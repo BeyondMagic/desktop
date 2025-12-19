@@ -13,6 +13,9 @@ def main []: string -> nothing {
 			'arte/bandeiras'
 			'arte/design'
 			'fotos'
+			'perfil/quadrado'
+			'perfil/thumbnail'
+			'perfil/alto'
 		]
 		| str join "\n"
 		| fuzzel --dmenu
