@@ -9,5 +9,5 @@ export def clear []: nothing -> nothing {
 
 # Execute the compositor.
 export def --env main []: nothing -> nothing {
-	exec Hyprland
+	exec start-hyprland
 }
