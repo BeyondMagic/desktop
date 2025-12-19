@@ -7,7 +7,7 @@ app_id = swayimg
 overlay = no
 
 [list]
-all = yes
+#all = yes
 order = mtime
 
 [keys.viewer]
