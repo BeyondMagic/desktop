@@ -119,6 +119,13 @@
 		"enabled": true
 	},
 	{
+		"name": "Site: Story (module)",
+		"rootPath": "/home/dream/armazenamento/.compartilhado/projetos/pessoal/site/module/story",
+		"paths": [],
+		"tags": [],
+		"enabled": true
+	},
+	{
 		"name": "-----------------------",
 		"rootPath": "/home/dream/armazenamento/.compartilhado/projetos/---",
 		"paths": [],
