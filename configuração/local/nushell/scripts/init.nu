@@ -40,7 +40,7 @@ export use ~/projetos/pessoal/competitive-programming/script/pc.nu
 export use ./themes/tokyo-night.nu
 
 export alias fm = file manager
-export alias rm = rm -i
+#export alias rm = rm -i
 export alias _ = echo $env.LAST
 export alias find = find --no-highlight
 export alias prolog = ^swipl
