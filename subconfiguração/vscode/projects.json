@@ -335,8 +335,8 @@
 		"enabled": true
 	},
 	{
-		"name": "ROUTER: APP",
-		"rootPath": "/mnt/kaguya/projetos/contribuindo/router/app",
+		"name": "GenneOS: app",
+		"rootPath": "/mnt/kaguya/projetos/contribuindo/genneos/app",
 		"paths": [],
 		"tags": [],
 		"enabled": true
