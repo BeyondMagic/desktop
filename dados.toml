@@ -52,12 +52,12 @@ target_mode = "exact"
 
 [[links.entries]]
 sources = ["~/armazenamento/.compartilhado/armazenamento/videos"]
-target = "~/armazenamento/videos/compartilhado"
+target = "~/armazenamento/videos"
 target_mode = "exact"
 
 [[links.entries]]
 sources = ["~/armazenamento/.compartilhado/armazenamento/entreterimento"]
-target = "~/armazenamento/entreterimento/compartilhado"
+target = "~/armazenamento/entreterimento"
 target_mode = "exact"
 
 [[links.entries]]
