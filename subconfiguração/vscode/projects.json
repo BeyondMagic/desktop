@@ -221,8 +221,8 @@
 		"enabled": true
 	},
 	{
-		"name": "UnB: Compiladores",
-		"rootPath": "/mnt/kaguya/projetos/pessoal/g7comp2025",
+		"name": "UnB: c2lua",
+		"rootPath": "/mnt/kaguya/projetos/pessoal/c2lua",
 		"paths": [],
 		"tags": [
 			""
