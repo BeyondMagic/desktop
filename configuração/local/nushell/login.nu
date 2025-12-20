@@ -113,8 +113,27 @@ $env.LC_TIME = 'ja_JP.UTF-8'
 $env.LANG = 'en_GB.UTF-8'
 $env.LC_COLLATE = 'C.UTF-8'
 
+# Image folder.
+$env.IMAGES_FOLDER = '~/armazenamento/imagens/'
+
+# Default location for images.
+$env.IMAGE_LOCATIONS = [
+	($env.IMAGES_FOLDER + 'extensões/jpg')
+	($env.IMAGES_FOLDER + 'extensões/png')
+	($env.IMAGES_FOLDER + 'arte/extensões/jpg')
+	($env.IMAGES_FOLDER + 'arte/extensões/png')
+	($env.IMAGES_FOLDER + 'arte/poemas')
+	($env.IMAGES_FOLDER + 'arte/gl')
+	($env.IMAGES_FOLDER + 'arte/bandeiras')
+	($env.IMAGES_FOLDER + 'arte/design')
+	($env.IMAGES_FOLDER + 'fotos')
+	($env.IMAGES_FOLDER + 'perfil/quadrado')
+	($env.IMAGES_FOLDER + 'perfil/thumbnail')
+	($env.IMAGES_FOLDER + 'perfil/alto')
+]
+
 # Glob to all wallpaper files.
-$env.WALLPAPER_FILES = '~/armazenamento/imagens/paredepapel/desktop/**/*'
+$env.WALLPAPER_FILES = $env.IMAGES_FOLDER + 'paredepapel/desktop/**/*'
 
 # Share local database between diferent personal systems.
 # Useful for sioyek.
