@@ -41,7 +41,7 @@ export function Bar({ monitor }: { monitor: number }) {
 				$type="end"
 			>
 
-				<Workspaces />
+				<Workspaces monitor={monitor} />
 				{/* To-do: The height is 100%, so commenting this for now. */}
 				{/* <Gtk.Separator
 						orientation={Gtk.Orientation.VERTICAL}

@@ -141,6 +141,11 @@ target = "~/.cache/cliphist"
 target_mode = "exact"
 
 [[links.entries]]
+sources = ["./scripts/workspace.nu"]
+target = "~/.local/bin/workspace.nu"
+target_mode = "exact"
+
+[[links.entries]]
 sources = ["./scripts/minimize.nu"]
 target = "~/.local/bin/minimize.nu"
 target_mode = "exact"

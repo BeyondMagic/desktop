@@ -4,43 +4,51 @@ import { config } from "../../../app";
 import Hyprland from "gi://AstalHyprland";
 import { Workspace } from "./workspace";
 
-const workspaceLabels = new Map(
-	config.workspaces.labels.map(({ id, label }) => [id, label] as const),
-);
+type WorkspaceConfig = {
+	monitor?: { id?: number };
+	total?: number;
+	labels?: { id: number; label: string }[];
+};
 
-export function Workspaces ( {length}: {length?: number} )
+const workspaceConfigs: WorkspaceConfig[] = Array.isArray(config.workspaces) ? config.workspaces : [];
+
+export function Workspaces ( { monitor, length }: { monitor: number; length?: number } )
 {
-	const total = length ?? config.workspaces.total;
 	const workspaces = createBinding(hyprland(), "workspaces")
+	const workspaceConfig = workspaceConfigs.find(({ monitor: m }) => m?.id === monitor);
+	const configuredLabels = workspaceConfig?.labels ?? [];
+	const labelMap = new Map(configuredLabels.map(({ id, label }) => [id, label] as const));
+
+	const configuredIds = configuredLabels.map(({ id }) => id);
+	const count = length ?? workspaceConfig?.total ?? configuredIds.length;
+	const baseIds = configuredIds.length > 0
+		? (count > 0 ? configuredIds.slice(0, count) : configuredIds)
+		: (count > 0 ? Array.from({ length: count }, (_, idx) => idx + 1) : []);
 
 	const display = workspaces((existing) => {
 		const raw: Hyprland.Workspace[] = Array.isArray(existing) ? existing : [];
-		const actual = raw.filter((ws) => ws.id >= 0);
-		// printerr("[workspaces] filtered special workspaces:", raw.filter((ws) => ws.id < 0).map((ws) => ws.id));
-		// printerr("[workspaces] actual ids:", actual.map((ws) => ws.id));
-		if (total <= 0)
-			return actual.map((ws) => ({ ws, fallbackLabel: workspaceLabels.get(ws.id) }));
+		const actual = raw.filter((ws) => ws.id >= 0 && (monitor == null || ws.monitor?.id === monitor));
+
+		if (baseIds.length === 0)
+			return actual.map((ws) => ({ ws, fallbackLabel: labelMap.get(ws.id) }));
 
 		const byId = new Map(actual.map((ws) => [ws.id, ws] as const));
 		const seen = new Set<number>();
 		const result: { ws: Hyprland.Workspace; fallbackLabel?: string }[] = [];
 
-		for (let id = 1; id <= total; id++) {
+		for (const id of baseIds) {
 			const ws = byId.get(id) ?? Hyprland.Workspace.dummy(id, null);
-			// printerr(`[workspaces] fallback dummy for id ${id}`, workspaceLabels.get(id));
-			result.push({ ws, fallbackLabel: workspaceLabels.get(id) });
+			result.push({ ws, fallbackLabel: labelMap.get(id) });
 			seen.add(id);
 		}
 
 		for (const ws of actual) {
 			if (!seen.has(ws.id))
 			{
-				// printerr(`[workspaces] extra workspace ${ws.id} label`, workspaceLabels.get(ws.id));
-				result.push({ ws, fallbackLabel: workspaceLabels.get(ws.id) });
+				result.push({ ws, fallbackLabel: labelMap.get(ws.id) });
 			}
 		}
 
-		// printerr("[workspaces] display slots:", result.map(({ ws, fallbackLabel }) => ({ id: ws.id, name: ws.name, fallbackLabel })));
 		return result;
 	})
 

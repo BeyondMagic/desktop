@@ -8,21 +8,44 @@
 		"blue": 5,
 		"alpha": 1
 	},
-	"workspaces": {
-		"total": 10,
-		"labels": [
-			{ "id": 1, "label": "一" },
-			{ "id": 2, "label": "二" },
-			{ "id": 3, "label": "三" },
-			{ "id": 4, "label": "四" },
-			{ "id": 5, "label": "五" },
-			{ "id": 6, "label": "六" },
-			{ "id": 7, "label": "七" },
-			{ "id": 8, "label": "八" },
-			{ "id": 9, "label": "九" },
-			{ "id": 10, "label": "十" }
-		]
-	},
+	"workspaces": [
+		{
+			"monitor": {
+				"id": 0
+			},
+			"total": 10,
+			"labels": [
+				{ "id": 1, "label": "一" },
+				{ "id": 2, "label": "二" },
+				{ "id": 3, "label": "三" },
+				{ "id": 4, "label": "四" },
+				{ "id": 5, "label": "五" },
+				{ "id": 6, "label": "六" },
+				{ "id": 7, "label": "七" },
+				{ "id": 8, "label": "八" },
+				{ "id": 9, "label": "九" },
+				{ "id": 10, "label": "十" }
+			]
+		},
+		{
+			"monitor": {
+				"id": 1
+			},
+			"total": 10,
+			"labels": [
+				{ "id": 11, "label": "一" },
+				{ "id": 12, "label": "二" },
+				{ "id": 13, "label": "三" },
+				{ "id": 14, "label": "四" },
+				{ "id": 15, "label": "五" },
+				{ "id": 16, "label": "六" },
+				{ "id": 17, "label": "七" },
+				{ "id": 18, "label": "八" },
+				{ "id": 19, "label": "九" },
+				{ "id": 20, "label": "十" }
+			]
+		}
+	],
 	"categories": [
 		{
 			"find": [
