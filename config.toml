@@ -1,0 +1,224 @@
+# -----------------------------------------------
+# System devices information
+# -----------------------------------------------
+
+# Example
+# [[devices]]
+# A unique label for the device
+# label = "device_name"
+# From `/etc/machine-id`
+# machine_id = "machine_id_value"
+
+[[devices]]
+label = "computer"
+machine_id = "6edffeeb6b9909f86ad4630865c13921"
+
+[[devices]]
+label = "laptop"
+machine_id = ""
+
+# -----------------------------------------------
+# Services for devices
+# -----------------------------------------------
+
+# Example
+# [[services]]
+# command = "service_command" 		  # The command to run the service
+# description = "Service description" # Concise, but informative description
+# depends_on = ["service_name", ...]  # List of services that must be started before this one
+# privileged = true/false 			  # Requires elevated permissions
+# autostart = ["device_name", ...] 	  # List of devices where this service should autostart
+# devices = ["device_name", ...] 	  # List of devices where this service should run
+
+[[services]]
+command = "/usr/local/bin/ags"
+description = "Launches AGS shell for panels and widgets"
+depends_on = []
+privileged = false
+autostart = ["computer", "laptop"]
+devices = ["computer", "laptop"]
+
+[[services]]
+command = "/usr/bin/beeper"
+description = "Starts the Beeper unified messaging desktop client"
+depends_on = ["ags"]
+privileged = false
+autostart = ["computer"]
+devices = ["computer", "laptop"]
+
+[[services]]
+command = "/usr/bin/blueman-applet"
+description = "Bluetooth management tray applet for BlueZ"
+depends_on = ["ags"]
+privileged = false
+autostart = ["computer", "laptop"]
+devices = ["computer", "laptop"]
+
+[[services]]
+command = "~/.local/bin/chartdb"
+description = "Runs the local chartdb service"
+depends_on = ["ags"]
+privileged = false
+autostart = ["computer"]
+devices = ["computer", "laptop"]
+
+[[services]]
+command = "/usr/bin/cliphist"
+description = "Wayland clipboard history daemon"
+depends_on = ["ags"]
+privileged = false
+autostart = ["computer", "laptop"]
+devices = ["computer", "laptop"]
+
+[[services]]
+command = "/usr/bin/dockerd"
+description = "Docker daemon providing container runtime"
+depends_on = []
+privileged = true
+autostart = ["computer"]
+devices = ["computer", "laptop"]
+
+[[services]]
+command = "/usr/bin/fcitx5"
+description = "Fcitx5 input method framework"
+depends_on = ["ags"]
+privileged = false
+autostart = ["computer", "laptop"]
+devices = ["computer", "laptop"]
+
+[[services]]
+command = "/usr/bin/fprintd"
+description = "Fingerprint reader D-Bus service"
+depends_on = []
+privileged = true
+autostart = []
+devices = ["laptop"]
+
+[[services]]
+command = "/usr/bin/gammastep"
+description = "Adjusts display color temperature based on time/location"
+depends_on = ["ags"]
+privileged = false
+autostart = ["computer", "laptop"]
+devices = ["computer", "laptop"]
+
+[[services]]
+command = "/usr/bin/gnome-keyring-daemon"
+description = "GNOME Keyring secrets, SSH, and PGP agent"
+depends_on = ["ags"]
+privileged = false
+autostart = ["computer", "laptop"]
+devices = ["computer", "laptop"]
+
+
+[[services]]
+command = "/usr/bin/iio-sensor-proxy"
+description = "Exposes accelerometer and ambient light sensors via D-Bus"
+depends_on = ["ags"]
+privileged = false
+autostart = ["laptop"]
+devices = ["laptop"]
+
+[[services]]
+command = "/usr/bin/keyd"
+description = "Low-level keyboard remapping daemon"
+depends_on = ["ags"]
+privileged = true
+autostart = ["computer", "laptop"]
+devices = ["computer", "laptop"]
+
+[[services]]
+command = "/usr/bin/nm-applet"
+description = "NetworkManager system tray applet"
+depends_on = ["ags"]
+privileged = false
+autostart = ["computer", "laptop"]
+devices = ["computer", "laptop"]
+
+[[services]]
+command = "/usr/bin/pipewire"
+description = "PipeWire multimedia daemon"
+depends_on = ["ags"]
+privileged = false
+autostart = ["computer", "laptop"]
+devices = ["computer", "laptop"]
+
+[[services]]
+command = "/usr/bin/pipewire-pulse"
+description = "PulseAudio-compatible server on PipeWire"
+depends_on = ["pipewire"]
+privileged = false
+autostart = ["computer", "laptop"]
+devices = ["computer", "laptop"]
+
+[[services]]
+command = "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+description = "Polkit authentication agent for graphical prompts"
+depends_on = ["ags"]
+privileged = false
+autostart = ["computer", "laptop"]
+devices = ["computer", "laptop"]
+
+[[services]]
+command = "/usr/local/bin/python3-validity"
+description = "Validity fingerprint driver userspace helper"
+depends_on = ["fprintd"]
+privileged = true
+autostart = []
+devices = ["laptop"]
+
+[[services]]
+command = "/usr/bin/rclone"
+description = "Rclone remote storage sync/mount daemon"
+depends_on = []
+privileged = false
+autostart = ["computer", "laptop"]
+devices = ["computer", "laptop"]
+
+[[services]]
+command = "/usr/bin/ssh-agent"
+description = "SSH key agent providing keys to clients"
+depends_on = []
+privileged = false
+autostart = ["computer", "laptop"]
+devices = ["computer", "laptop"]
+
+[[services]]
+command = "/usr/bin/awww"
+description = "Runs the awww wallpaper fetcher/rotator"
+depends_on = ["ags"]
+privileged = false
+autostart = ["computer", "laptop"]
+devices = ["computer", "laptop"]
+
+[[services]]
+command = "/usr/bin/syncthing"
+description = "Syncthing peer-to-peer file synchronization daemon"
+depends_on = []
+privileged = false
+autostart = ["computer", "laptop"]
+devices = ["computer", "laptop"]
+
+[[services]]
+command = "/usr/bin/thunderbird"
+description = "Mozilla Thunderbird email and calendar client"
+depends_on = ["ags"]
+privileged = false
+autostart = ["computer"]
+devices = ["computer", "laptop"]
+
+[[services]]
+command = "/usr/bin/waydroid"
+description = "Waydroid Android container/session"
+depends_on = ["ags"]
+privileged = false
+autostart = ["computer", "laptop"]
+devices = ["computer", "laptop"]
+
+[[services]]
+command = "/usr/bin/wireplumber"
+description = "PipeWire session manager for policy and routing"
+depends_on = ["pipewire"]
+privileged = false
+autostart = ["computer", "laptop"]
+devices = ["computer", "laptop"]
