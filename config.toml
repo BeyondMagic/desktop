@@ -28,7 +28,7 @@ machine_id = ""
 # depends_on = ["service_name", ...]  # List of services that must be started before this one
 # privileged = true/false 			  # Requires elevated permissions
 # autostart = ["device_name", ...] 	  # List of devices where this service should autostart
-# devices = ["device_name", ...] 	  # List of devices where this service should run
+# devices = ["device_name", ...] 	  # List of devices where this service should be able to run
 
 [[services]]
 command = "/usr/local/bin/ags"
