@@ -18,5 +18,5 @@ Ctrl+k = exec fork.nu "'%' | organize-fav.nu"
 Ctrl+r = exec fork.nu "rnote '%'"
 Ctrl+g = exec fork.nu "gimp %"
 Ctrl+i = exec fork.nu "inkscape %"
-Ctrl+w = exec swww img "%"
+Ctrl+w = exec awww img "%"
 Shift+greater = flip_vertical

@@ -37,9 +37,9 @@ export def set [
 }
 
 # Run list of command of wallpaper manager.
-def main []: list<string> -> nothing {
+def main []: list<string> -> any {
 	let args = $in
-	# See manual for swww(1).
-	# The repository can be found at: https://github.com/LGFae/swww
-	^swww ...$args
+	# See manual for awww(1).
+	# The repository can be found at: https://codeberg.org/LGFae/awww
+	^awww ...$args
 }

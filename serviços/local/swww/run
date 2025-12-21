@@ -1,5 +1,5 @@
 #!/usr/bin/env dash
 #
-# João Farias © 2021-2024 BeyondMagic <beyondmagic@mail.ru>
+# João Farias © 2024-2025 BeyondMagic <beyondmagic@mail.ru>
 
-exec swww-daemon
+exec awww-daemon
