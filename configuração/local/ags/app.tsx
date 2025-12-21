@@ -42,8 +42,6 @@ function main() {
 		<For each={hypr_monitors} >
 			{(monitor) => {
 
-				GLib.setenv("DBUS_SESSION_BUS_ADDRESS", dbus_address, true);
-
 				return (
 					<This
 						this={app}

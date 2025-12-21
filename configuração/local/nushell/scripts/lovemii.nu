@@ -9,5 +9,8 @@ export def clear []: nothing -> nothing {
 
 # Execute the compositor.
 export def --env main []: nothing -> nothing {
-	exec start-hyprland
+	$env.XDG_SESSION_TYPE = 'wayland'
+	$env.XDG_CURRENT_DESKTOP = 'Hyprland'
+
+	exec dbus-run-session -- start-hyprland
 }
