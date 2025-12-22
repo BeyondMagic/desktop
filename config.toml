@@ -15,7 +15,7 @@ machine_id = "6edffeeb6b9909f86ad4630865c13921"
 
 [[devices]]
 label = "laptop"
-machine_id = ""
+machine_id = "7faad10195bec8f37d9fbb7a656ff61d"
 
 # -----------------------------------------------
 # Services for devices
