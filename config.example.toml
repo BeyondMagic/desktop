@@ -4,10 +4,8 @@
 
 # Example
 # [[devices]]
-# A unique label for the device
-# label = "device_name"
-# From `/etc/machine-id`
-# machine_id = "machine_id_value"
+# label = "device_name" 		  # Unique label for the device
+# machine_id = "machine_id_value" # From `/etc/machine-id`
 
 [[devices]]
 label = "computer"
