@@ -1,0 +1,1 @@
+When performing a code review, think of edge cases, potential bugs and performance issues. Provide constructive feedback and suggest improvements where necessary.

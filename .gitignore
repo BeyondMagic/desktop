@@ -1,3 +1,6 @@
+# Ignore non-example files.
+/config.toml
+
 # rnote
 **/*.rnote
 
