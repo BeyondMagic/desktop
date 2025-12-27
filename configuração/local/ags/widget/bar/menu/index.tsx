@@ -4,7 +4,6 @@ import { createBinding } from "ags"
 import { get_color_at_percentage } from "./color"
 
 import Service from "gi://AstalBattery"
-import { toggleMenuWindow } from "../../menu"
 
 export function Menu() {
 	const service = Service.get_default()
@@ -40,7 +39,6 @@ export function Menu() {
 	return (
 		<button
 			css_classes={["menu"]}
-			onClicked={() => toggleMenuWindow()}
 		>
 			{icon}
 		</button>
