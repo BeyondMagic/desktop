@@ -16,11 +16,7 @@ import { MenuWindow } from "./widget/menu";
 import { NotificationPopups } from "./widget/notification"
 
 let app_launcher: Gtk.Window;
-let menu_window: Gtk.Window;
-
-print("Astal Desktop starting...");
-const dbus_address = GLib.getenv("DBUS_SESSION_BUS_ADDRESS") ?? "unix:path=/tmp/dbus";
-print("DBUS_SESSION_BUS_ADDRESS:", dbus_address);
+let menu_window: Gtk.Window;;
 
 export {
 	config,
