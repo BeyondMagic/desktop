@@ -61,4 +61,6 @@ require 'lsp.biome'
 -- copilot
 require 'lsp.copilot'
 
-
+-- dbml
+-- Disabled for now, as dbml-lsp is not yet stable, nor maintained.
+-- require 'lsp.dbml'
