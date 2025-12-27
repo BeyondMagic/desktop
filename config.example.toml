@@ -245,3 +245,14 @@ depends_on = ["pipewire"]
 privileged = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
+
+# -----------------------------------------------
+# Packages for devices
+# -----------------------------------------------
+
+# Example
+# [[packages]]
+# label = "package_name" 		   # Unique label for the package
+# manager = "package_manager_name" # Package manager to use
+# packages = ["pkg1", "pkg2", ...] # List of packages to install
+# devices = ["device_name", ...]   # List of devices where this package should be
