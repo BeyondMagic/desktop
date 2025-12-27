@@ -130,7 +130,7 @@ $env.IMAGE_LOCATIONS = [
 	($env.IMAGES_FOLDER + 'perfil/quadrado')
 	($env.IMAGES_FOLDER + 'perfil/thumbnail')
 	($env.IMAGES_FOLDER + 'perfil/alto')
-]
+] | str join (char esep)
 
 # Glob to all wallpaper files.
 $env.WALLPAPER_FILES = $env.IMAGES_FOLDER + 'paredepapel/desktop/**/*'

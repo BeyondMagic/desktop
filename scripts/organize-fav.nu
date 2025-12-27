@@ -10,7 +10,7 @@ def main []: string -> any {
 	}
 
 	let image_locations = if ('IMAGE_LOCATIONS' in $env) {
-		$env.IMAGE_LOCATIONS
+		$env.IMAGE_LOCATIONS | split row ':'
 	} else {
 		[($base + '/')]
 	}
