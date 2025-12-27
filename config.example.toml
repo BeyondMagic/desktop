@@ -247,6 +247,26 @@ autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
 
 # -----------------------------------------------
+# Plugins for devices
+# -----------------------------------------------
+
+# Example
+# [[plugins]]
+# label = "plugin_name" 		   # Unique label for the plugin
+# source = "plugin_source_file"  # Path to the plugin source file/URL
+# devices = ["device_name", ...] # List of devices where this plugin should be used
+
+[[plugins]]
+label = "dynamic-cursors"
+source = "https://github.com/VirtCode/hypr-dynamic-cursors/"
+devices = ["computer", "laptop"]
+
+[[plugins]]
+label = "hyprsplit"
+source = "https://github.com/shezdy/hyprsplit"
+devices = ["computer", "laptop"]
+
+# -----------------------------------------------
 # Packages for devices
 # -----------------------------------------------
 
