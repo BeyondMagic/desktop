@@ -275,4 +275,18 @@ devices = ["computer", "laptop"]
 # label = "package_name" 		   # Unique label for the package
 # manager = "package_manager_name" # Package manager to use
 # packages = ["pkg1", "pkg2", ...] # List of packages to install
-# devices = ["device_name", ...]   # List of devices where this package should be
+# devices = ["device_name", ...]   # List of devices where this package should be installed
+
+[[packages]]
+description = ["Package manager."]
+manager = "pacman"
+packages = ["yay"]
+devices = ["computer", "laptop"]
+
+[[packages]]
+description = ["System manager."]
+manager = "pacman-aur"
+packages = [
+	"opendoas-retry", # A sudo replacement with retry mechanism
+]
+devices = ["computer", "laptop"]
