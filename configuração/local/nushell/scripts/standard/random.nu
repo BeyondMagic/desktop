@@ -6,10 +6,12 @@ export def item []: list<any> -> any {
 	if ($piped | is-empty) {
 		error make {
 			msg: "Failed to find data."
+			code: "random::item::no_data"
 			label: {
 				text: "Not given any data."
 				span: (metadata $piped).span
 			}
+			help: "Provide a non-empty list of items to select from."
 		}
 	}
 	$piped
