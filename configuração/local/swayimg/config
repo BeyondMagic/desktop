@@ -11,7 +11,7 @@ overlay = no
 order = mtime
 
 [keys.viewer]
-Delete = exec rm "%"; skip_file
+Delete = exec fork.nu "rm '%'"
 Ctrl+p = exec fork.nu "'%' | ^wl-copy"
 Ctrl+c = exec fork.nu "cat '%' | ^wl-copy"
 Ctrl+k = exec fork.nu "'%' | organize-fav.nu"
