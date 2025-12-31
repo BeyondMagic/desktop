@@ -55,5 +55,33 @@ return {
     -- See the fuzzy documentation for more information
     fuzzy = { implementation = "prefer_rust_with_warning" }
   },
-  opts_extend = { "sources.default" }
+  opts_extend = { "sources.default" },
+
+  config = function(_, opts)
+    local blink = require('blink.cmp')
+    blink.setup(opts)
+
+    local function del_keymap_if_exists(mode, lhs)
+      -- Only attempt to delete the mapping if it actually exists, so we don't
+      -- mask unexpected errors with pcall.
+      if vim.fn.maparg(lhs, mode) == '' then
+        return
+      end
+      vim.keymap.del(mode, lhs)
+    end
+
+    -- Keep normal-mode tab navigation for Cokeline, even if other plugins remap it.
+    local function set_cokeline_tabs()
+      del_keymap_if_exists('n', '<Tab>')
+      del_keymap_if_exists('n', '<S-Tab>')
+      vim.keymap.set('n', '<Tab>', '<Plug>(cokeline-focus-next)', { silent = true })
+      vim.keymap.set('n', '<S-Tab>', '<Plug>(cokeline-focus-prev)', { silent = true })
+    end
+
+    set_cokeline_tabs()
+    vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
+      callback = set_cokeline_tabs,
+      desc = 'Ensure Cokeline keeps normal-mode <Tab>/<S-Tab> after other mappings run',
+    })
+  end
 }
