@@ -58,14 +58,14 @@ return {
     default_hl = {
       -- default: `ColorColumn`'s background color for focused buffers,
       -- `Normal`'s foreground color for unfocused ones.
-      fg = function (buffer)
+      fg = function(buffer)
         return buffer.is_focused and COLOUR.fg_1 or COLOUR.fg_2
       end,
 
       -- default: `Normal`'s foreground color for focused buffers,
       -- `ColorColumn`'s background color for unfocused ones.
       -- default: `Normal`'s foreground color.
-      bg = function (buffer)
+      bg = function(buffer)
         return buffer.is_focused and COLOUR.bg_3 or COLOUR.bg_0
       end,
       -- default: `'NONE'`.
@@ -81,99 +81,99 @@ return {
     -- default: see `/lua/cokeline/defaults.lua`
     components = {
 
-        {
-          text = '  '
-        },
+      {
+        text = '  '
+      },
 
-        -- The index of the tab!
-        {
-          text = function(buffer)
-            return buffer.index .. ". "
-          end,
+      -- The index of the tab!
+      {
+        text = function(buffer)
+          return buffer.index .. ". "
+        end,
 
-          -- Whetever the are mistakes in this.
-          fg = function(buffer)
-            return
+        -- Whetever the are mistakes in this.
+        fg = function(buffer)
+          return
               (buffer.diagnostics.errors ~= 0 and COLOUR.red_1)
               or (buffer.diagnostics.warnings ~= 0 and COLOUR.fg_3)
               or nil
-          end,
+        end,
 
-          style = function(buffer)
-            return buffer.is_focused and "bold" or nil
-          end,
+        style = function(buffer)
+          return buffer.is_focused and "bold" or nil
+        end,
+      },
+
+      -- The devicon of the file
+      {
+        text = function(buffer)
+          return buffer.devicon.icon
+        end,
+        fg = function(buffer)
+          return buffer.devicon.color
+        end,
+
+        style = 'NONE',
+      },
+
+      -- The prefix (path, folder) of the file.
+      -- It will show up when necessary.
+      {
+        text = function(buffer)
+          return buffer.unique_prefix
+        end,
+        fg = function(buffer)
+          return buffer.is_focused and COLOUR.fg_3 or COLOUR.fg_5
+        end,
+        style = function(buffer)
+          return buffer.is_focused and "bold" or nil
+        end,
+        truncation = {
+          -- default: index of the component in the `components` table (1 for the
+          -- first component, 2 for the second, etc.).
+          priority = 1,
+
+          -- default: `right`.
+          direction = 'left',
         },
+      },
 
-        -- The devicon of the file
-        {
-          text = function(buffer)
-            return buffer.devicon.icon
-          end,
-          fg = function(buffer)
-            return buffer.devicon.color
-          end,
-
-          style = 'NONE',
-        },
-
-        -- The prefix (path, folder) of the file.
-        -- It will show up when necessary.
-        {
-          text = function(buffer)
-            return buffer.unique_prefix
-          end,
-          fg = function(buffer)
-            return buffer.is_focused and COLOUR.fg_3 or COLOUR.fg_5
-          end,
-          style = function(buffer)
-            return buffer.is_focused and "bold" or nil
-          end,
-          truncation = {
-            -- default: index of the component in the `components` table (1 for the
-            -- first component, 2 for the second, etc.).
-            priority = 1,
-
-            -- default: `right`.
-            direction = 'left',
-          },
-        },
-
-        -- The file name itself.
-        {
-          text = function(buffer)
-            return buffer.filename .. " "
-          end,
-          fg = function(buffer)
-            return (buffer.diagnostics.errors ~= 0 and COLOUR.red_1)
+      -- The file name itself.
+      {
+        text = function(buffer)
+          return buffer.filename .. " "
+        end,
+        fg = function(buffer)
+          return (buffer.diagnostics.errors ~= 0 and COLOUR.red_1)
               or (buffer.diagnostics.warnings ~= 0 and COLOUR.warning)
               or (buffer.is_focused and COLOUR.violet_1)
               or nil
-          end,
-          style = function(buffer)
-            return buffer.is_focused and "bold" or nil
-          end,
-          truncation = {
-            -- default: index of the component in the `components` table (1 for the
-            -- first component, 2 for the second, etc.).
-            priority = 2,
+        end,
+        style = function(buffer)
+          return buffer.is_focused and "bold" or nil
+        end,
+        truncation = {
+          -- default: index of the component in the `components` table (1 for the
+          -- first component, 2 for the second, etc.).
+          priority = 2,
 
-            -- default: `right`.
-            direction = 'left',
-          },
+          -- default: `right`.
+          direction = 'left',
         },
+      },
 
-        -- A sign to display whetever is modified or not.
-        {
-          text = ' ',
-          delete_buffer_on_left_click = true,
-          fg = function(buffer)
-            return buffer.is_modified and COLOUR.green_0
-          end,
-        },
+      -- A sign to display whetever is modified or not.
+      {
+        text = ' ',
+        delete_buffer_on_left_click = true,
+        fg = function(buffer)
+          return buffer.is_modified and COLOUR.green_0
+        end,
+      },
 
-        {
-          text = "  ",
-        },
+      {
+        text = "  ",
+      },
 
     },
 
