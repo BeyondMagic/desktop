@@ -84,6 +84,9 @@ $env.SSH_AUTH_SOCK = '/tmp/ssh-agent.socket'
 # For Neovim MRU plugin (latest files).
 $env.MRU_File = $env.HOME + '/.cache/vim_mru_files'
 
+# XDG desktop folder.
+$env.XDG_DESKTOP_DIR = $env.HOME + '/armazenamento/desktop'
+
 # XDG default folder for data files.
 $env.XDG_DATA_HOME = $env.HOME + '/.local/share'
 
