@@ -48,11 +48,18 @@ devices = ["computer", "laptop"]
 # depends_on = ["package_label", ...] # List of packages that must be installed before this one
 
 [[packages]]
-method = "yay"
-label = "yay"
-codename = "yay"
-description = "AUR helper and package manager"
-depends_on = ["pacman"]
+method = "pacman"
+label = "base-devel"
+codename = "base-devel"
+description = "Base development tools"
+depends_on = []
+
+[[packages]]
+method = "pacman"
+label = "git"
+codename = "git"
+description = "Git version control system"
+depends_on = []
 
 [[packages]]
 method = "pacman"
@@ -62,30 +69,46 @@ description = "A sudo replacement with retry mechanism"
 depends_on = []
 
 [[packages]]
+method = "pacman"
+label = "turnstile"
+codename = "turnstile"
+description = "Independent session/login tracker"
+depends_on = []
+
+[[packages]]
+method = "script"
+label = "yay"
+codename = "./packages/yay"
+description = "AUR helper and package manager"
+depends_on = ["pacman", "git", "base-devel"]
+
+[[packages]]
 method = "yay"
 label = "hyprland"
 codename = "hyprland-git"
 description = "Hyprland Wayland compositor"
-depends_on = ["yay"]
+depends_on = []
 
 [[packages]]
 method = "hyprpm"
 label = "hyprgrass"
 codename = "https://github.com/horriblename/hyprgrass"
 description = "Hyprland touchscreen gestures support."
-depends_on = ["hyprland"]
+depends_on = []
 
 [[packages]]
 method = "hyprpm"
 label = "dynamic-cursors"
 codename = "https://github.com/VirtCode/hypr-dynamic-cursors"
 description = "Dynamic cursors for Hyprland."
+depends_on = []
 
 [[packages]]
 method = "hyprpm"
 label = "hyprsplit"
 codename = "https://github.com/shezdy/hyprsplit"
 description = "Hyprsplit window manager plugin."
+depends_on = []
 
 [[packages]]
 method = "script"
@@ -93,6 +116,55 @@ label = "openscq30"
 codename = "./packages/openscq30"
 description = "Soundcore headphones and earbuds manager."
 depends_on = ["opendoas-retry", "rust"]
+
+[[packages]]
+method = "yay"
+label = "ags"
+codename = "aylurs-gtk-shell-git"
+description = "AGS - Aylurs GTK Shell for panels and widgets"
+depends_on = []
+
+[[packages]]
+method = "yay"
+label = "beeper"
+codename = "beeper-v4-bin"
+description = "Beeper unified messaging desktop client"
+depends_on = []
+
+[[packages]]
+method = "pacman"
+label = "blueman"
+codename = "blueman"
+description = "Bluetooth management utility for BlueZ"
+depends_on = []
+
+[[packages]]
+method = "yay"
+label = "chartdb"
+codename = "chartdb"
+description = "Database diagrams editor and viewer"
+depends_on = []
+
+[[packages]]
+method = "yay"
+label = "thunderbird"
+codename = "thunderbird"
+description = "Email client"
+depends_on = []
+
+[[packages]]
+method = "script"
+label = "hypr-minimize"
+codename = "./packages/hypr-minimize"
+description = "Toggle sending/receiving an app from a special workspace (minimized) in Hyprland"
+depends_on = []
+
+[[packages]]
+method = "thunderbird"
+label = "minimizeonclose-addon"
+codename = "https://github.com/BeyondMagic/thunderbird-minimize-hyprland/releases/download/2.0.2.0-7-gd08f330/minimizeonclose.xpi"
+description = "Minimize on close extension for Thunderbird in Hyprland"
+depends_on = ["hypr-minimize"]
 
 # -----------------------------------------------
 # Profiles for packages per device
