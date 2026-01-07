@@ -267,11 +267,64 @@ source = "https://github.com/shezdy/hyprsplit"
 devices = ["computer", "laptop"]
 
 # -----------------------------------------------
-# Packages for devices
+# Packages
 # -----------------------------------------------
 
-# Example
+# Example:
 # [[packages]]
+# method = "package_manager" 	   	  # Package manager to use (e.g., pacman, yay, aur, hyprpm)
+# label = "package_label" 		   	  # Label of the package (identified by other packages)
+# codename = "package_code_name"  	  # Unique key for the package to be used by package manager
+# description = "Package description" # Description of the package
+# depends_on = ["package_label", ...] # List of packages that must be installed before this one
+
+[[packages]]
+method = "yay"
+label = "yay"
+codename = "yay"
+description = "AUR helper and package manager"
+depends_on = ["pacman"]
+
+[[packages]]
+method = "pacman"
+label = "doas"
+codename = "opendoas-retry"
+description = "A sudo replacement with retry mechanism"
+depends_on = []
+
+[[packages]]
+method = "yay"
+label = "hyprland"
+codename = "hyprland-git"
+description = "Hyprland Wayland compositor"
+depends_on = ["yay"]
+
+[[packages]]
+method = "hyprpm"
+label = "hyprgrass"
+codename = "https://github.com/horriblename/hyprgrass"
+description = "Hyprland touchscreen gestures support."
+depends_on = ["hyprland"]
+
+[[packages]]
+method = "hyprpm"
+label = "dynamic-cursors"
+codename = "https://github.com/VirtCode/hypr-dynamic-cursors"
+description = "Dynamic cursors for Hyprland."
+
+[[packages]]
+method = "hyprpm"
+label = "hyprsplit"
+codename = "https://github.com/shezdy/hyprsplit"
+description = "Hyprsplit window manager plugin."
+
+[[packages]]
+method = "script"
+label = "openscq30"
+codename = "./packages/openscq30"
+description = "Soundcore headphones and earbuds manager."
+depends_on = ["opendoas-retry", "rust"]
+
 # label = "package_name" 		   # Unique label for the package
 # manager = "package_manager_name" # Package manager to use
 # packages = ["pkg1", "pkg2", ...] # List of packages to install
