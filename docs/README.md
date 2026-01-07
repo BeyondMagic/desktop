@@ -1,4 +1,4 @@
-**lovemii**: A nushell-driven dotfiles collection to configure a personalized desktop environment (Hyprland, apps, services) for fast, reproducible setup.
+**lovemii**: A **very personal** nushell-driven dotfiles collection to configure a personalized desktop environment (Hyprland, apps, services) for fast, reproducible setup.
 
 # Requirements
 
