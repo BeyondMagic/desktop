@@ -1,9 +1,0 @@
-#!/usr/bin/env dash
-#
-# João Farias © 2024 BeyondMagic <beyondmagic@mail.ru>
-
-export DIST='/mnt/kaguya/projetos/usando/chartdb/dist'
-
-cd $DIST
-
-exec python3 -m http.server 1234 -b 0.0.0.0
