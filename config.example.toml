@@ -141,6 +141,7 @@ packages = ["openscq30"]
 # privileged = true/false 			  # Requires elevated permissions
 # autostart = ["device_name", ...] 	  # List of devices where this service should autostart
 # devices = ["device_name", ...] 	  # List of devices where this service should be able to run
+# packages = ["package_name", ...]    # List of packages required for this service
 
 [[services]]
 label = "ags"
@@ -150,6 +151,7 @@ depends_on = []
 privileged = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
+packages = ["ags"]
 
 [[services]]
 label = "beeper"
@@ -159,6 +161,7 @@ depends_on = ["ags"]
 privileged = false
 autostart = ["computer"]
 devices = ["computer", "laptop"]
+packages = ["beeper"]
 
 [[services]]
 label = "blueman-applet"
@@ -168,6 +171,7 @@ depends_on = ["ags"]
 privileged = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
+packages = ["blueman"]
 
 [[services]]
 label = "chartdb"
@@ -177,6 +181,7 @@ depends_on = ["ags"]
 privileged = false
 autostart = ["computer"]
 devices = ["computer", "laptop"]
+packages = ["chartdb"]
 
 [[services]]
 label = "cliphist"
@@ -186,6 +191,7 @@ depends_on = ["ags"]
 privileged = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
+packages = ["cliphist"]
 
 [[services]]
 label = "dockerd"
@@ -195,6 +201,7 @@ depends_on = []
 privileged = true
 autostart = ["computer"]
 devices = ["computer", "laptop"]
+packages = ["docker"]
 
 [[services]]
 label = "fcitx5"
@@ -204,6 +211,7 @@ depends_on = ["ags"]
 privileged = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
+packages = ["fcitx5"]
 
 [[services]]
 label = "fprintd"
@@ -213,6 +221,7 @@ depends_on = []
 privileged = true
 autostart = []
 devices = ["laptop"]
+packages = ["fprintd"]
 
 [[services]]
 label = "gammastep"
@@ -222,6 +231,7 @@ depends_on = ["ags"]
 privileged = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
+packages = ["gammastep"]
 
 [[services]]
 label = "gnome-keyring-daemon"
@@ -231,7 +241,7 @@ depends_on = ["ags"]
 privileged = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
-
+packages = ["gnome-keyring"]
 
 [[services]]
 label = "iio-sensor-proxy"
@@ -241,6 +251,7 @@ depends_on = ["ags"]
 privileged = false
 autostart = ["laptop"]
 devices = ["laptop"]
+packages = ["iio-sensor-proxy"]
 
 [[services]]
 label = "keyd"
@@ -250,6 +261,7 @@ depends_on = ["ags"]
 privileged = true
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
+packages = ["keyd"]
 
 [[services]]
 label = "nm-applet"
@@ -259,6 +271,7 @@ depends_on = ["ags"]
 privileged = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
+packages = ["networkmanager"]
 
 [[services]]
 label = "pipewire"
@@ -268,6 +281,7 @@ depends_on = ["ags"]
 privileged = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
+packages = ["pipewire"]
 
 [[services]]
 label = "pipewire-pulse"
@@ -277,6 +291,7 @@ depends_on = ["pipewire"]
 privileged = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
+packages = ["pipewire-pulse"]
 
 [[services]]
 label = "polkit-gnome-authentication-agent-1"
@@ -286,6 +301,7 @@ depends_on = ["ags"]
 privileged = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
+packages = ["polkit-gnome"]
 
 [[services]]
 label = "python3-validity"
@@ -295,6 +311,7 @@ depends_on = ["fprintd"]
 privileged = true
 autostart = []
 devices = ["laptop"]
+packages = ["python-validity"]
 
 [[services]]
 label = "rclone"
@@ -304,6 +321,7 @@ depends_on = []
 privileged = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
+packages = ["rclone"]
 
 [[services]]
 label = "ssh-agent"
@@ -313,6 +331,7 @@ depends_on = []
 privileged = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
+packages = ["openssh"]
 
 [[services]]
 label = "awww"
@@ -322,6 +341,7 @@ depends_on = ["ags"]
 privileged = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
+packages = ["awww-git"]
 
 [[services]]
 label = "syncthing"
@@ -331,6 +351,7 @@ depends_on = []
 privileged = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
+packages = ["syncthing"]
 
 [[services]]
 label = "thunderbird"
@@ -340,6 +361,7 @@ depends_on = ["ags"]
 privileged = false
 autostart = ["computer"]
 devices = ["computer", "laptop"]
+packages = ["thunderbird"]
 
 [[services]]
 label = "waydroid"
@@ -349,6 +371,7 @@ depends_on = ["ags"]
 privileged = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
+packages = ["waydroid"]
 
 [[services]]
 label = "wireplumber"
@@ -358,3 +381,4 @@ depends_on = ["pipewire"]
 privileged = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
+packages = ["wireplumber"]
