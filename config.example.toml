@@ -47,12 +47,15 @@ devices = ["computer", "laptop"]
 # description = "Package description" # Description of the package
 # depends_on = ["package_label", ...] # List of packages that must be installed before this one
 
+# Pacman packages
+
 [[packages]]
 method = "pacman"
 label = "base-devel"
 codename = "base-devel"
 description = "Base development tools"
 depends_on = []
+configs = []
 
 [[packages]]
 method = "pacman"
@@ -60,6 +63,7 @@ label = "git"
 codename = "git"
 description = "Git version control system"
 depends_on = []
+configs = []
 
 [[packages]]
 method = "pacman"
@@ -67,6 +71,7 @@ label = "doas"
 codename = "opendoas-retry"
 description = "A sudo replacement with retry mechanism"
 depends_on = []
+configs = []
 
 [[packages]]
 method = "pacman"
@@ -74,62 +79,7 @@ label = "turnstile"
 codename = "turnstile"
 description = "Independent session/login tracker"
 depends_on = []
-
-[[packages]]
-method = "script"
-label = "yay"
-codename = "./packages/yay"
-description = "AUR helper and package manager"
-depends_on = ["pacman", "git", "base-devel"]
-
-[[packages]]
-method = "yay"
-label = "hyprland"
-codename = "hyprland-git"
-description = "Hyprland Wayland compositor"
-depends_on = []
-
-[[packages]]
-method = "hyprpm"
-label = "hyprgrass"
-codename = "https://github.com/horriblename/hyprgrass"
-description = "Hyprland touchscreen gestures support."
-depends_on = []
-
-[[packages]]
-method = "hyprpm"
-label = "dynamic-cursors"
-codename = "https://github.com/VirtCode/hypr-dynamic-cursors"
-description = "Dynamic cursors for Hyprland."
-depends_on = []
-
-[[packages]]
-method = "hyprpm"
-label = "hyprsplit"
-codename = "https://github.com/shezdy/hyprsplit"
-description = "Hyprsplit window manager plugin."
-depends_on = []
-
-[[packages]]
-method = "script"
-label = "openscq30"
-codename = "./packages/openscq30"
-description = "Soundcore headphones and earbuds manager."
-depends_on = ["opendoas-retry", "rust"]
-
-[[packages]]
-method = "yay"
-label = "ags"
-codename = "aylurs-gtk-shell-git"
-description = "AGS - Aylurs GTK Shell for panels and widgets"
-depends_on = []
-
-[[packages]]
-method = "yay"
-label = "beeper"
-codename = "beeper-v4-bin"
-description = "Beeper unified messaging desktop client"
-depends_on = []
+configs = []
 
 [[packages]]
 method = "pacman"
@@ -137,20 +87,131 @@ label = "blueman"
 codename = "blueman"
 description = "Bluetooth management utility for BlueZ"
 depends_on = []
+configs = []
+
+# AUR packages
 
 [[packages]]
-method = "yay"
+method = "aur"
+label = "hyprland"
+codename = "hyprland-git"
+description = "Hyprland Wayland compositor"
+depends_on = []
+configs = []
+
+[[packages]]
+method = "aur"
+label = "ags"
+codename = "aylurs-gtk-shell-git"
+description = "AGS - Aylurs GTK Shell for panels and widgets"
+depends_on = []
+configs = []
+
+[[packages]]
+method = "aur"
+label = "beeper"
+codename = "beeper-v4-bin"
+description = "Beeper unified messaging desktop client"
+depends_on = []
+configs = []
+
+[[packages]]
+method = "aur"
 label = "chartdb"
 codename = "chartdb"
 description = "Database diagrams editor and viewer"
 depends_on = []
+configs = []
 
 [[packages]]
-method = "yay"
+method = "aur"
 label = "thunderbird"
 codename = "thunderbird"
 description = "Email client"
 depends_on = []
+configs = []
+
+[[packages]]
+method = "aur"
+label = "hyprsplit"
+codename = "https://github.com/shezdy/hyprsplit"
+description = "Hyprsplit window manager plugin."
+depends_on = []
+configs = []
+
+[[packages]]
+method = "aur"
+label = "neovim"
+codename = "neovim-nightly-bin"
+description = "Neovim editor (nightly build)"
+depends_on = []
+configs = ["nvim"]
+
+[[packages]]
+method = "aur"
+label = "ncmpcpp"
+codename = "ncmpcpp"
+description = "NCurses Music Player Client"
+depends_on = []
+configs = []
+
+[[packages]]
+method = "aur"
+label = "noto-fonts-cjk"
+codename = "noto-fonts-cjk"
+description = "CJK fonts from Google"
+depends_on = []
+configs = []
+
+[[packages]]
+method = "aur"
+label = "dash"
+codename = "dash"
+description = "Faster shell."
+depends_on = []
+configs = []
+
+[[packages]]
+method = "aur"
+label = "dashbinsh"
+codename = "dashbinsh"
+description = "Links dash to /bin/sh for faster shell startup."
+depends_on = []
+configs = []
+
+[[packages]]
+method = "aur"
+label = ""
+codename = ""
+description = ""
+depends_on = []
+configs = []
+
+[[packages]]
+method = "aur"
+label = ""
+codename = ""
+description = ""
+depends_on = []
+configs = []
+
+# Script packages
+
+[[packages]]
+method = "script"
+label = "openscq30"
+codename = "./packages/openscq30"
+description = "Soundcore headphones and earbuds manager."
+depends_on = ["opendoas-retry", "rust"]
+configs = []
+
+[[packages]]
+method = "script"
+label = "yay"
+codename = "./packages/yay"
+description = "AUR helper and package manager"
+depends_on = ["pacman", "git", "base-devel"]
+configs = []
 
 [[packages]]
 method = "script"
@@ -158,6 +219,17 @@ label = "hypr-minimize"
 codename = "./packages/hypr-minimize"
 description = "Toggle sending/receiving an app from a special workspace (minimized) in Hyprland"
 depends_on = []
+configs = []
+
+[[packages]]
+method = "script"
+label = "advcpmv"
+codename = "./packages/advcpmv"
+description = "cp and mv with progress bar."
+depends_on = ["patch", "gcc"]
+configs = []
+
+# Thunderbird addons
 
 [[packages]]
 method = "thunderbird"
@@ -165,6 +237,43 @@ label = "minimizeonclose-addon"
 codename = "https://github.com/BeyondMagic/thunderbird-minimize-hyprland/releases/download/2.0.2.0-7-gd08f330/minimizeonclose.xpi"
 description = "Minimize on close extension for Thunderbird in Hyprland"
 depends_on = ["hypr-minimize"]
+configs = []
+
+# Hyprland plugins
+
+[[packages]]
+method = "hyprpm"
+label = "hyprgrass"
+codename = "https://github.com/horriblename/hyprgrass"
+description = "Hyprland touchscreen gestures support."
+depends_on = []
+configs = []
+
+[[packages]]
+method = "hyprpm"
+label = "dynamic-cursors"
+codename = "https://github.com/VirtCode/hypr-dynamic-cursors"
+description = "Dynamic cursors for Hyprland."
+depends_on = []
+configs = []
+
+[[packages]]
+method = "hyprpm"
+label = "hyprsplit"
+codename = "https://github.com/shezdy/hyprsplit"
+description = "Hyprsplit window manager plugin."
+depends_on = []
+configs = []
+
+# Python packages
+
+# [[packages]]
+# method = "pip"
+# label = "python-validity"
+# codename = "python-validity"
+# description = "Validity fingerprint driver userspace helper"
+# depends_on = []
+# configs = []
 
 # -----------------------------------------------
 # Profiles for packages per device
@@ -181,9 +290,54 @@ description = ["Package manager."]
 devices = ["computer", "laptop"]
 
 [[profiles]]
-description = ["System utilities."]
+description = ["System-wide utilities."]
 devices = ["computer", "laptop"]
-packages = ["opendoas-retry"]
+packages = ["doas", "dash", "dashbinsh", "turnstile", "advcpmv"]
+
+[[profiles]]
+description = ["Sound server using PipeWire."]
+devices = ["computer", "laptop"]
+packages = [
+	"libpipewire",
+	"pipewire",
+	"pipewire-alsa",
+	"pipewire-audio",
+	"pipewire-pulse",
+	"pipewire-session-manager",
+]
+
+[[profiles]]
+description = ["Desktop utilities."]
+devices = ["computer", "laptop"]
+packages = [
+	"selectdefaultapplication",
+	"polkit",
+	"polkit-gnome",
+	"yt-dlp",
+	"mpv",
+	"nnn",
+	"songrec",
+]
+
+[[profiles]]
+description = ["Communication tools."]
+devices = ["computer", "laptop"]
+packages = ["beeper", "thunderbird"]
+
+[[profiles]]
+description = ["Digital art and image tools."]
+devices = ["laptop"]
+packages = ["krita"]
+
+[[profiles]]
+description = ["Image editing software."]
+devices = ["computer", "laptop"]
+packages = ["gimp", "inkscape"]
+
+[[profiles]]
+description = ["Hyprland compositor and related plugins."]
+devices = ["computer", "laptop"]
+packages = ["hyprland-git", "hyprpicker-git", "libastal-hyprland-git"]
 
 [[profiles]]
 description = ["Hyprland's laptop plugins."]
@@ -199,6 +353,93 @@ packages = ["dynamic-cursors", "hyprsplit"]
 description = ["Soundcore headphones manager."]
 devices = ["computer", "laptop"]
 packages = ["openscq30"]
+
+[[profiles]]
+description = ["AGS desktop shell."]
+devices = ["computer", "laptop"]
+packages = ["libqalculate", "ags"]
+
+[[profiles]]
+description = ["Input method framework for multilingual typing."]
+devices = ["computer", "laptop"]
+packages = [
+	"fcitx5-configtool",
+	"fcitx5-gtk",
+	"fcitx5-material-color",
+	"fcitx5-qt",
+	"fcitx5-mozc-ut",
+]
+
+[[profiles]]
+description = ["NeoVim IDE."]
+devices = ["computer", "laptop"]
+packages = [
+	"neovim",
+	"vscode-css-language-server",
+	"vscode-json-languageserver",
+	"vscode-html-languageserver",
+	"typescript-language-server",
+	"python-lsp-server",
+	"python-lsp-all",
+	"python-lsp-black",
+	"python-pylint",
+	"flake8",
+	"biome-bin",
+	"typescript",
+]
+
+[[profiles]]
+description = ["VSCode IDE."]
+devices = ["computer", "laptop"]
+packages = ["vscode"]
+
+[[profiles]]
+description = ["Music server"]
+devices = ["computer"]
+packages = [
+	"Mopidy-Listenbrainz",
+	"Mopidy-Autoplay",
+	"Mopidy-Iris",
+	"Mopidy-Listenbrainz",
+	"Mopidy-Local",
+	"Mopidy-MPD",
+	"Mopidy-Scrobbler",
+	"Mopidy-Spotify",
+	"Mopidy-YouTube",
+	"ncmpcpp",
+]
+
+[[profiles]]
+description = ["PDF and eBook readers."]
+devices = ["computer", "laptop"]
+packages = ["foliate", "sioyek"]
+
+[[profiles]]
+description = ["Audio editing and streaming."]
+devices = ["computer"]
+packages = ["lmms", "audacity", "obs-studio", "olive"]
+
+[[profiles]]
+description = ["Manage LBRY and Odysee."]
+devices = ["computer", "laptop"]
+packages = ["lbry-app-bin"]
+
+[[profiles]]
+description = ["Flashcard learning tool."]
+devices = ["computer", "laptop"]
+packages = ["anki-bin"]
+
+[[profiles]]
+description = [
+	"Markup-aware linter for prose built with speed and extensibility in mind.",
+]
+devices = ["computer", "laptop"]
+packages = ["vale"]
+
+[[profiles]]
+description = ["LaTeX and related document tooling."]
+devices = ["computer", "laptop"]
+packages = ["latex-mk", "texlab", "perl-yaml-tiny", "perl-file-homedir"]
 
 # -----------------------------------------------
 # Services for devices
