@@ -1,0 +1,5 @@
+#!/usr/bin/env dash
+#
+# João Farias © 2025 BeyondMagic <beyondmagic@mail.ru>
+
+exec ags quit
