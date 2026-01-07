@@ -325,21 +325,36 @@ codename = "./packages/openscq30"
 description = "Soundcore headphones and earbuds manager."
 depends_on = ["opendoas-retry", "rust"]
 
+# -----------------------------------------------
+# Profiles for packages per device
+# -----------------------------------------------
+
+# Example:
+# [[profiles]]
 # label = "package_name" 		   # Unique label for the package
-# manager = "package_manager_name" # Package manager to use
-# packages = ["pkg1", "pkg2", ...] # List of packages to install
 # devices = ["device_name", ...]   # List of devices where this package should be installed
+# packages = ["package_name", ...] # List of packages to install on the device
 
-[[packages]]
+[[profiles]]
 description = ["Package manager."]
-manager = "pacman"
-packages = ["yay"]
 devices = ["computer", "laptop"]
 
-[[packages]]
-description = ["System manager."]
-manager = "pacman-aur"
-packages = [
-	"opendoas-retry", # A sudo replacement with retry mechanism
-]
+[[profiles]]
+description = ["System utilities."]
 devices = ["computer", "laptop"]
+packages = ["opendoas-retry"]
+
+[[profiles]]
+description = ["Hyprland's laptop plugins."]
+devices = ["laptop"]
+packages = ["hyprgrass"]
+
+[[profiles]]
+description = ["Hyprland's plugins."]
+devices = ["computer", "laptop"]
+packages = ["dynamic-cursors", "hyprsplit"]
+
+[[profiles]]
+description = ["Soundcore headphones manager."]
+devices = ["computer", "laptop"]
+packages = ["openscq30"]
