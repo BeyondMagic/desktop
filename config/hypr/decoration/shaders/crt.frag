@@ -1,9 +1,11 @@
-#version 100
+#version 300 es
+
 precision highp float;
-varying highp vec2 v_texcoord;
-varying highp vec3 v_pos;
+in highp vec2 v_texcoord;
+in highp vec3 v_pos;
 uniform highp sampler2D tex;
 uniform lowp float time;
+layout(location = 0) out vec4 fragColor;
 
 #define BORDER_COLOR vec4(vec3(0.0, 0.0, 0.0), 1.0) // black border
 #define BORDER_RADIUS 1.0 // larger vignette radius
@@ -299,67 +301,67 @@ vec4 bilateralFilter(sampler2D tex, vec2 uv, vec4 color, float sampleRadius, flo
     float totalWeight = 0.0;
 
     // Top-left pixel
-    vec4 sample = texture2D(tex, uv + vec2(-1.0, -1.0));
+    vec4 p_sample = texture2D(tex, uv + vec2(-1.0, -1.0));
     float dist = length(vec2(-1.0, -1.0));
-    float colorDist = length(sample - color);
+    float colorDist = length(p_sample - color);
     float weight = exp(-0.5 * (dist * dist + colorDist * colorDist * intensity) / (sampleRadius * sampleRadius));
-    filteredColor += sample * weight;
+    filteredColor += p_sample * weight;
     totalWeight += weight;
 
     // Top pixel
-    sample = texture2D(tex, uv + vec2(0.0, -1.0));
+    p_sample = texture2D(tex, uv + vec2(0.0, -1.0));
     dist = length(vec2(0.0, -1.0));
-    colorDist = length(sample - color);
+    colorDist = length(p_sample - color);
     weight = exp(-0.5 * (dist * dist + colorDist * colorDist * intensity) / (sampleRadius * sampleRadius));
-    filteredColor += sample * weight;
+    filteredColor += p_sample * weight;
     totalWeight += weight;
 
     // Top-right pixel
-    sample = texture2D(tex, uv + vec2(1.0, -1.0));
+    p_sample = texture2D(tex, uv + vec2(1.0, -1.0));
     dist = length(vec2(1.0, -1.0));
-    colorDist = length(sample - color);
+    colorDist = length(p_sample - color);
     weight = exp(-0.5 * (dist * dist + colorDist * colorDist * intensity) / (sampleRadius * sampleRadius));
-    filteredColor += sample * weight;
+    filteredColor += p_sample * weight;
     totalWeight += weight;
 
     // Left pixel
-    sample = texture2D(tex, uv + vec2(-1.0, 0.0));
+    p_sample = texture2D(tex, uv + vec2(-1.0, 0.0));
     dist = length(vec2(-1.0, 0.0));
-    colorDist = length(sample - color);
+    colorDist = length(p_sample - color);
     weight = exp(-0.5 * (dist * dist + colorDist * colorDist * intensity) / (sampleRadius * sampleRadius));
-    filteredColor += sample * weight;
+    filteredColor += p_sample * weight;
     totalWeight += weight;
 
     // Center pixel
-    sample = texture2D(tex, uv);
+    p_sample = texture2D(tex, uv);
     dist = 0.0;
-    colorDist = length(sample - color);
+    colorDist = length(p_sample - color);
     weight = exp(-0.5 * (dist * dist + colorDist * colorDist * intensity) / (sampleRadius * sampleRadius));
-    filteredColor += sample * weight;
+    filteredColor += p_sample * weight;
     totalWeight += weight;
 
     // Right pixel
-    sample = texture2D(tex, uv + vec2(1.0, 0.0));
+    p_sample = texture2D(tex, uv + vec2(1.0, 0.0));
     dist = length(vec2(1.0, 0.0));
-    colorDist = length(sample - color);
+    colorDist = length(p_sample - color);
     weight = exp(-0.5 * (dist * dist + colorDist * colorDist * intensity) / (sampleRadius * sampleRadius));
-    filteredColor += sample * weight;
+    filteredColor += p_sample * weight;
     totalWeight += weight;
 
     // Bottom-left pixel
-    sample = texture2D(tex, uv + vec2(-1.0, 1.0));
+    p_sample = texture2D(tex, uv + vec2(-1.0, 1.0));
     dist = length(vec2(-1.0, 1.0));
-    colorDist = length(sample - color);
+    colorDist = length(p_sample - color);
     weight = exp(-0.5 * (dist * dist + colorDist * colorDist * intensity) / (sampleRadius * sampleRadius));
-    filteredColor += sample * weight;
+    filteredColor += p_sample * weight;
     totalWeight += weight;
 
-// Bottom pixel
-    sample = texture2D(tex, uv + vec2(0.0, sampleRadius));
+    // Bottom pixel
+    p_sample = texture2D(tex, uv + vec2(0.0, sampleRadius));
     dist = length(vec2(0.0, sampleRadius));
-    colorDist = length(sample - color);
+    colorDist = length(p_sample - color);
     weight = exp(-0.5 * (dist * dist + colorDist * colorDist * intensity) / (sampleRadius * sampleRadius));
-    filteredColor += sample * weight;
+    filteredColor += p_sample * weight;
     totalWeight += weight;
 
     filteredColor /= totalWeight;
@@ -505,7 +507,7 @@ void main() {
 
     color = applyScanlines(tc, color);
 
-    gl_FragColor = color;
-    gl_FragColor.a = 1.0;
+    fragColor = color;
+    fragColor.a = 1.0;
 }
 
