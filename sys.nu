@@ -48,7 +48,7 @@ export module config {
 		| str replace --all `{device}` $device_label
 	
 		let target = $in.target
-		| path expand
+		| path expand --no-symlink
 	
 		let dir_target = if ($target | str ends-with `/`) {
 			$target
