@@ -1,5 +1,10 @@
 # João V. Farias © BeyondMagic 2025-2026 <beyondmagic@mail.ru>
 
+# A helper function to simulate command execution in dry-run mode.
+def dry-run []: list<string> -> nothing {
+	print $in
+}
+
 export module service {
 
 	# Install a managed service by label.
