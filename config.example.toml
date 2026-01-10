@@ -25,9 +25,10 @@ machine_id = "7faad10195bec8f37d9fbb7a656ff61d"
 # description = "Configuration description" # Description of the configuration
 #
 # [[configuration.file]]
-# source = "source_path" 			   # Source path of the configuration
-# target = "target_path" 			   # Target path where the configuration should be placed
-# root = true/false 				   # Whether to use root privileges to link the file
+# source = "source_path" 			      # Source path of the configuration
+# target = "target_path" 			      # Target path where the configuration should be placed
+# root = true/false 				      # Whether to use root privileges to link the file
+# exclude = ["pattern1", "pattern2", ...] # List of glob patterns to exclude from linking.
 #
 # Notes:
 # - `source` support wildcards (* and **) for multiple files and directories.
@@ -40,11 +41,13 @@ label = "hypr"
 source = "./config/hypr/*"
 target = "~/.config/hypr/"
 root = false
+exclude = []
 
 [[configuration.file]]
 source = "./config/hypr/**/{device}.conf"
 target = "~/.config/hypr/current/"
 root = false
+exclude = []
 
 [[configuration]]
 label = "hyprland-dynamic-cursors"
@@ -53,6 +56,7 @@ label = "hyprland-dynamic-cursors"
 source = "./config/hypr-plugins/dynamic-cursors"
 target = "~/.config/hypr/current/dynamic-cursors"
 root = false
+exclude = []
 
 [[configuration]]
 label = "hyprland-hyprsplit"
@@ -61,6 +65,7 @@ label = "hyprland-hyprsplit"
 source = "./config/hypr-plugins/hyprsplit"
 target = "~/.config/hypr/current/hyprsplit"
 root = false
+exclude = []
 
 [[configuration]]
 label = "hypridle"
@@ -69,6 +74,7 @@ label = "hypridle"
 source = "./config/hypr-idle/hypridle.conf"
 target = "~/.config/hypr/hypridle.conf"
 root = false
+exclude = []
 
 #[[configuration]]
 #label = "hyprland-hyprgrass"
@@ -77,6 +83,7 @@ root = false
 #[[configuration.file]]
 #source = "./config/hypr-plugins/hyprgrass"
 #target = "~/.config/hypr2/current/hyprgrass"
+#exclude = []
 
 [[configuration]]
 label = "nushell"
@@ -85,6 +92,16 @@ label = "nushell"
 source = "./config/nushell/*"
 target = "~/.config/nushell/"
 root = false
+exclude = []
+
+[[configuration]]
+label = "ags"
+
+[[configuration.file]]
+source = "./config/ags/*"
+target = "~/.config/ags2/"
+root = false
+exclude = []
 
 # [[configuration]]
 # label = ""
