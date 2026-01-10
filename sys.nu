@@ -26,7 +26,7 @@ export module config {
 	export def link [
 		--root # Whether to perform the linking operation with root privileges.
 	]: record<devices: list<record<label: string, machine_id: string>>, source: string, target: string> -> nothing {
-		let machine_id = sys host | get machine_id
+		let machine_id = host | get machine_id
 		let device = $in.devices | where { $in.machine_id == $machine_id }
 	
 		if ($device | length) != 1 {
