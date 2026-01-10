@@ -142,9 +142,6 @@ $env.WALLPAPER_FILES = $env.IMAGES_FOLDER + 'paredepapel/desktop/**/*'
 # Useful for sioyek.
 $env.PDF_USER_DATABASE = 'hana'
 
-# nnn: default opener for files.
-$env.NNN_OPENER = 'xdg-open.nu'
-
 # Python: path of './.python_history':
 $env.PYTHON_HISTORY = $env.XDG_DATA_HOME + '/python/history.txt'
 
