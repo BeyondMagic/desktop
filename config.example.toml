@@ -2,7 +2,7 @@
 # System devices information
 # -----------------------------------------------
 
-# Example
+# Example:
 # [[devices]]
 # label = "device_name" 		  # Unique label for the device
 # machine_id = "machine_id_value" # From `/etc/machine-id`
@@ -16,24 +16,65 @@ label = "laptop"
 machine_id = "7faad10195bec8f37d9fbb7a656ff61d"
 
 # -----------------------------------------------
-# Plugins for devices
+# Configuration files for devices
 # -----------------------------------------------
 
-# Example
-# [[plugins]]
-# label = "plugin_name" 		   # Unique label for the plugin
-# source = "plugin_source_file"  # Path to the plugin source file/URL
-# devices = ["device_name", ...] # List of devices where this plugin should be used
+# Example:
+# [[configuration]]
+# label = "config_label" 			   # Label for the configuration, note it doesn't have to be unique
+# description = "Configuration description" # Description of the configuration
+#
+# [[configuration.file]]
+# source = "source_path" 			   # Source path of the configuration
+# target = "target_path" 			   # Target path where the configuration should be placed
+#
+# Notes:
+# - `source` support wildcards (* and **) for multiple files and directories.
+# - `source` replaces `{device}` with the current device label when used in the path.
 
-[[plugins]]
-label = "dynamic-cursors"
-source = "https://github.com/VirtCode/hypr-dynamic-cursors/"
-devices = ["computer", "laptop"]
+[[configuration]]
+label = "hypr"
+description = "Hyprland configuration files"
 
-[[plugins]]
-label = "hyprsplit"
-source = "https://github.com/shezdy/hyprsplit"
-devices = ["computer", "laptop"]
+[[configuration.file]]
+source = "./config/hypr/*"
+target = "~/.config/hypr/"
+
+[[configuration.file]]
+source = "./config/hypr/**/{device}.conf"
+target = "~/.config/hypr/current/"
+
+[[configuration]]
+label = "hyprland-dynamic-cursors"
+description = "Dynamic cursors configuration for Hyprland"
+
+[[configuration.file]]
+source = "./config/hypr-plugins/dynamic-cursors"
+target = "~/.config/hypr/current/dynamic-cursors"
+
+[[configuration]]
+label = "hyprland-hyprsplit"
+description = "Hyprsplit configuration for Hyprland"
+
+[[configuration.file]]
+source = "./config/hypr-plugins/hyprsplit"
+target = "~/.config/hypr/current/hyprsplit"
+
+[[configuration]]
+label = "hypridle"
+description = "Hypridle configuration files"
+
+[[configuration.file]]
+source = "./config/hypr-idle/hypridle.conf"
+target = "~/.config/hypr/hypridle.conf"
+
+#[[configuration]]
+#label = "hyprland-hyprgrass"
+#description = "Hyprgrass configuration for Hyprland"
+
+#[[configuration.file]]
+#source = "./config/hypr-plugins/hyprgrass"
+#target = "~/.config/hypr2/current/hyprgrass"
 
 # -----------------------------------------------
 # Packages
@@ -97,7 +138,15 @@ label = "hyprland"
 codename = "hyprland-git"
 description = "Hyprland Wayland compositor"
 depends_on = []
-configs = []
+config = "hyprland"
+
+[[packages]]
+method = "aur"
+label = "hypridle"
+codename = "hypridle-git"
+description = "Hyprland idle plugin"
+depends_on = []
+config = "hypridle"
 
 [[packages]]
 method = "aur"
@@ -247,7 +296,7 @@ label = "hyprgrass"
 codename = "https://github.com/horriblename/hyprgrass"
 description = "Hyprland touchscreen gestures support."
 depends_on = []
-configs = []
+config = "hyprland-hyprgrass"
 
 [[packages]]
 method = "hyprpm"
@@ -255,7 +304,7 @@ label = "dynamic-cursors"
 codename = "https://github.com/VirtCode/hypr-dynamic-cursors"
 description = "Dynamic cursors for Hyprland."
 depends_on = []
-configs = []
+config = "hyprland-dynamic-cursors"
 
 [[packages]]
 method = "hyprpm"
@@ -263,7 +312,7 @@ label = "hyprsplit"
 codename = "https://github.com/shezdy/hyprsplit"
 description = "Hyprsplit window manager plugin."
 depends_on = []
-configs = []
+config = "hyprland-hyprsplit"
 
 # Python packages
 
