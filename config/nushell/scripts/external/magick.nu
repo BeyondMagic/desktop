@@ -1,0 +1,1 @@
+/home/dream/armazenamento/.compartilhado/sistema/magick.nu
