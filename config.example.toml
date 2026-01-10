@@ -39,10 +39,12 @@ description = "Hyprland configuration files"
 [[configuration.file]]
 source = "./config/hypr/*"
 target = "~/.config/hypr/"
+root = false
 
 [[configuration.file]]
 source = "./config/hypr/**/{device}.conf"
 target = "~/.config/hypr/current/"
+root = false
 
 [[configuration]]
 label = "hyprland-dynamic-cursors"
@@ -51,6 +53,7 @@ description = "Dynamic cursors configuration for Hyprland"
 [[configuration.file]]
 source = "./config/hypr-plugins/dynamic-cursors"
 target = "~/.config/hypr/current/dynamic-cursors"
+root = false
 
 [[configuration]]
 label = "hyprland-hyprsplit"
@@ -59,6 +62,7 @@ description = "Hyprsplit configuration for Hyprland"
 [[configuration.file]]
 source = "./config/hypr-plugins/hyprsplit"
 target = "~/.config/hypr/current/hyprsplit"
+root = false
 
 [[configuration]]
 label = "hypridle"
@@ -67,6 +71,7 @@ description = "Hypridle configuration files"
 [[configuration.file]]
 source = "./config/hypr-idle/hypridle.conf"
 target = "~/.config/hypr/hypridle.conf"
+root = false
 
 #[[configuration]]
 #label = "hyprland-hyprgrass"

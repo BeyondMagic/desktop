@@ -20,7 +20,12 @@ export module service {
 export module config {
 
 	# Link configuration files for the current machine based on its machine_id.
-	export def link []: record<devices: list<record<label: string, machine_id: string>>, source: string, target: string> -> nothing {
+	#
+	# Dependencies:
+	# - doas (if `--root` is specified)
+	export def link [
+		--root # Whether to perform the linking operation with root privileges.
+	]: record<devices: list<record<label: string, machine_id: string>>, source: string, target: string> -> nothing {
 		let machine_id = sys host | get machine_id
 		let device = $in.devices | where { $in.machine_id == $machine_id }
 	
@@ -44,11 +49,37 @@ export module config {
 		let target = $in.target
 		| path expand
 	
-		if ($target | str ends-with `/`) {
-			mkdir $target
+		let dir_target = if ($target | str ends-with `/`) {
+			$target
 		} else {
-			let parent = $target | path dirname
-			mkdir $parent
+			$target | path dirname
+		}
+
+		if $root {
+ 			try {
+ 				run-external ...[
+ 					"doas"
+ 					"mkdir"
+ 					"--parents"
+ 					$dir_target
+ 				]
+ 			} catch {|err|
+ 				error make {
+ 					msg: $"Failed to create directory '($dir_target)' with elevated privileges."
+ 					code: "sys::config::link::mkdir_failed"
+ 					labels: {
+ 						text: (if ('msg' in $err) {
+ 							$"Underlying error: ($err.msg)"
+ 						} else {
+ 							"Failed to execute 'doas mkdir --parents' for the target directory."
+ 						})
+ 						span: (metadata $in.target).span
+ 					}
+ 					help: "Check that 'doas' is installed and configured, and that you have permission to create the target directory."
+ 				}
+ 			}
+		} else {
+			mkdir $dir_target
 		}
 
 		let sources = glob $source
@@ -72,9 +103,31 @@ export module config {
 			"--relative"
 			"--symbolic"
 		]
+
+		let ln_args = if $root {
+			["doas"] ++ $ln_args
+		} else {
+			$ln_args
+		}
 	
-		$sources | each {
-			run-external ...$ln_args $in $target
+		$sources | each { |src|
+			try {
+				run-external ...$ln_args $src $target
+			} catch { |err|
+				error make {
+					msg: $"Failed to create symbolic link for '($src)' to '($target)'."
+				 	code: "sys::config::link::ln_failed"
+				 	labels: {
+						text: (if 'msg' in $err {
+			   				$"Underlying error: ($err.msg)"
+			   			} else {
+			   			"Failed to execute 'ln' command."
+			   			})
+						span: (metadata $src).span
+				 	}
+					help: "Check that 'ln' is available, you have write permissions to the target directory, the source file exists and is readable, and no conflicting file exists at the target path."
+				}
+			}
 		}
 	}
 	
