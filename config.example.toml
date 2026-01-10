@@ -34,7 +34,6 @@ machine_id = "7faad10195bec8f37d9fbb7a656ff61d"
 
 [[configuration]]
 label = "hypr"
-description = "Hyprland configuration files"
 
 [[configuration.file]]
 source = "./config/hypr/*"
@@ -48,7 +47,6 @@ root = false
 
 [[configuration]]
 label = "hyprland-dynamic-cursors"
-description = "Dynamic cursors configuration for Hyprland"
 
 [[configuration.file]]
 source = "./config/hypr-plugins/dynamic-cursors"
@@ -57,7 +55,6 @@ root = false
 
 [[configuration]]
 label = "hyprland-hyprsplit"
-description = "Hyprsplit configuration for Hyprland"
 
 [[configuration.file]]
 source = "./config/hypr-plugins/hyprsplit"
@@ -66,7 +63,6 @@ root = false
 
 [[configuration]]
 label = "hypridle"
-description = "Hypridle configuration files"
 
 [[configuration.file]]
 source = "./config/hypr-idle/hypridle.conf"
