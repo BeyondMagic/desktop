@@ -29,26 +29,22 @@ export module config {
 	# Dependencies:
 	# - doas (if `--root` is specified)
 	export def link [
-		--root # Whether to perform the linking operation with root privileges.
+		--device-label: string # The label of the device/machine to link configuration for.
 		--dry-run # If specified, the command will only simulate the linking without making any changes.
-	]: record<devices: list<record<label: string, machine_id: string>>, source: string, target: string> -> nothing {
-		let machine_id = host | get machine_id
-		let device = $in.devices | where { $in.machine_id == $machine_id }
-	
-		if ($device | length) != 1 {
+	]: record<devices: list<record<label: string, machine_id: string>>, source: string, target: string, root: bool> -> nothing {
+
+		if ($device_label | is-empty) {
 			error make {
-				msg: "Could not find a unique device configuration for this machine_id"
-				code: "sys::config::link::device_not_found"
+				msg: "Device label must be specified."
+				code: "sys::config::link::device_label_missing"
 				labels: {
-					text: $"machine_id: ($machine_id)"
-					span: (metadata $device).span
+					text: "The --device-label argument is required."
+					span: (metadata $in).span
 				}
-				help: "Ensure that the configuration file has a unique entry for this machine_id."
+				help: "Provide a valid device label corresponding to your machine."
 			}
 		}
-	
-		let device_label = $device | first | get label
-	
+
 		let source = $in.source
 		| str replace --all `{device}` $device_label
 	
@@ -60,6 +56,8 @@ export module config {
 		} else {
 			$target | path dirname
 		}
+
+		let root = $in.root
 
 		if $root {
  			try {
@@ -129,7 +127,7 @@ export module config {
 		$sources | each { |src|
 			try {
 				if $dry_run {
-					$ln_args ++ [ $src $target ] | dry-run
+					$ln_args ++ [ $src $target ]
 				} else {
 					run-external ...$ln_args $src $target
 				}
@@ -150,10 +148,66 @@ export module config {
 			}
 		}
 	}
+
+	# Apply a specific configuration by label.
+	export def apply [
+		--label: string # The label of the configuration to apply.
+		--dry-run # If specified, the command will only simulate the application without making any changes.
+	]: record<configuration: table<label: string, file: table<source: string, target: string, root: bool>>, devices: table<label: string, machine_id: string>> -> nothing {
+
+		if ($label | is-empty) {
+			error make {
+				msg: "Configuration label must be specified."
+				code: "sys::config::apply::label_missing"
+				labels: {
+					text: "The --label argument is required."
+					span: (metadata $in).span
+				}
+				help: "Provide a valid configuration label to apply."
+			}
+		}
+
+		let machine_id = host | get machine_id
+		let device = $in.devices | where { $in.machine_id == $machine_id }
 	
-	# View/list the current configuration.
-	export def main []: nothing -> any {
-		# TODO: Implement logic to retrieve and return the current configuration.
+		if ($device | length) != 1 {
+			error make {
+				msg: "Could not find a unique device configuration for this machine_id"
+				code: "sys::config::apply::device_not_found"
+				labels: {
+					text: $"machine_id: ($machine_id)"
+					span: (metadata $device).span
+				}
+				help: "Ensure that the configuration file has a unique entry for this machine_id."
+			}
+		}
+	
+		let device_label = $device | first | get label
+
+		let configuration = $in.configuration
+			| where { $in.label == $label }
+
+		if ($configuration | length) != 1 {
+			error make {
+				msg: "Could not find a unique configuration for the given label."
+				code: "sys::config::apply::configuration_not_found"
+				labels: {
+					text: $"label: ($label)"
+					span: (metadata $in).span
+				}
+				help: "Ensure that the configuration label exists and is unique."
+			}
+		}
+
+		let configuration = $configuration | first
+		let devices = $in.devices
+
+		$configuration.file | each {
+			{
+				devices: $devices
+				...$in
+			} | link --dry-run=($dry_run) --device-label=($device_label)
+		}
 	}
 }
 

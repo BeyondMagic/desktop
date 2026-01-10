@@ -21,12 +21,13 @@ machine_id = "7faad10195bec8f37d9fbb7a656ff61d"
 
 # Example:
 # [[configuration]]
-# label = "config_label" 			   # Label for the configuration, note it doesn't have to be unique
+# label = "config_label" 			        # Label for the configuration
 # description = "Configuration description" # Description of the configuration
 #
 # [[configuration.file]]
 # source = "source_path" 			   # Source path of the configuration
 # target = "target_path" 			   # Target path where the configuration should be placed
+# root = true/false 				   # Whether to use root privileges to link the file
 #
 # Notes:
 # - `source` support wildcards (* and **) for multiple files and directories.
@@ -76,6 +77,22 @@ root = false
 #[[configuration.file]]
 #source = "./config/hypr-plugins/hyprgrass"
 #target = "~/.config/hypr2/current/hyprgrass"
+
+[[configuration]]
+label = "nushell"
+
+[[configuration.file]]
+source = "./config/nushell/*"
+target = "~/.config/nushell/"
+root = false
+
+# [[configuration]]
+# label = ""
+# 
+# [[configuration.file]]
+# source = "./config/"
+# target = "~/.config/"
+# root = false
 
 # -----------------------------------------------
 # Packages
@@ -132,6 +149,14 @@ depends_on = []
 configs = []
 
 # AUR packages
+
+[[packages]]
+method = "aur"
+label = "nushell"
+codename = "nushell"
+description = "Functional shell for the 21st century"
+depends_on = []
+config = "nushell"
 
 [[packages]]
 method = "aur"
@@ -258,7 +283,7 @@ configs = []
 [[packages]]
 method = "script"
 label = "yay"
-codename = "./packages/yay"
+codename = "./packages/yay/index.sh"
 description = "AUR helper and package manager"
 depends_on = ["pacman", "git", "base-devel"]
 configs = []
