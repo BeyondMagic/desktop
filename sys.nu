@@ -25,6 +25,7 @@ export module config {
 	# - doas (if `--root` is specified)
 	export def link [
 		--root # Whether to perform the linking operation with root privileges.
+		--dry-run # If specified, the command will only simulate the linking without making any changes.
 	]: record<devices: list<record<label: string, machine_id: string>>, source: string, target: string> -> nothing {
 		let machine_id = host | get machine_id
 		let device = $in.devices | where { $in.machine_id == $machine_id }
@@ -57,12 +58,18 @@ export module config {
 
 		if $root {
  			try {
- 				run-external ...[
+				let args = [
  					"doas"
  					"mkdir"
  					"--parents"
  					$dir_target
  				]
+
+				if $dry_run {
+					$args | dry-run
+				} else {
+					run-external ...$args
+				}
  			} catch {|err|
  				error make {
  					msg: $"Failed to create directory '($dir_target)' with elevated privileges."
@@ -79,7 +86,11 @@ export module config {
  				}
  			}
 		} else {
-			mkdir $dir_target
+			if $dry_run {
+				[ 'mkdir' $dir_target ] | dry-run
+			} else {
+				mkdir $dir_target
+			}
 		}
 
 		let sources = glob $source
@@ -112,7 +123,11 @@ export module config {
 	
 		$sources | each { |src|
 			try {
-				run-external ...$ln_args $src $target
+				if $dry_run {
+					$ln_args ++ [ $src $target ] | dry-run
+				} else {
+					run-external ...$ln_args $src $target
+				}
 			} catch { |err|
 				error make {
 					msg: $"Failed to create symbolic link for '($src)' to '($target)'."
