@@ -154,6 +154,15 @@ target = "~/.config/foot/"
 root = false
 exclude = []
 
+[[configuration]]
+label = "fuzzel"
+
+[[configuration.file]]
+source = "./config/fuzzel/*"
+target = "~/.config/fuzzel/"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -365,6 +374,14 @@ config = "foot"
 
 [[packages]]
 method = "aur"
+label = "fuzzel"
+codename = "fuzzel"
+description = "A simple and lightweight application launcher for Wayland"
+depends_on = []
+config = "fuzzel"
+
+[[packages]]
+method = "aur"
 label = ""
 codename = ""
 description = ""
@@ -495,6 +512,7 @@ packages = [
 	"songrec",
 	"swayimg",
 	"foot",
+	"fuzzel",
 ]
 
 [[profiles]]
