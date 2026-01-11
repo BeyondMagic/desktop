@@ -203,8 +203,8 @@ exclude = []
 label = "gimp"
 
 [[configuration.file]]
-source = "./config/gimp/splashes"
-target = "~/.config/GIMP/3.0/splashes"
+source = "./config/gimp/*"
+target = "~/.config/GIMP/3.0/"
 root = false
 exclude = []
 
