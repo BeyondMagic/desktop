@@ -244,6 +244,15 @@ target = "/etc/keyd"
 root = true
 exclude = []
 
+[[configuration]]
+label = "base-devel"
+
+[[configuration.file]]
+source = "./config/base/locale.conf"
+target = "/etc/locale.conf"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -273,7 +282,7 @@ label = "base-devel"
 codename = "base-devel"
 description = "Base development tools"
 depends_on = []
-configs = []
+config = "base-devel"
 
 [[packages]]
 method = "pacman"
@@ -602,11 +611,28 @@ config = "hyprland-hyprsplit"
 [[profiles]]
 description = ["Package manager."]
 devices = ["computer", "laptop"]
+packages = [
+	"pacman",
+	"pacman-contrib",
+	"yay",
+	"artix-archlinux-support",
+	"artix-cgroups",
+	"artix-keyring",
+	"artix-mirrorlist",
+]
 
 [[profiles]]
 description = ["System-wide utilities."]
 devices = ["computer", "laptop"]
-packages = ["doas", "dash", "dashbinsh", "turnstile", "advcpmv"]
+packages = [
+	"base-devel",
+	"gcc",
+	"doas",
+	"dash",
+	"dashbinsh",
+	"turnstile",
+	"advcpmv",
+]
 
 [[profiles]]
 description = ["Android development and file transfer tools."]

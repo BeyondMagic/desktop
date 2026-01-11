@@ -1,6 +1,0 @@
-#!/usr/bin/env dash
-#
-# João Farias © BeyondMagic <beyondmagic@mail.ru> 2021-2024
-
-EDITOR=nvim
-VISUAL=nvim
