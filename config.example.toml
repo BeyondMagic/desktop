@@ -172,6 +172,15 @@ target = "~/.config/gammastep/"
 root = false
 exclude = []
 
+[[configuration]]
+label = "vscode"
+
+[[configuration.file]]
+source = "./config/vscode/flags.conf"
+target = "~/.config/code-flags.conf"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -388,6 +397,14 @@ codename = "fuzzel"
 description = "A simple and lightweight application launcher for Wayland"
 depends_on = []
 config = "fuzzel"
+
+[[packages]]
+method = "aur"
+label = "vscode"
+codename = "visual-studio-code-bin"
+description = "Visual Studio Code IDE"
+depends_on = []
+config = "vscode"
 
 [[packages]]
 method = "aur"
