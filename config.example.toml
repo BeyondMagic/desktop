@@ -145,6 +145,15 @@ target = "~/.config/swayimg/"
 root = false
 exclude = []
 
+[[configuration]]
+label = "foot"
+
+[[configuration.file]]
+source = "./config/foot/*"
+target = "~/.config/foot/"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -348,6 +357,14 @@ config = "swayimg"
 
 [[packages]]
 method = "aur"
+label = "foot"
+codename = "foot"
+description = "Lightweight terminal emulator for Wayland"
+depends_on = []
+config = "foot"
+
+[[packages]]
+method = "aur"
 label = ""
 codename = ""
 description = ""
@@ -477,6 +494,7 @@ packages = [
 	"nnn",
 	"songrec",
 	"swayimg",
+	"foot",
 ]
 
 [[profiles]]
