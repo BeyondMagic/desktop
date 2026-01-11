@@ -118,6 +118,14 @@ target = "~/.config/fcitx52/conf/"
 root = false
 exclude = []
 
+[[configuration]]
+label = "mpv"
+
+[[configuration.file]]
+source = "./config/mpv/*"
+target = "~/.config/mpv/"
+root = false
+exclude = []
 
 # [[configuration]]
 # label = ""
@@ -294,6 +302,14 @@ codename = "fcitx5"
 description = "Input method framework for multilingual typing."
 depends_on = []
 config = "fcitx5"
+
+[[packages]]
+method = "aur"
+label = "mpv"
+codename = "mpv"
+description = "Media player"
+depends_on = []
+config = "mpv"
 
 [[packages]]
 method = "aur"
