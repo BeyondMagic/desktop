@@ -235,6 +235,15 @@ target = "~/.android"
 root = false
 exclude = []
 
+[[configuration]]
+label = "keyd"
+
+[[configuration.file]]
+source = "./config/keyd"
+target = "/etc/keyd"
+root = true
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -483,6 +492,14 @@ codename = "android-tools"
 description = "Android platform tools"
 depends_on = []
 config = "android-tools"
+
+[[packages]]
+method = "aur"
+label = "keyd"
+codename = "keyd"
+description = "A key remapping daemon"
+depends_on = []
+config = "keyd"
 
 # [[packages]]
 # method = "aur"
