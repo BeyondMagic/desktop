@@ -136,6 +136,15 @@ target = "~/.config/sioyek/"
 root = false
 exclude = []
 
+[[configuration]]
+label = "swayimg"
+
+[[configuration.file]]
+source = "./config/swayimg/*"
+target = "~/.config/swayimg/"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -331,6 +340,14 @@ config = "sioyek"
 
 [[packages]]
 method = "aur"
+label = "swayimg"
+codename = "swayimg-git"
+description = "Lightweight image viewer for Wayland"
+depends_on = []
+config = "swayimg"
+
+[[packages]]
+method = "aur"
 label = ""
 codename = ""
 description = ""
@@ -459,6 +476,7 @@ packages = [
 	"mpv",
 	"nnn",
 	"songrec",
+	"swayimg",
 ]
 
 [[profiles]]
