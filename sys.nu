@@ -24,6 +24,52 @@ export module service {
 
 export module config {
 
+	def make_dir [
+		--target: string # The target directory to create.
+		--root # Whether to create the directory with elevated privileges.
+		--dry_run # If specified, the command will only simulate the creation without making
+	]: nothing -> nothing {
+
+		if not $root {
+			if $dry_run {
+				[ 'mkdir' $target ] | dry-run
+			} else {
+				mkdir $target
+			}
+			return
+		}
+
+		try {
+			let args = [
+ 				"doas"
+ 				"mkdir"
+ 				"--parents"
+ 				$target
+ 			]
+
+			if $dry_run {
+				$args | dry-run
+				return
+			}
+
+			run-external ...$args
+ 		} catch {|err|
+ 			error make {
+ 				msg: $"Failed to create directory '($target)' with elevated privileges."
+ 				code: "sys::config::link::mkdir_failed"
+ 				labels: {
+ 					text: (if ('msg' in $err) {
+ 						$"Underlying error: ($err.msg)"
+ 					} else {
+ 						"Failed to execute 'doas mkdir --parents' for the target directory."
+ 					})
+ 					span: (metadata $in.target).span
+ 				}
+ 				help: "Check that 'doas' is installed and configured, and that you have permission to create the target directory."
+ 			}
+ 		}
+	}
+
 	# Link configuration files for the current machine based on its machine_id.
 	#
 	# Dependencies:
@@ -31,7 +77,7 @@ export module config {
 	export def link [
 		--device-label: string # The label of the device/machine to link configuration for.
 		--dry-run # If specified, the command will only simulate the linking without making any changes.
-	]: record<devices: list<record<label: string, machine_id: string>>, source: string, target: string, root: bool> -> nothing {
+	]: record<devices: list<record<label: string, machine_id: string>>, source: string, target: string, root: bool, exclude: list<string>> -> nothing {
 
 		if ($device_label | is-empty) {
 			error make {
@@ -50,53 +96,18 @@ export module config {
 	
 		let target = $in.target
 		| path expand --no-symlink
+
+		let is_target_dir = $target | str ends-with `/`
 	
-		let dir_target = if ($target | str ends-with `/`) {
+		let dir_target = if $is_target_dir {
 			$target
 		} else {
 			$target | path dirname
 		}
 
-		let root = $in.root
+		make_dir --target=($dir_target) --root=($in.root) --dry_run=($dry_run)
 
-		if $root {
- 			try {
-				let args = [
- 					"doas"
- 					"mkdir"
- 					"--parents"
- 					$dir_target
- 				]
-
-				if $dry_run {
-					$args | dry-run
-				} else {
-					run-external ...$args
-				}
- 			} catch {|err|
- 				error make {
- 					msg: $"Failed to create directory '($dir_target)' with elevated privileges."
- 					code: "sys::config::link::mkdir_failed"
- 					labels: {
- 						text: (if ('msg' in $err) {
- 							$"Underlying error: ($err.msg)"
- 						} else {
- 							"Failed to execute 'doas mkdir --parents' for the target directory."
- 						})
- 						span: (metadata $in.target).span
- 					}
- 					help: "Check that 'doas' is installed and configured, and that you have permission to create the target directory."
- 				}
- 			}
-		} else {
-			if $dry_run {
-				[ 'mkdir' $dir_target ] | dry-run
-			} else {
-				mkdir $dir_target
-			}
-		}
-
-		let sources = glob $source
+		let sources = glob $source --exclude $in.exclude
 		if ($sources | length) == 0 {
 			error make {
 				msg: "No configuration files found to link."
@@ -109,6 +120,18 @@ export module config {
 			}
 		}
 
+		if not $is_target_dir and (($sources | length) > 1) {
+			error make {
+				msg: "Target path must be a directory when multiple sources are matched."
+				code: "sys::config::link::target_not_directory"
+				labels: {
+					text: $"target: ($target)"
+					span: (metadata $in.target).span
+				}
+				help: "Add a trailing '/' to the target to link many files while preserving their directory structure."
+			}
+		}
+
 		let ln_args = [
 			"ln"
 			"--verbose"
@@ -117,6 +140,8 @@ export module config {
 			"--relative"
 			"--symbolic"
 		]
+
+		let root = $in.root
 
 		let ln_args = if $root {
 			["doas"] ++ $ln_args
@@ -153,7 +178,7 @@ export module config {
 	export def apply [
 		--label: string # The label of the configuration to apply.
 		--dry-run # If specified, the command will only simulate the application without making any changes.
-	]: record<configuration: table<label: string, file: table<source: string, target: string, root: bool>>, devices: table<label: string, machine_id: string>> -> nothing {
+	]: record<configuration: table<label: string, file: table<source: string, target: string, root: bool, exclude: list<string>>>, devices: table<label: string, machine_id: string>> -> nothing {
 
 		if ($label | is-empty) {
 			error make {
