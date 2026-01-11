@@ -127,6 +127,15 @@ target = "~/.config/mpv/"
 root = false
 exclude = []
 
+[[configuration]]
+label = "sioyek"
+
+[[configuration.file]]
+source = "./config/sioyek/*"
+target = "~/.config/sioyek/"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -134,6 +143,7 @@ exclude = []
 # source = "./config/"
 # target = "~/.config/"
 # root = false
+# exclude = []
 
 # -----------------------------------------------
 # Packages
@@ -313,11 +323,19 @@ config = "mpv"
 
 [[packages]]
 method = "aur"
+label = "sioyek"
+codename = "sioyek-git"
+description = "PDF reader"
+depends_on = []
+config = "sioyek"
+
+[[packages]]
+method = "aur"
 label = ""
 codename = ""
 description = ""
 depends_on = []
-configs = []
+config = ""
 
 # Script packages
 
