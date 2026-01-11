@@ -163,6 +163,15 @@ target = "~/.config/fuzzel/"
 root = false
 exclude = []
 
+[[configuration]]
+label = "gammastep"
+
+[[configuration.file]]
+source = "./config/gammastep/*"
+target = "~/.config/gammastep/"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
