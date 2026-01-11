@@ -181,6 +181,12 @@ target = "~/.config/code-flags.conf"
 root = false
 exclude = []
 
+[[configuration.file]]
+source = "./config/vscode/code.desktop"
+target = "/usr/share/applications/code.desktop"
+root = false
+exclude = []
+
 [[configuration]]
 label = "gtk2"
 
