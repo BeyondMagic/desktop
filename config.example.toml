@@ -208,6 +208,15 @@ target = "~/.config/GIMP/3.0/"
 root = false
 exclude = []
 
+[[configuration]]
+label = "git"
+
+[[configuration.file]]
+source = "./config/git"
+target = "~/.config/git"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -245,7 +254,7 @@ label = "git"
 codename = "git"
 description = "Git version control system"
 depends_on = []
-configs = []
+config = "git"
 
 [[packages]]
 method = "pacman"
