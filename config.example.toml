@@ -199,6 +199,15 @@ target = "~/.config/nvim/"
 root = false
 exclude = []
 
+[[configuration]]
+label = "gimp"
+
+[[configuration.file]]
+source = "./config/gimp/splashes"
+target = "~/.config/GIMP/3.0/splashes"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -434,11 +443,19 @@ config = "gtk3"
 
 [[packages]]
 method = "aur"
-label = ""
-codename = ""
-description = ""
+label = "gimp"
+codename = "gimp"
+description = "GNU Image Manipulation Program"
 depends_on = []
-config = ""
+config = "gimp"
+
+# [[packages]]
+# method = "aur"
+# label = ""
+# codename = ""
+# description = ""
+# depends_on = []
+# config = ""
 
 # Script packages
 
