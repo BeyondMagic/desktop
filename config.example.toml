@@ -190,6 +190,15 @@ target = "~/.config/mimeapps.list"
 root = false
 exclude = []
 
+[[configuration]]
+label = "neovim"
+
+[[configuration.file]]
+source = "./config/neovim/*"
+target = "~/.config/nvim/"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -325,7 +334,7 @@ label = "neovim"
 codename = "neovim-nightly-bin"
 description = "Neovim editor (nightly build)"
 depends_on = []
-configs = ["nvim"]
+config = "neovim"
 
 [[packages]]
 method = "aur"
