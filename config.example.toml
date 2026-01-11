@@ -99,9 +99,24 @@ label = "ags"
 
 [[configuration.file]]
 source = "./config/ags/*"
-target = "~/.config/ags2/"
+target = "~/.config/ags/"
 root = false
 exclude = []
+
+[[configuration]]
+label = "fcitx5"
+
+[[configuration.file]]
+source = "./config/fcitx5/*"
+target = "~/.config/fcitx52/"
+root = false
+exclude = ["conf"]
+
+[[configuration.file]]
+source = "./config/fcitx5/conf/*"
+target = "~/.config/fcitx52/conf/"
+root = false
+exclude = ["cached_layouts"]
 
 # [[configuration]]
 # label = ""
@@ -273,11 +288,11 @@ configs = []
 
 [[packages]]
 method = "aur"
-label = ""
-codename = ""
-description = ""
+label = "fcitx5"
+codename = "fcitx5"
+description = "Input method framework for multilingual typing."
 depends_on = []
-configs = []
+config = "fcitx5"
 
 [[packages]]
 method = "aur"
@@ -455,6 +470,7 @@ packages = ["libqalculate", "ags"]
 description = ["Input method framework for multilingual typing."]
 devices = ["computer", "laptop"]
 packages = [
+	"fcitx5",
 	"fcitx5-configtool",
 	"fcitx5-gtk",
 	"fcitx5-material-color",
