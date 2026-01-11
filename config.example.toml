@@ -181,6 +181,15 @@ target = "~/.config/code-flags.conf"
 root = false
 exclude = []
 
+[[configuration]]
+label = "gtk3"
+
+[[configuration.file]]
+source = "./config/gtk3/mimeapps.list"
+target = "~/.config/mimeapps.list"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -408,6 +417,14 @@ config = "vscode"
 
 [[packages]]
 method = "aur"
+label = "gtk3"
+codename = "gtk3"
+description = "GTK3 toolkit"
+depends_on = []
+config = "gtk3"
+
+[[packages]]
+method = "aur"
 label = ""
 codename = ""
 description = ""
@@ -539,6 +556,7 @@ packages = [
 	"swayimg",
 	"foot",
 	"fuzzel",
+	"gtk3",
 ]
 
 [[profiles]]
