@@ -1,3 +1,6 @@
+# Private configuration files to ignore.
+/config/ssh
+/config/android
 /config/git
 
 # ---------------------------------------------------------------------

@@ -217,6 +217,24 @@ target = "~/.config/git"
 root = false
 exclude = []
 
+[[configuration]]
+label = "ssh"
+
+[[configuration.file]]
+source = "./config/ssh"
+target = "~/.ssh"
+root = false
+exclude = []
+
+[[configuration]]
+label = "android-tools"
+
+[[configuration.file]]
+source = "./config/android"
+target = "~/.android"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -458,6 +476,14 @@ description = "GNU Image Manipulation Program"
 depends_on = []
 config = "gimp"
 
+[[packages]]
+method = "aur"
+label = "android-tools"
+codename = "android-tools"
+description = "Android platform tools"
+depends_on = []
+config = "android-tools"
+
 # [[packages]]
 # method = "aur"
 # label = ""
@@ -564,6 +590,17 @@ devices = ["computer", "laptop"]
 description = ["System-wide utilities."]
 devices = ["computer", "laptop"]
 packages = ["doas", "dash", "dashbinsh", "turnstile", "advcpmv"]
+
+[[profiles]]
+description = ["Android development and file transfer tools."]
+devices = ["computer", "laptop"]
+packages = [
+	"android-file-transfer",
+	"android-sdk",
+	"android-sdk-platform-tools",
+	"android-tools",
+	"android-udev",
+]
 
 [[profiles]]
 description = ["Sound server using PipeWire."]
