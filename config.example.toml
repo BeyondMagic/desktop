@@ -116,7 +116,8 @@ exclude = ["conf"]
 source = "./config/fcitx5/conf/*"
 target = "~/.config/fcitx52/conf/"
 root = false
-exclude = ["cached_layouts"]
+exclude = []
+
 
 # [[configuration]]
 # label = ""
