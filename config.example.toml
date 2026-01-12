@@ -834,12 +834,12 @@ config = "hyprland-hyprsplit"
 
 # Example:
 # [[profiles]]
-# label = "package_name" 		   # Unique label for the package
-# devices = ["device_name", ...]   # List of devices where this package should be installed
-# packages = ["package_name", ...] # List of packages to install on the device
+# description = "Profile description." # Concise, but informative description
+# devices = ["device_name", ...]   	   # List of devices where this package should be installed
+# packages = ["package_name", ...] 	   # List of packages to install on the device
 
 [[profiles]]
-description = ["Package manager."]
+description = "Package manager."
 devices = ["computer", "laptop"]
 packages = [
 	"pacman",
@@ -852,7 +852,7 @@ packages = [
 ]
 
 [[profiles]]
-description = ["System-wide utilities."]
+description = "System-wide utilities."
 devices = ["computer", "laptop"]
 packages = [
 	"base-devel",
@@ -865,7 +865,7 @@ packages = [
 ]
 
 [[profiles]]
-description = ["Android development and file transfer tools."]
+description = "Android development and file transfer tools."
 devices = ["computer", "laptop"]
 packages = [
 	"android-file-transfer",
@@ -876,7 +876,7 @@ packages = [
 ]
 
 [[profiles]]
-description = ["Sound server using PipeWire."]
+description = "Sound server using PipeWire."
 devices = ["computer", "laptop"]
 packages = [
 	"libpipewire",
@@ -888,7 +888,7 @@ packages = [
 ]
 
 [[profiles]]
-description = ["Desktop utilities."]
+description = "Desktop utilities."
 devices = ["computer", "laptop"]
 packages = [
 	"selectdefaultapplication",
@@ -905,47 +905,47 @@ packages = [
 ]
 
 [[profiles]]
-description = ["Communication tools."]
+description = "Communication tools."
 devices = ["computer", "laptop"]
 packages = ["beeper", "thunderbird"]
 
 [[profiles]]
-description = ["Digital art and image tools."]
+description = "Digital art and image tools."
 devices = ["laptop"]
 packages = ["krita"]
 
 [[profiles]]
-description = ["Image editing software."]
+description = "Image editing software."
 devices = ["computer", "laptop"]
 packages = ["gimp", "inkscape"]
 
 [[profiles]]
-description = ["Hyprland compositor and related plugins."]
+description = "Hyprland compositor and related plugins."
 devices = ["computer", "laptop"]
 packages = ["hyprland-git", "hyprpicker-git", "libastal-hyprland-git"]
 
 [[profiles]]
-description = ["Hyprland's laptop plugins."]
+description = "Hyprland's laptop plugins."
 devices = ["laptop"]
 packages = ["hyprgrass"]
 
 [[profiles]]
-description = ["Hyprland's plugins."]
+description = "Hyprland's plugins."
 devices = ["computer", "laptop"]
 packages = ["dynamic-cursors", "hyprsplit"]
 
 [[profiles]]
-description = ["Soundcore headphones manager."]
+description = "Soundcore headphones manager."
 devices = ["computer", "laptop"]
 packages = ["openscq30"]
 
 [[profiles]]
-description = ["AGS desktop shell."]
+description = "AGS desktop shell."
 devices = ["computer", "laptop"]
 packages = ["libqalculate", "ags"]
 
 [[profiles]]
-description = ["Input method framework for multilingual typing."]
+description = "Input method framework for multilingual typing."
 devices = ["computer", "laptop"]
 packages = [
 	"fcitx5",
@@ -957,17 +957,17 @@ packages = [
 ]
 
 [[profiles]]
-description = ["Firefox web browser."]
+description = "Firefox web browser."
 devices = ["computer", "laptop"]
 packages = ["firefox-nightly-bin"]
 
 [[profiles]]
-description = ["Chrome web browser."]
+description = "Chrome web browser."
 devices = ["computer", "laptop"]
 packages = ["google-chrome"]
 
 [[profiles]]
-description = ["NeoVim IDE."]
+description = "NeoVim IDE."
 devices = ["computer", "laptop"]
 packages = [
 	"neovim",
@@ -985,12 +985,12 @@ packages = [
 ]
 
 [[profiles]]
-description = ["VSCode IDE."]
+description = "VSCode IDE."
 devices = ["computer", "laptop"]
 packages = ["vscode"]
 
 [[profiles]]
-description = ["Music server"]
+description = "Music server"
 devices = ["computer"]
 packages = [
 	"Mopidy-Listenbrainz",
@@ -1006,59 +1006,57 @@ packages = [
 ]
 
 [[profiles]]
-description = ["PDF and eBook readers."]
+description = "PDF and eBook readers."
 devices = ["computer", "laptop"]
 packages = ["foliate", "sioyek"]
 
 [[profiles]]
-description = ["Audio editing and streaming."]
+description = "Audio editing and streaming."
 devices = ["computer"]
 packages = ["lmms", "audacity", "obs-studio", "olive"]
 
 [[profiles]]
-description = ["Manage LBRY and Odysee."]
+description = "Manage LBRY and Odysee."
 devices = ["computer", "laptop"]
 packages = ["lbry-app-bin"]
 
 [[profiles]]
-description = ["Flashcard learning tool."]
+description = "Flashcard learning tool."
 devices = ["computer", "laptop"]
 packages = ["anki-bin"]
 
 [[profiles]]
-description = [
-	"Markup-aware linter for prose built with speed and extensibility in mind.",
-]
+description = "Markup-aware linter for prose built with speed and extensibility in mind.",
 devices = ["computer", "laptop"]
 packages = ["vale"]
 
 [[profiles]]
-description = ["LaTeX and related document tooling."]
+description = "LaTeX and related document tooling."
 devices = ["computer", "laptop"]
 packages = ["latex-mk", "texlab", "perl-yaml-tiny", "perl-file-homedir"]
 
 [[profiles]]
-description = ["Oracle developer tools."]
+description = "Oracle developer tools."
 devices = ["computer", "laptop"]
 packages = ["sqlcl", "oracle-sqldeveloper"]
 
 [[profiles]]
-description = ["Torrent/sharing clients."]
+description = "Torrent/sharing clients."
 devices = ["computer", "laptop"]
 packages = ["soulseekqt", "qbittorrent"]
 
 [[profiles]]
-description = ["Wireframing and prototyping tools."]
+description = "Wireframing and prototyping tools."
 devices = ["computer", "laptop"]
 packages = ["frame0", "rnote"]
 
 [[profiles]]
-description = ["Javascript/Typescript development tools."]
+description = "Javascript/Typescript development tools."
 devices = ["computer", "laptop"]
 packages = ["npm", "bun", "yarn", "pnpm"]
 
 # [[profiles]]
-# description = [""]
+# description = ""
 # devices = ["computer", "laptop"]
 # packages = [""]
 
