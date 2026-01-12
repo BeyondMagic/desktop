@@ -319,6 +319,15 @@ target = "/usr/share/applications/"
 root = false
 exclude = []
 
+[[configuration]]
+label = "nnn"
+
+[[configuration.file]]
+source = "./config/nnn/*.desktop"
+target = "/usr/share/applications/"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -657,6 +666,14 @@ codename = "./packages/firefox-nightly-bin"
 description = "Firefox Nightly web browser."
 depends_on = []
 configs = []
+
+[[packages]]
+method = "script"
+label = "nnn"
+codename = "./packages/nnn/index.nu"
+description = "Terminal file manager."
+depends_on = []
+config = "nnn"
 
 # Thunderbird addons
 
