@@ -15,12 +15,12 @@ const targets = [
 ]
 
 export def clone []: nothing -> any {
-	run-external ...([
+	run-external ...[
 		doas
 		rm
 		-rf
 		$dir
-	])
+	]
 	
 	mkdir $dir
 
@@ -32,33 +32,39 @@ export def clone []: nothing -> any {
 export def build []: nothing -> any {
 	cd $dir
 
-	run-external ...([
+	run-external ...[
 		sh
 		install.sh
-	])
+	]
 }
 
 export def install []: nothing -> any {
 	cd $dir
 
 	$targets | each {
-		run-external ...([
+		run-external ...[
 			doas
 			cp
 			$in.name
 			($local + $in.bin)
-		])
+		]
 	}
 	null
 }
 
 export def uninstall []: nothing -> any {
 	$targets | each {
-		run-external ...([
+		run-external ...[
 			doas
 			rm
 			($local + $in.bin)
-		])
+		]
 	}
 	null
+}
+
+export def main []: nothing -> any {
+	clone
+	build
+	install
 }
