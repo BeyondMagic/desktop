@@ -406,6 +406,21 @@ target = "~/.cache/cliphist/"
 root = false
 exclude = []
 
+[[configuration]]
+label = "shared-desktop"
+
+[[configuration.file]]
+source = "~/storage/desktop/*"
+target = "~/storage/"
+root = false
+exclude = []
+
+[[configuration.file]]
+source = "~/storage/desktop/projects"
+target = "~/projects"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -1314,6 +1329,7 @@ packages = ["wireplumber"]
 # description = "Sync description" 	   # Description of the synchronization
 # remote = "remote_name:" 			   # Remote name or identifier
 # mount = "local_mount_point" 	       # Local mount point or directory, supports tilde for user's home dir
+# config = "config_label" 		       # Optional configuration label to use for this synchronization
 
 [[synchronization]]
 type = "rclone"
@@ -1325,4 +1341,11 @@ mount = "~/storage/gdrive"
 type = "syncthing"
 description = "Inter-desktop files"
 remote = "dream"
-mount = "~/storage/shared"
+mount = "~/storage/desktop"
+config = "shared-desktop"
+
+[[synchronization]]
+type = "syncthing"
+description = "Android files"
+remote = "android"
+mount = "~/storage/android"
