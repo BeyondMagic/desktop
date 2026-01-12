@@ -19,7 +19,7 @@ username = "dream"
 machine_id = "7faad10195bec8f37d9fbb7a656ff61d"
 
 # -----------------------------------------------
-# Configuration files for devices
+# Configuration files/folders for devices
 # -----------------------------------------------
 
 # Example:
@@ -27,7 +27,7 @@ machine_id = "7faad10195bec8f37d9fbb7a656ff61d"
 # label = "config_label" 			        # Label for the configuration
 # description = "Configuration description" # Description of the configuration
 #
-# [[configuration.file]]
+# [[configuration.item]]
 # source = "source_path" 			      # Source path of the configuration
 # target = "target_path" 			      # Target path where the configuration should be placed
 # root = true/false 				      # Whether to use root privileges to link the file
@@ -40,19 +40,19 @@ machine_id = "7faad10195bec8f37d9fbb7a656ff61d"
 [[configuration]]
 label = "hyprland"
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/hypr/*"
 target = "~/.config/hypr/"
 root = false
 exclude = ["zoom.nu"]
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/hypr/**/{device}.conf"
 target = "~/.config/hypr/current/"
 root = false
 exclude = []
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/hypr/zoom.nu"
 target = "~/.local/bin/zoom.nu"
 root = false
@@ -61,7 +61,7 @@ exclude = []
 [[configuration]]
 label = "hyprland-dynamic-cursors"
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/hypr-plugins/dynamic-cursors"
 target = "~/.config/hypr/current/dynamic-cursors"
 root = false
@@ -70,7 +70,7 @@ exclude = []
 [[configuration]]
 label = "hyprland-hyprsplit"
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/hypr-plugins/hyprsplit"
 target = "~/.config/hypr/current/hyprsplit"
 root = false
@@ -79,7 +79,7 @@ exclude = []
 [[configuration]]
 label = "hypridle"
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/hypr-idle/hypridle.conf"
 target = "~/.config/hypr/hypridle.conf"
 root = false
@@ -89,7 +89,7 @@ exclude = []
 #label = "hyprland-hyprgrass"
 #description = "Hyprgrass configuration for Hyprland"
 
-#[[configuration.file]]
+#[[configuration.item]]
 #source = "./config/hypr-plugins/hyprgrass"
 #target = "~/.config/hypr2/current/hyprgrass"
 #exclude = []
@@ -97,7 +97,7 @@ exclude = []
 [[configuration]]
 label = "nushell"
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/nushell/*"
 target = "~/.config/nushell/"
 root = false
@@ -106,7 +106,7 @@ exclude = []
 [[configuration]]
 label = "ags"
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/ags/*"
 target = "~/.config/ags/"
 root = false
@@ -115,13 +115,13 @@ exclude = []
 [[configuration]]
 label = "fcitx5"
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/fcitx5/*"
 target = "~/.config/fcitx52/"
 root = false
 exclude = ["conf"]
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/fcitx5/conf/*"
 target = "~/.config/fcitx52/conf/"
 root = false
@@ -130,7 +130,7 @@ exclude = []
 [[configuration]]
 label = "mpv"
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/mpv/*"
 target = "~/.config/mpv/"
 root = false
@@ -139,13 +139,13 @@ exclude = []
 [[configuration]]
 label = "sioyek"
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/sioyek/*"
 target = "~/.config/sioyek/"
 root = false
 exclude = ["cache"]
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/sioyek/cache"
 target = "~/.local/share/sioyek"
 root = false
@@ -154,13 +154,13 @@ exclude = []
 [[configuration]]
 label = "swayimg"
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/swayimg/config"
 target = "~/.config/swayimg/config"
 root = false
 exclude = []
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/swayimg/organize-fav.nu"
 target = "~/.local/bin/organize-fav.nu"
 root = false
@@ -169,7 +169,7 @@ exclude = []
 [[configuration]]
 label = "foot"
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/foot/*"
 target = "~/.config/foot/"
 root = false
@@ -178,7 +178,7 @@ exclude = []
 [[configuration]]
 label = "fuzzel"
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/fuzzel/*"
 target = "~/.config/fuzzel/"
 root = false
@@ -187,7 +187,7 @@ exclude = []
 [[configuration]]
 label = "gammastep"
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/gammastep/*"
 target = "~/.config/gammastep/"
 root = false
@@ -196,19 +196,19 @@ exclude = []
 [[configuration]]
 label = "vscode"
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/vscode/flags.conf"
 target = "~/.config/code-flags.conf"
 root = false
 exclude = []
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/vscode/code.desktop"
 target = "/usr/share/applications/code.desktop"
 root = false
 exclude = []
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/vscode/projects.json"
 target = "~/.config/vscode/general/User/globalStorage/alefragnani.project-manager/projects.json"
 root = false
@@ -217,7 +217,7 @@ exclude = []
 [[configuration]]
 label = "gtk2"
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/gtk/2/*"
 target = "~/.config/gtk-2.0/"
 root = false
@@ -226,13 +226,13 @@ exclude = []
 [[configuration]]
 label = "gtk3"
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/gtk/3/*"
 target = "~/.config/gtk-3.0/"
 root = false
 exclude = ["mimeapps*"]
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/gtk/3/mimeapps.list"
 target = "~/.config/mimeapps.list"
 root = false
@@ -241,7 +241,7 @@ exclude = []
 [[configuration]]
 label = "gtk4"
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/gtk/4/*"
 target = "~/.config/gtk-4.0/"
 root = false
@@ -250,7 +250,7 @@ exclude = []
 [[configuration]]
 label = "neovim"
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/neovim/*"
 target = "~/.config/nvim/"
 root = false
@@ -259,7 +259,7 @@ exclude = []
 [[configuration]]
 label = "gimp"
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/gimp/*"
 target = "~/.config/GIMP/3.0/"
 root = false
@@ -268,7 +268,7 @@ exclude = []
 [[configuration]]
 label = "git"
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/git"
 target = "~/.config/git"
 root = false
@@ -277,7 +277,7 @@ exclude = []
 [[configuration]]
 label = "ssh"
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/ssh"
 target = "~/.ssh"
 root = false
@@ -286,7 +286,7 @@ exclude = []
 [[configuration]]
 label = "android-tools"
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/android"
 target = "~/.android"
 root = false
@@ -295,7 +295,7 @@ exclude = []
 [[configuration]]
 label = "keyd"
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/keyd"
 target = "/etc/keyd"
 root = true
@@ -304,31 +304,31 @@ exclude = []
 [[configuration]]
 label = "base-devel"
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/base/locale.conf"
 target = "/etc/locale.conf"
 root = true
 exclude = []
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/base/fonts"
 target = "~/.local/share/fonts"
 root = false
 exclude = []
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/base/themes/*"
 target = "/usr/share/themes/"
 root = true
 exclude = []
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/base/icons/*"
 target = "/usr/share/icons/"
 root = false
 exclude = []
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/base/fetch.sh"
 target = "~/.local/bin/fetch.sh"
 root = true
@@ -337,7 +337,7 @@ exclude = []
 [[configuration]]
 label = "beeper"
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/beeper/beeper.desktop"
 target = "/usr/share/applications/beeper.desktop"
 root = false
@@ -346,7 +346,7 @@ exclude = []
 [[configuration]]
 label = "chrome"
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/chrome/*.desktop"
 target = "/usr/share/applications/"
 root = false
@@ -355,7 +355,7 @@ exclude = []
 [[configuration]]
 label = "soulseekqt"
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/soulseekqt/soulseekqt.desktop"
 target = "/usr/share/applications/soulseekqt.desktop"
 root = false
@@ -364,7 +364,7 @@ exclude = []
 [[configuration]]
 label = "thunderbird"
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/thunderbird/*.desktop"
 target = "/usr/share/applications/"
 root = false
@@ -373,7 +373,7 @@ exclude = []
 [[configuration]]
 label = "nnn"
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/nnn/*.desktop"
 target = "/usr/share/applications/"
 root = false
@@ -382,7 +382,7 @@ exclude = []
 [[configuration]]
 label = "frame0"
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/frame0/*.desktop"
 target = "/usr/share/applications/"
 root = false
@@ -391,7 +391,7 @@ exclude = []
 [[configuration]]
 label = "npm"
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/npm/*"
 target = "~/.config/npm"
 root = false
@@ -400,7 +400,7 @@ exclude = []
 [[configuration]]
 label = "cliphist"
 
-[[configuration.file]]
+[[configuration.item]]
 source = "./config/cliphist/*"
 target = "~/.cache/cliphist/"
 root = false
@@ -409,13 +409,13 @@ exclude = []
 [[configuration]]
 label = "shared-desktop"
 
-[[configuration.file]]
+[[configuration.item]]
 source = "~/storage/desktop/*"
 target = "~/storage/"
 root = false
 exclude = []
 
-[[configuration.file]]
+[[configuration.item]]
 source = "~/storage/desktop/projects"
 target = "~/projects"
 root = false
@@ -424,7 +424,7 @@ exclude = []
 # [[configuration]]
 # label = ""
 # 
-# [[configuration.file]]
+# [[configuration.item]]
 # source = "./config/"
 # target = "~/.config/"
 # root = false
@@ -1026,7 +1026,7 @@ devices = ["computer", "laptop"]
 packages = ["anki-bin"]
 
 [[profiles]]
-description = "Markup-aware linter for prose built with speed and extensibility in mind.",
+description = "Markup-aware linter for prose built with speed and extensibility in mind."
 devices = ["computer", "laptop"]
 packages = ["vale"]
 

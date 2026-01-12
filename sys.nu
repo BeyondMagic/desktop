@@ -178,7 +178,7 @@ export module config {
 	export def apply [
 		--label: string # The label of the configuration to apply.
 		--dry-run # If specified, the command will only simulate the application without making any changes.
-	]: record<configuration: table<label: string, file: table<source: string, target: string, root: bool, exclude: list<string>>>, devices: table<label: string, machine_id: string>> -> nothing {
+	]: record<configuration: table<label: string, item: table<source: string, target: string, root: bool, exclude: list<string>>>, devices: table<label: string, username: string, machine_id: string>> -> nothing {
 
 		if ($label | is-empty) {
 			error make {
@@ -227,7 +227,7 @@ export module config {
 		let configuration = $configuration | first
 		let devices = $in.devices
 
-		$configuration.file | each {
+		$configuration.item | each {
 			{
 				devices: $devices
 				...$in
