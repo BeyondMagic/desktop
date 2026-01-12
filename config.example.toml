@@ -187,6 +187,12 @@ target = "/usr/share/applications/code.desktop"
 root = false
 exclude = []
 
+[[configuration.file]]
+source = "./config/vscode/projects.json"
+target = "~/.config/vscode/general/User/globalStorage/alefragnani.project-manager/projects.json"
+root = false
+exclude = []
+
 [[configuration]]
 label = "gtk2"
 
