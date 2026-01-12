@@ -3,6 +3,7 @@
 const local = '/usr/local/bin/'
 const name = "OpenSCQ30"
 const dir = "/tmp/openscq30"
+const remote = "https://github.com/Oppzippy/OpenSCQ30"
 
 const gui = {
 	name: "openscq30-gui"
@@ -15,55 +16,62 @@ const cli = {
 }
 
 export def clone []: nothing -> any {
-	(
-		^doas
-		rm -rf $dir
-	)
+	run-external ...[
+		doas
+		rm
+		-rf
+		$dir
+	]
 
-	(
-		^git
+	run-external ...[
+		git
 		clone
 		--recurse-submodules
-		"https://github.com/Oppzippy/OpenSCQ30"
+		$remote
 		$dir
-	)
+	]
 }
 
 export def build []: nothing -> any {
 	cd $dir
 
-	(
-		^cargo
+	run-external ...[
+		cargo
 		build
 		--package $gui.name
 		--release
-	)
-	(
-		^cargo
+	]
+	run-external ...[
+		cargo
 		build
 		--package $cli.name
 		--release
-	)
+	]
 }
 
 export def install []: nothing -> any {
 	cd $dir
 
-	(
-		^doas
-		cp $gui.binary
-		($local + $gui.name)
-	)
-	(
-		^doas
-		cp $cli.binary
+	run-external ...[
+		doas
+		cp
+		$cli.binary
+		$gui.binary
 		($local + $cli.name)
-	)
+	]
 }
 
 export def uninstall []: nothing -> any {
-	(
-		^doas
-		rm ($local + $gui.name) ($local + $cli.name)
-	)
+	run-external ...[
+		doas
+		rm
+		($local + $gui.name)
+		($local + $cli.name)
+	]
+}
+
+export def main []: nothing -> any {
+	clone
+	build
+	install
 }
