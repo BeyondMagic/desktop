@@ -337,6 +337,15 @@ target = "/usr/share/applications/"
 root = false
 exclude = []
 
+[[configuration]]
+label = "npm"
+
+[[configuration.file]]
+source = "./config/npm/*"
+target = "~/.config/npm"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -629,6 +638,14 @@ method = "aur"
 label = "rnote"
 codename = "rnote"
 description = "Vector-based drawing app for sketching, handwritten notes and to annotate documents and pictures"
+
+[[packages]]
+method = "aur"
+label = "npm"
+codename = "npm"
+description = "Node.js package manager"
+depends_on = []
+config = "npm"
 
 # [[packages]]
 # method = "aur"
@@ -951,6 +968,11 @@ packages = ["soulseekqt", "qbittorrent"]
 description = ["Wireframing and prototyping tools."]
 devices = ["computer", "laptop"]
 packages = ["frame0", "rnote"]
+
+[[profiles]]
+description = ["Javascript/Typescript development tools."]
+devices = ["computer", "laptop"]
+packages = ["npm", "bun", "yarn", "pnpm"]
 
 # [[profiles]]
 # description = [""]
