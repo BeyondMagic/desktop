@@ -296,8 +296,8 @@ exclude = []
 label = "chrome"
 
 [[configuration.file]]
-source = "./config/chrome/com.google.Chrome.desktop"
-target = "/usr/share/applications/com.google.Chrome.desktop"
+source = "./config/chrome/*.desktop"
+target = "/usr/share/applications/"
 root = false
 exclude = []
 
