@@ -7,49 +7,53 @@ const args = [
 	O_NERD=1
 ]
 
-export def clone []: nothing -> any {
-	rm -rf $dir
+def run [
+	--dry # Print commands without executing them.
+]: closure -> any {
+	if $dry {
+		print (view source $in)
+		return
+	} else {
+		do $in
+	}
+}
+
+export def clone [
+	--dry # Print commands without executing them.
+]: nothing -> any {
+	{ rm -rf $dir } | run --dry=($dry)
 	
-	run-external ...([
-		git
-		clone
-		$remote
-		$dir
-	])
+	{ run-external ...[ git clone $remote $dir ] } | run --dry=($dry)
 }
 
-export def build []: nothing -> any {
+export def build [
+	--dry # Print commands without executing them.
+]: nothing -> any {
 	cd $dir
 
-	run-external ...([
-		make
-		...$args
-		all
-	])
+	{ run-external ...[ make ...$args all ] } | run --dry=($dry)
 }
 
-export def install []: nothing -> any {
+export def install [
+	--dry # Print commands without executing them.
+]: nothing -> any {
 	cd $dir
 
-	run-external ...([
-		doas
-		make
-		install
-	])
+	{ run-external ...[ doas make install ] } | run --dry=($dry)
 }
 
-export def uninstall []: nothing -> any {
+export def uninstall [
+	--dry # Print commands without executing them.
+]: nothing -> any {
 	cd $dir
 
-	run-external ...([
-		doas
-		make
-		uninstall
-	])
+	{ run-external ...[ doas make uninstall ] } | run --dry=($dry)
 }
 
-export def main []: nothing -> any {
-	clone
-	build
-	install
+export def main [
+	--dry # Print commands without executing them.
+]: nothing -> any {
+	clone --dry=($dry)
+	build --dry=($dry)
+	install --dry=($dry)
 }
