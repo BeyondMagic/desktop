@@ -170,8 +170,6 @@ $env.PATH = ($env.PATH | split row (char esep)) ++ [
 	($env.BUN_INSTALL + '/bin/')
 	# Go: binaries.
 	($env.GOPATH + '/bin/')
-	# Nushell: binaries of nupm, package manager.
-	#($env.NUPM_HOME + '/scripts/')
 ] | str join (char esep)
 
 # For QT applications, disable GPU usage if Intel CPU is detected.

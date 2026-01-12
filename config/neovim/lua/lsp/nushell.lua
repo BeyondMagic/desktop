@@ -6,8 +6,6 @@ vim.lsp.config("nushell", {
 		"--no-config-file",
 		"--include-path",
 		"/home/dream/.config/nushell/scripts",
-		"--include-path",
-		"/home/dream/.local/share/nupm/modules/",
 		"--lsp",
 	},
 
