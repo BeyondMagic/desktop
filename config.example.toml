@@ -295,6 +295,24 @@ label = "base-devel"
 [[configuration.file]]
 source = "./config/base/locale.conf"
 target = "/etc/locale.conf"
+root = true
+exclude = []
+
+[[configuration.file]]
+source = "./config/base/fonts"
+target = "~/.local/share/fonts"
+root = false
+exclude = []
+
+[[configuration.file]]
+source = "./config/base/themes/*"
+target = "/usr/share/themes/"
+root = true
+exclude = []
+
+[[configuration.file]]
+source = "./config/base/icons/*"
+target = "/usr/share/icons/"
 root = false
 exclude = []
 
