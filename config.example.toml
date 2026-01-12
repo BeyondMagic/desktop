@@ -5,14 +5,17 @@
 # Example:
 # [[devices]]
 # label = "device_name" 		  # Unique label for the device
+# username = "user_name" 	      # Username on the device
 # machine_id = "machine_id_value" # From `/etc/machine-id`
 
 [[devices]]
 label = "computer"
+username = "hana"
 machine_id = "6edffeeb6b9909f86ad4630865c13921"
 
 [[devices]]
 label = "laptop"
+username = "dream"
 machine_id = "7faad10195bec8f37d9fbb7a656ff61d"
 
 # -----------------------------------------------
