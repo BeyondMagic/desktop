@@ -598,6 +598,14 @@ description = "cp and mv with progress bar."
 depends_on = ["patch", "gcc"]
 configs = []
 
+[[packages]]
+method = "script"
+label = "firefox-nightly-bin"
+codename = "./packages/firefox-nightly-bin"
+description = "Firefox Nightly web browser."
+depends_on = []
+configs = []
+
 # Thunderbird addons
 
 [[packages]]
@@ -771,6 +779,11 @@ packages = [
 	"fcitx5-qt",
 	"fcitx5-mozc-ut",
 ]
+
+[[profiles]]
+description = ["Firefox web browser."]
+devices = ["computer", "laptop"]
+packages = ["firefox-nightly-bin"]
 
 [[profiles]]
 description = ["NeoVim IDE."]
