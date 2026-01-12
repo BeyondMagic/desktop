@@ -3,6 +3,7 @@
 const local = '/usr/local/bin/'
 const dir = "/tmp/packages/nnn"
 const remote = "https://github.com/jarun/nnn/"
+const nu_plugin = "./misc/quitcd/quitcd.nu"
 const args = [
 	O_NERD=1
 ]
@@ -39,7 +40,13 @@ export def install [
 ]: nothing -> any {
 	cd $dir
 
-	{ run-external ...[ doas make install ] } | run --dry=($dry)
+	let lib_dir = $env.NU_LIB_DIRS | last
+
+	{
+		mkdir $lib_dir
+		cp $nu_plugin $lib_dir
+		run-external ...[ doas make install ]
+	} | run --dry=($dry)
 }
 
 export def uninstall [
@@ -47,7 +54,13 @@ export def uninstall [
 ]: nothing -> any {
 	cd $dir
 
-	{ run-external ...[ doas make uninstall ] } | run --dry=($dry)
+	let lib_dir = $env.NU_LIB_DIRS | last
+	let plugin_file = $nu_plugin | path basename
+
+	{
+		rm ($lib_dir | path join $plugin_file)
+		run-external ...[ doas make uninstall ]
+	} | run --dry=($dry)
 }
 
 export def main [

@@ -8,9 +8,7 @@ def update-system [
 	--refresh = true # Refresh packages database.
 	--force-refresh = false # Force-refrsh database.
 ]: nothing -> any {
-	use ./external/magick.nu
 	upgrade --ignore $ignore --refresh $refresh --force-refresh $force_refresh
-	magick link
 }
 
 export alias upgrade = update-system

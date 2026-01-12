@@ -49,7 +49,7 @@ export def --env manager [
 	...args : string # Argument for file manager.
 	--flags : list<string> = $default_flags # Flags of file manager.
 ]: nothing -> nothing {
-	use external/nnn.nu n
+	use quitcd.nu n
 	n ...$flags ...$args
 }
 

@@ -745,7 +745,7 @@ method = "script"
 label = "openscq30"
 codename = "./packages/openscq30/index.nu"
 description = "Soundcore headphones and earbuds manager."
-depends_on = ["opendoas-retry", "rust"]
+depends_on = ["opendoas-retry", "rust", "nushell"]
 
 [[packages]]
 method = "script"
@@ -759,28 +759,28 @@ method = "script"
 label = "hypr-minimize"
 codename = "./packages/hypr-minimize/index.nu"
 description = "Toggle sending/receiving an app from a special workspace (minimized) in Hyprland"
-depends_on = []
+depends_on = ["nushell"]
 
 [[packages]]
 method = "script"
 label = "advcpmv"
 codename = "./packages/advcpmv/index.nu"
 description = "cp and mv with progress bar."
-depends_on = ["patch", "gcc"]
+depends_on = ["patch", "gcc", "nushell"]
 
 [[packages]]
 method = "script"
 label = "firefox-nightly-bin"
 codename = "./packages/firefox-nightly-bin/index.nu"
 description = "Firefox Nightly web browser."
-depends_on = []
+depends_on = ["nushell"]
 
 [[packages]]
 method = "script"
 label = "nnn"
 codename = "./packages/nnn/index.nu"
 description = "Terminal file manager."
-depends_on = []
+depends_on = ["nushell"]
 config = "nnn"
 
 # Thunderbird addons
