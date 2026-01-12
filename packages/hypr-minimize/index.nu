@@ -36,3 +36,9 @@ export def uninstall []: nothing -> any {
 		($local + $name)
 	])
 }
+
+export def main []: nothing -> any {
+	clone
+	build
+	install
+}
