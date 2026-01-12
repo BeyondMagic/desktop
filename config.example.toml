@@ -328,6 +328,15 @@ target = "/usr/share/applications/"
 root = false
 exclude = []
 
+[[configuration]]
+label = "frame0"
+
+[[configuration.file]]
+source = "./config/frame0/*.desktop"
+target = "/usr/share/applications/"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -616,6 +625,14 @@ codename = "soulseekqt"
 description = "Hybrid p2p and centralized QT client for file sharing"
 depends_on = []
 config = "soulseekqt"
+
+[[packages]]
+method = "aur"
+label = "frame0"
+codename = "frame0"
+description = "Wireframing and prototyping tool."
+depends_on = []
+config = "frame0"
 
 # [[packages]]
 # method = "aur"
@@ -929,6 +946,11 @@ packages = ["vale"]
 description = ["LaTeX and related document tooling."]
 devices = ["computer", "laptop"]
 packages = ["latex-mk", "texlab", "perl-yaml-tiny", "perl-file-homedir"]
+
+[[profiles]]
+description = ["Wireframing and prototyping tools."]
+devices = ["computer", "laptop"]
+packages = ["frame0", "rnote"]
 
 # -----------------------------------------------
 # Services for devices
