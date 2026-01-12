@@ -15,12 +15,12 @@ clone() {
 
 build() {
     cd "$DIR" || exit 1
-    makepkg -si --noconfirm
+    makepkg -s --noconfirm
 }
 
 install() {
-    # Alias to build (kept for parity)
-    build
+    cd "$DIR" || exit 1
+    makepkg -i --noconfirm
 }
 
 uninstall() {
@@ -29,6 +29,7 @@ uninstall() {
 
 cmd="${1:-}"
 case "$cmd" in
+    "")        clone; build; install ;;
     clone)     clone ;;
     build)     build ;;
     install)   install ;;
