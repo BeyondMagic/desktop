@@ -8,6 +8,7 @@ export use ./standard/random.nu
 export use ./standard/str.nu
 export use ./standard/transform.nu
 export use ./standard/each.nu
+export use ./standard/sys.nu
 
 # Modules for external commands.
 export use ./external/sv.nu
