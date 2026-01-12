@@ -634,6 +634,13 @@ description = "Wireframing and prototyping tool."
 depends_on = []
 config = "frame0"
 
+[[packages]]
+method = "aur"
+label = "rnote"
+codename = "rnote"
+description = "Vector-based drawing app for sketching, handwritten notes and to annotate documents and pictures"
+depends_on = []
+
 # [[packages]]
 # method = "aur"
 # label = ""
@@ -948,9 +955,24 @@ devices = ["computer", "laptop"]
 packages = ["latex-mk", "texlab", "perl-yaml-tiny", "perl-file-homedir"]
 
 [[profiles]]
+description = ["Oracle developer tools."]
+devices = ["computer", "laptop"]
+packages = ["sqlcl", "oracle-sqldeveloper"]
+
+[[profiles]]
+description = ["Torrent/sharing clients."]
+devices = ["computer", "laptop"]
+packages = ["soulseekqt", "qbittorrent"]
+
+[[profiles]]
 description = ["Wireframing and prototyping tools."]
 devices = ["computer", "laptop"]
 packages = ["frame0", "rnote"]
+
+# [[profiles]]
+# description = [""]
+# devices = ["computer", "laptop"]
+# packages = [""]
 
 # -----------------------------------------------
 # Services for devices
