@@ -283,6 +283,15 @@ target = "/etc/locale.conf"
 root = false
 exclude = []
 
+[[configuration]]
+label = "beeper"
+
+[[configuration.file]]
+source = "./config/beeper/beeper.desktop"
+target = "/usr/share/applications/beeper.desktop"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -386,7 +395,7 @@ label = "beeper"
 codename = "beeper-v4-bin"
 description = "Beeper unified messaging desktop client"
 depends_on = []
-configs = []
+config = "beeper"
 
 [[packages]]
 method = "aur"
