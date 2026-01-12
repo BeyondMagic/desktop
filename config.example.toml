@@ -155,8 +155,14 @@ exclude = []
 label = "swayimg"
 
 [[configuration.file]]
-source = "./config/swayimg/*"
-target = "~/.config/swayimg/"
+source = "./config/swayimg/config"
+target = "~/.config/swayimg/config"
+root = false
+exclude = []
+
+[[configuration.file]]
+source = "./config/swayimg/organize-fav.nu"
+target = "~/.local/bin/organize-fav.nu"
 root = false
 exclude = []
 
