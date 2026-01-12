@@ -382,7 +382,6 @@ label = "doas"
 codename = "opendoas-retry"
 description = "A sudo replacement with retry mechanism"
 depends_on = []
-configs = []
 
 [[packages]]
 method = "pacman"
@@ -390,7 +389,6 @@ label = "turnstile"
 codename = "turnstile"
 description = "Independent session/login tracker"
 depends_on = []
-configs = []
 
 [[packages]]
 method = "pacman"
@@ -398,7 +396,6 @@ label = "blueman"
 codename = "blueman"
 description = "Bluetooth management utility for BlueZ"
 depends_on = []
-configs = []
 
 # AUR packages
 
@@ -432,7 +429,6 @@ label = "ags"
 codename = "aylurs-gtk-shell-git"
 description = "AGS - Aylurs GTK Shell for panels and widgets"
 depends_on = []
-configs = []
 
 [[packages]]
 method = "aur"
@@ -448,7 +444,6 @@ label = "chartdb"
 codename = "chartdb"
 description = "Database diagrams editor and viewer"
 depends_on = []
-configs = []
 
 [[packages]]
 method = "aur"
@@ -464,7 +459,6 @@ label = "hyprsplit"
 codename = "https://github.com/shezdy/hyprsplit"
 description = "Hyprsplit window manager plugin."
 depends_on = []
-configs = []
 
 [[packages]]
 method = "aur"
@@ -480,7 +474,6 @@ label = "ncmpcpp"
 codename = "ncmpcpp"
 description = "NCurses Music Player Client"
 depends_on = []
-configs = []
 
 [[packages]]
 method = "aur"
@@ -488,7 +481,6 @@ label = "noto-fonts-cjk"
 codename = "noto-fonts-cjk"
 description = "CJK fonts from Google"
 depends_on = []
-configs = []
 
 [[packages]]
 method = "aur"
@@ -496,7 +488,6 @@ label = "dash"
 codename = "dash"
 description = "Faster shell."
 depends_on = []
-configs = []
 
 [[packages]]
 method = "aur"
@@ -504,7 +495,6 @@ label = "dashbinsh"
 codename = "dashbinsh"
 description = "Links dash to /bin/sh for faster shell startup."
 depends_on = []
-configs = []
 
 [[packages]]
 method = "aur"
@@ -639,7 +629,6 @@ method = "aur"
 label = "rnote"
 codename = "rnote"
 description = "Vector-based drawing app for sketching, handwritten notes and to annotate documents and pictures"
-depends_on = []
 
 # [[packages]]
 # method = "aur"
@@ -654,10 +643,9 @@ depends_on = []
 [[packages]]
 method = "script"
 label = "openscq30"
-codename = "./packages/openscq30"
+codename = "./packages/openscq30/index.nu"
 description = "Soundcore headphones and earbuds manager."
 depends_on = ["opendoas-retry", "rust"]
-configs = []
 
 [[packages]]
 method = "script"
@@ -665,31 +653,27 @@ label = "yay"
 codename = "./packages/yay/index.sh"
 description = "AUR helper and package manager"
 depends_on = ["pacman", "git", "base-devel"]
-configs = []
 
 [[packages]]
 method = "script"
 label = "hypr-minimize"
-codename = "./packages/hypr-minimize"
+codename = "./packages/hypr-minimize/index.nu"
 description = "Toggle sending/receiving an app from a special workspace (minimized) in Hyprland"
 depends_on = []
-configs = []
 
 [[packages]]
 method = "script"
 label = "advcpmv"
-codename = "./packages/advcpmv"
+codename = "./packages/advcpmv/index.nu"
 description = "cp and mv with progress bar."
 depends_on = ["patch", "gcc"]
-configs = []
 
 [[packages]]
 method = "script"
 label = "firefox-nightly-bin"
-codename = "./packages/firefox-nightly-bin"
+codename = "./packages/firefox-nightly-bin/index.nu"
 description = "Firefox Nightly web browser."
 depends_on = []
-configs = []
 
 [[packages]]
 method = "script"
@@ -707,7 +691,6 @@ label = "minimizeonclose-addon"
 codename = "https://github.com/BeyondMagic/thunderbird-minimize-hyprland/releases/download/2.0.2.0-7-gd08f330/minimizeonclose.xpi"
 description = "Minimize on close extension for Thunderbird in Hyprland"
 depends_on = ["hypr-minimize"]
-configs = []
 
 # Hyprland plugins
 
@@ -743,7 +726,7 @@ config = "hyprland-hyprsplit"
 # codename = "python-validity"
 # description = "Validity fingerprint driver userspace helper"
 # depends_on = []
-# configs = []
+# config = ""
 
 # -----------------------------------------------
 # Profiles for packages per device
@@ -984,7 +967,7 @@ packages = ["frame0", "rnote"]
 # command = "service_command" 		  # The command to run the service
 # description = "Service description" # Concise, but informative description
 # depends_on = ["service_name", ...]  # List of services that must be started before this one
-# privileged = true/false 			  # Requires elevated permissions
+# root = true/false 			      # Requires elevated permissions
 # autostart = ["device_name", ...] 	  # List of devices where this service should autostart
 # devices = ["device_name", ...] 	  # List of devices where this service should be able to run
 # packages = ["package_name", ...]    # List of packages required for this service
@@ -994,7 +977,7 @@ label = "ags"
 command = "/usr/local/bin/ags"
 description = "Launches AGS shell for panels and widgets"
 depends_on = []
-privileged = false
+root = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
 packages = ["ags"]
@@ -1004,7 +987,7 @@ label = "beeper"
 command = "/usr/bin/beeper"
 description = "Starts the Beeper unified messaging desktop client"
 depends_on = ["ags"]
-privileged = false
+root = false
 autostart = ["computer"]
 devices = ["computer", "laptop"]
 packages = ["beeper"]
@@ -1014,7 +997,7 @@ label = "blueman-applet"
 command = "/usr/bin/blueman-applet"
 description = "Bluetooth management tray applet for BlueZ"
 depends_on = ["ags"]
-privileged = false
+root = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
 packages = ["blueman"]
@@ -1024,7 +1007,7 @@ label = "chartdb"
 command = "~/.local/bin/chartdb"
 description = "Runs the local chartdb service"
 depends_on = ["ags"]
-privileged = false
+root = false
 autostart = ["computer"]
 devices = ["computer", "laptop"]
 packages = ["chartdb"]
@@ -1034,7 +1017,7 @@ label = "cliphist"
 command = "/usr/bin/cliphist"
 description = "Wayland clipboard history daemon"
 depends_on = ["ags"]
-privileged = false
+root = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
 packages = ["cliphist"]
@@ -1044,7 +1027,7 @@ label = "dockerd"
 command = "/usr/bin/dockerd"
 description = "Docker daemon providing container runtime"
 depends_on = []
-privileged = true
+root = true
 autostart = ["computer"]
 devices = ["computer", "laptop"]
 packages = ["docker"]
@@ -1054,7 +1037,7 @@ label = "fcitx5"
 command = "/usr/bin/fcitx5"
 description = "Fcitx5 input method framework"
 depends_on = ["ags"]
-privileged = false
+root = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
 packages = ["fcitx5"]
@@ -1064,7 +1047,7 @@ label = "fprintd"
 command = "/usr/bin/fprintd"
 description = "Fingerprint reader D-Bus service"
 depends_on = []
-privileged = true
+root = true
 autostart = []
 devices = ["laptop"]
 packages = ["fprintd"]
@@ -1074,7 +1057,7 @@ label = "gammastep"
 command = "/usr/bin/gammastep"
 description = "Adjusts display color temperature based on time/location"
 depends_on = ["ags"]
-privileged = false
+root = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
 packages = ["gammastep"]
@@ -1084,7 +1067,7 @@ label = "gnome-keyring-daemon"
 command = "/usr/bin/gnome-keyring-daemon"
 description = "GNOME Keyring secrets, SSH, and PGP agent"
 depends_on = ["ags"]
-privileged = false
+root = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
 packages = ["gnome-keyring"]
@@ -1094,7 +1077,7 @@ label = "iio-sensor-proxy"
 command = "/usr/bin/iio-sensor-proxy"
 description = "Exposes accelerometer and ambient light sensors via D-Bus"
 depends_on = ["ags"]
-privileged = false
+root = false
 autostart = ["laptop"]
 devices = ["laptop"]
 packages = ["iio-sensor-proxy"]
@@ -1104,7 +1087,7 @@ label = "keyd"
 command = "/usr/bin/keyd"
 description = "Low-level keyboard remapping daemon"
 depends_on = ["ags"]
-privileged = true
+root = true
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
 packages = ["keyd"]
@@ -1114,7 +1097,7 @@ label = "nm-applet"
 command = "/usr/bin/nm-applet"
 description = "NetworkManager system tray applet"
 depends_on = ["ags"]
-privileged = false
+root = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
 packages = ["networkmanager"]
@@ -1124,7 +1107,7 @@ label = "pipewire"
 command = "/usr/bin/pipewire"
 description = "PipeWire multimedia daemon"
 depends_on = ["ags"]
-privileged = false
+root = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
 packages = ["pipewire"]
@@ -1134,7 +1117,7 @@ label = "pipewire-pulse"
 command = "/usr/bin/pipewire-pulse"
 description = "PulseAudio-compatible server on PipeWire"
 depends_on = ["pipewire"]
-privileged = false
+root = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
 packages = ["pipewire-pulse"]
@@ -1144,7 +1127,7 @@ label = "polkit-gnome-authentication-agent-1"
 command = "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 description = "Polkit authentication agent for graphical prompts"
 depends_on = ["ags"]
-privileged = false
+root = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
 packages = ["polkit-gnome"]
@@ -1154,7 +1137,7 @@ label = "python3-validity"
 command = "/usr/local/bin/python3-validity"
 description = "Validity fingerprint driver userspace helper"
 depends_on = ["fprintd"]
-privileged = true
+root = true
 autostart = []
 devices = ["laptop"]
 packages = ["python-validity"]
@@ -1164,7 +1147,7 @@ label = "rclone"
 command = "/usr/bin/rclone"
 description = "Rclone remote storage sync/mount daemon"
 depends_on = []
-privileged = false
+root = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
 packages = ["rclone"]
@@ -1174,7 +1157,7 @@ label = "ssh-agent"
 command = "/usr/bin/ssh-agent"
 description = "SSH key agent providing keys to clients"
 depends_on = []
-privileged = false
+root = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
 packages = ["openssh"]
@@ -1184,7 +1167,7 @@ label = "awww"
 command = "/usr/bin/awww"
 description = "Runs the awww wallpaper fetcher/rotator"
 depends_on = ["ags"]
-privileged = false
+root = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
 packages = ["awww-git"]
@@ -1194,7 +1177,7 @@ label = "syncthing"
 command = "/usr/bin/syncthing"
 description = "Syncthing peer-to-peer file synchronization daemon"
 depends_on = []
-privileged = false
+root = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
 packages = ["syncthing"]
@@ -1204,7 +1187,7 @@ label = "thunderbird"
 command = "/usr/bin/thunderbird"
 description = "Mozilla Thunderbird email and calendar client"
 depends_on = ["ags"]
-privileged = false
+root = false
 autostart = ["computer"]
 devices = ["computer", "laptop"]
 packages = ["thunderbird"]
@@ -1214,7 +1197,7 @@ label = "waydroid"
 command = "/usr/bin/waydroid"
 description = "Waydroid Android container/session"
 depends_on = ["ags"]
-privileged = false
+root = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
 packages = ["waydroid"]
@@ -1224,7 +1207,7 @@ label = "wireplumber"
 command = "/usr/bin/wireplumber"
 description = "PipeWire session manager for policy and routing"
 depends_on = ["pipewire"]
-privileged = false
+root = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
 packages = ["wireplumber"]
