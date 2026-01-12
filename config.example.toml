@@ -352,6 +352,15 @@ target = "~/.config/npm"
 root = false
 exclude = []
 
+[[configuration]]
+label = "cliphist"
+
+[[configuration.file]]
+source = "./config/cliphist/*"
+target = "~/.cache/cliphist/"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -652,6 +661,14 @@ codename = "npm"
 description = "Node.js package manager"
 depends_on = []
 config = "npm"
+
+[[packages]]
+method = "aur"
+label = "cliphist"
+codename = "cliphist"
+description = "Wayland clipboard history manager"
+depends_on = []
+config = "cliphist"
 
 # [[packages]]
 # method = "aur"
