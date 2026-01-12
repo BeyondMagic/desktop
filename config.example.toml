@@ -134,6 +134,12 @@ label = "sioyek"
 source = "./config/sioyek/*"
 target = "~/.config/sioyek/"
 root = false
+exclude = ["cache"]
+
+[[configuration.file]]
+source = "./config/sioyek/cache"
+target = "~/.local/share/sioyek"
+root = false
 exclude = []
 
 [[configuration]]
