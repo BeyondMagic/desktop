@@ -38,17 +38,23 @@ machine_id = "7faad10195bec8f37d9fbb7a656ff61d"
 # - `source` replaces `{device}` with the current device label when used in the path.
 
 [[configuration]]
-label = "hypr"
+label = "hyprland"
 
 [[configuration.file]]
 source = "./config/hypr/*"
 target = "~/.config/hypr/"
 root = false
-exclude = []
+exclude = ["zoom.nu"]
 
 [[configuration.file]]
 source = "./config/hypr/**/{device}.conf"
 target = "~/.config/hypr/current/"
+root = false
+exclude = []
+
+[[configuration.file]]
+source = "./config/hypr/zoom.nu"
+target = "~/.local/bin/zoom.nu"
 root = false
 exclude = []
 
