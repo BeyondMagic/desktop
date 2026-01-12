@@ -328,6 +328,12 @@ target = "/usr/share/icons/"
 root = false
 exclude = []
 
+[[configuration.file]]
+source = "./config/base/fetch.sh"
+target = "~/.local/bin/fetch.sh"
+root = true
+exclude = []
+
 [[configuration]]
 label = "beeper"
 
