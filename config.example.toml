@@ -292,6 +292,15 @@ target = "/usr/share/applications/beeper.desktop"
 root = false
 exclude = []
 
+[[configuration]]
+label = "chrome"
+
+[[configuration.file]]
+source = "./config/chrome/com.google.Chrome.desktop"
+target = "/usr/share/applications/com.google.Chrome.desktop"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -565,6 +574,14 @@ description = "A key remapping daemon"
 depends_on = []
 config = "keyd"
 
+[[packages]]
+method = "aur"
+label = "chrome"
+codename = "google-chrome"
+description = "Google Chrome web browser"
+depends_on = []
+config = "chrome"
+
 # [[packages]]
 # method = "aur"
 # label = ""
@@ -793,6 +810,11 @@ packages = [
 description = ["Firefox web browser."]
 devices = ["computer", "laptop"]
 packages = ["firefox-nightly-bin"]
+
+[[profiles]]
+description = ["Chrome web browser."]
+devices = ["computer", "laptop"]
+packages = ["google-chrome"]
 
 [[profiles]]
 description = ["NeoVim IDE."]
