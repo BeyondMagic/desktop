@@ -301,6 +301,15 @@ target = "/usr/share/applications/com.google.Chrome.desktop"
 root = false
 exclude = []
 
+[[configuration]]
+label = "soulseekqt"
+
+[[configuration.file]]
+source = "./config/soulseekqt/soulseekqt.desktop"
+target = "/usr/share/applications/soulseekqt.desktop"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -581,6 +590,14 @@ codename = "google-chrome"
 description = "Google Chrome web browser"
 depends_on = []
 config = "chrome"
+
+[[packages]]
+method = "aur"
+label = "soulseekqt"
+codename = "soulseekqt"
+description = "Hybrid p2p and centralized QT client for file sharing"
+depends_on = []
+config = "soulseekqt"
 
 # [[packages]]
 # method = "aur"
