@@ -310,6 +310,15 @@ target = "/usr/share/applications/soulseekqt.desktop"
 root = false
 exclude = []
 
+[[configuration]]
+label = "thunderbird"
+
+[[configuration.file]]
+source = "./config/thunderbird/*.desktop"
+target = "/usr/share/applications/"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -429,7 +438,7 @@ label = "thunderbird"
 codename = "thunderbird"
 description = "Email client"
 depends_on = []
-configs = []
+config = "thunderbird"
 
 [[packages]]
 method = "aur"
