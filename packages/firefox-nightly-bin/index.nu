@@ -8,15 +8,24 @@ const remote = [
 	"./policies.json"
 ]
 
-export def clone []: nothing -> any {
+export def clean []: nothing -> any {
 	rm --recursive --force $dir
+}
 
+export def clone []: nothing -> any {
 	mkdir $dir
 	
 	cp ...$remote $dir
 }
 
 export def build []: nothing -> any {
+	cd $dir
+
+	run-external ...([
+		makepkg
+		-sLf
+		--skippgpcheck
+	])
 }
 
 export def install []: nothing -> any {
@@ -24,7 +33,7 @@ export def install []: nothing -> any {
 
 	run-external ...([
 		makepkg
-		-sLfi
+		-i
 		--skippgpcheck
 	])
 }
@@ -41,7 +50,9 @@ export def uninstall []: nothing -> any {
 }
 
 export def main []: nothing -> any {
+	clean
 	clone
 	build
 	install
+	clean
 }
