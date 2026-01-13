@@ -730,6 +730,13 @@ description = "Wayland clipboard history manager"
 depends_on = []
 config = "cliphist"
 
+[[packages]]
+method = "aur"
+label = "ventoy"
+codename = "ventoy-bin"
+description = "Bootable USB solution for ISO/WIM/IMG/VHD(x)/EFI files"
+depends_on = []
+
 # [[packages]]
 # method = "aur"
 # label = ""
