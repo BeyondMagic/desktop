@@ -205,7 +205,7 @@ exclude = []
 [[configuration.item]]
 source = "./config/vscode/code.desktop"
 target = "/usr/share/applications/code.desktop"
-root = false
+root = true
 exclude = []
 
 [[configuration.item]]
@@ -325,7 +325,7 @@ exclude = []
 [[configuration.item]]
 source = "./config/base/icons/*"
 target = "/usr/share/icons/"
-root = false
+root = true
 exclude = []
 
 [[configuration.item]]
@@ -340,7 +340,7 @@ label = "beeper"
 [[configuration.item]]
 source = "./config/beeper/beeper.desktop"
 target = "/usr/share/applications/beeper.desktop"
-root = false
+root = true
 exclude = []
 
 [[configuration]]
@@ -349,7 +349,7 @@ label = "chrome"
 [[configuration.item]]
 source = "./config/chrome/*.desktop"
 target = "/usr/share/applications/"
-root = false
+root = true
 exclude = []
 
 [[configuration]]
@@ -358,7 +358,7 @@ label = "soulseekqt"
 [[configuration.item]]
 source = "./config/soulseekqt/soulseekqt.desktop"
 target = "/usr/share/applications/soulseekqt.desktop"
-root = false
+root = true
 exclude = []
 
 [[configuration]]
@@ -367,7 +367,7 @@ label = "thunderbird"
 [[configuration.item]]
 source = "./config/thunderbird/*.desktop"
 target = "/usr/share/applications/"
-root = false
+root = true
 exclude = []
 
 [[configuration]]
@@ -376,7 +376,7 @@ label = "nnn"
 [[configuration.item]]
 source = "./config/nnn/*.desktop"
 target = "/usr/share/applications/"
-root = false
+root = true
 exclude = []
 
 [[configuration]]
@@ -385,7 +385,7 @@ label = "frame0"
 [[configuration.item]]
 source = "./config/frame0/*.desktop"
 target = "/usr/share/applications/"
-root = false
+root = true
 exclude = []
 
 [[configuration]]
