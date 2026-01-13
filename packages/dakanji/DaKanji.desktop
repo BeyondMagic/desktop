@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=DaKanji
+Comment=Japanese dictionary and learning application
+Exec=dakanji
+Icon=/usr/share/icons/dakanji.png
+Terminal=false
+Type=Application
+Categories=Utility
+MimeType=inode/directory
