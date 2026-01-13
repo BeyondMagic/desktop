@@ -421,6 +421,15 @@ target = "~/projects"
 root = false
 exclude = []
 
+[[configuration]]
+label = "qbittorrent"
+
+[[configuration.item]]
+source = "./config/qbittorrent/engines"
+target = "~/.local/share/qBittorrent/nova3/engines"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -752,6 +761,14 @@ codename = "python-validity"
 description = "Validity fingerprint driver userspace helper"
 depends_on = []
 config = "python-validity"
+
+[[packages]]
+method = "aur"
+label = "qbittorrent"
+codename = "qbittorrent"
+description = "A cross-platform free and open-source BitTorrent client"
+depends_on = []
+config = "qbittorrent"
 
 # [[packages]]
 # method = "aur"
