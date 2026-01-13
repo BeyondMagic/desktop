@@ -737,6 +737,14 @@ codename = "ventoy-bin"
 description = "Bootable USB solution for ISO/WIM/IMG/VHD(x)/EFI files"
 depends_on = []
 
+[[packages]]
+method = "aur"
+label = "open-fprintd"
+codename = "open-fprintd"
+description = "Open source fingerprint daemon"
+depends_on = []
+config = "open-fprintd"
+
 # [[packages]]
 # method = "aur"
 # label = ""

@@ -1,0 +1,5 @@
+#!/bin/sh -e
+exec 2>&1
+
+export PYTHONPATH=/opt/python-validity
+exec /opt/python-validity/dbus_service/dbus-service
