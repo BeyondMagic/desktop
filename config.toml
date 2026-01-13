@@ -783,6 +783,14 @@ description = "Terminal file manager."
 depends_on = ["nushell"]
 config = "nnn"
 
+[[packages]]
+method = "script"
+label = "flameshot"
+codename = "./packages/flameshot/index.nu"
+description = "Screenshot tool for Wayland."
+depends_on = ["nushell"]
+config = "flameshot"
+
 # Thunderbird addons
 
 [[packages]]
