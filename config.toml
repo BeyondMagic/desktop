@@ -745,6 +745,14 @@ description = "Open source fingerprint daemon"
 depends_on = []
 config = "open-fprintd"
 
+[[packages]]
+method = "aur"
+label = "python-validity"
+codename = "python-validity"
+description = "Validity fingerprint driver userspace helper"
+depends_on = []
+config = "python-validity"
+
 # [[packages]]
 # method = "aur"
 # label = ""
