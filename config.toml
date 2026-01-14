@@ -547,7 +547,27 @@ method = "aur"
 label = "ags"
 codename = "aylurs-gtk-shell-git"
 description = "AGS - Aylurs GTK Shell for panels and widgets"
-depends_on = []
+depends_on = [
+	"libastal-4-git",
+	"libastal-apps-git",
+	"libastal-auth-git",
+	"libastal-battery-git",
+	"libastal-bluetooth-git",
+	"libastal-cava-git",
+	"libastal-git",
+	"libastal-gjs-git",
+	"libastal-greetd-git",
+	"libastal-hyprland-git",
+	"libastal-io-git",
+	"libastal-meta",
+	"libastal-mpris-git",
+	"libastal-network-git",
+	"libastal-notifd-git",
+	"libastal-powerprofiles-git",
+	"libastal-river-git",
+	"libastal-tray-git",
+	"libastal-wireplumber-git",
+]
 
 [[packages]]
 method = "aur"
