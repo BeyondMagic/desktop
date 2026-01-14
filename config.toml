@@ -430,6 +430,15 @@ target = "~/.local/share/qBittorrent/nova3/engines"
 root = false
 exclude = []
 
+[[configuration]]
+label = "doas"
+
+[[configuration.item]]
+source = "./config/doas/doas.conf"
+target = "/etc/doas.conf"
+root = true
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -475,6 +484,7 @@ label = "doas"
 codename = "opendoas-retry"
 description = "A sudo replacement with retry mechanism"
 depends_on = []
+config = "doas"
 
 [[packages]]
 method = "pacman"
