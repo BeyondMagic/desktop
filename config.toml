@@ -490,6 +490,22 @@ codename = "blueman"
 description = "Bluetooth management utility for BlueZ"
 depends_on = []
 
+[[packages]]
+method = "pacman"
+label = "intel-ucode"
+codename = "intel-ucode"
+description = "Intel CPU microcode updates"
+depends_on = []
+
+# amd-code
+
+[[packages]]
+method = "pacman"
+label = "amd-ucode"
+codename = "amd-ucode"
+description = "AMD CPU microcode updates"
+depends_on = []
+
 # AUR packages
 
 [[packages]]
@@ -830,6 +846,13 @@ codename = "./packages/flameshot/index.nu"
 description = "Screenshot tool for Wayland."
 depends_on = ["nushell"]
 config = "flameshot"
+
+[[packages]]
+method = "script"
+label = "kbd-br-thinkpad"
+codename = "./packages/kbd-br-thinkpad/index.nu"
+description = "Brazilian Portuguese keyboard layout for ThinkPad laptops"
+depends_on = ["yay"]
 
 # Thunderbird addons
 
