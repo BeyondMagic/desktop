@@ -741,5 +741,5 @@ $env.config = {
 	]
 }
 
-use ~/projetos/pessoal/nincat/nincat.nu
-nincat random (glob '~/projetos/pessoal/nincat/data.json').0
+# use ~/projetos/pessoal/nincat/nincat.nu
+# nincat random (glob '~/projetos/pessoal/nincat/data.json').0

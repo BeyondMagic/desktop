@@ -37,7 +37,7 @@ export use quotes.nu
 export use editor.nu
 export use prompt.nu
 
-export use ~/projetos/pessoal/competitive-programming/script/pc.nu
+# export use ~/projetos/pessoal/competitive-programming/script/pc.nu
 
 export use ./themes/tokyo-night.nu
 
