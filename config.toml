@@ -1416,6 +1416,16 @@ autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
 packages = ["wireplumber"]
 
+[[services]]
+label = "turnstile"
+command = "turnstiled"
+description = "Turnstile session/login tracker daemon"
+depends_on = []
+root = true
+autostart = ["computer", "laptop"]
+devices = ["computer", "laptop"]
+packages = ["turnstile-dinit"]
+
 # -----------------------------------------------
 # Synchronization for devices
 # -----------------------------------------------
