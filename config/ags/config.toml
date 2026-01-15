@@ -1,0 +1,241 @@
+title_max_width = 400
+root_size = 16
+corner = 32
+
+[[workspaces]]
+total = 10
+
+[[workspaces.labels]]
+id = 1
+label = "一"
+
+[[workspaces.labels]]
+id = 2
+label = "二"
+
+[[workspaces.labels]]
+id = 3
+label = "三"
+
+[[workspaces.labels]]
+id = 4
+label = "四"
+
+[[workspaces.labels]]
+id = 5
+label = "五"
+
+[[workspaces.labels]]
+id = 6
+label = "六"
+
+[[workspaces.labels]]
+id = 7
+label = "七"
+
+[[workspaces.labels]]
+id = 8
+label = "八"
+
+[[workspaces.labels]]
+id = 9
+label = "九"
+
+[[workspaces.labels]]
+id = 10
+label = "十"
+
+[workspaces.monitor]
+id = 0
+
+[[workspaces]]
+total = 10
+
+[[workspaces.labels]]
+id = 11
+label = "一"
+
+[[workspaces.labels]]
+id = 12
+label = "二"
+
+[[workspaces.labels]]
+id = 13
+label = "三"
+
+[[workspaces.labels]]
+id = 14
+label = "四"
+
+[[workspaces.labels]]
+id = 15
+label = "五"
+
+[[workspaces.labels]]
+id = 16
+label = "六"
+
+[[workspaces.labels]]
+id = 17
+label = "七"
+
+[[workspaces.labels]]
+id = 18
+label = "八"
+
+[[workspaces.labels]]
+id = 19
+label = "九"
+
+[[workspaces.labels]]
+id = 20
+label = "十"
+
+[workspaces.monitor]
+id = 1
+
+[[categories]]
+find = ["nm-applet", "nm-connection-editor"]
+replace = "network-wireless-signal-level-7-symbolic"
+
+[[categories]]
+find = ["foot"]
+replace = "command-terminal"
+
+[[categories]]
+find = ["blueman-manager", "blueman-applet"]
+replace = "tool-bluetooth-any"
+
+[[categories]]
+find = ["io.github.whoozle.android-file-transfer"]
+replace = "tool-android-any"
+
+[[categories]]
+find = ["firefox", "firefox-nightly", "Google-chrome", "google-chrome"]
+replace = "internet-browser"
+
+[[categories]]
+find = ["swayimg", "file-png"]
+replace = "any-image-viewer"
+
+[[categories]]
+find = ["org.telegram.desktop", "vesktop"]
+replace = "social-media"
+
+[[categories]]
+find = ["com.stremio.stremio"]
+replace = "movie-streaming"
+
+[[categories]]
+find = ["thunderbird", "org.gnome.Evolution", "SysTray-X"]
+replace = "email-manager"
+
+[[categories]]
+find = ["flameshot"]
+replace = "tool-screenshot"
+
+[[categories]]
+find = ["obsidian"]
+replace = "tool-notetaking"
+
+[[categories]]
+find = ["org.inkscape.Inkscape", "gjs"]
+replace = "tool-designer"
+
+[[categories]]
+find = ["mpv"]
+replace = "any-video-viewer"
+
+[[categories]]
+find = ["org.olivevideoeditor.Olive"]
+replace = "video-plus"
+
+[[categories]]
+find = ["Waydroid"]
+replace = "android"
+
+[[categories]]
+find = ["steam"]
+replace = "game"
+
+[[categories]]
+find = ["Code", "code", "jetbrains-idea"]
+replace = "code-editor"
+
+[[categories]]
+find = ["krita", "gimp", "Gimp", "Gimp-2.10"]
+replace = "digital-art-tool"
+
+[[categories]]
+find = ["com.github.flxzt.rnote", "rnote", "Frame0"]
+replace = "tool-note-taking"
+
+[[categories]]
+find = ["xdg-desktop-portal-gtk"]
+replace = "tool-file-explorer"
+
+[[categories]]
+find = ["org.qbittorrent.qBittorrent"]
+replace = "tool-any-downloader"
+
+[[categories]]
+find = ["org.pwmt.zathura", "com.github.johnfactotum.Foliate", "sioyek"]
+replace = "any-book-reader"
+
+[[categories]]
+find = ["anki"]
+replace = "any-flashcard-learning-tool"
+
+[[categories]]
+find = ["dakanji", "DaKanji"]
+replace = "japanese-character-phrase"
+
+[[categories]]
+find = ["org.fcitx.fcitx5-config-qt"]
+replace = "input-method-set"
+
+[[categories]]
+find = ["pavucontrol", "songrec", "org.pulseaudio.pavucontrol", "SoulseekQt"]
+replace = "sound-loud"
+
+[[categories]]
+find = ["Beeper", "BeeperTexts"]
+replace = "message-service"
+
+[[categories]]
+find = ["PacketTracer", "F5 VPN"]
+replace = "network-wired-logical"
+
+[[categories]]
+find = ["Lxappearance", "hyprland-update-screen"]
+replace = "idea-theme"
+
+[[categories]]
+find = ["hyprland-dialog"]
+replace = "urgent"
+
+[[categories]]
+find = ["hyprland-donate-screen", "selectdefaultapplication"]
+replace = "love-heart"
+
+[[categories]]
+find = [
+	"DBeaver",
+	"^Oracle SQL Developer.*",
+	"oracle-ide-osgi-boot-OracleIdeLauncher",
+]
+replace = "database"
+
+[[categories]]
+find = ["virt-manager", "virt-viewer"]
+replace = "virtual-machine"
+
+[[categories]]
+find = ["java"]
+replace = "java-icon"
+
+[background_color]
+red = 5
+green = 5
+blue = 5
+alpha = 1
