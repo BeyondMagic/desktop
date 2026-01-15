@@ -904,7 +904,7 @@ method = "script"
 label = "flameshot"
 codename = "./packages/flameshot/index.nu"
 description = "Screenshot tool for Wayland."
-depends_on = ["nushell"]
+depends_on = ["nushell", "qt6-tools"]
 config = "flameshot"
 
 [[packages]]
