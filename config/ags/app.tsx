@@ -1,7 +1,6 @@
 import app from "ags/gtk4/app"
 import { Gtk } from "ags/gtk4";
 import { For, This } from "ags"
-import GLib from "gi://GLib";
 
 import style from "./styles.scss"
 import config from "./config.json";
@@ -18,8 +17,7 @@ let app_launcher: Gtk.Window;
 let menu_window: Gtk.Window;;
 
 export {
-	config,
-	dbus_address
+	config
 };
 
 // https://wiki.hypr.land/Configuring/XWayland/
@@ -51,11 +49,9 @@ function main() {
 	)
 }
 
-function request_handler(request: string, res: (response: any) => void) {
-	const [, argv] = GLib.shell_parse_argv(request)
-
-	if (!argv)
-		return res("argv parse error")
+function request_handler(argv: string[], res: (response: any) => void) {
+	if (!argv?.length)
+		return res("missing command")
 
 	switch (argv[0]) {
 		case "toggle":
