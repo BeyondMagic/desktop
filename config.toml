@@ -984,7 +984,7 @@ packages = [
 	"pacman-contrib",
 	"yay",
 	"artix-archlinux-support",
-	"artix-cgroups",
+	# "artix-cgroups",
 	"artix-keyring",
 	"artix-mirrorlist",
 ]
