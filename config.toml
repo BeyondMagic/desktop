@@ -1426,6 +1426,16 @@ autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
 packages = ["turnstile-dinit"]
 
+# [[services]]
+# label = ""
+# command = ""
+# description = ""
+# depends_on = []
+# root = false
+# autostart = ["computer", "laptop"]
+# devices = ["computer", "laptop"]
+# packages = [""]
+
 # -----------------------------------------------
 # Synchronization for devices
 # -----------------------------------------------
