@@ -893,10 +893,17 @@ depends_on = ["nushell"]
 
 [[packages]]
 method = "script"
+label = "terminal-nu"
+codename = "./packages/terminal-nu/index.nu"
+description = "Easy way to open Nushell in a terminal emulator."
+depends_on = ["nushell"]
+
+[[packages]]
+method = "script"
 label = "nnn"
 codename = "./packages/nnn/index.nu"
 description = "Terminal file manager."
-depends_on = ["nushell"]
+depends_on = ["nushell", "terminal-nu"]
 config = "nnn"
 
 [[packages]]

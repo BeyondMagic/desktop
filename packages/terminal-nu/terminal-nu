@@ -1,0 +1,15 @@
+#!/usr/bin/env -S nu --stdin
+#
+# João V. Farias © BeyondMagic 2026 <beyondmagic@mail.ru>
+
+export def main [...args: string]: nothing -> any {
+	let args = $args | str join " "
+
+	run-external ...[
+		foot
+		--hold
+		nu
+		--execute
+		$args
+	]
+}

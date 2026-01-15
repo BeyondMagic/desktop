@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=nnn
 Comment=A simple file manager just for you!
-Exec=foot nu --execute fm
+Exec=terminal-nu fm %U
 Icon=~/.local/share/icons/png/nnn.png
 Terminal=false
 Type=Application
