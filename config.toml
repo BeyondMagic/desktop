@@ -15,8 +15,8 @@ machine_id = "6edffeeb6b9909f86ad4630865c13921"
 
 [[devices]]
 label = "laptop"
-username = "dream"
-machine_id = "7faad10195bec8f37d9fbb7a656ff61d"
+username = "luna"
+machine_id = "4a64f9af5e847abe41a86c956967fa82"
 
 # -----------------------------------------------
 # Configuration files/folders for devices
