@@ -816,6 +816,21 @@ description = "A cross-platform free and open-source BitTorrent client"
 depends_on = []
 config = "qbittorrent"
 
+[[packages]]
+method = "aur"
+label = "awww"
+codename = "awww-git"
+description = "Wallpaper daemon for Wayland"
+depends_on = []
+
+[[packages]]
+method = "aur"
+label = "github-copilot-cli"
+codename = "github-copilot-cli"
+description = "GitHub Copilot command line interface"
+depends_on = []
+
+
 # [[packages]]
 # method = "aur"
 # label = ""
@@ -1083,6 +1098,8 @@ packages = [
 	"flake8",
 	"biome-bin",
 	"typescript",
+	"typescript-language-server",
+	"github-copilot-cli",
 ]
 
 [[profiles]]
@@ -1374,7 +1391,7 @@ depends_on = ["ags"]
 root = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
-packages = ["awww-git"]
+packages = ["awww"]
 
 [[services]]
 label = "syncthing"
