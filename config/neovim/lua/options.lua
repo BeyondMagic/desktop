@@ -29,7 +29,7 @@ vim.o.cmdheight                = 0
 vim.wo.wrap                    = true
 
 -- Always show tabs
-vim.o.showtabline              = 2
+vim.o.showtabline              = 4
 
 -- Show extra spaces.
 vim.opt.list                   = true
