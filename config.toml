@@ -567,6 +567,8 @@ depends_on = [
 	"libastal-river-git",
 	"libastal-tray-git",
 	"libastal-wireplumber-git",
+	"dart-sass",
+	"libqalculate",
 ]
 
 [[packages]]
@@ -832,11 +834,17 @@ depends_on = []
 
 [[packages]]
 method = "aur"
-label = ""
-codename = ""
-description = ""
+label = "gnuplot"
+codename = "gnuplot"
+description = "Command-line driven graphing utility"
 depends_on = []
-config = ""
+
+[[packages]]
+method = "aur"
+label = "libqalculate"
+codename = "libqalculate"
+description = "Library for Qalculate! calculator"
+depends_on = ["gnuplot"]
 
 # [[packages]]
 # method = "aur"
@@ -1072,7 +1080,7 @@ packages = ["openscq30"]
 [[profiles]]
 description = "AGS desktop shell."
 devices = ["computer", "laptop"]
-packages = ["libqalculate", "ags"]
+packages = ["ags"]
 
 [[profiles]]
 description = "Input method framework for multilingual typing."
