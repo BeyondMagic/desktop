@@ -906,6 +906,13 @@ codename = "./packages/kbd-br-thinkpad/index.nu"
 description = "Brazilian Portuguese keyboard layout for ThinkPad laptops"
 depends_on = ["yay"]
 
+[[packages]]
+method = "script"
+label = "dakanji"
+codename = "./packages/dakanji/index.nu"
+description = "Japanese Kanji learning tool"
+depends_on = ["yay", "unzip", "nushell"]
+
 # Thunderbird addons
 
 [[packages]]
