@@ -1,6 +1,24 @@
+# -------------------------------
+# General
+# -------------------------------
+
 title_max_width = 400
 root_size = 16
 corner = 32
+
+# -------------------------------
+# Background color of the widgets
+# -------------------------------
+
+[background_color]
+red = 5
+green = 5
+blue = 5
+alpha = 1
+
+# -------------------------------
+# Workspaces per monitor
+# -------------------------------
 
 [[workspaces]]
 total = 10
@@ -93,6 +111,10 @@ label = "十"
 
 [workspaces.monitor]
 id = 1
+
+# -------------------------------
+# Icons categories for apps
+# -------------------------------
 
 [[categories]]
 find = ["nm-applet", "nm-connection-editor"]
@@ -233,9 +255,3 @@ replace = "virtual-machine"
 [[categories]]
 find = ["java"]
 replace = "java-icon"
-
-[background_color]
-red = 5
-green = 5
-blue = 5
-alpha = 1
