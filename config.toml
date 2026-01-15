@@ -489,7 +489,7 @@ config = "doas"
 [[packages]]
 method = "pacman"
 label = "turnstile"
-codename = "turnstile"
+codename = "turnstile-dinit"
 description = "Independent session/login tracker"
 depends_on = []
 
@@ -830,6 +830,13 @@ codename = "github-copilot-cli"
 description = "GitHub Copilot command line interface"
 depends_on = []
 
+[[packages]]
+method = "aur"
+label = ""
+codename = ""
+description = ""
+depends_on = []
+config = ""
 
 # [[packages]]
 # method = "aur"
