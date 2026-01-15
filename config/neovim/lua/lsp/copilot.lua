@@ -4,5 +4,3 @@ vim.lsp.config('copilot', {
 })
 
 vim.lsp.enable('copilot')
-
-vim.lsp.inline_completion.enable()
