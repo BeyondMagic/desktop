@@ -110,6 +110,12 @@ label = "ags"
 source = "./config/ags/*"
 target = "~/.config/ags/"
 root = false
+exclude = ["dinit"]
+
+[[configuration.item]]
+source = "./config/ags/dinit/ags"
+target = "~/.config/dinit.d/ags"
+root = false
 exclude = []
 
 [[configuration]]
@@ -437,6 +443,42 @@ label = "doas"
 source = "./config/doas/doas.conf"
 target = "/etc/doas.conf"
 root = true
+exclude = []
+
+[[configuration]]
+label = "pipewire-dinit"
+
+[[configuration.item]]
+source = "/etc/dinit.d/user/pipewire"
+target = "~/.config/dinit.d/pipewire"
+root = false
+exclude = []
+
+[[configuration]]
+label = "pipewire-pulse"
+
+[[configuration.item]]
+source = "./config/pipewire-pulse/pipewire-pulse"
+target = "~/.config/dinit.d/pipewire-pulse"
+root = false
+exclude = []
+
+[[configuration]]
+label = "wireplumber-dinit"
+
+[[configuration.item]]
+source = "/etc/dinit.d/user/wireplumber"
+target = "~/.config/dinit.d/wireplumber"
+root = false
+exclude = []
+
+[[configuration]]
+label = "awww"
+
+[[configuration.item]]
+source = "./config/awww/dinit/awww"
+target = "~/.config/dinit.d/awww"
+root = false
 exclude = []
 
 # [[configuration]]
@@ -846,6 +888,30 @@ codename = "libqalculate"
 description = "Library for Qalculate! calculator"
 depends_on = ["gnuplot"]
 
+[[packages]]
+method = "aur"
+label = "pipewire-dinit"
+codename = "pipewire-dinit"
+description = "PipeWire media server with Dinit init system"
+depends_on = ["pipewire-dinit"]
+config = "pipewire-dinit"
+
+[[packages]]
+method = "aur"
+label = "pipewire-pulse"
+codename = "pipewire-pulse"
+description = "PulseAudio compatibility layer for PipeWire"
+depends_on = ["pipewire-dinit"]
+config = "pipewire-pulse"
+
+[[packages]]
+method = "aur"
+label = "wireplumber-dinit"
+codename = "wireplumber-dinit"
+description = "WirePlumber session manager for PipeWire with Dinit init system"
+depends_on = ["pipewire-dinit"]
+config = "wireplumber-dinit"
+
 # [[packages]]
 # method = "aur"
 # label = ""
@@ -1026,10 +1092,12 @@ devices = ["computer", "laptop"]
 packages = [
 	"libpipewire",
 	"pipewire",
+	"pipewire-dinit",
 	"pipewire-alsa",
 	"pipewire-audio",
 	"pipewire-pulse",
 	"pipewire-session-manager",
+	"wireplumber-dinit",
 ]
 
 [[profiles]]
@@ -1353,26 +1421,6 @@ devices = ["computer", "laptop"]
 packages = ["networkmanager"]
 
 [[services]]
-label = "pipewire"
-command = "/usr/bin/pipewire"
-description = "PipeWire multimedia daemon"
-depends_on = ["ags"]
-root = false
-autostart = ["computer", "laptop"]
-devices = ["computer", "laptop"]
-packages = ["pipewire"]
-
-[[services]]
-label = "pipewire-pulse"
-command = "/usr/bin/pipewire-pulse"
-description = "PulseAudio-compatible server on PipeWire"
-depends_on = ["pipewire"]
-root = false
-autostart = ["computer", "laptop"]
-devices = ["computer", "laptop"]
-packages = ["pipewire-pulse"]
-
-[[services]]
 label = "polkit-gnome-authentication-agent-1"
 command = "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 description = "Polkit authentication agent for graphical prompts"
@@ -1451,16 +1499,6 @@ root = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
 packages = ["waydroid"]
-
-[[services]]
-label = "wireplumber"
-command = "/usr/bin/wireplumber"
-description = "PipeWire session manager for policy and routing"
-depends_on = ["pipewire"]
-root = false
-autostart = ["computer", "laptop"]
-devices = ["computer", "laptop"]
-packages = ["wireplumber"]
 
 [[services]]
 label = "turnstile"
