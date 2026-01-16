@@ -1,0 +1,6 @@
+type = process
+command = /usr/bin/beeper
+stop-command = /usr/bin/beeper
+depends-on = dbus
+waits-for = dbus
+smooth-recovery = true
