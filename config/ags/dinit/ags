@@ -1,0 +1,6 @@
+type = process
+command = /usr/bin/ags run
+stop-command = /usr/bin/ags quit
+depends-on = dbus
+waits-for = dbus
+smooth-recovery = true
