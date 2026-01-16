@@ -493,6 +493,15 @@ target = "~/.config/dinit.d/awww-daemon"
 root = false
 exclude = []
 
+[[configuration]]
+label = "turnstile"
+
+[[configuration.item]]
+source = "/etc/dinit.d/turnstiled"
+target = "/etc/dinit.d/boot.d/turnstiled"
+root = true
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -546,6 +555,7 @@ label = "turnstile"
 codename = "turnstile-dinit"
 description = "Independent session/login tracker"
 depends_on = []
+config = "turnstile"
 
 [[packages]]
 method = "pacman"
@@ -1464,16 +1474,6 @@ root = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
 packages = ["waydroid"]
-
-[[services]]
-label = "turnstile"
-command = "turnstiled"
-description = "Turnstile session/login tracker daemon"
-depends_on = []
-root = true
-autostart = ["computer", "laptop"]
-devices = ["computer", "laptop"]
-packages = ["turnstile-dinit"]
 
 # -----------------------------------------------
 # Synchronization for devices
