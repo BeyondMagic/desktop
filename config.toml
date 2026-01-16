@@ -388,6 +388,12 @@ target = "/usr/share/applications/"
 root = true
 exclude = []
 
+[[configuration.item]]
+source = "./config/thunderbird/dinit/thunderbird"
+target = "~/.config/dinit.d/boot/thunderbird"
+root = false
+exclude = []
+
 [[configuration]]
 label = "nnn"
 
@@ -500,15 +506,6 @@ label = "turnstile"
 source = "/etc/dinit.d/turnstiled"
 target = "/etc/dinit.d/boot.d/turnstiled"
 root = true
-exclude = []
-
-[[configuration]]
-label = "thunderbird"
-
-[[configuration.item]]
-source = "./config/thunderbird/dinit/thunderbird"
-target = "~/.config/dinit.d/thunderbird"
-root = false
 exclude = []
 
 [[configuration]]
