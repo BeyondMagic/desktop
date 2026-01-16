@@ -611,7 +611,9 @@ depends_on = [
 	"libastal-wireplumber-git",
 	"dart-sass",
 	"libqalculate",
+	"bun",
 ]
+config = "ags"
 
 [[packages]]
 method = "aur"
