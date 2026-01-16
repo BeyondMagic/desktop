@@ -1,5 +1,5 @@
 type = process
 command = /usr/bin/beeper --no-sandbox --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime
-depends-on = dbus
-waits-for = dbus
+depends-on = ags
+waits-for = ags
 smooth-recovery = true
