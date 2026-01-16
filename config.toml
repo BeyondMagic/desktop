@@ -103,6 +103,12 @@ target = "~/.config/nushell/"
 root = false
 exclude = []
 
+[[configuration.item]]
+source = "./config/nushell/scripts/fork.nu"
+target = "~/.local/bin/fork.nu"
+root = false
+exclude = []
+
 [[configuration]]
 label = "ags"
 
