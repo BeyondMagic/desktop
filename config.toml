@@ -616,6 +616,21 @@ target = "~/.config/dinit.d/boot.d/polkit-gnome-agent"
 root = false
 exclude = []
 
+[[configuration]]
+label = "gnome-keyring"
+
+[[configuration.item]]
+source = "./config/gnome-keyring/dinit/gnome-keyring"
+target = "~/.config/dinit.d/gnome-keyring"
+root = false
+exclude = []
+
+[[configuration.item]]
+source = "./config/gnome-keyring/dinit/gnome-keyring"
+target = "~/.config/dinit.d/boot.d/gnome-keyring"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -1081,6 +1096,14 @@ description = "Adjusts display color temperature based on time/location"
 depends_on = []
 config = "gammastep"
 
+[[packages]]
+method = "aur"
+label = "gnome-keyring"
+codename = "gnome-keyring"
+description = "GNOME password and key manager"
+depends_on = []
+config = "gnome-keyring"
+
 # [[packages]]
 # method = "aur"
 # label = ""
@@ -1457,16 +1480,6 @@ root = true
 autostart = []
 devices = ["laptop"]
 packages = ["fprintd"]
-
-[[services]]
-label = "gnome-keyring-daemon"
-command = "/usr/bin/gnome-keyring-daemon"
-description = "GNOME Keyring secrets, SSH, and PGP agent"
-depends_on = ["ags"]
-root = false
-autostart = ["computer", "laptop"]
-devices = ["computer", "laptop"]
-packages = ["gnome-keyring"]
 
 [[services]]
 label = "iio-sensor-proxy"

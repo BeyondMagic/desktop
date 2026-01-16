@@ -1,0 +1,5 @@
+type = process
+command = /usr/bin/gnome-keyring-daemon --foreground --components=secrets,ssh,pkcs11
+depends-on = dbus
+waits-for = dbus
+smooth-recovery = true
