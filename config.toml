@@ -476,8 +476,8 @@ exclude = []
 label = "awww"
 
 [[configuration.item]]
-source = "./config/awww/dinit/awww"
-target = "~/.config/dinit.d/awww"
+source = "./config/awww/dinit/awww-daemon"
+target = "~/.config/dinit.d/awww-daemon"
 root = false
 exclude = []
 

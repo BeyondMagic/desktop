@@ -1,0 +1,6 @@
+type = process
+command = /usr/bin/awww-daemon
+log-type = buffer
+depends-on = dbus
+waits-for = dbus
+smooth-recovery = true

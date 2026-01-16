@@ -1,5 +1,0 @@
-type = process
-command = /usr/bin/awww
-depends-on = dbus
-waits-for = dbus
-smooth-recovery = true
