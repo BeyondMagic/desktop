@@ -1075,6 +1075,7 @@ packages = [
 	"dashbinsh",
 	"turnstile",
 	"advcpmv",
+	"pavucontrol",
 ]
 
 [[profiles]]
