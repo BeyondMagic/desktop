@@ -355,6 +355,12 @@ target = "/usr/share/applications/beeper.desktop"
 root = true
 exclude = []
 
+[[configuration.item]]
+source = "./config/beeper/dinit/beeper"
+target = "~/.config/dinit.d/beeper"
+root = false
+exclude = []
+
 [[configuration]]
 label = "chrome"
 
@@ -1278,21 +1284,6 @@ packages = ["frame0", "rnote"]
 description = "Javascript/Typescript development tools."
 devices = ["computer", "laptop"]
 packages = ["npm", "bun", "yarn", "pnpm"]
-
-# [[profiles]]
-# description = ""
-# devices = ["computer", "laptop"]
-# packages = [""]
-
-[[services]]
-label = "beeper"
-command = "/usr/bin/beeper"
-description = "Starts the Beeper unified messaging desktop client"
-depends_on = ["ags"]
-root = false
-autostart = ["computer"]
-devices = ["computer", "laptop"]
-packages = ["beeper"]
 
 [[services]]
 label = "blueman-applet"
