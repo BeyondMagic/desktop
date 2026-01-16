@@ -658,6 +658,33 @@ target = "~/.config/dinit.d/boot.d/nm-applet"
 root = false
 exclude = []
 
+[[configuration]]
+label = "rclone"
+
+[[configuration.item]]
+source = "./config/rclone/rclone.conf"
+target = "~/.config/rclone/rclone.conf"
+root = false
+exclude = []
+
+[[configuration.item]]
+source = "./config/rclone/dinit/rclone-daemon"
+target = "~/.config/dinit.d/rclone-daemon"
+root = false
+exclude = []
+
+[[configuration.item]]
+source = "./config/rclone/dinit/rclone-daemon"
+target = "~/.config/dinit.d/boot.d/rclone-daemon"
+root = false
+exclude = []
+
+[[configuration.item]]
+source = "./config/rclone/rclone-daemon"
+target = "/usr/local/bin/rclone-daemon"
+root = true
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -1147,6 +1174,14 @@ description = "NetworkManager system tray applet"
 depends_on = []
 config = "network-manager-applet"
 
+[[packages]]
+method = "aur"
+label = "rclone"
+codename = "rclone"
+description = "Command line program to manage files on cloud storage"
+depends_on = []
+config = "rclone"
+
 # [[packages]]
 # method = "aur"
 # label = ""
@@ -1545,16 +1580,6 @@ devices = ["laptop"]
 packages = ["python-validity"]
 
 [[services]]
-label = "rclone"
-command = "/usr/bin/rclone"
-description = "Rclone remote storage sync/mount daemon"
-depends_on = []
-root = false
-autostart = ["computer", "laptop"]
-devices = ["computer", "laptop"]
-packages = ["rclone"]
-
-[[services]]
 label = "waydroid"
 command = "/usr/bin/waydroid"
 description = "Waydroid Android container/session"
@@ -1577,12 +1602,6 @@ packages = ["waydroid"]
 # remote = "remote_name:" 			   # Remote name or identifier
 # mount = "local_mount_point" 	       # Local mount point or directory, supports tilde for user's home dir
 # config = "config_label" 		       # Optional configuration label to use for this synchronization
-
-[[synchronization]]
-type = "rclone"
-description = "Google Drive storage"
-remote = "gdrive:"
-mount = "~/storage/gdrive"
 
 [[synchronization]]
 type = "syncthing"

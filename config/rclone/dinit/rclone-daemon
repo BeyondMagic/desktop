@@ -1,0 +1,4 @@
+type = process
+command = /usr/local/bin/rclone-daemon start --drive drive --mount ~/storage/gdrive
+stop-command = /usr/local/bin/rclone-daemon quit --mount ~/storage/gdrive
+smooth-recovery = true

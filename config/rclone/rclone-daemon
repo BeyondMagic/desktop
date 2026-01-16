@@ -1,0 +1,82 @@
+#!/usr/bin/env -S nu --stdin
+#
+# João Farias © 2025-2026 BeyondMagic <beyondmagic@mail.ru>
+
+def "main start" [
+	--drive: string # Required rclone remote drive name
+	--mount: string  # Required mount root path
+]: nothing -> any {
+	if ($drive | is-empty) {
+		error make {
+			msg: "Drive name not specified"
+			code: "rclone-daemon::no-drive"
+			labels: {
+				text: "You must specify a drive name using the --drive parameter."
+				span: (metadata $drive).span
+			}
+			help: "Specify the drive name configured in rclone (e.g., 'gdrive', 'dropbox', etc.)"
+		}
+	}
+
+	if ($mount | is-empty) {
+		error make {
+			msg: "Mount path not specified"
+			code: "rclone-daemon::no-mount"
+			labels: {
+				text: "You must specify a mount path using the --mount parameter."
+				span: (metadata $mount).span
+			}
+			help: "Specify the local path where the drive should be mounted."
+		}
+	}
+
+	let mount = $mount | path expand
+
+	mkdir $mount
+
+	try {
+	    run-external ...[
+			fusermount
+			-uz
+			$mount
+		]
+	    sleep 1sec
+	}
+
+	run-external ...[
+		rclone
+		mount
+		$"($drive):"
+		$mount
+	]	
+}
+
+def "main quit" [
+	--mount: string  # Required mount root path
+]: nothing -> any {
+	if ($mount | is-empty) {
+		error make {
+			msg: "Mount path not specified"
+			code: "rclone-daemon::no-mount"
+			labels: {
+				text: "You must specify a mount path using the --mount parameter."
+				span: (metadata $mount).span
+			}
+			help: "Specify the local path where the drive is mounted."
+		}
+	}
+
+	let mount = $mount | path expand
+
+	try {
+	    run-external ...[
+			fusermount
+			-uz
+			$mount
+		]
+	}
+
+	rm $mount
+}
+
+def main []: nothing -> nothing {}
