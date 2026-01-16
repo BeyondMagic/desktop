@@ -290,7 +290,25 @@ exclude = []
 label = "ssh"
 
 [[configuration.item]]
-source = "./config/ssh"
+source = "./config/ssh/dinit/ssh-agent"
+target = "~/.config/dinit.d/ssh-agent"
+root = false
+exclude = []
+
+[[configuration.item]]
+source = "./config/ssh/dinit/ssh-agent"
+target = "~/.config/dinit.d/boot.d/ssh-agent"
+root = false
+exclude = []
+
+[[configuration.item]]
+source = "/etc/dinit.d/sshd"
+target = "/etc/dinit.d/boot.d/sshd"
+root = true
+exclude = []
+
+[[configuration.item]]
+source = "./config/ssh/shared"
 target = "~/.ssh"
 root = false
 exclude = []
@@ -608,6 +626,14 @@ label = "amd-ucode"
 codename = "amd-ucode"
 description = "AMD CPU microcode updates"
 depends_on = []
+
+[[packages]]
+method = "pacman"
+label = "openssh-dinit"
+codename = "openssh-dinit"
+description = "OpenSSH with Dinit init system"
+depends_on = []
+config = "ssh"
 
 # AUR packages
 
@@ -1185,6 +1211,7 @@ packages = [
 	"foot",
 	"fuzzel",
 	"gtk3",
+	"openssh-dinit",
 ]
 
 [[profiles]]
@@ -1469,16 +1496,6 @@ root = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
 packages = ["rclone"]
-
-[[services]]
-label = "ssh-agent"
-command = "/usr/bin/ssh-agent"
-description = "SSH key agent providing keys to clients"
-depends_on = []
-root = false
-autostart = ["computer", "laptop"]
-devices = ["computer", "laptop"]
-packages = ["openssh"]
 
 [[services]]
 label = "waydroid"
