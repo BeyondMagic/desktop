@@ -643,6 +643,21 @@ target = "~/.config/dinit.d/boot.d/gnome-keyring"
 root = false
 exclude = []
 
+[[configuration]]
+label = "network-manager-applet"
+
+[[configuration.item]]
+source = "./config/network-manager-applet/dinit/nm-applet"
+target = "~/.config/dinit.d/nm-applet"
+root = false
+exclude = []
+
+[[configuration.item]]
+source = "./config/network-manager-applet/dinit/nm-applet"
+target = "~/.config/dinit.d/boot.d/nm-applet"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -1124,6 +1139,14 @@ description = "Key remapping daemon"
 depends_on = []
 config = "keyd"
 
+[[packages]]
+method = "aur"
+label = "network-manager-applet"
+codename = "network-manager-applet"
+description = "NetworkManager system tray applet"
+depends_on = []
+config = "network-manager-applet"
+
 # [[packages]]
 # method = "aur"
 # label = ""
@@ -1510,16 +1533,6 @@ root = false
 autostart = ["laptop"]
 devices = ["laptop"]
 packages = ["iio-sensor-proxy"]
-
-[[services]]
-label = "nm-applet"
-command = "/usr/bin/nm-applet"
-description = "NetworkManager system tray applet"
-depends_on = ["ags"]
-root = false
-autostart = ["computer", "laptop"]
-devices = ["computer", "laptop"]
-packages = ["networkmanager"]
 
 [[services]]
 label = "python3-validity"
