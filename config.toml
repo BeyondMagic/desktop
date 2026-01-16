@@ -511,6 +511,15 @@ target = "~/.config/dinit.d/thunderbird"
 root = false
 exclude = []
 
+[[configuration]]
+label = "syncthing"
+
+[[configuration.item]]
+source = "/etc/dinit.d/user/syncthing"
+target = "~/.config/dinit.d/boot/syncthing"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -945,6 +954,14 @@ description = "WirePlumber session manager for PipeWire with Dinit init system"
 depends_on = ["pipewire-dinit"]
 config = "wireplumber-dinit"
 
+[[packages]]
+method = "aur"
+label = "syncthing"
+codename = "syncthing-dinit"
+description = "Continuous file synchronization program with Dinit init system"
+depends_on = []
+config = "syncthing"
+
 # [[packages]]
 # method = "aur"
 # label = ""
@@ -1107,6 +1124,7 @@ packages = [
 	"turnstile",
 	"advcpmv",
 	"pavucontrol",
+	"syncthing",
 ]
 
 [[profiles]]
@@ -1453,16 +1471,6 @@ root = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
 packages = ["openssh"]
-
-[[services]]
-label = "syncthing"
-command = "/usr/bin/syncthing"
-description = "Syncthing peer-to-peer file synchronization daemon"
-depends_on = []
-root = false
-autostart = ["computer", "laptop"]
-devices = ["computer", "laptop"]
-packages = ["syncthing"]
 
 [[services]]
 label = "waydroid"
