@@ -1,6 +1,5 @@
 type = process
-command = /usr/bin/beeper
-stop-command = /usr/bin/beeper
+command = /usr/bin/beeper --no-sandbox --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime
 depends-on = dbus
 waits-for = dbus
 smooth-recovery = true
