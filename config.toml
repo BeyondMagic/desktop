@@ -215,6 +215,18 @@ label = "gammastep"
 source = "./config/gammastep/*"
 target = "~/.config/gammastep/"
 root = false
+exclude = ["dinit"]
+
+[[configuration.item]]
+source = "./config/gammastep/dinit/gammastep"
+target = "~/.config/dinit.d/gammastep"
+root = false
+exclude = []
+
+[[configuration.item]]
+source = "./config/gammastep/dinit/gammastep"
+target = "~/.config/dinit.d/boot.d/gammastep"
+root = false
 exclude = []
 
 [[configuration]]
@@ -1061,6 +1073,14 @@ description = "Continuous file synchronization program with Dinit init system"
 depends_on = []
 config = "syncthing"
 
+[[packages]]
+method = "aur"
+label = "gammastep"
+codename = "gammastep"
+description = "Adjusts display color temperature based on time/location"
+depends_on = []
+config = "gammastep"
+
 # [[packages]]
 # method = "aur"
 # label = ""
@@ -1437,16 +1457,6 @@ root = true
 autostart = []
 devices = ["laptop"]
 packages = ["fprintd"]
-
-[[services]]
-label = "gammastep"
-command = "/usr/bin/gammastep"
-description = "Adjusts display color temperature based on time/location"
-depends_on = ["ags"]
-root = false
-autostart = ["computer", "laptop"]
-devices = ["computer", "laptop"]
-packages = ["gammastep"]
 
 [[services]]
 label = "gnome-keyring-daemon"
