@@ -1410,15 +1410,10 @@ description = "Javascript/Typescript development tools."
 devices = ["computer", "laptop"]
 packages = ["npm", "bun", "yarn", "pnpm"]
 
-[[services]]
-label = "dockerd"
-command = "/usr/bin/dockerd"
-description = "Docker daemon providing container runtime"
-depends_on = []
-root = true
-autostart = ["computer"]
+[[profiles]]
+description = "Javascript/Typescript development tools."
 devices = ["computer", "laptop"]
-packages = ["docker"]
+packages = ["docker", "docker-compose", "docker-dinit"]
 
 [[services]]
 label = "fcitx5"
