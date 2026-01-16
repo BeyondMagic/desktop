@@ -577,6 +577,21 @@ target = "~/.config/dinit.d/chartdb"
 root = false
 exclude = []
 
+[[configuration]]
+label = "polkit-gnome"
+
+[[configuration.item]]
+source = "./config/polkit-gnome/dinit/polkit-gnome-agent"
+target = "~/.config/dinit.d/polkit-gnome-agent"
+root = false
+exclude = []
+
+[[configuration.item]]
+source = "./config/polkit-gnome/dinit/polkit-gnome-agent"
+target = "~/.config/dinit.d/boot.d/polkit-gnome-agent"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -1474,16 +1489,6 @@ root = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
 packages = ["networkmanager"]
-
-[[services]]
-label = "polkit-gnome-authentication-agent-1"
-command = "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
-description = "Polkit authentication agent for graphical prompts"
-depends_on = ["ags"]
-root = false
-autostart = ["computer", "laptop"]
-devices = ["computer", "laptop"]
-packages = ["polkit-gnome"]
 
 [[services]]
 label = "python3-validity"

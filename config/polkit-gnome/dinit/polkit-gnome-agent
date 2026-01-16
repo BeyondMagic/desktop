@@ -1,0 +1,5 @@
+type = process
+command = /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+depends-on = dbus
+waits-for = dbus
+smooth-recovery = true
