@@ -390,7 +390,7 @@ exclude = []
 
 [[configuration.item]]
 source = "./config/thunderbird/dinit/thunderbird"
-target = "~/.config/dinit.d/boot/thunderbird"
+target = "~/.config/dinit.d/thunderbird"
 root = false
 exclude = []
 
