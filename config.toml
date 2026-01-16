@@ -350,8 +350,20 @@ exclude = []
 label = "keyd"
 
 [[configuration.item]]
-source = "./config/keyd"
-target = "/etc/keyd"
+source = "./config/keyd/default.conf"
+target = "/etc/keyd/default.conf"
+root = true
+exclude = []
+
+[[configuration.item]]
+source = "./config/keyd/dinit/keyd"
+target = "/etc/dinit.d/keyd"
+root = true
+exclude = []
+
+[[configuration.item]]
+source = "./config/keyd/dinit/keyd"
+target = "/etc/dinit.d/boot.d/keyd"
 root = true
 exclude = []
 
@@ -1104,6 +1116,14 @@ description = "GNOME password and key manager"
 depends_on = []
 config = "gnome-keyring"
 
+[[packages]]
+method = "aur"
+label = "keyd"
+codename = "keyd"
+description = "Key remapping daemon"
+depends_on = []
+config = "keyd"
+
 # [[packages]]
 # method = "aur"
 # label = ""
@@ -1490,16 +1510,6 @@ root = false
 autostart = ["laptop"]
 devices = ["laptop"]
 packages = ["iio-sensor-proxy"]
-
-[[services]]
-label = "keyd"
-command = "/usr/bin/keyd"
-description = "Low-level keyboard remapping daemon"
-depends_on = ["ags"]
-root = true
-autostart = ["computer", "laptop"]
-devices = ["computer", "laptop"]
-packages = ["keyd"]
 
 [[services]]
 label = "nm-applet"
