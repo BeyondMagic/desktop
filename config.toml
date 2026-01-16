@@ -1438,16 +1438,6 @@ devices = ["computer", "laptop"]
 packages = ["openssh"]
 
 [[services]]
-label = "awww"
-command = "/usr/bin/awww"
-description = "Runs the awww wallpaper fetcher/rotator"
-depends_on = ["ags"]
-root = false
-autostart = ["computer", "laptop"]
-devices = ["computer", "laptop"]
-packages = ["awww"]
-
-[[services]]
 label = "syncthing"
 command = "/usr/bin/syncthing"
 description = "Syncthing peer-to-peer file synchronization daemon"
@@ -1486,16 +1476,6 @@ root = true
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
 packages = ["turnstile-dinit"]
-
-# [[services]]
-# label = ""
-# command = ""
-# description = ""
-# depends_on = []
-# root = false
-# autostart = ["computer", "laptop"]
-# devices = ["computer", "laptop"]
-# packages = [""]
 
 # -----------------------------------------------
 # Synchronization for devices
