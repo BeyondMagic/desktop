@@ -1277,31 +1277,6 @@ packages = ["npm", "bun", "yarn", "pnpm"]
 # devices = ["computer", "laptop"]
 # packages = [""]
 
-# -----------------------------------------------
-# Services for devices
-# -----------------------------------------------
-
-# Example
-# [[services]]
-# label = "service_name" 		      # Unique label for the service
-# command = "service_command" 		  # The command to run the service
-# description = "Service description" # Concise, but informative description
-# depends_on = ["service_name", ...]  # List of services that must be started before this one
-# root = true/false 			      # Requires elevated permissions
-# autostart = ["device_name", ...] 	  # List of devices where this service should autostart
-# devices = ["device_name", ...] 	  # List of devices where this service should be able to run
-# packages = ["package_name", ...]    # List of packages required for this service
-
-[[services]]
-label = "ags"
-command = "/usr/local/bin/ags"
-description = "Launches AGS shell for panels and widgets"
-depends_on = []
-root = false
-autostart = ["computer", "laptop"]
-devices = ["computer", "laptop"]
-packages = ["ags"]
-
 [[services]]
 label = "beeper"
 command = "/usr/bin/beeper"
