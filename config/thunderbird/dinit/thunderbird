@@ -1,0 +1,5 @@
+type = process
+command = /usr/bin/thunderbird
+depends-on = dbus
+waits-for = dbus
+smooth-recovery = true

@@ -502,6 +502,15 @@ target = "/etc/dinit.d/boot.d/turnstiled"
 root = true
 exclude = []
 
+[[configuration]]
+label = "thunderbird"
+
+[[configuration.item]]
+source = "./config/thunderbird/dinit/thunderbird"
+target = "~/.config/dinit.d/thunderbird"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -1454,16 +1463,6 @@ root = false
 autostart = ["computer", "laptop"]
 devices = ["computer", "laptop"]
 packages = ["syncthing"]
-
-[[services]]
-label = "thunderbird"
-command = "/usr/bin/thunderbird"
-description = "Mozilla Thunderbird email and calendar client"
-depends_on = ["ags"]
-root = false
-autostart = ["computer"]
-devices = ["computer", "laptop"]
-packages = ["thunderbird"]
 
 [[services]]
 label = "waydroid"
