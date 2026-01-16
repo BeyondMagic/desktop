@@ -129,13 +129,25 @@ label = "fcitx5"
 
 [[configuration.item]]
 source = "./config/fcitx5/*"
-target = "~/.config/fcitx52/"
+target = "~/.config/fcitx5/"
 root = false
-exclude = ["conf"]
+exclude = ["conf", "dinit"]
 
 [[configuration.item]]
 source = "./config/fcitx5/conf/*"
-target = "~/.config/fcitx52/conf/"
+target = "~/.config/fcitx5/conf/"
+root = false
+exclude = []
+
+[[configuration.item]]
+source = "./config/fcitx5/dinit/fcitx5"
+target = "~/.config/dinit.d/fcitx5"
+root = false
+exclude = []
+
+[[configuration.item]]
+source = "./config/fcitx5/dinit/fcitx5"
+target = "~/.config/dinit.d/boot.d/fcitx5"
 root = false
 exclude = []
 
@@ -1307,6 +1319,7 @@ packages = [
 	"fcitx5-material-color",
 	"fcitx5-qt",
 	"fcitx5-mozc-ut",
+	"fcitx5-skin-fluentdark-git",
 ]
 
 [[profiles]]
@@ -1414,16 +1427,6 @@ packages = ["npm", "bun", "yarn", "pnpm"]
 description = "Javascript/Typescript development tools."
 devices = ["computer", "laptop"]
 packages = ["docker", "docker-compose", "docker-dinit"]
-
-[[services]]
-label = "fcitx5"
-command = "/usr/bin/fcitx5"
-description = "Fcitx5 input method framework"
-depends_on = ["ags"]
-root = false
-autostart = ["computer", "laptop"]
-devices = ["computer", "laptop"]
-packages = ["fcitx5"]
 
 [[services]]
 label = "fprintd"
