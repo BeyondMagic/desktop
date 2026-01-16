@@ -1,0 +1,7 @@
+type = process
+command = /usr/bin/blueman-applet
+depends-on = dbus
+depends-on = bluetoothd
+waits-for = dbus
+waits-for = bluetoothd
+smooth-recovery = true

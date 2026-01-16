@@ -517,6 +517,21 @@ target = "~/.config/dinit.d/boot/syncthing"
 root = false
 exclude = []
 
+[[configuration]]
+label = "blueman"
+
+[[configuration.item]]
+source = "./config/blueman/dinit/blueman-applet"
+target = "~/.config/dinit.d/blueman-applet"
+root = false
+exclude = []
+
+[[configuration.item]]
+source = "./config/blueman/dinit/blueman-applet"
+target = "~/.config/dinit.d/boot.d/blueman-applet"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -578,6 +593,7 @@ label = "blueman"
 codename = "blueman"
 description = "Bluetooth management utility for BlueZ"
 depends_on = []
+config = "blueman"
 
 [[packages]]
 method = "pacman"
@@ -585,8 +601,6 @@ label = "intel-ucode"
 codename = "intel-ucode"
 description = "Intel CPU microcode updates"
 depends_on = []
-
-# amd-code
 
 [[packages]]
 method = "pacman"
@@ -596,6 +610,13 @@ description = "AMD CPU microcode updates"
 depends_on = []
 
 # AUR packages
+
+[[packages]]
+method = "aur"
+label = "bluez-utils"
+codename = "bluez-utils"
+description = "Bluetooth tools and daemons"
+depends_on = ["blueman"]
 
 [[packages]]
 method = "aur"
@@ -1318,16 +1339,6 @@ packages = ["frame0", "rnote"]
 description = "Javascript/Typescript development tools."
 devices = ["computer", "laptop"]
 packages = ["npm", "bun", "yarn", "pnpm"]
-
-[[services]]
-label = "blueman-applet"
-command = "/usr/bin/blueman-applet"
-description = "Bluetooth management tray applet for BlueZ"
-depends_on = ["ags"]
-root = false
-autostart = ["computer", "laptop"]
-devices = ["computer", "laptop"]
-packages = ["blueman"]
 
 [[services]]
 label = "chartdb"
