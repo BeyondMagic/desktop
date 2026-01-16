@@ -1,0 +1,9 @@
+#!/usr/bin/env dash
+#
+# João Farias © 2024-2026 BeyondMagic <beyondmagic@mail.ru>
+
+export DIST='/usr/share/webapps/chartdb'
+
+cd $DIST
+
+exec python3 -m http.server 1234 -b 0.0.0.0

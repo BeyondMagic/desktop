@@ -562,6 +562,21 @@ target = "~/.config/dinit.d/boot.d/blueman-applet"
 root = false
 exclude = []
 
+[[configuration]]
+label = "chartdb"
+
+[[configuration.item]]
+source = "./config/chartdb/dinit/chartdb-daemon"
+target = "/usr/local/bin/chartdb-daemon"
+root = true
+exclude = []
+
+[[configuration.item]]
+source = "./config/chartdb/dinit/chartdb"
+target = "~/.config/dinit.d/chartdb"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -724,7 +739,8 @@ method = "aur"
 label = "chartdb"
 codename = "chartdb"
 description = "Database diagrams editor and viewer"
-depends_on = []
+depends_on = ["python"]
+config = "chartdb"
 
 [[packages]]
 method = "aur"
@@ -1378,16 +1394,6 @@ packages = ["frame0", "rnote"]
 description = "Javascript/Typescript development tools."
 devices = ["computer", "laptop"]
 packages = ["npm", "bun", "yarn", "pnpm"]
-
-[[services]]
-label = "chartdb"
-command = "~/.local/bin/chartdb"
-description = "Runs the local chartdb service"
-depends_on = ["ags"]
-root = false
-autostart = ["computer"]
-devices = ["computer", "laptop"]
-packages = ["chartdb"]
 
 [[services]]
 label = "dockerd"
