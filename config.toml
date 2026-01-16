@@ -443,8 +443,20 @@ exclude = []
 label = "cliphist"
 
 [[configuration.item]]
-source = "./config/cliphist/*"
+source = "./config/cliphist/shared/*"
 target = "~/.cache/cliphist/"
+root = false
+exclude = []
+
+[[configuration.item]]
+source = "./config/cliphist/dinit/cliphist"
+target = "~/.config/dinit.d/cliphist"
+root = false
+exclude = []
+
+[[configuration.item]]
+source = "./config/cliphist/dinit/cliphist"
+target = "~/.config/dinit.d/boot.d/cliphist"
 root = false
 exclude = []
 
@@ -1376,16 +1388,6 @@ root = false
 autostart = ["computer"]
 devices = ["computer", "laptop"]
 packages = ["chartdb"]
-
-[[services]]
-label = "cliphist"
-command = "/usr/bin/cliphist"
-description = "Wayland clipboard history daemon"
-depends_on = ["ags"]
-root = false
-autostart = ["computer", "laptop"]
-devices = ["computer", "laptop"]
-packages = ["cliphist"]
 
 [[services]]
 label = "dockerd"
