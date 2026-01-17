@@ -1,5 +1,4 @@
 type = process
 command = /usr/bin/nm-applet
-depends-on = ags
 waits-for = ags
 smooth-recovery = true
