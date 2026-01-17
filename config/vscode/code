@@ -2,7 +2,9 @@
 #
 # João Farias © 2026 BeyondMagic <beyondmagic@mail.ru>
 
-def main []: nothing -> nothing {
+def main [
+	...args: string # Arguments to pass to main binary.
+]: nothing -> nothing {
 
 	let dirs = [
 		$"--extensions-dir=($env.HOME)/.config/vscode/extensions"
@@ -12,5 +14,6 @@ def main []: nothing -> nothing {
 	exec ...[
 		/usr/bin/code
 		...$dirs
+		...$args
 	]
 }

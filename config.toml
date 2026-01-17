@@ -244,6 +244,18 @@ target = "~/.config/vscode/general/User/globalStorage/alefragnani.project-manage
 root = false
 exclude = []
 
+[[configuration.item]]
+source = "./config/vscode/code.desktop"
+target = "/usr/share/applications/code.desktop"
+root = true
+exclude = []
+
+[[configuration.item]]
+source = "./config/vscode/code-flags.conf"
+target = "~/.config/code-flags.conf"
+root = false
+exclude = []
+
 [[configuration]]
 label = "gtk2"
 
