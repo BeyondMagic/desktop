@@ -3,4 +3,5 @@ command = /usr/bin/awww-daemon
 log-type = buffer
 depends-on = dbus
 waits-for = dbus
+waits-for = ags
 smooth-recovery = true
