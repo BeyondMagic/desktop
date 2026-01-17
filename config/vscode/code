@@ -1,0 +1,16 @@
+#!/usr/bin/env -S nu --stdin
+#
+# João Farias © 2026 BeyondMagic <beyondmagic@mail.ru>
+
+def main []: nothing -> nothing {
+
+	let dirs = [
+		$"--extensions-dir=($env.HOME)/.config/vscode/extensions"
+		$"--user-data-dir=($env.HOME)/.config/vscode/general"
+	]
+
+	exec ...[
+		/usr/bin/code
+		...$dirs
+	]
+}

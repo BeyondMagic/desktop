@@ -233,14 +233,8 @@ exclude = []
 label = "vscode"
 
 [[configuration.item]]
-source = "./config/vscode/flags.conf"
-target = "~/.config/code-flags.conf"
-root = false
-exclude = []
-
-[[configuration.item]]
-source = "./config/vscode/code.desktop"
-target = "/usr/share/applications/code.desktop"
+source = "./config/vscode/code"
+target = "/usr/local/bin/code"
 root = true
 exclude = []
 
@@ -1476,7 +1470,7 @@ packages = [
 [[profiles]]
 description = "VSCode IDE."
 devices = ["computer", "laptop"]
-packages = ["vscode"]
+packages = ["visual-studio-code-bin"]
 
 [[profiles]]
 description = "Music server"
