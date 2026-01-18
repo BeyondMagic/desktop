@@ -1551,6 +1551,11 @@ devices = ["computer", "laptop"]
 packages = ["npm", "bun", "yarn", "pnpm"]
 
 [[profiles]]
+description = "Stylus/touchscreen support."
+devices = ["laptop"]
+packages = ["xf86-input-wacom", "libinput"]
+
+[[profiles]]
 description = "Javascript/Typescript development tools."
 devices = ["computer", "laptop"]
 packages = ["docker", "docker-compose", "docker-dinit"]
