@@ -2,5 +2,5 @@ type = process
 command = /usr/bin/fcitx5
 depends-on = dbus
 waits-for = dbus
-waits-for = ags
+waits-for = dbus
 smooth-recovery = true
