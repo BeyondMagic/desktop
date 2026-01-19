@@ -712,6 +712,27 @@ target = "/usr/local/bin/rclone-daemon"
 root = true
 exclude = []
 
+[[configuration]]
+label = "flameshot"
+
+[[configuration.item]]
+source = "./config/flameshot/flameshot.ini"
+target = "~/.config/flameshot/flameshot.ini"
+root = false
+exclude = []
+
+[[configuration.item]]
+source = "./config/flameshot/dinit/flameshot"
+target = "~/.config/dinit.d/flameshot"
+root = false
+exclude = []
+
+[[configuration.item]]
+source = "./config/flameshot/dinit/flameshot"
+target = "~/.config/dinit.d/boot.d/flameshot"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
