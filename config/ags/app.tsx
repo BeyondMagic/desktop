@@ -14,7 +14,7 @@ import { Launcher } from "./widget/launcher";
 import { NotificationPopups } from "./widget/notification"
 
 let app_launcher: Gtk.Window;
-let menu_window: Gtk.Window;;
+let menu_window: Gtk.Window;
 
 export {
 	config
