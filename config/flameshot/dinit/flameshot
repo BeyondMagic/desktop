@@ -1,0 +1,6 @@
+type = process
+command = /usr/local/bin/flameshot
+depends-on = dbus
+waits-for = dbus
+waits-for = ags
+smooth-recovery = true
