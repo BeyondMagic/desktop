@@ -1,5 +1,0 @@
-#!/usr/bin/env dash
-#
-# João Farias © BeyondMagic 2023 <beyondmagic@mail.ru>
-
-exec /usr/lib/iio-sensor-proxy > /dev/null 2>&1

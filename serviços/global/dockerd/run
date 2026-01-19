@@ -1,5 +1,0 @@
-#!/usr/bin/env dash
-#
-# João Farias © BeyondMagic 2025 <beyondmagic@mail.ru>
-
-exec dockerd

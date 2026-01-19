@@ -1,8 +1,0 @@
-#!/usr/bin/env dash
-#
-# João Farias © BeyondMagic 2023 <beyondmagic@mail.ru>
-
-# Depends on dbus running.
-sv check dbus > /dev/null || exit 1
-
-exec /usr/bin/input-remapper-service > /dev/null 2>&1

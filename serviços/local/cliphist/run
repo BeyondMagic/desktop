@@ -1,7 +1,0 @@
-#!/usr/bin/env dash
-#
-# João Farias © 2024 BeyondMagic <beyondmagic@mail.ru>
-
-export XDG_CONFIG_HOME="$HOME/sistema/subconfiguração/clipboard/"
-
-exec wl-paste --watch cliphist store

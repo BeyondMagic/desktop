@@ -1,8 +1,0 @@
-#!/usr/bin/env dash
-#
-# João Farias © BeyondMagic 2023 <beyondmagic@mail.ru>
-
-# Depends on dbus running.
-#sv check dbus > /dev/null || exit 1
-
-exec chpst -u hana:hana /usr/lib/sonarr/bin/Sonarr -nobrowser -data=/var/lib/sonarr #> /dev/null 2>&1

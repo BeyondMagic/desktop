@@ -1,5 +1,0 @@
-#!/usr/bin/env dash
-#
-# João Farias © BeyondMagic 2024 <beyondmagic@mail.ru>
-
-exec keyd

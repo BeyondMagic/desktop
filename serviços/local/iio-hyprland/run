@@ -1,5 +1,0 @@
-#!/usr/bin/env dash
-#
-# João Farias © 2024 BeyondMagic <beyondmagic@mail.ru>
-
-exec iio-hyprland

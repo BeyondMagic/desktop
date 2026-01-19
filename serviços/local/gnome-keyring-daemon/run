@@ -1,5 +1,0 @@
-#!/usr/bin/env dash
-#
-# João Farias © 2025 BeyondMagic <beyondmagic@mail.ru>
-
-exec gnome-keyring-daemon --foreground --components=secrets,ssh,pkcs11
