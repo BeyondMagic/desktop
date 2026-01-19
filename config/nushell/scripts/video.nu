@@ -124,6 +124,7 @@ export def download [
 		--recode mp4
 		--download-archive $archive
 		--js-runtimes bun
+		--remote-components ejs:github
 		#--extractor-arg "youtube:player_client=tv"
 		--add-metadata
 		--embed-thumbnail
