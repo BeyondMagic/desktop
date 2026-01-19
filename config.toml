@@ -840,7 +840,17 @@ method = "aur"
 label = "hyprland"
 codename = "hyprland-git"
 description = "Hyprland Wayland compositor"
-depends_on = []
+depends_on = [
+	"grim",
+	"slurp",
+	"python-pyxdg",
+	"xdg-dbus-proxy",
+	"xdg-desktop-portal",
+	"xdg-desktop-portal-gtk",
+	"xdg-desktop-portal-hyprland-git",
+	"xdg-user-dirs",
+	"xdg-utils",
+]
 config = "hyprland"
 
 [[packages]]
