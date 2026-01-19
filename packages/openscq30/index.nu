@@ -57,7 +57,7 @@ export def install []: nothing -> any {
 		cp
 		$cli.binary
 		$gui.binary
-		($local + $cli.name)
+		$local
 	]
 }
 
