@@ -1,14 +1,14 @@
 # Private configuration files to ignore.
-/config/ssh
+/config/ssh/shared
 /config/android
 /config/git
 /config/gtk/3/bookmarks
 /config/vscode/projects.json
-/config/cliphist/db
+/config/cliphist/shared
 /config/sioyek/cache
 /config/base/fonts
 /config/base/icons
 /config/base/themes
 /config/refind
-/config/rclone/key
+/config/rclone/rclone.conf
 /config/qbittorrent
