@@ -124,6 +124,12 @@ target = "~/.config/dinit.d/boot.d/xdg-desktop-portal"
 root = false
 exclude = []
 
+[[configuration.item]]
+source = "./config/xdg-desktop-portal/portals.conf"
+target = "~/.config/xdg-desktop-portal/portals.conf"
+root = false
+exclude = []
+
 [[configuration]]
 label = "nushell"
 
