@@ -110,6 +110,21 @@ root = false
 exclude = []
 
 [[configuration]]
+label = "xdg-desktop-portal"
+
+[[configuration.item]]
+source = "./config/xdg-desktop-portal/dinit/xdg-desktop-portal"
+target = "~/.config/dinit.d/xdg-desktop-portal"
+root = false
+exclude = []
+
+[[configuration.item]]
+source = "./config/xdg-desktop-portal/dinit/xdg-desktop-portal"
+target = "~/.config/dinit.d/boot.d/xdg-desktop-portal"
+root = false
+exclude = []
+
+[[configuration]]
 label = "nushell"
 
 [[configuration.item]]

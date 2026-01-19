@@ -1,0 +1,5 @@
+type = process
+depends-on = dbus
+waits-for = ags
+command = /usr/lib/xdg-desktop-portal
+smooth-recovery = true
