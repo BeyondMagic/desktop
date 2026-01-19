@@ -5,7 +5,7 @@ local set = vim.api.nvim_set_var
 
 return {
   'RRethy/vim-hexokinase',
-  build = 'cd ~/.local/share/nvim/lazy/vim-hexokinase && make hexokinase',
+  build = 'make hexokinase',
   init = function()
 
     -- All possible highlighters
