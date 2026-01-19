@@ -173,6 +173,12 @@ label = "mpv"
 source = "./config/mpv/*"
 target = "~/.config/mpv/"
 root = false
+exclude = ["computer.conf", "laptop.conf"]
+
+[[configuration.item]]
+source = "./config/mpv/{device}.conf"
+target = "~/.config/mpv/device.conf"
+root = false
 exclude = []
 
 [[configuration]]
