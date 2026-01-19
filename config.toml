@@ -472,6 +472,12 @@ target = "/usr/share/applications/"
 root = true
 exclude = []
 
+[[configuration.item]]
+source = "/usr/bin/google-chrome-stable"
+target = "/usr/bin/google-chrome"
+root = true
+exclude = []
+
 [[configuration]]
 label = "soulseekqt"
 
