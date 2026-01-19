@@ -95,6 +95,21 @@ exclude = []
 #exclude = []
 
 [[configuration]]
+label = "hyprland-portal"
+
+[[configuration.item]]
+source = "./config/hyprland-portal/dinit/xdg-desktop-portal-hyprland"
+target = "~/.config/dinit.d/xdg-desktop-portal-hyprland"
+root = false
+exclude = []
+
+[[configuration.item]]
+source = "./config/hyprland-portal/dinit/xdg-desktop-portal-hyprland"
+target = "~/.config/dinit.d/boot.d/xdg-desktop-portal-hyprland"
+root = false
+exclude = []
+
+[[configuration]]
 label = "nushell"
 
 [[configuration.item]]
