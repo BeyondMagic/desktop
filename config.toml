@@ -523,20 +523,20 @@ target = "~/.config/dinit.d/boot.d/cliphist"
 root = false
 exclude = []
 
-[[configuration]]
-label = "shared-desktop"
+#[[configuration]]
+#label = "shared-desktop"
 
-[[configuration.item]]
-source = "~/storage/desktop/*"
-target = "~/storage/"
-root = false
-exclude = []
+#[[configuration.item]]
+#source = "~/storage/desktop/*"
+#target = "~/storage/"
+#root = false
+#exclude = []
 
-[[configuration.item]]
-source = "~/storage/desktop/projects"
-target = "~/projects"
-root = false
-exclude = []
+#[[configuration.item]]
+#source = "~/storage/desktop/projects"
+#target = "~/projects"
+#root = false
+#exclude = []
 
 [[configuration]]
 label = "qbittorrent"
@@ -547,14 +547,15 @@ target = "~/.local/share/qBittorrent/nova3/engines"
 root = false
 exclude = []
 
-[[configuration]]
-label = "doas"
-
-[[configuration.item]]
-source = "./config/doas/doas.conf"
-target = "/etc/doas.conf"
-root = true
-exclude = []
+#[[configuration]]
+#label = "doas"
+#
+# Should not symlink but copy
+#[[configuration.item]]
+#source = "./config/doas/doas.conf"
+#target = "/etc/doas.conf"
+#root = true
+#exclude = []
 
 [[configuration]]
 label = "pipewire-dinit"
