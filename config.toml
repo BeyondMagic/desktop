@@ -600,7 +600,7 @@ label = "syncthing"
 
 [[configuration.item]]
 source = "/etc/dinit.d/user/syncthing"
-target = "~/.config/dinit.d/boot/syncthing"
+target = "~/.config/dinit.d/boot.d/syncthing"
 root = false
 exclude = []
 
