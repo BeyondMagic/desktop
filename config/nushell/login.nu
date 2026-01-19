@@ -111,26 +111,26 @@ $env.LANG = 'en_GB.UTF-8'
 $env.LC_COLLATE = 'C.UTF-8'
 
 # Image folder.
-$env.IMAGES_FOLDER = '~/armazenamento/imagens/'
+$env.IMAGES_FOLDER = '~/storage/images/'
 
 # Default location for images.
 $env.IMAGE_LOCATIONS = [
-	($env.IMAGES_FOLDER + 'extensões/jpg')
-	($env.IMAGES_FOLDER + 'extensões/png')
-	($env.IMAGES_FOLDER + 'arte/extensões/jpg')
-	($env.IMAGES_FOLDER + 'arte/extensões/png')
-	($env.IMAGES_FOLDER + 'arte/poemas')
-	($env.IMAGES_FOLDER + 'arte/gl')
-	($env.IMAGES_FOLDER + 'arte/bandeiras')
-	($env.IMAGES_FOLDER + 'arte/design')
-	($env.IMAGES_FOLDER + 'fotos')
-	($env.IMAGES_FOLDER + 'perfil/quadrado')
-	($env.IMAGES_FOLDER + 'perfil/thumbnail')
-	($env.IMAGES_FOLDER + 'perfil/alto')
+	($env.IMAGES_FOLDER + 'extensions/jpg')
+	($env.IMAGES_FOLDER + 'extensions/png')
+	($env.IMAGES_FOLDER + 'art/extensions/jpg')
+	($env.IMAGES_FOLDER + 'art/extensions/png')
+	($env.IMAGES_FOLDER + 'art/poetry')
+	($env.IMAGES_FOLDER + 'art/gl')
+	($env.IMAGES_FOLDER + 'art/flags')
+	($env.IMAGES_FOLDER + 'art/design')
+	($env.IMAGES_FOLDER + 'photos')
+	($env.IMAGES_FOLDER + 'profile/square')
+	($env.IMAGES_FOLDER + 'profile/thumbnail')
+	($env.IMAGES_FOLDER + 'profile/tall')
 ] | str join (char esep)
 
 # Glob to all wallpaper files.
-$env.WALLPAPER_FILES = $env.IMAGES_FOLDER + 'paredepapel/desktop/**/*'
+$env.WALLPAPER_FILES = $env.IMAGES_FOLDER + 'wallpaper/desktop/**/*'
 
 # Share local database between diferent personal systems.
 # Useful for sioyek.
