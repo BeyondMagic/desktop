@@ -10,8 +10,8 @@
 
 [[devices]]
 label = "computer"
-username = "hana"
-machine_id = "6edffeeb6b9909f86ad4630865c13921"
+username = "terra"
+machine_id = "1c10df823273826fae94bf62696ce970"
 
 [[devices]]
 label = "laptop"
