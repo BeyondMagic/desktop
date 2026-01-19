@@ -595,6 +595,12 @@ target = "/etc/dinit.d/boot.d/turnstiled"
 root = true
 exclude = []
 
+[[configuration.item]]
+source = "./config/turnstile/boot"
+target = "~/.config/dinit.d/boot"
+root = false
+exclude = []
+
 [[configuration]]
 label = "syncthing"
 
