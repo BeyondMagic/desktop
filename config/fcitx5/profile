@@ -4,17 +4,17 @@ Name=デフォルト
 # Layout
 Default Layout=br
 # Default Input Method
-DefaultIM=keyboard-br
+DefaultIM=mozc
 
 [Groups/0/Items/0]
 # Name
-Name=mozc
+Name=keyboard-br
 # Layout
 Layout=
 
 [Groups/0/Items/1]
 # Name
-Name=keyboard-br
+Name=mozc
 # Layout
 Layout=
 

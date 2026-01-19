@@ -1,29 +1,29 @@
 [Hotkey]
-# トリガーキーを押すたびに切り替える
+# Enumerate when holding modifier of Toggle key
 EnumerateWithTriggerKeys=True
-# 一時的に第1入力メソッドに切り替える
-AltTriggerKeys=
-# 次の入力メソッドに切り替える
-EnumerateForwardKeys=
-# 前の入力メソッドに切り替える
-EnumerateBackwardKeys=
-# 切り替え時は第1入力メソッドをスキップする
-EnumerateSkipFirst=False
-# 次の入力メソッドグループに切り替える
-EnumerateGroupForwardKeys=
-# 前の入力メソッドグループに切り替える
-EnumerateGroupBackwardKeys=
-# 入力メソッドを有効にする
+# Activate Input Method
 ActivateKeys=
-# 入力メソッドをオフにする
+# Deactivate Input Method
 DeactivateKeys=
-# デフォルトの前候補
+# Temporarily Toggle Input Method
+AltTriggerKeys=
+# Enumerate Input Method Forward
+EnumerateForwardKeys=
+# Enumerate Input Method Backward
+EnumerateBackwardKeys=
+# Skip first input method while enumerating
+EnumerateSkipFirst=False
+# Enumerate Input Method Group Forward
+EnumerateGroupForwardKeys=
+# Enumerate Input Method Group Backward
+EnumerateGroupBackwardKeys=
+# Fallback Previous Candidate
 PrevCandidate=
-# デフォルトの次候補
+# Fallback Next Candidate
 NextCandidate=
-# 埋め込みプリエディットの切り替え
+# Toggle embedded preedit
 TogglePreedit=
-# 修飾キーのショートカットをトリガーするための時間制限（ミリ秒）
+# Time limit in milliseconds for triggering modifier key shortcuts
 ModifierOnlyKeyTimeout=250
 
 [Hotkey/TriggerKeys]
@@ -36,27 +36,27 @@ ModifierOnlyKeyTimeout=250
 0=Down
 
 [Behavior]
-# デフォルトで有効にする
+# Active By Default
 ActiveByDefault=True
-# フォーカス時に状態をリセット
+# Reset state on Focus In
 resetStateWhenFocusIn=No
-# 入力状態を共有する
+# Share Input State
 ShareInputState=All
-# アプリケーションにプリエディットを表示する
+# Show preedit in application
 PreeditEnabledByDefault=False
-# 入力メソッドを切り替える際に入力メソッドの情報を表示する
+# Show Input Method Information when switch input method
 ShowInputMethodInformation=True
-# フォーカスを変更する際に入力メソッドの情報を表示する
+# Show Input Method Information when changing focus
 showInputMethodInformationWhenFocusIn=False
-# 入力メソッドの情報をコンパクトに表示する
+# Show compact input method information
 CompactInputMethodInformation=True
-# 第1入力メソッドの情報を表示する
+# Show first input method information
 ShowFirstInputMethodInformation=True
-# デフォルトのページサイズ
+# Default page size
 DefaultPageSize=5
-# XKB オプションより優先する
+# Override XKB Option
 OverrideXkbOption=False
-# カスタム XKB オプション
+# Custom XKB Option
 CustomXkbOption=
 # Force Enabled Addons
 EnabledAddons=
@@ -64,10 +64,10 @@ EnabledAddons=
 DisabledAddons=
 # Preload input method to be used by default
 PreloadInputMethod=True
-# パスワード欄に入力メソッドを許可する
+# Allow input method in the password field
 AllowInputMethodForPassword=False
-# パスワード入力時にプリエディットテキストを表示する
+# Show preedit text when typing password
 ShowPreeditForPassword=False
-# ユーザーデータを保存する間隔（分）
+# Interval of saving user data in minutes
 AutoSavePeriod=30
 
