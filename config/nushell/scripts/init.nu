@@ -11,7 +11,7 @@ export use ./standard/each.nu
 export use ./standard/sys.nu
 
 # Modules for external commands.
-export use ./external/sv.nu
+export use ./external/dinitctl.nu
 export use ./external/typst.nu
 export use ./external/tokei.nu
 export use ./external/git.nu
