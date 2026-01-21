@@ -23,12 +23,23 @@ export def list [
 # TODO:
 #	- Auto complete the types for the `--transition-type` flag.
 export def set [
-	--transition-type : string = 'any' # In which to perform transition when setting the wallpaper.
-]: string -> nothing {
-	let $file = $in
+	--transition-type: string = 'any' # In which to perform transition when setting the wallpaper.
+	--outputs: list<string> # The outputs (monitor names) to set the wallpaper on.
+]: string -> any {
+	let outputs = if ($outputs | is-empty) {
+		[]
+	} else {
+		[
+			--outputs (
+				$outputs
+				| str join ','
+			)
+		]
+	}
 
 	[
-		img $file
+		img $in
+		...$outputs
 		--transition-type $transition_type
 	]
 	| main
