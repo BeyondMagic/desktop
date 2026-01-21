@@ -9,15 +9,13 @@ export def list [
 ]: nothing -> list<string> {
 
 	# Use environment WALLPAPER_FILES to 
-	let folder = if ($folder | is-empty) {
+	let wallpapers = if ($folder | is-empty) {
 		$env.WALLPAPER_FILES
 	} else {
 		$folder
 	}
 
-	ls --all=$all ($folder | into glob)
-	| where type != dir
-	| get name
+	glob $wallpapers --no-dir
 }
 
 # Set wallpaper given path.
