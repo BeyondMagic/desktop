@@ -35,9 +35,12 @@ export def set [
 }
 
 # Run list of command of wallpaper manager.
+#
+# See manual for awww(1).
+# The repository can be found at: https://codeberg.org/LGFae/awww
 def main []: list<string> -> any {
-	let args = $in
-	# See manual for awww(1).
-	# The repository can be found at: https://codeberg.org/LGFae/awww
-	^awww ...$args
+	run-external ...[
+		'awww'
+		...$in
+	]
 }
