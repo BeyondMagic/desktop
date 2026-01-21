@@ -14,6 +14,31 @@ return {
 	---@module 'blink.cmp'
 	---@type blink.cmp.Config
 	opts = {
+		completion = {
+			-- Show suggestions after typing a keyword character (default: true)
+			-- Set to false to avoid showing after typing the *first* char of a word
+			-- show_on_trigger_character = true, -- Set to true to show on trigger chars
+			-- Or enable prefetching when entering insert mode to show suggestions immediately
+			trigger = {
+				show_on_backspace = true,
+				prefetch_on_insert = true, -- Shows completions on InsertEnter event
+				-- show_on_keyword = true,
+				-- Show suggestions after typing specific trigger characters (e.g., '.', '(', ':', etc.)
+
+				-- When true, will show the completion window after entering insert mode
+				show_on_insert = false,
+
+			},
+			-- Other settings for documentation, menu, etc.
+			documentation = {
+				auto_show = true, -- Show docs with suggestions
+				auto_show_delay_ms = 200,
+			},
+			menu = {
+				auto_show = true, -- Show the menu automatically
+			},
+		},
+
 		-- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
 		-- 'super-tab' for mappings similar to vscode (tab to accept)
 		-- 'enter' for enter to accept
