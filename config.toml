@@ -77,6 +77,15 @@ root = false
 exclude = []
 
 [[configuration]]
+label = "hyprland-hyprgrass"
+
+[[configuration.item]]
+source = "./config/hypr-plugins/hyprgrass"
+target = "~/.config/hypr/current/hyprgrass"
+root = false
+exclude = []
+
+[[configuration]]
 label = "hypridle"
 
 [[configuration.item]]
