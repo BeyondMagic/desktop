@@ -56,11 +56,6 @@ return {
 			["<Tab>"] = {
 				"select_next",
 				"snippet_forward",
-				function()
-					if require("sidekick").nes_jump_or_apply() then
-						return true
-					end
-				end,
 				"fallback",
 			},
 			["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },

@@ -21,14 +21,9 @@ return {
 				if require("sidekick").nes_jump_or_apply() then
 					return -- jumped or applied
 				end
-
-				-- if you are using Neovim's native inline completions
-				-- if vim.lsp.inline_completion.get() then
-				-- 	return
-				-- end
-
-				-- any other things (like snippets) you want to do on <tab> go here.
-
+				vim.schedule(function()
+					require "cokeline/mappings".by_step("focus", 1)
+				end)
 				-- fall back to normal tab
 				return "<tab>"
 			end,
