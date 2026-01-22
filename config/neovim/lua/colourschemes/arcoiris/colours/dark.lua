@@ -26,6 +26,7 @@ return {
 	red_3    = { "#e88388", 174, "Red"         },
 	red_4    = { "#ee4f4e",  64, "lsperrobg"   },
 	red_5    = { "#0f0607",  67, "lsperrorbg"  },
+	red_6    = { "#8d0c2e", 241, "red_weak"  },
 
 	violet_0 = { "#c678dd", 176, "hue_3"        },
 	violet_1 = { "#9990ff", 213, "Magenta"      },
@@ -40,6 +41,7 @@ return {
 	yellow_1 = { '#f4c069', 221, 'yellow'  },
 	yellow_2 = { '#ffe034', 221, 'yellow'  },
 	yellow_3 = { '#140f09', 221, 'yellow'  },
+	yellow_4 = { "#99861f", 180, "Yellow"  },
 
 	green_0  = { "#86d39a", 114, "Green"               },
 	green_1  = { "#43d08a",  78, "syntax_color_added"  },
