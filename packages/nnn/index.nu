@@ -8,65 +8,41 @@ const args = [
 	O_NERD=1
 ]
 
-def run [
-	--dry # Print commands without executing them.
-]: closure -> any {
-	if $dry {
-		print (view source $in)
-		return
-	} else {
-		do $in
-	}
-}
 
-export def clone [
-	--dry # Print commands without executing them.
-]: nothing -> any {
-	{ rm -rf $dir } | run --dry=($dry)
+export def clone []: nothing -> any {
+	rm -rf $dir
 	
-	{ run-external ...[ git clone $remote $dir ] } | run --dry=($dry)
+	run-external ...[ git clone $remote $dir ]
 }
 
-export def build [
-	--dry # Print commands without executing them.
-]: nothing -> any {
+export def build []: nothing -> any {
 	cd $dir
 
-	{ run-external ...[ make ...$args all ] } | run --dry=($dry)
+	run-external ...[ make ...$args all ]
 }
 
-export def install [
-	--dry # Print commands without executing them.
-]: nothing -> any {
+export def install []: nothing -> any {
 	cd $dir
 
 	let lib_dir = $env.NU_LIB_DIRS | last
 
-	{
-		mkdir $lib_dir
-		cp $nu_plugin $lib_dir
-		run-external ...[ doas make install ]
-	} | run --dry=($dry)
+	mkdir $lib_dir
+	cp $nu_plugin $lib_dir
+	run-external ...[ doas make install ]
 }
 
-export def uninstall [
-	--dry # Print commands without executing them.
-]: nothing -> any {
+export def uninstall []: nothing -> any {
 	cd $dir
 
 	let lib_dir = $env.NU_LIB_DIRS | last
 	let plugin_file = $nu_plugin | path basename
 
-	{
-		rm ($lib_dir | path join $plugin_file)
-		run-external ...[ doas make uninstall ]
-	} | run --dry=($dry)
+	rm ($lib_dir | path join $plugin_file)
+	run-external ...[ doas make uninstall ]
 }
 
-export def main [
-	--dry # Print commands without executing them.
-]: nothing -> any {
-	clone --dry=($dry)
-	build --dry=($dry)
-	install --dry=($dry)
+export def main []: nothing -> any {
+	clone
+	build
+	install
 }

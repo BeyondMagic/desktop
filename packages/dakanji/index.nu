@@ -15,9 +15,6 @@ const local_icon = "/usr/share/icons/dakanji.png"
 const desktop = "./DaKanji.desktop"
 const local_desktop = "/usr/share/applications/DaKanji.desktop"
 
-# make it possible to run --dry-run
-# def run-external
-
 export def clone []: nothing -> any {
 	rm -rf $dir
 
