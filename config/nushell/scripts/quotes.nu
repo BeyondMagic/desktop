@@ -15,29 +15,53 @@ export def add [
 	--database : string # The database to load from.
 ]: nothing -> nothing {
 
-	if ($database | describe) == nothing or not ($database | path exists) {
+	let path = $database
+		| path expand
+
+	if not ($path | path exists) {
 		error make {
 			msg: "--database failed parsing."
-			label: {
+			code: "quotes::add::invalid-database"
+			labels: {
 				text: "Empty or path does not exist."
 				span: (metadata $database).span
 			}
+			help: "Provide a valid path to a quotes database."
 		}
 	}
 
 	if ($words | is-empty) {
 		error make {
 			msg: "Empty quote given."
-			label: {
+			code: "quotes::add::empty-quote"
+			labels: {
 				text: "Is empty."
 				span: (metadata $words).span
 			}
+			help: "Provide at least one word for the quote."
 		}
 	}
 
-	let path = $database
-		| path expand
+	# Backup existing database since the program may crash/closed while writing later.
+	let content = open $path
+	let backup_path = $path + ".bak"
 
+	# If there's a backup already, warns the user.
+	if ($backup_path | path exists) {
+		error make {
+			msg: "Backup file already exists, something went wrong last time."
+			code: "quotes::add::backup-exists"
+			labels: {
+				text: "Backup path: $backup_path"
+				span: (metadata $path).span
+			}
+			help: "Remove/check the existing backup file before adding a new quote."
+		}
+	}
+
+	$content | to json | save $backup_path
+
+	# If disk is busy, it may take a few seconds to write.
 	[{
 		words: $words
 		authors: $authors
@@ -46,7 +70,9 @@ export def add [
 			added: (date now)
 			time: $time
 		}
-	}] ++ (open $path) | save --force $path
+	}] ++ $content | save --force $path
+
+	rm $backup_path
 }
 
 # Initialise database.
