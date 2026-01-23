@@ -158,10 +158,10 @@ exclude = []
 label = "ags"
 
 [[configuration.item]]
-source = "./config/ags/*"
-target = "~/.config/ags/"
+source = "./config/ags/app"
+target = "~/.config/ags"
 root = false
-exclude = ["dinit"]
+exclude = []
 
 [[configuration.item]]
 source = "./config/ags/dinit/ags"
