@@ -3,6 +3,16 @@
 # AN3223 © 2022
 # João Farias © 2022-2024 BeyondMagic <beyondmagic@mail.ru>
 
+# Run doas with the given arguments.
+export def doas [
+	args : list<string> # Arguments to pass to doas.
+]: nothing -> nothing {
+	run-external ...[
+		doas
+		...$args
+	]
+}
+
 # Edit a priviliged file with the normal editor.
 #
 # Every argument will be treated as a file to edit.
@@ -36,14 +46,27 @@ export def editor [
 
 		let fullpath = $filepath | path expand
 
+		let is_file = try {
+			$fullpath
+			| path type
+		} catch {
+			doas [
+				nu
+				--commands
+				('"' + $fullpath + '"| path type')
+			]
+		}
+
 		# Test if the file exists AND it is a file.
-		if ($fullpath | path type) != 'file' {
+		if ($is_file | is-not-empty) and $is_file == 'file' {
 			
 			# It may be due to permissions, so let's try to
 			# read the file anyway with elevated access.
-			let exit_code = main {|file| open $file } --args [ $fullpath ]
-				| complete
-				| get exit_code
+			let exit_code = main {|file|
+				open $file
+			} --args [
+				$fullpath
+			] | complete | get exit_code
 
 			# We set the variable here because if it falls in the if
 			# it will throw an error anyway.
@@ -178,5 +201,9 @@ export def main [
 	] | str join ' '
 
 	# Run the elevated access command.
-	^doas nu --commands $command
+	doas [
+		nu
+		--commands
+		$command
+	]
 }
