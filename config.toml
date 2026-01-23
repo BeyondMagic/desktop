@@ -559,6 +559,21 @@ target = "~/.config/dinit.d/boot.d/cliphist"
 root = false
 exclude = []
 
+[[configuration]]
+label = "polkit"
+
+[[configuration.item]]
+source = "./config/polkit/dinit/polkitd"
+target = "/etc/dinit.d/polkitd"
+root = true
+exclude = []
+
+[[configuration.item]]
+source = "./config/polkit/dinit/polkitd"
+target = "/etc/dinit.d/boot.d/polkitd"
+root = true
+exclude = []
+
 #[[configuration]]
 #label = "shared-desktop"
 
@@ -1305,6 +1320,14 @@ codename = "iio-sensor-proxy"
 description = "Exposes accelerometer and ambient light sensors via D-Bus"
 depends_on = []
 config = "iio-sensor-proxy"
+
+[[packages]]
+method = "aur"
+label = "polkit"
+codename = "polkit"
+description = "Application-level toolkit for defining and handling authorizations"
+depends_on = []
+config = "polkit"
 
 # [[packages]]
 # method = "aur"

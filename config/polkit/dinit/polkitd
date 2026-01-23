@@ -1,0 +1,3 @@
+type = process
+command = /usr/lib/polkit-1/polkitd
+run-as = polkitd
