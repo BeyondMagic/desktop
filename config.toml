@@ -776,6 +776,21 @@ target = "~/.config/dinit.d/boot.d/flameshot"
 root = false
 exclude = []
 
+[[configuration]]
+label = "iio-sensor-proxy"
+
+[[configuration.item]]
+source = "./config/iio-sensor-proxy/dinit/iio-sensor-proxy"
+target = "/etc/dinit.d/iio-sensor-proxy"
+root = true
+exclude = []
+
+[[configuration.item]]
+source = "./config/iio-sensor-proxy/dinit/iio-sensor-proxy"
+target = "/etc/dinit.d/boot.d/iio-sensor-proxy"
+root = true
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -1283,6 +1298,14 @@ description = "Command line program to manage files on cloud storage"
 depends_on = []
 config = "rclone"
 
+[[packages]]
+method = "aur"
+label = "iio-sensor-proxy"
+codename = "iio-sensor-proxy"
+description = "Exposes accelerometer and ambient light sensors via D-Bus"
+depends_on = []
+config = "iio-sensor-proxy"
+
 # [[packages]]
 # method = "aur"
 # label = ""
@@ -1664,16 +1687,6 @@ root = true
 autostart = []
 devices = ["laptop"]
 packages = ["fprintd"]
-
-[[services]]
-label = "iio-sensor-proxy"
-command = "/usr/bin/iio-sensor-proxy"
-description = "Exposes accelerometer and ambient light sensors via D-Bus"
-depends_on = ["ags"]
-root = false
-autostart = ["laptop"]
-devices = ["laptop"]
-packages = ["iio-sensor-proxy"]
 
 [[services]]
 label = "python3-validity"
