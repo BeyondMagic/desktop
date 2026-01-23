@@ -806,6 +806,21 @@ target = "/etc/dinit.d/boot.d/iio-sensor-proxy"
 root = true
 exclude = []
 
+[[configuration]]
+label = "hypr-iio"
+
+[[configuration.item]]
+source = "./config/hypr-iio/dinit/iio-hyprland"
+target = "~/.config/dinit.d/iio-hyprland"
+root = false
+exclude = []
+
+[[configuration.item]]
+source = "./config/hypr-iio/dinit/iio-hyprland"
+target = "~/.config/dinit.d/boot.d/iio-hyprland"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -1320,6 +1335,14 @@ codename = "iio-sensor-proxy"
 description = "Exposes accelerometer and ambient light sensors via D-Bus"
 depends_on = []
 config = "iio-sensor-proxy"
+
+[[packages]]
+method = "aur"
+label = "iio-hyprland"
+codename = "iio-hyprland-git"
+description = "Hyprland plugin for automatic screen rotation using iio-sensor-proxy"
+depends_on = ["polkit"]
+config = "hypr-iio"
 
 [[packages]]
 method = "aur"

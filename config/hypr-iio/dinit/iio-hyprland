@@ -1,0 +1,5 @@
+type = process
+command = /usr/bin/iio-hyprland
+depends-on = dbus
+waits-for = ags
+smooth-recovery = true
