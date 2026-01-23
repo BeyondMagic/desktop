@@ -110,11 +110,11 @@ export module config {
 		let sources = glob $source --exclude $in.exclude
 		if ($sources | length) == 0 {
 			error make {
-				msg: "No configuration files found to link."
+				msg: $'No configuration files found to link from source "($source)"'
 				code: "sys::config::link::sources_not_found"
 				labels: {
 					text: $"source pattern: ($source)"
-					span: (metadata $in.source).span
+					span: (metadata $source).span
 				}
 				help: "Ensure that the source pattern matches existing files."
 			}
