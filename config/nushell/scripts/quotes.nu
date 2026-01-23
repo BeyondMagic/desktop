@@ -1,6 +1,6 @@
 #!/usr/bin/env nu
 #
-# BeyondMagic © João Farias 2024 <beyondmagic@mail.ru>
+# BeyondMagic © João Farias 2024-2026 <beyondmagic@mail.ru>
 
 const default_database: list<string> = [
 	'~/armazenamento/citações/*'
