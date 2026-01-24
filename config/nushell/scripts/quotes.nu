@@ -3,7 +3,7 @@
 # BeyondMagic © João Farias 2024-2026 <beyondmagic@mail.ru>
 
 const default_database: list<string> = [
-	'~/armazenamento/citações/*'
+	'~/storage/quotes/*'
 ]
 
 # Add quote to database.
