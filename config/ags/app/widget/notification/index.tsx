@@ -20,7 +20,7 @@ export function NotificationPopups({ monitor }: { monitor: number }) {
 
 		persistNotification(notification)
 
-		if (replaced && notifications.get().some(n => n.id === id)) {
+		if (replaced && notifications.peek().some(n => n.id === id)) {
 			setNotifications((ns) => ns.map((n) => (n.id === id ? notification : n)))
 		} else {
 			setNotifications((ns) => [notification, ...ns])
