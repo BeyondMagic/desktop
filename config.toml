@@ -1488,11 +1488,18 @@ config = "hyprland-hyprsplit"
 
 # Python packages
 
+[[packages]]
+method = "bun"
+label = "copilot-language-server"
+codename = "@github/copilot-language-server"
+description = "GitHub Copilot Language Server"
+depends_on = []
+
 # [[packages]]
-# method = "pip"
-# label = "python-validity"
-# codename = "python-validity"
-# description = "Validity fingerprint driver userspace helper"
+# method = ""
+# label = ""
+# codename = ""
+# description = ""
 # depends_on = []
 # config = ""
 
@@ -1654,10 +1661,12 @@ packages = [
 	"python-lsp-black",
 	"python-pylint",
 	"flake8",
-	"biome-bin",
+	"biome",
 	"typescript",
 	"typescript-language-server",
 	"github-copilot-cli",
+	"tree-sitter-cli",
+	"ccls",
 ]
 
 [[profiles]]

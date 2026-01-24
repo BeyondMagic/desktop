@@ -1,6 +1,6 @@
 return {
   'b0o/incline.nvim',
-  config = {
+  opts = {
     debounce_threshold = {
       falling = 50,
       rising = 0

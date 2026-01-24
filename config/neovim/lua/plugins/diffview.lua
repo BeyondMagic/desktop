@@ -4,7 +4,7 @@
 return {
   'sindrets/diffview.nvim',
   dependencies = 'nvim-lua/plenary.nvim',
-  config = {
+  opts = {
     enhanced_diff_hl = true,
     hooks = {
       diff_buf_read = function(bufnr)
@@ -34,7 +34,7 @@ return {
   --  },
   --  view = {
   --    -- Configure the layout and behavior of different types of views.
-  --    -- Available layouts: 
+  --    -- Available layouts:
   --    --  'diff1_plain'
   --    --    |'diff2_horizontal'
   --    --    |'diff2_vertical'

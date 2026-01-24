@@ -3,7 +3,7 @@
 return {
   'andymass/vim-matchup',
   dependencies = 'nvim-treesitter/nvim-treesitter',
-  config = {
+  opts = {
     highlight = {
       enable = true,
       disable = {},
@@ -16,7 +16,7 @@ return {
       enable = true,
     },
     matchup = {
-      enable = true,              -- mandatory, false will disable the whole extension
+      enable = true, -- mandatory, false will disable the whole extension
       --disable = { "c", "ruby" },  -- optional, list of language that will be disabled
     },
   }

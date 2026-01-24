@@ -5,9 +5,20 @@ return {
 		-- Additional Nushell parser
 		{ "nushell/tree-sitter-nu", build = ":TSUpdate nu" },
 	},
-	config = {
+	opts = {
 		ensure_installed = {
-			"c", "lua", "markdown", "vim"
+			"c",
+			"lua",
+			"markdown",
+			"vim",
+			"nu",
+			"css",
+			"html",
+			"javascript",
+			"latex",
+			"scss",
+			"tsx",
+			"typst"
 		},
 		highlight = {
 			enable = true

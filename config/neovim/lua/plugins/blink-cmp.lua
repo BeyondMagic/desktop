@@ -14,6 +14,13 @@ return {
 	---@module 'blink.cmp'
 	---@type blink.cmp.Config
 	opts = {
+		cmdline = {
+			completion = {
+				ghost_text = {
+					enabled = true,
+				},
+			},
+		},
 		completion = {
 			-- Show suggestions after typing a keyword character (default: true)
 			-- Set to false to avoid showing after typing the *first* char of a word
@@ -28,6 +35,12 @@ return {
 				-- When true, will show the completion window after entering insert mode
 				show_on_insert = false,
 
+				--
+				show_on_blocked_trigger_characters = {
+					-- ' ',
+					-- '\n',
+					-- '\t'
+				},
 			},
 			-- Other settings for documentation, menu, etc.
 			documentation = {
@@ -36,6 +49,15 @@ return {
 			},
 			menu = {
 				auto_show = true, -- Show the menu automatically
+			},
+			ghost_text = {
+				enabled = true, -- Enables the ghost text
+			},
+			list = {
+				selection = {
+					preselect = true, -- Recommended for clearer ghost text
+					auto_insert = false,
+				},
 			},
 		},
 
@@ -53,6 +75,7 @@ return {
 		-- See :h blink-cmp-config-keymap for defining your own keymap
 		keymap = {
 			preset = 'default',
+			["<CR>"] = { "accept" },
 			["<Tab>"] = {
 				"select_next",
 				"snippet_forward",

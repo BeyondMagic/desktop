@@ -7,7 +7,7 @@ return {
     'kyazdani42/nvim-web-devicons', -- Optional
   },
   -- If you set this to false, floating windows will look weird
-  config = {
+  opts = {
     exclude_float = true,
 
     -- Instead of excluding countless number of filetypes, barbecue tries to only show on some buftypes
@@ -89,15 +89,15 @@ return {
       -- this highlight is used to override other highlights
       -- you can take advantage of its `bg` and set a background throughout your winbar
       -- (e.g. basename will look like this: { fg = "#c0caf5", bold = true })
-      normal = { fg = COLOUR.fg_1 },
+      normal                 = { fg = COLOUR.fg_1 },
 
       -- these highlights correspond to symbols table from config
       --ellipsis = { fg = "#737aa2" },
-      separator = { fg = COLOUR.fg_4 },
+      separator              = { fg = COLOUR.fg_4 },
       --modified = { fg = "#737aa2" },
 
       -- these highlights represent the _text_ of three main parts of barbecue
-      dirname = { fg = COLOUR.fg_5 },
+      dirname                = { fg = COLOUR.fg_5 },
       --basename = { bold = true },
       --context = {},
 

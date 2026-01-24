@@ -2,7 +2,7 @@
 
 return {
 	'noib3/nvim-cokeline',
-	config = {
+	opts = {
 		-- Only show the bufferline when there are at least this many visible buffers.
 		-- default: `1`.
 		show_if_buffers_are_at_least = 1,

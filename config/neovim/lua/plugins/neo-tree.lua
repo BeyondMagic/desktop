@@ -23,7 +23,7 @@ return {
 		"MunifTanjim/nui.nvim",
 		'saifulapm/neotree-file-nesting-config', -- add plugin as dependency. no need any other config or setup call
 	},
-	config = {
+	opts = {
 		close_if_last_window      = true, -- Close Neo-tree if it is the last window left in the tab
 		popup_border_style        = "NC", -- "double", "none", "rounded", "shadow", "single" or "solid"
 		enable_git_status         = true,

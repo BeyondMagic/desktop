@@ -111,9 +111,6 @@ return {
   -- Theme for sxhkdrc.
   'kovetskiy/sxhkd-vim',
 
-   -- Status information for LSP.
-  'j-hui/fidget.nvim',
-
   -- EWW parser for Vim
   'elkowar/yuck.vim',
 
@@ -134,8 +131,8 @@ return {
   -- JSONLS
   'b0o/schemastore.nvim',
 
-  -- 
+  --
   --  LSP
-  -- 
+  --
   -- 'MunifTanjim/eslint.nvim',
 }
