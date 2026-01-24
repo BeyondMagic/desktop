@@ -821,6 +821,15 @@ target = "~/.config/dinit.d/boot.d/iio-hyprland"
 root = false
 exclude = []
 
+[[configuration]]
+label = "python"
+
+[[configuration.item]]
+source = "./config/python/startup.py"
+target = "~/.config/python/startup.py"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -1211,6 +1220,14 @@ codename = "open-fprintd"
 description = "Open source fingerprint daemon"
 depends_on = []
 config = "open-fprintd"
+
+[[packages]]
+method = "aur"
+label = "python"
+codename = "python"
+description = "Python programming language interpreter"
+depends_on = []
+config = "python"
 
 [[packages]]
 method = "aur"

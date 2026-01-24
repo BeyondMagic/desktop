@@ -22,12 +22,6 @@ $env.XDG_DOWNLOAD_DIR = $env.HOME + '/armazenamento/baixados'
 # Rust: package manager home and configuration.
 $env.CARGO_HOME = $env.XDG_CONFIG_HOME + '/cargo'
 
-# Python: set virtual environment.
-$env.VIRTUAL_ENV = $env.XDG_CONFIG_HOME + '/python/packages/'
-
-# Python: package installation path.
-$env.IPYTHONDIR = $env.XDG_CONFIG_HOME + '/python/ipython'
-
 # Bun: home and configuration files.
 $env.BUN_INSTALL = $env.XDG_CONFIG_HOME + '/bun'
 
