@@ -153,7 +153,6 @@ $env.PATH = ($env.PATH | split row (char esep)) ++ [
 	# Rust: binaries of cargo, package manager.
 	($env.CARGO_HOME + '/bin/')
 	# Python: binaries of virtual environment.
-	($env.VIRTUAL_ENV + '/bin/')
 	# Bun: binaries.
 	($env.BUN_INSTALL + '/bin/')
 	# Go: binaries.
