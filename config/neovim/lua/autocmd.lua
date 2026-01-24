@@ -3,7 +3,7 @@
 local modules = {
 	'autocmd.session',
 	'autocmd.save_path',
-	'autocmd.optimise',
+	-- 'autocmd.optimise',
 }
 
 for _, module_name in ipairs(modules) do
@@ -12,11 +12,11 @@ for _, module_name in ipairs(modules) do
 	if not ok then
 		vim.api.nvim_echo(
 			{
-				{('Failed to load autocmd module: %s').format(module_name)}
+				{ ('Failed to load autocmd module: %s').format(module_name) }
 			},
 			true,
 			{
-				err=true
+				err = true
 			}
 		)
 	else
