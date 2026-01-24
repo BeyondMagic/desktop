@@ -830,6 +830,15 @@ target = "~/.config/python/startup.py"
 root = false
 exclude = []
 
+[[configuration]]
+label = "obsidian"
+
+[[configuration.item]]
+source = "./config/obsidian/obsidian.desktop"
+target = "/usr/share/applications/obsidian.desktop"
+root = true
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
