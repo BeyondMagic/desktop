@@ -20,10 +20,7 @@ export function Bar({ monitor }: { monitor: number }) {
 		monitor={monitor}
 		anchor={TOP | LEFT | RIGHT}
 		application={app}
-		// BACKGROUND: makes impossible to interact if a window is maximized, although appears behind transparent windows
-		// TOP: makes possible to interact if a window is maximized, although disappears behind transparent windows
-		// FIXME: is it possible to have TOP's interaction with maximized windows and still appear above transparent windows?
-		layer={Astal.Layer.TOP}
+		layer={Astal.Layer.BOTTOM}
 		$={(self) => onCleanup(() => self.destroy())}
 		visible
 	>
