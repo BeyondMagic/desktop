@@ -94,7 +94,7 @@ export function Calendar() {
 	);
 
 	const refresh_today_highlight = () => {
-		print("Refreshing today's highlight");
+		// print("Refreshing today's highlight");
 		set_calendar_view((current_view: CalendarView) => {
 			const now = GLib.DateTime.new_now_local();
 			if (!current_view.is_current_month)
