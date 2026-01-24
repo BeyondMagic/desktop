@@ -118,6 +118,12 @@ export function persistNotification(notification: AstalNotifd.Notification) {
 	if (!notification) return
 	ensureDirectories()
 
+	const existing = readPersisted()
+	if (existing.some((entry) => entry.id === notification.id)) {
+		print(`Notification with ID ${notification.id} already persisted, skipping.`)
+		return
+	}
+
 	const imagePath = copyBinaryAsset(notification.image ?? null, imagesDir, `image-${notification.id}`)
 	const soundPath = copyBinaryAsset(notification.soundFile ?? null, soundsDir, `sound-${notification.id}`)
 
@@ -141,8 +147,7 @@ export function persistNotification(notification: AstalNotifd.Notification) {
 		})),
 	}
 
-	const data = readPersisted()
-	data.unshift(entry)
-	savePersisted(data)
-	emitPersisted(data)
+	existing.unshift(entry)
+	savePersisted(existing)
+	emitPersisted(existing)
 }
