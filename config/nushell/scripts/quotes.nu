@@ -72,7 +72,7 @@ export def add [
 		}
 	}] ++ $content | save --force $path
 
-	rm $backup_path
+	rm --permanent $backup_path
 }
 
 # Initialise database.
