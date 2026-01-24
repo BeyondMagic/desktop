@@ -839,6 +839,15 @@ target = "/usr/share/applications/obsidian.desktop"
 root = true
 exclude = []
 
+[[configuration]]
+label = "yay"
+
+[[configuration.item]]
+source = "./config/yay/config.json"
+target = "~/.config/yay/config.json"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -1401,6 +1410,7 @@ label = "yay"
 codename = "./packages/yay/index.sh"
 description = "AUR helper and package manager"
 depends_on = ["pacman", "git", "base-devel"]
+config = "yay"
 
 [[packages]]
 method = "script"
