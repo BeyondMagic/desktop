@@ -13,6 +13,7 @@ type CalendarView = {
 	month_label: string;
 	year_label: string;
 	weeks: DayCell[][];
+	is_current_month: boolean;
 }
 
 const WEEKDAY_LABELS = ["日", "月", "火", "水", "木", "金", "土"] as const;
@@ -71,12 +72,14 @@ function build_calendar_view(date: GLib.DateTime): CalendarView {
 	const first_day = ensure_date(date.get_year(), date.get_month(), 1);
 	const month_label = first_day.format("%B") ?? "Month";
 	const year_label = first_day.format("%Y") ?? first_day.get_year().toString();
+	const now = GLib.DateTime.new_now_local();
 
 	return {
 		base: first_day,
 		month_label,
 		year_label,
 		weeks: build_weeks(first_day),
+		is_current_month: is_same_month(first_day, now),
 	};
 }
 
@@ -94,7 +97,7 @@ export function Calendar() {
 		print("Refreshing today's highlight");
 		set_calendar_view((current_view: CalendarView) => {
 			const now = GLib.DateTime.new_now_local();
-			if (!is_same_month(current_view.base, now))
+			if (!current_view.is_current_month)
 				return current_view;
 			return build_calendar_view(now);
 		});
