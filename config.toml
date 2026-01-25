@@ -834,9 +834,9 @@ exclude = []
 label = "obsidian"
 
 [[configuration.item]]
-source = "./config/obsidian/obsidian.desktop"
-target = "/usr/share/applications/obsidian.desktop"
-root = true
+source = "./config/obsidian/user-flags.conf"
+target = "~/.config/obsidian/user-flags.conf"
+root = false
 exclude = []
 
 [[configuration]]
