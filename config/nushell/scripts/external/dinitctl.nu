@@ -45,6 +45,7 @@ export def list []: nothing -> list<any> {
         	$row.pid | into int
     	}
 	}
+    | sort-by pid service
 }
 
 # Control and manage services monitored by dinit.
