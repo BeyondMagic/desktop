@@ -75,7 +75,7 @@ return {
 		-- See :h blink-cmp-config-keymap for defining your own keymap
 		keymap = {
 			preset = 'default',
-			["<CR>"] = { "accept" },
+			["<CR>"] = { "accept", "fallback" },
 			["<Tab>"] = {
 				"select_next",
 				"snippet_forward",
