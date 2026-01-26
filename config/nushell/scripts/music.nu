@@ -3,9 +3,9 @@
 # BeyondMagic © João Farias 2024 <beyondmagic@mail.ru>
 
 const default_playlist = 'https://www.youtube.com/playlist?list=PLZx2EchsfnlgoXkZtHaNrAta_hIl4wkXA'
-const default_archive = '~/armazenamento/música/youtube.log'
-const default_archive_failed = '~/armazenamento/música/youtube_failed.log'
-const default_folder = '~/armazenamento/música/canções/'
+const default_archive = '~/storage/music/youtube.log'
+const default_archive_failed = '~/storage/music/youtube_failed.log'
+const default_folder = '~/storage/music/songs/'
 const default_format = '%(title)s.%(ext)s'
 const default_max = 50
 
