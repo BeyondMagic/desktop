@@ -1387,6 +1387,13 @@ description = "Application-level toolkit for defining and handling authorization
 depends_on = []
 config = "polkit"
 
+[[packages]]
+method = "aur"
+label = "yt-dlp"
+codename = "yt-dlp-git"
+description = "YouTube video downloader"
+depends_on = ["python-mutagen"]
+
 # [[packages]]
 # method = "aur"
 # label = ""
