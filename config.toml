@@ -977,10 +977,6 @@ depends_on = []
 config = "hypridle"
 
 [[packages]]
-method = "aur"
-label = "ags"
-codename = "aylurs-gtk-shell-git"
-description = "AGS - Aylurs GTK Shell for panels and widgets"
 depends_on = [
 	"libastal-4-git",
 	"libastal-apps-git",
@@ -1004,7 +1000,11 @@ depends_on = [
 	"dart-sass",
 	"libqalculate",
 	"bun",
-]
+	"upower",,
+]method = "aur"
+label = "ags"
+codename = "aylurs-gtk-shell-git"
+description = "AGS - Aylurs GTK Shell for panels and widgets"
 config = "ags"
 
 [[packages]]
