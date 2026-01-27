@@ -1000,8 +1000,9 @@ depends_on = [
 	"dart-sass",
 	"libqalculate",
 	"bun",
-	"upower",,
-]method = "aur"
+	"upower",
+]
+method = "aur"
 label = "ags"
 codename = "aylurs-gtk-shell-git"
 description = "AGS - Aylurs GTK Shell for panels and widgets"
