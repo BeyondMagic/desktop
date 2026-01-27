@@ -21,7 +21,11 @@ window.bar {
 						}
 
 						>contents {
-							// background-color: yellow;
+
+							/*
+							* Main tray icon image.
+							*/
+							>image {}
 						}
 
 						>arrow {
