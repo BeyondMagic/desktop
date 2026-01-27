@@ -3,8 +3,8 @@
 # BeyondMagic © João Farias 2024 <beyondmagic@mail.ru>
 
 const default_database = [
-	"~/armazenamento/kaomojis.json"
-	"~/armazenamento/emojis.json"
+	"~/storage/kaomojis.json"
+	"~/storage/emojis.json"
 ]
 
 # List all emoji and/or kaomojis of database.
