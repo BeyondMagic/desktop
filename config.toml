@@ -1127,7 +1127,7 @@ method = "aur"
 label = "vscode"
 codename = "visual-studio-code-bin"
 description = "Visual Studio Code IDE"
-depends_on = []
+depends_on = ["python-ipykernel"]
 config = "vscode"
 
 [[packages]]
@@ -1698,7 +1698,7 @@ packages = [
 [[profiles]]
 description = "VSCode IDE."
 devices = ["computer", "laptop"]
-packages = ["visual-studio-code-bin"]
+packages = ["vscode"]
 
 [[profiles]]
 description = "Music server"
