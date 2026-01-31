@@ -44,7 +44,7 @@ require 'lsp.python'
 -- require 'lsp.zig'
 
 -- typst
--- require 'lsp.typst'
+require 'lsp.typst'
 
 -- nushell
 require 'lsp.nushell'
