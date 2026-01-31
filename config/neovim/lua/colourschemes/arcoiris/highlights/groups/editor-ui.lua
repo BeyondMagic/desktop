@@ -34,11 +34,13 @@ return {
 	Folded     = { fg = COLOUR.fg_5, bg = COLOUR.bg_2, italic = true},
 
 	-- Diffs
-	DiffAdd = {fg = COLOUR.bg_0, bg = COLOUR.green_5},
+	DiffAdd = { fg = COLOUR.green_3, bg = "none" },
 	diffAdded = 'DiffAdd',
-	DiffChange = {bg = COLOUR.yellow_1},
-	DiffDelete = function(self) return {fg = self.DiffAdd.fg, bg = COLOUR.red_3} end,
-	DiffText = function(self) return {fg = self.DiffAdd.fg, bg = COLOUR.yellow_0} end,
+	DiffDelete = { fg = COLOUR.red_0, bg = "none" },
+	DiffText = { fg = COLOUR.yellow_0, bg = "none" },
+	DiffChange = { fg = COLOUR.blue_0, bg = "none" },
+	-- DiffDelete = function(self) return {fg = self.DiffAdd.fg, bg = COLOUR.red_3} end,
+	-- DiffText = function(self) return {fg = self.DiffAdd.fg, bg = COLOUR.yellow_0} end,
 	diffRemoved = 'DiffDelete',
 
 	-- Searching

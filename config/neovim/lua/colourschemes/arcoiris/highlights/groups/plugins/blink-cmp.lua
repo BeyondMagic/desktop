@@ -1,3 +1,3 @@
 return {
-	BlinkCmpGhostText = { fg = COLOUR.red_0, bg = COLOUR.blue_0 },
+	BlinkCmpGhostText = { fg = COLOUR.fg_4, bg = "none" },
 }

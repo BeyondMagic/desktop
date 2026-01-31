@@ -90,6 +90,7 @@ read {
   'plugins.vim-jumpmotion',
   'plugins.vim-sandwhich',
   'plugins.vim-signify',
-  'plugins.blink-cmp'
+  'plugins.blink-cmp',
+  'plugins.sidekick'
 
 }
