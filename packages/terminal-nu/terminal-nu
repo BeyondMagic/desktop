@@ -3,7 +3,23 @@
 # João V. Farias © BeyondMagic 2026 <beyondmagic@mail.ru>
 
 export def main [...args: string]: nothing -> any {
-	let args = $args | str join " "
+	let bin = $args | first
+	
+	let args = $args
+		| skip 1
+		| each {|str|
+			if not ($str | str starts-with "file://") {
+				$str
+			} else {
+				$str
+				| url decode
+				| str replace `file://` ``
+			}
+		}
+		| each {|str| '"' + $str + '"'}
+		| str join " "
+
+	let args = $bin + " " + $args
 
 	run-external ...[
 		foot
