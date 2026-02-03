@@ -1395,6 +1395,13 @@ codename = "yt-dlp-git"
 description = "YouTube video downloader"
 depends_on = ["python-mutagen"]
 
+[[packages]]
+method = "aur"
+label = "upscayl"
+codename = "upscayl-bin"
+description = "Image upscaling tool powered by AI"
+depends_on = []
+
 # [[packages]]
 # method = "aur"
 # label = ""
