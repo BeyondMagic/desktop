@@ -44,7 +44,7 @@ $env.NU_PLUGIN_DIRS = [
 
 # Use nushell functions to define your right and left prompt
 $env.PROMPT_COMMAND = {
-    let home =  $nu.home-path
+    let home =  $nu.home-dir
 
     # Perform tilde substitution on dir
     # To determine if the prefix of the path matches the home dir, we split the current path into
