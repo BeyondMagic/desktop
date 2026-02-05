@@ -125,7 +125,7 @@ export def download [
 		--download-archive $archive
 		--js-runtimes bun
 		--remote-components ejs:github
-		#--extractor-arg "youtube:player_client=tv"
+		--extractor-args "youtube:player_js_variant=tv"
 		--add-metadata
 		--embed-thumbnail
 		--embed-metadata
