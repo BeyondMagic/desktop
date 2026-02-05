@@ -131,6 +131,15 @@ vim.g.loaded_python3_provider  = 0
 -- Disable Ruby provider
 vim.g.loaded_ruby_provider     = 0
 
+-- Set fold method to expression
+vim.opt.foldmethod = "expr"
+
+-- Use treesitter for folding
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+
+-- Automatically open all folds
+vim.opt.foldlevel = 99
+
 --------------------Variables-----------------
 
 set('one_allow_itali:set cursorlinec:set cursorlines', 1)
@@ -159,9 +168,6 @@ option('dictionary', '/usr/share/dict/words', {})
 
 -- Wildignore for when opening files :0
 option('wildignore', '*/tmp*/,*/node_modules/*,_site,*/__pycache__/,*/venv/*,*/target/*,*/.vim$,~$,*/.log', {})
-
--- Folding
-option('foldmethod', 'manual', {})
 
 -- File format for neovim reading
 option('fileformat', 'unix', {})
