@@ -25,16 +25,17 @@ def format-item-time []: any -> string {
 }
 
 # Fetch calendar events from the specified calendar and time range.
-export def events [
+export def "main events" [
 	--calendar: string = 'primary' # Calendar to fetch events from (default: primary).
 	--time-min: datetime = (2025-01-01T00:00:00Z) # Minimum time for events (default: 2025-01-01T00:00:00Z).
 	--time-max: datetime = (2025-12-31T00:00:00Z) # Maximum time for events (default: 2025-12-31T00:00:00Z).
+	--json = false # Whether to output events in JSON format (default: false).
 ]: nothing -> any {
 
 	let time_min = $time_min | format-time
 	let time_max = $time_max | format-time
 
-	run-external ...[
+	let result = run-external ...[
 		calendar3
 		events
 		list
@@ -50,7 +51,15 @@ export def events [
 	| update 'start' { $in | format-item-time }
 	| update 'end' { $in | format-item-time }
 	| sort-by 'start' 'end'
+
+	if $json {
+		$result | to json
+	} else {
+		$result
+	}
 }
 
 # Main function (not used in this script, but required for NuShell scripts).
-export def main []: nothing -> nothing {}
+export def main []: nothing -> nothing {
+	null
+}
