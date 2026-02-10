@@ -85,25 +85,17 @@ export def --wrapped "gcal mes" [
 	gcalcli --calendar $"($calendars)" calm ...$rest --military --monday
 }
 
-#list available calendars
-export def "gcal list" [
-	--readers(-r) #exclude read-only calendars
-	--readers_bool(-R) = false #same as -r, but bool flag
-	--full(-f) = true  #if false, filter not wanted calendars
-] {
-	gcalcli list
+# List available calendars
+export def list []: nothing -> table<access: string, title: string> {
+	run-external ...[
+		gcalcli
+		list
+	]
 	| ansi strip
 	| lines
-	| skip 2 
-	| if $readers or $readers_bool {find -v reader} else {find ""}
-	| if $full {find ""} else {find -v Cuentas}
-	| drop 
-	| str replace -a "owner" "" 
-	| str replace "writer" "" 
-	| str replace "reader" "" 
-	| str replace "    " "" 
-	| str replace "   " "" 
 	| str trim
+	| parse "{access} {title}"
+	| skip 2
 }
 
 #re-authenticate gcalcli
