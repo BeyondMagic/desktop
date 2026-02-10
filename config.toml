@@ -848,6 +848,15 @@ target = "~/.config/yay/config.json"
 root = false
 exclude = []
 
+[[configuration]]
+label = "gcalcli"
+
+[[configuration.item]]
+source = "./config/gcalcli/share"
+target = "~/.local/share/gcalcli"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
