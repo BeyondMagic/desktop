@@ -1,4 +1,4 @@
-#!/usr/bin/env nu
+#!/usr/bin/env -S nu --stdin
 #
 # João Farias © BeyondMagic <beyondmagic@mail.ru> 2026
 
@@ -51,3 +51,6 @@ export def events [
 	| update 'end' { $in | format-item-time }
 	| sort-by 'start' 'end'
 }
+
+# Main function (not used in this script, but required for NuShell scripts).
+export def main []: nothing -> nothing {}
