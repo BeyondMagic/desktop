@@ -8,7 +8,9 @@ def format []: datetime -> string {
 	| format date "%Y-%m-%dT%H:%M:%SZ"
 }
 
+# Fetch calendar events from the specified calendar and time range.
 export def events [
+	--calendar: string = 'primary' # Calendar to fetch events from (default: primary).
 	--time-min: datetime = (2025-01-01T00:00:00Z) # Minimum time for events (default: 2025-01-01T00:00:00Z).
 	--time-max: datetime = (2025-12-31T00:00:00Z) # Maximum time for events (default: 2025-12-31T00:00:00Z).
 ]: nothing -> nothing {
@@ -20,7 +22,7 @@ export def events [
 		calendar3
 		events
 		list
-		primary
+		$calendar
 		-p ('time-min=' + $time_min)
 		-p ('time-max=' + $time_max)
 	]
