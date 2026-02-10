@@ -45,7 +45,9 @@ export def events [
 	| from json
 	| get 'items'
 	| default null 'summary'
-	| select 'start' 'end' 'summary'
+	| select 'start' 'end' 'summary' 'eventType' 'id'
+	| rename --column { 'eventType': 'event_type' }
 	| update 'start' { $in | format-item-time }
 	| update 'end' { $in | format-item-time }
+	| sort-by 'start' 'end'
 }
