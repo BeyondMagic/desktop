@@ -35,6 +35,7 @@ export use admin.nu
 export use quotes.nu
 export use editor.nu
 export use prompt.nu
+export use calendar.nu
 
 # export use ~/projetos/pessoal/competitive-programming/script/pc.nu
 
@@ -44,7 +45,6 @@ export alias fm = file manager
 export alias _ = echo $env.LAST
 export alias find = find --no-highlight
 export alias prolog = ^swipl
-export alias calendar = gcal
 export alias mv = mv --progress --verbose
 export alias cp = cp --progress --verbose
 export alias rm = rm --interactive --trash --verbose
