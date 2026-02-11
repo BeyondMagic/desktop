@@ -63,6 +63,21 @@ popover.calendar {
 						border-radius: 0.2rem;
 						font-weight: 500;
 
+						&.birthday,
+						&.event {
+							border-bottom: 2px solid;
+							border-bottom-left-radius: 0;
+							border-bottom-right-radius: 0;
+						}
+
+						&.birthday {
+							border-color: tokens.color-var("calendar-birthday-color");
+						}
+
+						&.event {
+							border-color: tokens.color-var("calendar-event-color");
+						}
+
 						&:hover {
 							background-color: tokens.color-var("overlay-darker-2");
 							color: tokens.color-var("fg-color");
@@ -89,6 +104,71 @@ popover.calendar {
 								background-color: transparent;
 								color: tokens.color-var("button-accent-color");
 							}
+						}
+					}
+				}
+			}
+
+			.events {
+				padding-top: 0.2rem;
+				font-family: 'Noto Sans CJK JP';
+
+				>.events-title {
+					font-size: 0.95rem;
+					font-weight: 600;
+				}
+
+				>.events-tabs {
+					button {
+						padding: 0.3rem 0.6rem;
+						border-radius: 0.4rem;
+
+						&:hover {
+							background-color: tokens.color-var("overlay-darker-2");
+						}
+
+						&.active {
+							background-color: tokens.color-var("button-accent-color");
+							color: tokens.color-var("bg-color");
+						}
+					}
+				}
+
+				>.events-scroll {
+					min-height: 8rem;
+					max-height: 14rem;
+				}
+
+				>.events-list {
+					padding: 0.2rem 0.4rem;
+				}
+
+				.event-item {
+					padding: 0.35rem 0.4rem;
+					border-radius: 0.4rem;
+					background-color: tokens.color-var("overlay-darker");
+
+					>.event-title {
+						font-weight: 600;
+					}
+
+					>.event-time {
+						font-size: 0.8rem;
+						color: tokens.gtkalpha(tokens.color-var("fg-color"), 0.7);
+					}
+
+					>.event-description {
+						font-size: 0.8rem;
+						color: tokens.gtkalpha(tokens.color-var("fg-color"), 0.8);
+					}
+				}
+
+				>.events-actions {
+					button {
+						padding: 0.35rem 0.7rem;
+
+						&:hover {
+							background-color: tokens.color-var("overlay-darker-2");
 						}
 					}
 				}

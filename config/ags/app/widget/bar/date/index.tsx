@@ -1,7 +1,7 @@
 import { execAsync } from "ags/process"
 import { Astal, Gtk, Gdk } from "ags/gtk4"
 import { text } from "./text"
-import { Calendar } from "./calendar"
+import { Calendar, Events } from "./calendar"
 
 export function Date() {
 	return <menubutton
@@ -17,8 +17,13 @@ export function Date() {
 			class="calendar"
 		// visible
 		>
-			{/* <Gtk.Calendar /> */}
-			<Calendar />
+			<box
+				orientation={Gtk.Orientation.VERTICAL}
+			>
+				{/* <Gtk.Calendar /> */}
+				<Calendar />
+				<Events />
+			</box>
 		</popover>
 	</menubutton>
 }

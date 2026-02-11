@@ -9,8 +9,7 @@ export async function events({
 }) {
 
 	const stdout = await execAsync([
-		"calendar.nu",
-		"main",
+		"calendar3.nu",
 		"events",
 		"--time-min", time_min,
 		"--time-max", time_max,
@@ -21,6 +20,7 @@ export async function events({
 
 	return events.map((event: any) => ({
 		title: event.summary,
+		description: event.description,
 		start: new Date(event.start),
 		end: new Date(event.end),
 		id: event.id,

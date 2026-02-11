@@ -2,10 +2,12 @@ import GLib from "gi://GLib";
 import { Gtk } from "ags/gtk4"
 import { For, createState, onCleanup } from "ags"
 import { interval } from "ags/time"
+import { google } from "./google";
 
 type DayCell = {
 	label: string;
 	css_classes: string[];
+	tooltip_text?: string;
 }
 
 type CalendarView = {
@@ -16,9 +18,60 @@ type CalendarView = {
 	is_current_month: boolean;
 }
 
+type CalendarEvent = {
+	title: string;
+	description?: string;
+	start: Date;
+	end: Date;
+	id: string;
+	type: string;
+}
+
+// Time range is in years, so 3 means we fetch events from 3 years ago to 3 years in the future.
+const time_range = 3;
+
+// const events = await google.events({
+// 	time_min: ensure_date(GLib.DateTime.new_now_local().get_year() - time_range, 1, 1).format("%FT%T") ?? "",
+// 	time_max: ensure_date(GLib.DateTime.new_now_local().get_year() + time_range, 12, 31).format("%FT%T") ?? "",
+// });
+
 const WEEKDAY_LABELS = ["日", "月", "火", "水", "木", "金", "土"] as const;
 const DEFAULT_SPACING = 6;
 const REFRESH_RATE = 60_000; // 1 minute in milliseconds
+
+const [events_state, set_events_state] = createState(new Array<CalendarEvent>());
+let events_loaded = false;
+let events_loading: Promise<CalendarEvent[]> | null = null;
+let refresh_calendar_view: (() => void) | null = null;
+
+async function refresh_events() {
+	const now = GLib.DateTime.new_now_local();
+	const time_min = ensure_date(now.get_year() - time_range, 1, 1).format("%FT%T") ?? "";
+	const time_max = ensure_date(now.get_year() + time_range, 12, 31).format("%FT%T") ?? "";
+	const events = await google.events({ time_min, time_max }) as CalendarEvent[];
+	set_events_state(events);
+	refresh_calendar_view?.();
+	return events;
+}
+
+function ensure_events_loaded(onLoad?: (events: CalendarEvent[]) => void) {
+	if (events_loaded) {
+		onLoad?.(events_state.peek());
+		return;
+	}
+
+	if (events_loading) {
+		events_loading.then((events) => onLoad?.(events));
+		return;
+	}
+
+	events_loading = refresh_events().then((events) => {
+		events_loaded = true;
+		events_loading = null;
+		onLoad?.(events);
+		return events;
+	});
+}
 
 function ensure_date(year: number, month: number, day = 1) {
 	const dt = GLib.DateTime.new_local(year, month, day, 0, 0, 0);
@@ -31,7 +84,31 @@ function is_same_date(a: GLib.DateTime, b: GLib.DateTime) {
 		a.get_day_of_month() === b.get_day_of_month();
 }
 
-function build_weeks(first_day: GLib.DateTime): DayCell[][] {
+function to_glib_datetime(date: Date) {
+	const seconds = Math.floor(date.getTime() / 1000);
+	return GLib.DateTime.new_from_unix_local(seconds);
+}
+
+function day_bounds(day: GLib.DateTime) {
+	const day_start = ensure_date(day.get_year(), day.get_month(), day.get_day_of_month());
+	const day_end = day_start.add_days(1) ?? day_start;
+	return { day_start, day_end };
+}
+
+function event_overlaps_day(event: CalendarEvent, day: GLib.DateTime) {
+	const { day_start, day_end } = day_bounds(day);
+	const event_start = to_glib_datetime(event.start);
+	const event_end = to_glib_datetime(event.end);
+	return event_start.compare(day_end) < 0 && event_end.compare(day_start) > 0;
+}
+
+function event_tooltip_line(event: CalendarEvent) {
+	const title = event.title?.trim() || "Untitled";
+	const description = event.description?.trim();
+	return description ? `${title}: ${description}` : title;
+}
+
+function build_weeks(first_day: GLib.DateTime, events: CalendarEvent[]): DayCell[][] {
 	const today_date = GLib.DateTime.new_now_local();
 	const month = first_day.get_month();
 	const start_weekday = first_day.get_day_of_week() % 7;
@@ -44,6 +121,12 @@ function build_weeks(first_day: GLib.DateTime): DayCell[][] {
 		for (let day_index = 0; day_index < 7; day_index++) {
 			const is_current_month = cursor.get_month() === month;
 			const classes = ["day"];
+			const day_events = events.filter((event) => event_overlaps_day(event, cursor));
+			const has_birthday = day_events.some((event) => event.type === "birthday");
+			const has_default = day_events.some((event) => event.type === "default");
+			const tooltip_text = day_events.length > 0
+				? day_events.map(event_tooltip_line).join("\n")
+				: undefined;
 
 			if (!is_current_month)
 				classes.push("inactive");
@@ -51,9 +134,16 @@ function build_weeks(first_day: GLib.DateTime): DayCell[][] {
 			if (is_same_date(cursor, today_date))
 				classes.push("today");
 
+			if (has_birthday)
+				classes.push("birthday");
+
+			if (has_default)
+				classes.push("event");
+
 			week_days.push({
 				label: cursor.get_day_of_month().toString(),
 				css_classes: classes,
+				tooltip_text,
 			});
 
 			cursor = cursor.add_days(1) ?? cursor;
@@ -69,7 +159,7 @@ function is_same_month(a: GLib.DateTime, b: GLib.DateTime) {
 	return a.get_year() === b.get_year() && a.get_month() === b.get_month();
 }
 
-function build_calendar_view(date: GLib.DateTime): CalendarView {
+function build_calendar_view(date: GLib.DateTime, events: CalendarEvent[]): CalendarView {
 	const first_day = ensure_date(date.get_year(), date.get_month(), 1);
 	const month_label = first_day.format("%B") ?? "Month";
 	const year_label = first_day.format("%Y") ?? first_day.get_year().toString();
@@ -79,20 +169,71 @@ function build_calendar_view(date: GLib.DateTime): CalendarView {
 		base: first_day,
 		month_label,
 		year_label,
-		weeks: build_weeks(first_day),
+		weeks: build_weeks(first_day, events),
 		is_current_month: is_same_month(first_day, now),
 	};
 }
 
+type EventSpan = "today" | "week" | "month" | "year";
+
+function range_for_span(span: EventSpan) {
+	const now = GLib.DateTime.new_now_local();
+	if (span === "today") {
+		const day_start = ensure_date(now.get_year(), now.get_month(), now.get_day_of_month());
+		const day_end = day_start.add_days(1) ?? day_start;
+		return { range_start: day_start, range_end: day_end };
+	}
+
+	if (span === "week") {
+		const start_weekday = now.get_day_of_week() % 7;
+		const week_start = now.add_days(-start_weekday) ?? now;
+		const week_end = week_start.add_days(7) ?? week_start;
+		const range_start = ensure_date(week_start.get_year(), week_start.get_month(), week_start.get_day_of_month());
+		return { range_start, range_end: week_end };
+	}
+
+	if (span === "month") {
+		const month_start = ensure_date(now.get_year(), now.get_month(), 1);
+		const month_end = month_start.add_months(1) ?? month_start;
+		return { range_start: month_start, range_end: month_end };
+	}
+
+	const year_start = ensure_date(now.get_year(), 1, 1);
+	const year_end = year_start.add_years(1) ?? year_start;
+	return { range_start: year_start, range_end: year_end };
+}
+
+function event_overlaps_range(event: CalendarEvent, range_start: GLib.DateTime, range_end: GLib.DateTime) {
+	const event_start = to_glib_datetime(event.start);
+	const event_end = to_glib_datetime(event.end);
+	return event_start.compare(range_end) < 0 && event_end.compare(range_start) > 0;
+}
+
+function format_event_time(event: CalendarEvent) {
+	const start = to_glib_datetime(event.start);
+	const end = to_glib_datetime(event.end);
+	const start_text = start.format("%b %d %H:%M") ?? "";
+	const end_text = end.format("%b %d %H:%M") ?? "";
+	return `${start_text} – ${end_text}`.trim();
+}
+
 export function Calendar() {
+	ensure_events_loaded();
+
 	const nav_arrows = {
 		left: "◀",
 		right: "▶",
 	} as const;
 
 	const [calendar_view, set_calendar_view] = createState(
-		build_calendar_view(GLib.DateTime.new_now_local()),
+		build_calendar_view(GLib.DateTime.new_now_local(), events_state.peek()),
 	);
+
+	refresh_calendar_view = () => {
+		set_calendar_view((current_view: CalendarView) =>
+			build_calendar_view(current_view.base, events_state.peek()),
+		);
+	};
 
 	const refresh_today_highlight = () => {
 		// print("Refreshing today's highlight");
@@ -100,7 +241,7 @@ export function Calendar() {
 			const now = GLib.DateTime.new_now_local();
 			if (!current_view.is_current_month)
 				return current_view;
-			return build_calendar_view(now);
+			return build_calendar_view(now, events_state.peek());
 		});
 	};
 
@@ -108,19 +249,20 @@ export function Calendar() {
 
 	onCleanup(() => {
 		refresh_tick?.cancel();
+		refresh_calendar_view = null;
 	});
 
 	function shift_month(delta: number) {
 		set_calendar_view((current_view: CalendarView) => {
 			const next_base = current_view.base.add_months(delta);
-			return build_calendar_view(next_base ?? current_view.base);
+			return build_calendar_view(next_base ?? current_view.base, events_state.peek());
 		});
 	}
 
 	function shift_year(delta: number) {
 		set_calendar_view((current_view: CalendarView) => {
 			const next_base = current_view.base.add_years(delta);
-			return build_calendar_view(next_base ?? current_view.base);
+			return build_calendar_view(next_base ?? current_view.base, events_state.peek());
 		});
 	}
 
@@ -197,6 +339,7 @@ export function Calendar() {
 								<label
 									css_classes={day_cell.css_classes}
 									label={day_cell.label}
+									tooltipText={day_cell.tooltip_text}
 								/>
 							))}
 						</box>
@@ -205,4 +348,143 @@ export function Calendar() {
 			</box>
 		</box>
 	);
+}
+
+export function Events() {
+	const [active_span, set_active_span] = createState<EventSpan>("today");
+	const [visible_events, set_visible_events] = createState(new Array<CalendarEvent>());
+
+	const update_visible_events = (events: CalendarEvent[], span: EventSpan) => {
+		const { range_start, range_end } = range_for_span(span);
+		const filtered = events
+			.filter((event) => event_overlaps_range(event, range_start, range_end))
+			.sort((a, b) => a.start.getTime() - b.start.getTime());
+		set_visible_events(filtered);
+	};
+
+	ensure_events_loaded((events) => {
+		update_visible_events(events, active_span.peek());
+	});
+
+	const on_refresh = () => {
+		refresh_events().then((events) => {
+			update_visible_events(events, active_span.peek());
+		});
+	};
+
+	const on_select_span = (span: EventSpan) => {
+		set_active_span(span);
+		update_visible_events(events_state.peek(), span);
+	};
+
+	return (
+		<box
+			class="box events"
+			orientation={Gtk.Orientation.VERTICAL}
+			spacing={DEFAULT_SPACING}
+		// css_classes={["events"]}
+		// margin={DEFAULT_SPACING * 2}
+		// padding={DEFAULT_SPACING * 2}
+		>
+			<label
+				class="events-title"
+				halign={Gtk.Align.START}
+				xalign={0}
+				label="Events"
+			/>
+			<box
+				class="events-tabs"
+				halign={Gtk.Align.START}
+				spacing={DEFAULT_SPACING}
+			>
+				<button
+					onClicked={() => on_select_span("today")}
+					class={active_span.peek() === "today" ? "active" : ""}
+					label="Today"
+				/>
+				<button
+					onClicked={() => on_select_span("week")}
+					class={active_span.peek() === "week" ? "active" : ""}
+					label="Week"
+				/>
+				<button
+					onClicked={() => on_select_span("month")}
+					class={active_span.peek() === "month" ? "active" : ""}
+					label="Month"
+				/>
+				<button
+					onClicked={() => on_select_span("year")}
+					class={active_span.peek() === "year" ? "active" : ""}
+					label="Year"
+				/>
+			</box>
+			<Gtk.ScrolledWindow
+				css_classes={["events-scroll"]}
+				vexpand={false}
+				hexpand
+				heightRequest={220}
+			>
+				<box
+					class="events-list"
+					orientation={Gtk.Orientation.VERTICAL}
+					spacing={DEFAULT_SPACING}
+				>
+					<For each={visible_events}>
+						{(event: CalendarEvent) => (
+							<box
+								class="event-item"
+								orientation={Gtk.Orientation.VERTICAL}
+								spacing={DEFAULT_SPACING / 2}
+							>
+								<label
+									class="event-title"
+									halign={Gtk.Align.START}
+									xalign={0}
+									label={event.title || "Untitled"}
+								/>
+								<label
+									class="event-time"
+									halign={Gtk.Align.START}
+									xalign={0}
+									label={format_event_time(event)}
+								/>
+								{event.description && (
+									<label
+										class="event-description"
+										halign={Gtk.Align.START}
+										xalign={0}
+										wrap
+										label={event.description}
+									/>
+								)}
+							</box>
+						)}
+					</For>
+					<box
+						class="events-empty"
+						visible={visible_events((items) => items.length === 0)}
+					>
+						<label
+							halign={Gtk.Align.START}
+							xalign={0}
+							label="No events"
+						/>
+					</box>
+				</box>
+			</Gtk.ScrolledWindow>
+			<box
+				class="events-actions"
+				spacing={DEFAULT_SPACING}
+			>
+				<button
+					onClicked={on_refresh}
+					label="Refresh"
+				/>
+				<button
+					label="Add"
+				/>
+			</box>
+		</box>
+	)
+
 }
