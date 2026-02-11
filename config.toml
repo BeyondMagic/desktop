@@ -857,6 +857,12 @@ target = "~/.config/nushell/scripts/external/calendar.nu"
 root = false
 exclude = []
 
+[[configuration.item]]
+source = "./config/calendar3/calendar.nu"
+target = "~/.local/bin/calendar3.nu"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
