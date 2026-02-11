@@ -1,1 +1,1 @@
-vim.api.nvim_command('HexokinaseTurnOn')
+-- vim.api.nvim_command('HexokinaseTurnOff')
