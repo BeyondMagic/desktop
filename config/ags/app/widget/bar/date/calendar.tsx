@@ -18,6 +18,7 @@ type CalendarView = {
 
 const WEEKDAY_LABELS = ["日", "月", "火", "水", "木", "金", "土"] as const;
 const DEFAULT_SPACING = 6;
+const REFRESH_RATE = 60_000; // 1 minute in milliseconds
 
 function ensure_date(year: number, month: number, day = 1) {
 	const dt = GLib.DateTime.new_local(year, month, day, 0, 0, 0);
@@ -103,7 +104,7 @@ export function Calendar() {
 		});
 	};
 
-	const refresh_tick = interval(60_000, refresh_today_highlight);
+	const refresh_tick = interval(REFRESH_RATE, refresh_today_highlight);
 
 	onCleanup(() => {
 		refresh_tick?.cancel();
