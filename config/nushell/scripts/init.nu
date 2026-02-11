@@ -20,6 +20,7 @@ export use ./external/oracle.nu
 export use ./external/steam.nu
 export use ./external/pacman.nu
 export use ./external/biome.nu
+export use ./external/calendar.nu
 
 export use miscelanous.nu *
 export use package.nu
@@ -35,7 +36,6 @@ export use admin.nu
 export use quotes.nu
 export use editor.nu
 export use prompt.nu
-export use calendar.nu
 
 # export use ~/projetos/pessoal/competitive-programming/script/pc.nu
 

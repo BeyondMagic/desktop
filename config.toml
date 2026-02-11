@@ -848,6 +848,15 @@ target = "~/.config/yay/config.json"
 root = false
 exclude = []
 
+[[configuration]]
+label = "calendar3"
+
+[[configuration.item]]
+source = "./config/calendar3/calendar.nu"
+target = "~/.config/nushell/scripts/external/calendar.nu"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -1534,9 +1543,9 @@ depends_on = []
 [[packages]]
 method = "cargo"
 label = "calendar3"
-codename = "google-apis-rs"
+codename = "google-calendar3-cli"
 description = "Command line Google Calendar client"
-
+depends_on = []
 
 # [[packages]]
 # method = ""
