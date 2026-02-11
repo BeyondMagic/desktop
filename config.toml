@@ -863,6 +863,12 @@ target = "~/.local/bin/calendar3.nu"
 root = false
 exclude = []
 
+[[configuration.item]]
+source = "./config/calendar3/share"
+target = "~/.google-service-cli"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
