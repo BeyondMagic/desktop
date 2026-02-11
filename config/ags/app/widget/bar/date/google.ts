@@ -1,6 +1,6 @@
 import { execAsync } from "ags/process";
 
-export default async function ({
+export async function events({
 	time_min,
 	time_max
 }: {
@@ -26,4 +26,8 @@ export default async function ({
 		id: event.id,
 		type: event.event_type
 	}));
+}
+
+export const google = {
+	events
 }
