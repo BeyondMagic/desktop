@@ -1,7 +1,7 @@
 import GLib from "gi://GLib";
 import { Gtk } from "ags/gtk4"
 import { For, createState, onCleanup } from "ags"
-import { interval } from "ags/time"
+import { interval, timeout } from "ags/time"
 import { google } from "./google";
 
 type DayCell = {
@@ -38,6 +38,7 @@ const time_range = 3;
 const WEEKDAY_LABELS = ["日", "月", "火", "水", "木", "金", "土"] as const;
 const DEFAULT_SPACING = 6;
 const REFRESH_RATE = 60_000; // 1 minute in milliseconds
+const REFRESH_RATE_FIRST = 1_000; // 3 seconds in milliseconds
 const DEBUG_EVENTS = true;
 
 const [events_state, set_events_state] = createState(new Array<CalendarEvent>());
@@ -263,9 +264,9 @@ export function Calendar() {
 		);
 	};
 
-	ensure_events_loaded(() => {
-		refresh_calendar_view?.();
-	});
+	// ensure_events_loaded(() => {
+	// 	refresh_calendar_view?.();
+	// });
 
 	const refresh_today_highlight = () => {
 		// print("Refreshing today's highlight");
@@ -278,6 +279,7 @@ export function Calendar() {
 	};
 
 	const refresh_tick = interval(REFRESH_RATE, refresh_today_highlight);
+	timeout(REFRESH_RATE_FIRST, refresh_today_highlight);
 
 	onCleanup(() => {
 		refresh_tick?.cancel();

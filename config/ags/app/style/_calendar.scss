@@ -86,10 +86,26 @@
 						&:hover {
 							background-color: tokens.color-var("overlay-darker-2");
 							color: tokens.color-var("fg-color");
+
+							&.birthday {
+								color: tokens.color-var("calendar-birthday-color");
+							}
+
+							&.event {
+								color: tokens.color-var("calendar-event-color");
+							}
 						}
 
 						&.inactive {
 							color: tokens.gtkalpha(tokens.color-var("fg-color"), 0.3);
+
+							&.birthday {
+								background-color: tokens.gtkalpha(tokens.color-var("calendar-birthday-color"), 0.25);
+							}
+
+							&.event {
+								background-color: tokens.gtkalpha(tokens.color-var("calendar-event-color"), 0.25);
+							}
 						}
 
 						&.today {
