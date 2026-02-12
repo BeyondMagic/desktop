@@ -125,6 +125,30 @@ function event_tooltip_line(event: CalendarEvent) {
 	return description ? `${title}: ${description}` : title;
 }
 
+function add_span_edge_classes(week_days: DayCell[]) {
+	const span_types = ["event", "birthday"] as const;
+
+	for (const span_type of span_types) {
+		for (let index = 0; index < week_days.length; index++) {
+			const day_cell = week_days[index];
+			if (!day_cell)
+				continue;
+			if (!day_cell.css_classes.includes(span_type))
+				continue;
+
+			const prev_same = index > 0 && week_days[index - 1]?.css_classes.includes(span_type);
+			const next_same = index < week_days.length - 1 && week_days[index + 1]?.css_classes.includes(span_type);
+
+			if (!prev_same && !day_cell.css_classes.includes("edge-left"))
+				day_cell.css_classes.push("edge-left");
+			if (!next_same && !day_cell.css_classes.includes("edge-right"))
+				day_cell.css_classes.push("edge-right");
+		}
+	}
+
+	return week_days;
+}
+
 function build_weeks(first_day: GLib.DateTime, events: CalendarEvent[]): DayCell[][] {
 	const today_date = GLib.DateTime.new_now_local();
 	const month = first_day.get_month();
@@ -134,7 +158,7 @@ function build_weeks(first_day: GLib.DateTime, events: CalendarEvent[]): DayCell
 	const marked_days: string[] = [];
 
 	for (let week_index = 0; week_index < 6; week_index++) {
-		const week_days: DayCell[] = [];
+		let week_days: DayCell[] = [];
 
 		for (let day_index = 0; day_index < 7; day_index++) {
 			const is_current_month = cursor.get_month() === month;
@@ -172,6 +196,8 @@ function build_weeks(first_day: GLib.DateTime, events: CalendarEvent[]): DayCell
 
 			cursor = cursor.add_days(1) ?? cursor;
 		}
+
+		week_days = add_span_edge_classes(week_days);
 
 		weeks.push(week_days);
 	}
