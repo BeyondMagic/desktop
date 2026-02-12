@@ -38,17 +38,33 @@ const time_range = 3;
 const WEEKDAY_LABELS = ["日", "月", "火", "水", "木", "金", "土"] as const;
 const DEFAULT_SPACING = 6;
 const REFRESH_RATE = 60_000; // 1 minute in milliseconds
+const DEBUG_EVENTS = true;
 
 const [events_state, set_events_state] = createState(new Array<CalendarEvent>());
 let events_loaded = false;
 let events_loading: Promise<CalendarEvent[]> | null = null;
 let refresh_calendar_view: (() => void) | null = null;
 
+function debug_log(message: string) {
+	if (!DEBUG_EVENTS)
+		return;
+	// eslint-disable-next-line no-console
+	print(`[calendar] ${message}`);
+}
+
 async function refresh_events() {
 	const now = GLib.DateTime.new_now_local();
 	const time_min = ensure_date(now.get_year() - time_range, 1, 1).format("%FT%T") ?? "";
 	const time_max = ensure_date(now.get_year() + time_range, 12, 31).format("%FT%T") ?? "";
+	debug_log(`Refreshing events time_min=${time_min} time_max=${time_max}`);
 	const events = await google.events({ time_min, time_max }) as CalendarEvent[];
+	debug_log(`Loaded ${events.length} events`);
+	if (events.length > 0) {
+		const samples = events.slice(0, 3).map((event) => {
+			return `${event.title || "Untitled"} | ${event.start.toISOString()} -> ${event.end.toISOString()} | ${event.type}`;
+		});
+		debug_log(`Sample events: ${samples.join(" || ")}`);
+	}
 	set_events_state(events);
 	refresh_calendar_view?.();
 	return events;
@@ -114,6 +130,7 @@ function build_weeks(first_day: GLib.DateTime, events: CalendarEvent[]): DayCell
 	const start_weekday = first_day.get_day_of_week() % 7;
 	let cursor = first_day.add_days(-start_weekday) ?? first_day;
 	const weeks: DayCell[][] = [];
+	const marked_days: string[] = [];
 
 	for (let week_index = 0; week_index < 6; week_index++) {
 		const week_days: DayCell[] = [];
@@ -140,6 +157,12 @@ function build_weeks(first_day: GLib.DateTime, events: CalendarEvent[]): DayCell
 			if (has_default)
 				classes.push("event");
 
+			if (day_events.length > 0) {
+				marked_days.push(
+					`${cursor.get_year()}-${cursor.get_month()}-${cursor.get_day_of_month()}:${day_events.length}`,
+				);
+			}
+
 			week_days.push({
 				label: cursor.get_day_of_month().toString(),
 				css_classes: classes,
@@ -150,6 +173,12 @@ function build_weeks(first_day: GLib.DateTime, events: CalendarEvent[]): DayCell
 		}
 
 		weeks.push(week_days);
+	}
+
+	if (DEBUG_EVENTS) {
+		debug_log(`Month ${first_day.get_year()}-${first_day.get_month()} has ${marked_days.length} marked days`);
+		if (marked_days.length > 0)
+			debug_log(`Marked days: ${marked_days.slice(0, 20).join(", ")}`);
 	}
 
 	return weeks;
@@ -218,8 +247,6 @@ function format_event_time(event: CalendarEvent) {
 }
 
 export function Calendar() {
-	ensure_events_loaded();
-
 	const nav_arrows = {
 		left: "◀",
 		right: "▶",
@@ -230,10 +257,15 @@ export function Calendar() {
 	);
 
 	refresh_calendar_view = () => {
+		debug_log("Refreshing calendar view with loaded events");
 		set_calendar_view((current_view: CalendarView) =>
 			build_calendar_view(current_view.base, events_state.peek()),
 		);
 	};
+
+	ensure_events_loaded(() => {
+		refresh_calendar_view?.();
+	});
 
 	const refresh_today_highlight = () => {
 		// print("Refreshing today's highlight");
@@ -268,13 +300,14 @@ export function Calendar() {
 
 	return (
 		<box
-			class="box"
+			class="grid"
 			orientation={Gtk.Orientation.VERTICAL}
 			spacing={DEFAULT_SPACING}
 		>
 			<box
 				class="navigation"
 				spacing={DEFAULT_SPACING * 2}
+				vexpand={false}
 			>
 				<box
 					class="section"
@@ -337,7 +370,7 @@ export function Calendar() {
 						>
 							{week_cells.map((day_cell: DayCell) => (
 								<label
-									css_classes={day_cell.css_classes}
+									class={day_cell.css_classes.join(" ")}
 									label={day_cell.label}
 									tooltipText={day_cell.tooltip_text}
 								/>
@@ -379,19 +412,19 @@ export function Events() {
 
 	return (
 		<box
-			class="box events"
+			class="events"
 			orientation={Gtk.Orientation.VERTICAL}
 			spacing={DEFAULT_SPACING}
 		// css_classes={["events"]}
 		// margin={DEFAULT_SPACING * 2}
 		// padding={DEFAULT_SPACING * 2}
 		>
-			<label
+			{/* <label
 				class="events-title"
 				halign={Gtk.Align.START}
 				xalign={0}
 				label="Events"
-			/>
+			/> */}
 			<box
 				class="events-tabs"
 				halign={Gtk.Align.START}
@@ -422,7 +455,8 @@ export function Events() {
 				css_classes={["events-scroll"]}
 				vexpand={false}
 				hexpand
-				heightRequest={220}
+				heightRequest={180}
+				maxContentHeight={180}
 			>
 				<box
 					class="events-list"

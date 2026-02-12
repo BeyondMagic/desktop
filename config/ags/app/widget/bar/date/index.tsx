@@ -14,11 +14,12 @@ export function Date() {
 			label={text()}
 		/>
 		<popover
-			class="calendar"
+			class="calendar-popover"
 		// visible
 		>
 			<box
-				orientation={Gtk.Orientation.VERTICAL}
+				class="calendar"
+				orientation={Gtk.Orientation.HORIZONTAL}
 			>
 				{/* <Gtk.Calendar /> */}
 				<Calendar />
