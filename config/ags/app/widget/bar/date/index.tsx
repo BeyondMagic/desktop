@@ -20,6 +20,8 @@ export function Date() {
 			<box
 				class="calendar"
 				orientation={Gtk.Orientation.HORIZONTAL}
+				homogeneous
+				spacing={20}
 			>
 				{/* <Gtk.Calendar /> */}
 				<Calendar />

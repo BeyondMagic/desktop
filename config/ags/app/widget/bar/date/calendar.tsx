@@ -1,8 +1,9 @@
 import GLib from "gi://GLib";
 import { Gtk } from "ags/gtk4"
-import { For, createState, onCleanup } from "ags"
+import { With, For, createState, onCleanup } from "ags"
 import { interval, timeout } from "ags/time"
 import { google } from "./google";
+import { Gdk } from "ags/gtk4";
 
 type DayCell = {
 	label: string;
@@ -125,6 +126,21 @@ function event_tooltip_line(event: CalendarEvent) {
 	return description ? `${title}: ${description}` : title;
 }
 
+function hash_u32_fnv1a(input: string) {
+	let hash = 0x811c9dc5;
+	for (let i = 0; i < input.length; i++) {
+		hash ^= input.charCodeAt(i);
+		hash = Math.imul(hash, 0x01000193);
+	}
+	return hash >>> 0;
+}
+
+function color_class_for_event_title(title?: string) {
+	const normalized = (title ?? "").trim() || "Untitled";
+	const color_index = (hash_u32_fnv1a(normalized) % 16) + 1;
+	return `color-${color_index}`;
+}
+
 function add_span_edge_classes(week_days: DayCell[]) {
 	const span_types = ["event", "birthday"] as const;
 
@@ -166,6 +182,16 @@ function build_weeks(first_day: GLib.DateTime, events: CalendarEvent[]): DayCell
 			const day_events = events.filter((event) => event_overlaps_day(event, cursor));
 			const has_birthday = day_events.some((event) => event.type === "birthday");
 			const has_default = day_events.some((event) => event.type === "default");
+			let default_color_title: string | undefined;
+			if (has_default) {
+				for (const event of day_events) {
+					if (event.type !== "default")
+						continue;
+					const candidate = event.title?.trim() || "Untitled";
+					if (default_color_title === undefined || candidate.localeCompare(default_color_title) < 0)
+						default_color_title = candidate;
+				}
+			}
 			const tooltip_text = day_events.length > 0
 				? day_events.map(event_tooltip_line).join("\n")
 				: undefined;
@@ -181,6 +207,9 @@ function build_weeks(first_day: GLib.DateTime, events: CalendarEvent[]): DayCell
 
 			if (has_default)
 				classes.push("event");
+
+			if (has_default)
+				classes.push(color_class_for_event_title(default_color_title));
 
 			if (day_events.length > 0) {
 				marked_days.push(
@@ -453,38 +482,61 @@ export function Events() {
 				xalign={0}
 				label="Events"
 			/> */}
+			<box>
+							<With
+					value={active_span}
+				>
+					{(span) => (
 			<box
 				class="events-tabs"
 				halign={Gtk.Align.START}
 				spacing={DEFAULT_SPACING}
 			>
-				<button
-					onClicked={() => on_select_span("today")}
-					class={active_span.peek() === "today" ? "active" : ""}
-					label="Today"
-				/>
-				<button
-					onClicked={() => on_select_span("week")}
-					class={active_span.peek() === "week" ? "active" : ""}
-					label="Week"
-				/>
-				<button
-					onClicked={() => on_select_span("month")}
-					class={active_span.peek() === "month" ? "active" : ""}
-					label="Month"
-				/>
-				<button
-					onClicked={() => on_select_span("year")}
-					class={active_span.peek() === "year" ? "active" : ""}
-					label="Year"
-				/>
+					
+							<button
+								onClicked={() => on_select_span("today")}
+								class={span === "today" ? "active" : ""}
+								label="Today"
+								$={(self) => {
+									self.set_cursor_from_name("pointer");
+								}}
+							/>
+							<button
+								onClicked={() => on_select_span("week")}
+								class={span === "week" ? "active" : ""}
+								label="Week"
+								$={(self) => {
+									self.set_cursor_from_name("pointer");
+								}}
+							/>
+							<button
+								onClicked={() => on_select_span("month")}
+								class={span === "month" ? "active" : ""}
+								label="Month"
+								$={(self) => {
+									self.set_cursor_from_name("pointer");
+								}}
+							/>
+							<button
+								onClicked={() => on_select_span("year")}
+								class={span === "year" ? "active" : ""}
+								label="Year"
+								$={(self) => {
+									self.set_cursor_from_name("pointer");
+								}}
+							/>
+					
+				
 			</box>
+			)}
+						</With>
+						</box>
 			<Gtk.ScrolledWindow
 				css_classes={["events-scroll"]}
 				vexpand={false}
 				hexpand
-				heightRequest={180}
-				maxContentHeight={180}
+				heightRequest={200}
+				maxContentHeight={200}
 			>
 				<box
 					class="events-list"
@@ -539,11 +591,19 @@ export function Events() {
 				spacing={DEFAULT_SPACING}
 			>
 				<button
+					class="action refresh"
 					onClicked={on_refresh}
 					label="Refresh"
+					$={(self) => {
+						self.set_cursor_from_name("pointer");
+					}}
 				/>
 				<button
+					class="action add"
 					label="Add"
+					$={(self) => {
+						self.set_cursor_from_name("pointer");
+					}}
 				/>
 			</box>
 		</box>
