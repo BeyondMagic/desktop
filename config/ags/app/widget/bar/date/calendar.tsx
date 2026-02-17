@@ -36,7 +36,37 @@ const time_range = 3;
 // 	time_max: ensure_date(GLib.DateTime.new_now_local().get_year() + time_range, 12, 31).format("%FT%T") ?? "",
 // });
 
-const WEEKDAY_LABELS = ["日", "月", "火", "水", "木", "金", "土"] as const;
+const WEEKDAY_LABELS = [
+	{
+		label: "日",
+		weekday: true,
+	},
+	{
+		label: "月",
+		weekday: true,
+	},
+	{
+		label: "火",
+		weekday: true,
+	},
+	{
+		label: "水",
+		weekday: true,
+	},
+	{
+		label: "木",
+		weekday: true,
+	},
+	{
+		label: "金",
+		weekday: false,
+	},
+	{
+		label: "土",
+		weekday: false,
+	}
+] as const;
+
 const DEFAULT_SPACING = 6;
 const REFRESH_RATE = 60_000; // 1 minute in milliseconds
 const REFRESH_RATE_FIRST = 1_000; // 3 seconds in milliseconds
@@ -114,6 +144,11 @@ function day_bounds(day: GLib.DateTime) {
 }
 
 function event_overlaps_day(event: CalendarEvent, day: GLib.DateTime) {
+	if (event.type === "birthday") {
+		const event_start = to_glib_datetime(event.start);
+		return event_start.get_month() === day.get_month()
+			&& event_start.get_day_of_month() === day.get_day_of_month();
+	}
 	const { day_start, day_end } = day_bounds(day);
 	const event_start = to_glib_datetime(event.start);
 	const event_end = to_glib_datetime(event.end);
@@ -289,6 +324,17 @@ function range_for_span(span: EventSpan) {
 }
 
 function event_overlaps_range(event: CalendarEvent, range_start: GLib.DateTime, range_end: GLib.DateTime) {
+	if (event.type === "birthday") {
+		const event_start = to_glib_datetime(event.start);
+		const month = event_start.get_month();
+		const day = event_start.get_day_of_month();
+		for (let year = range_start.get_year(); year <= range_end.get_year(); year++) {
+			const candidate = ensure_date(year, month, day);
+			if (candidate.compare(range_start) >= 0 && candidate.compare(range_end) < 0)
+				return true;
+		}
+		return false;
+	}
 	const event_start = to_glib_datetime(event.start);
 	const event_end = to_glib_datetime(event.end);
 	return event_start.compare(range_end) < 0 && event_end.compare(range_start) > 0;
@@ -415,7 +461,9 @@ export function Calendar() {
 				// spacing={DEFAULT_SPACING * 2}
 				>
 					{WEEKDAY_LABELS.map((weekday_label) => (
-						<label label={weekday_label} />
+						<label css_classes={[
+							weekday_label.weekday ? "weekday" : ""
+						]} label={weekday_label.label} />
 					))}
 				</box>
 				<For each={calendar_view((calendar_state: CalendarView) => calendar_state.weeks)}>
