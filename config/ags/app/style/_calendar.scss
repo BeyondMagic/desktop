@@ -116,70 +116,69 @@
 						}
 
 						&.event {
-							background-color: tokens.color-var("calendar-event-color");
 
 							&.color-1 {
-								background-color: tokens.color-var("calendar-event-color-0")
+								color: tokens.color-var("calendar-event-color-0")
 							}
 
 							&.color-2 {
-								background-color: tokens.color-var("calendar-event-color-1")
+								color: tokens.color-var("calendar-event-color-1")
 							}
 
 							&.color-3 {
-								background-color: tokens.color-var("calendar-event-color-2")
+								color: tokens.color-var("calendar-event-color-2")
 							}
 
 							&.color-4 {
-								background-color: tokens.color-var("calendar-event-color-3")
+								color: tokens.color-var("calendar-event-color-3")
 							}
 
 							&.color-5 {
-								background-color: tokens.color-var("calendar-event-color-4")
+								color: tokens.color-var("calendar-event-color-4")
 							}
 
 							&.color-6 {
-								background-color: tokens.color-var("calendar-event-color-5")
+								color: tokens.color-var("calendar-event-color-5")
 							}
 
 							&.color-7 {
-								background-color: tokens.color-var("calendar-event-color-6")
+								color: tokens.color-var("calendar-event-color-6")
 							}
 
 							&.color-8 {
-								background-color: tokens.color-var("calendar-event-color-7")
+								color: tokens.color-var("calendar-event-color-7")
 							}
 
 							&.color-9 {
-								background-color: tokens.color-var("calendar-event-color-8")
+								color: tokens.color-var("calendar-event-color-8")
 							}
 
 							&.color-10 {
-								background-color: tokens.color-var("calendar-event-color-9")
+								color: tokens.color-var("calendar-event-color-9")
 							}
 
 							&.color-11 {
-								background-color: tokens.color-var("calendar-event-color-10")
+								color: tokens.color-var("calendar-event-color-10")
 							}
 
 							&.color-12 {
-								background-color: tokens.color-var("calendar-event-color-11")
+								color: tokens.color-var("calendar-event-color-11")
 							}
 
 							&.color-13 {
-								background-color: tokens.color-var("calendar-event-color-12")
+								color: tokens.color-var("calendar-event-color-12")
 							}
 
 							&.color-14 {
-								background-color: tokens.color-var("calendar-event-color-13")
+								color: tokens.color-var("calendar-event-color-13")
 							}
 
 							&.color-15 {
-								background-color: tokens.color-var("calendar-event-color-14")
+								color: tokens.color-var("calendar-event-color-14")
 							}
 
 							&.color-16 {
-								background-color: tokens.color-var("calendar-event-color-15")
+								color: tokens.color-var("calendar-event-color-15")
 							}
 						}
 
@@ -190,10 +189,6 @@
 							&.birthday {
 								color: tokens.color-var("calendar-birthday-color");
 							}
-
-							&.event {
-								color: black;
-							}
 						}
 
 						&.inactive {
@@ -201,77 +196,78 @@
 
 							&.birthday {
 								background-color: tokens.gtkalpha(tokens.color-var("calendar-birthday-color"), 0.25);
+								// color: tokens.gtkalpha(tokens.color-var("bg-color"), 0.8);
 							}
 
 							&.event {
-								background-color: tokens.gtkalpha(tokens.color-var("calendar-event-color"), 0.25);
+								color: tokens.gtkalpha(tokens.color-var("calendar-event-color"), 0.25);
 
 								&:hover {
 									color: white;
 								}
 
 								&.color-1 {
-									background-color: tokens.gtkalpha(tokens.color-var("calendar-event-color-0"), 0.25);
+									color: tokens.gtkalpha(tokens.color-var("calendar-event-color-0"), 0.25);
 								}
 
 								&.color-2 {
-									background-color: tokens.gtkalpha(tokens.color-var("calendar-event-color-1"), 0.25);
+									color: tokens.gtkalpha(tokens.color-var("calendar-event-color-1"), 0.25);
 								}
 
 								&.color-3 {
-									background-color: tokens.gtkalpha(tokens.color-var("calendar-event-color-2"), 0.25);
+									color: tokens.gtkalpha(tokens.color-var("calendar-event-color-2"), 0.25);
 								}
 
 								&.color-4 {
-									background-color: tokens.gtkalpha(tokens.color-var("calendar-event-color-3"), 0.25)
+									color: tokens.gtkalpha(tokens.color-var("calendar-event-color-3"), 0.25)
 								}
 
 								&.color-5 {
-									background-color: tokens.gtkalpha(tokens.color-var("calendar-event-color-4"), 0.25)
+									color: tokens.gtkalpha(tokens.color-var("calendar-event-color-4"), 0.25)
 								}
 
 								&.color-6 {
-									background-color: tokens.gtkalpha(tokens.color-var("calendar-event-color-5"), 0.25)
+									color: tokens.gtkalpha(tokens.color-var("calendar-event-color-5"), 0.25)
 								}
 
 								&.color-7 {
-									background-color: tokens.gtkalpha(tokens.color-var("calendar-event-color-6"), 0.25)
+									color: tokens.gtkalpha(tokens.color-var("calendar-event-color-6"), 0.25)
 								}
 
 								&.color-8 {
-									background-color: tokens.gtkalpha(tokens.color-var("calendar-event-color-7"), 0.25)
+									color: tokens.gtkalpha(tokens.color-var("calendar-event-color-7"), 0.25)
 								}
 
 								&.color-9 {
-									background-color: tokens.gtkalpha(tokens.color-var("calendar-event-color-8"), 0.25)
+									color: tokens.gtkalpha(tokens.color-var("calendar-event-color-8"), 0.25)
 								}
 
 								&.color-10 {
-									background-color: tokens.gtkalpha(tokens.color-var("calendar-event-color-9"), 0.25)
+									color: tokens.gtkalpha(tokens.color-var("calendar-event-color-9"), 0.25)
 								}
 
 								&.color-11 {
-									background-color: tokens.gtkalpha(tokens.color-var("calendar-event-color-10"), 0.25)
+									color: tokens.gtkalpha(tokens.color-var("calendar-event-color-10"), 0.25)
 								}
 
 								&.color-12 {
-									background-color: tokens.gtkalpha(tokens.color-var("calendar-event-color-11"), 0.25)
+									color: tokens.gtkalpha(tokens.color-var("calendar-event-color-11"), 0.25)
 								}
 
 								&.color-13 {
-									background-color: tokens.gtkalpha(tokens.color-var("calendar-event-color-12"), 0.25)
+									color: tokens.gtkalpha(tokens.color-var("calendar-event-color-12"), 0.25)
 								}
 
 								&.color-14 {
-									background-color: tokens.gtkalpha(tokens.color-var("calendar-event-color-13"), 0.25)
+									color: tokens.gtkalpha(tokens.color-var("calendar-event-color-13"), 0.25)
 								}
 
 								&.color-15 {
-									background-color: tokens.gtkalpha(tokens.color-var("calendar-event-color-14"), 0.25)
+									color: tokens.gtkalpha(tokens.color-var("calendar-event-color-14"), 0.25)
 								}
 
 								&.color-16 {
-									background-color: tokens.gtkalpha(tokens.color-var("calendar-event-color-15"), 0.25)
+									color: tokens.gtkalpha(tokens.color-var("calendar-event-color-15"), 0.25)
 								}
 							}
 						}
@@ -288,7 +284,16 @@
 					}
 
 					&.header {
+
 						label {
+
+							// calendar-border-color
+							color: tokens.color-var("calendar-border-color");
+
+							&.weekday {
+								color: tokens.color-var("calendar-highlight-color");
+							}
+
 							&:hover {
 								background-color: transparent;
 								color: tokens.color-var("button-accent-color");
