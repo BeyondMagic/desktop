@@ -225,6 +225,30 @@ key("i", "<C-j>", 'copilot#Previous("<CR>")', remap)
 key("i", "<C-k>", 'copilot#Next("<CR>")', remap)
 key("i", "<C-l>", 'copilot#Accept("<CR>")', remap)
 
+key("n", "<Leader>cpd", '',
+  {
+    noremap  = true,
+    silent   = true,
+    desc     = "Open the NeoTree without any warning messages...",
+    callback = function()
+      vim.g.blink_cmp = false
+      vim.cmd(":Copilot disable")
+    end
+  }
+)
+
+key("n", "<Leader>cpe", '',
+  {
+    noremap  = true,
+    silent   = true,
+    desc     = "Open the NeoTree without any warning messages...",
+    callback = function()
+      vim.cmd(":Copilot enable")
+      vim.g.blink_cmp = true
+    end
+  }
+)
+
 -- Open Neotree
 key('n', '<C-k>', '', {
   noremap  = true,
