@@ -229,6 +229,30 @@ key("n", "<Leader>cpd", '',
   {
     noremap  = true,
     silent   = true,
+    desc     = "Disable Copilot",
+    callback = function()
+      vim.g.blink_cmp = false
+      vim.cmd(":Copilot disable")
+    end
+  }
+)
+
+key("n", "<Leader>cpe", '',
+  {
+    noremap  = true,
+    silent   = true,
+    desc     = "Enable Copilot",
+    callback = function()
+      vim.cmd(":Copilot enable")
+      vim.g.blink_cmp = true
+    end
+  }
+)
+
+key("n", "<Leader>cpd", '',
+  {
+    noremap  = true,
+    silent   = true,
     desc     = "Open the NeoTree without any warning messages...",
     callback = function()
       vim.g.blink_cmp = false
