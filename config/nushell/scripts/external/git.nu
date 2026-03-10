@@ -383,6 +383,28 @@ export def unstage [
 	main [ 'restore' '--staged' $patch ...$paths ]
 }
 
+export def push [
+	remote?: string # Remote to push to.
+	branch?: string # Branch to push to.
+	--force # Force push to the remote branch.
+]: nothing -> any {
+	mut args = [ 'push' ]
+
+	if ($remote | is-not-empty) {
+		$args = $args ++ [ $remote ]
+	}
+
+	if ($branch | is-not-empty) {
+		$args = $args ++ [ $branch ]
+	}
+
+	if $force {
+		$args = $args ++ [ '--force-with-lease' ]
+	}
+
+	main $args
+}
+
 # The command itself for the package manager.
 # See git manual(1).
 #
