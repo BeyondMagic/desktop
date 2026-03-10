@@ -1814,6 +1814,16 @@ description = "Javascript/Typescript development tools."
 devices = ["computer", "laptop"]
 packages = ["docker", "docker-compose", "docker-dinit"]
 
+[[profiles]]
+description = "OCR tools."
+devices = ["computer", "laptop"]
+packages = [
+	"tesseract-data-best-por",      # Portuguese
+	"tesseract-data-best-jpn",      # Japanese horizontal text
+	"tesseract-data-best-jpn_vert", # Japanese vertical text
+	"tesseract-data-best-eng",      # English
+]
+
 [[services]]
 label = "fprintd"
 command = "/usr/bin/fprintd"
