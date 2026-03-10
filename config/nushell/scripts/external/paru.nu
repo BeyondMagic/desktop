@@ -19,12 +19,26 @@ export def downgrade [
 
 # Install packages in system.
 export def add [
+	--ignore: list<string> # Names of packages to ignore.
 	...packages: string # Names of the packages.
 ]: nothing -> any {
-	main [
+	mut args = [
 		-S
 		...$packages
 	]
+
+
+	if not ($ignore | is-empty) {
+		let ignore_parsed = $ignore
+			| par-each {
+				[ --ignore ] ++ [ $in ]
+			}
+			| flatten
+
+		$args = $args ++ $ignore_parsed
+	}
+
+	main $args
 }
 
 # Remove all packages.
