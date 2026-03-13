@@ -33,8 +33,8 @@ _build_id=(
 _build_id_date=${_build_id[date]}
 _build_id_time=${_build_id[time]}
 
-# https://ftp.mozilla.org/pub/firefox/nightly/2026/02/2026-02-03-09-28-03-mozilla-central/
-pkgver=149.0a1.20260203.092803
+# https://ftp.mozilla.org/pub/firefox/nightly/2026/03/2026-03-12-09-47-48-mozilla-central/
+pkgver=150.0a1.20260312.094748
 
 pkgver() {
   printf "%s.%s.%s" ${_version} ${_build_id_date} ${_build_id_time}
