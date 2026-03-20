@@ -39,7 +39,7 @@ const time_range = 3;
 const WEEKDAY_LABELS = [
 	{
 		label: "日",
-		weekday: true,
+		weekday: false,
 	},
 	{
 		label: "月",
@@ -59,7 +59,7 @@ const WEEKDAY_LABELS = [
 	},
 	{
 		label: "金",
-		weekday: false,
+		weekday: true,
 	},
 	{
 		label: "土",
