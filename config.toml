@@ -241,6 +241,12 @@ target = "~/.local/bin/organize-fav.nu"
 root = false
 exclude = []
 
+[[configuration.item]]
+source = "./config/swayimg/init.lua"
+target = "~/.config/swayimg/init.lua"
+root = false
+exclude = []
+
 [[configuration]]
 label = "foot"
 
