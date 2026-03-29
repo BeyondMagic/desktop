@@ -220,3 +220,51 @@ load-env $environment.runtime
 if (sys cpu | get brand | any { $in =~ 'Intel' }) {
 	$env.QTWEBENGINE_CHROMIUM_FLAGS = "--use-gl=disabled"
 }
+
+# Build a login-time export set for dinit user services (turnstiled session).
+let session_environment = {
+	DISPLAY: ($env.DISPLAY?)
+	WAYLAND_DISPLAY: ($env.WAYLAND_DISPLAY?)
+	XDG_CURRENT_DESKTOP: ($env.XDG_CURRENT_DESKTOP?)
+	DBUS_SESSION_BUS_ADDRESS: ($env.DBUS_SESSION_BUS_ADDRESS?)
+	XDG_RUNTIME_DIR: ($env.XDG_RUNTIME_DIR?)
+	LANG: ($env.LANG?)
+	LC_TIME: ($env.LC_TIME?)
+	LC_COLLATE: ($env.LC_COLLATE?)
+	USER: ($env.USER?)
+	HYPRLAND_INSTANCE_SIGNATURE: ($env.HYPRLAND_INSTANCE_SIGNATURE?)
+	SSH_AUTH_SOCK: ($env.SSH_AUTH_SOCK?)
+	PATH: ($env.PATH?)
+	GDK_BACKEND: ($env.GDK_BACKEND?)
+	QT_QPA_PLATFORM: ($env.QT_QPA_PLATFORM?)
+	XDG_SESSION_TYPE: ($env.XDG_SESSION_TYPE?)
+	MOZ_ENABLE_WAYLAND: ($env.MOZ_ENABLE_WAYLAND?)
+	ELECTRON_OZONE_PLATFORM_HINT: 'auto'
+}
+
+let dinit_environment = ($environment.static | merge $environment.runtime | merge $session_environment)
+let dinit_environment = (
+	if ('QTWEBENGINE_CHROMIUM_FLAGS' in ($env | columns)) {
+		$dinit_environment | merge { QTWEBENGINE_CHROMIUM_FLAGS: $env.QTWEBENGINE_CHROMIUM_FLAGS }
+	} else {
+		$dinit_environment
+	}
+)
+
+# Push environment into dinit user manager for all user services.
+$dinit_environment
+| transpose key value
+| where value != null
+| each {|item|
+	let value = ($item.value | into string | str trim)
+	if ($value | str length) > 0 {
+		try {
+			run-external 'dinitctl' '--user' 'setenv' $"($item.key)=($value)"
+		} catch {
+			# Keep login shell resilient if dinit user manager is not ready yet.
+			null
+		}
+	}
+}
+
+null
