@@ -9,11 +9,11 @@ uniform int wl_output;
 // match_color.frag
 void main() {
 	if (wl_output == 1) {
-		vec4 pixColor = texture(tex, v_texcoord);
+	 	vec4 pixColor = texture(tex, v_texcoord);
 
-		pixColor[0] *= 0.878; // Red
-		pixColor[1] *= 0.986; // Green
-		pixColor[2] *= 0.701; // Blue (Heavy reduction)
+		pixColor[0] *= 1.0; // Red
+		pixColor[1] *= 0.91; // Green
+		pixColor[2] *= 0.91; // Blue (Heavy reduction)
 
 		fragColor = pixColor;
 	} else {
