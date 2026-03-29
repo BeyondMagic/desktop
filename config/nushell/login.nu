@@ -127,9 +127,6 @@ let environment = {
 		# Python: startup file for Python.
 		PYTHONSTARTUP: ($xdg_config_home + '/python/startup.py'),
 
-		# Runit: directory for serive manager (sv).
-		SVDIR: ($env.HOME + '/.local/services'),
-
 		# Go path for binaries, etc.
 		GOPATH: ($env.HOME + '/.config/go'),
 
