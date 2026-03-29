@@ -8,220 +8,218 @@
 #
 # João V. Farias © BeyondMagic 2024-2026 <beyondmagic@mail.ru>
 
-# Path for neovim's last working directory.
-$env.NEOVIM_CD = '/tmp/neovim_cd'
+let xdg_config_home = $env.HOME + '/.config'
+let xdg_cache_home = $env.HOME + '/.cache'
+let xdg_data_home = $env.HOME + '/.local/share'
+let xdg_state_home = $env.HOME + '/.local/state'
+let images_folder = '~/storage/images/'
 
-# For scripts of the desktop.
-$env.DESKTOP_NAME = 'lovemii'
+let environment = {
+	static: {
+		# Path for neovim's last working directory.
+		NEOVIM_CD: '/tmp/neovim_cd',
 
-# XDG default folder for configuration files.
-$env.XDG_CONFIG_HOME = $env.HOME + '/.config'
+		# For scripts of the desktop.
+		DESKTOP_NAME: 'lovemii',
 
-$env.XDG_DOWNLOAD_DIR = $env.HOME + '/armazenamento/baixados'
+		# XDG folders.
+		XDG_CONFIG_HOME: $xdg_config_home,
+		XDG_DOWNLOAD_DIR: ($env.HOME + '/armazenamento/baixados'),
+		XDG_DESKTOP_DIR: ($env.HOME + '/armazenamento/desktop'),
+		XDG_DATA_HOME: $xdg_data_home,
+		XDG_CACHE_HOME: $xdg_cache_home,
+		XDG_STATE_HOME: $xdg_state_home,
 
-# Rust: package manager home and configuration.
-$env.CARGO_HOME = $env.XDG_CONFIG_HOME + '/cargo'
+		# Rust: package manager home and configuration.
+		CARGO_HOME: ($xdg_config_home + '/cargo'),
 
-# Bun: home and configuration files.
-$env.BUN_INSTALL = $env.XDG_CONFIG_HOME + '/bun'
+		# Bun: home and configuration files.
+		BUN_INSTALL: ($xdg_config_home + '/bun'),
 
-# Activate fcitx5.
-#$env.GTK_IM_MODULE = fcitx
-$env.QT_IM_MODULE = 'fcitx'
-$env.GLFW_IM_MODULE = 'ibus'
-$env.XMODIFIERS = '@im=fcitx'
-$env.GTK_USE_PORTAL = 1
+		# Activate fcitx5.
+		#GTK_IM_MODULE: 'fcitx'
+		QT_IM_MODULE: 'fcitx',
+		GLFW_IM_MODULE: 'ibus',
+		XMODIFIERS: '@im=fcitx',
+		GTK_USE_PORTAL: 1,
 
-# History path for less.
-$env.LESSHISTFILE = '/dev/null'
+		# History path for less.
+		LESSHISTFILE: '/dev/null',
 
-# Supress accessibility warning from GNOME bus.
-$env.NO_AT_BRIDGE = 1
+		# Supress accessibility warning from GNOME bus.
+		NO_AT_BRIDGE: 1,
 
-# Default text editor.
-$env.EDITOR = 'nvim'
+		# Default applications.
+		EDITOR: 'nvim',
+		VISUAL: 'nvim',
+		FILE: 'nnn',
+		READER: 'foliate',
+		BROWSER: 'firefox-nightly',
 
-# Default visual editor.
-$env.VISUAL = 'nvim'
+		# Scale for Wayland (GTK)
+		GDK_SCALE: 1,
 
-# Default application for file manager.
-$env.FILE = 'nnn'
+		# DPI Scale for Wayland (GTK)
+		GDK_DPI_SCALE: 1,
 
-# Default application for reading files.
-$env.READER = 'foliate'
+		# Enable Wayland for Firefox.
+		MOZ_ENABLE_WAYLAND: 1,
+		MOZ_DBUS_REMOTE: 1,
 
-# Default application for browser.
-$env.BROWSER = 'firefox-nightly'
+		# Fix all Java issues.
+		_JAVA_AWT_WM_NONREPARENTING: 1,
 
-# Scale for Wayland (GTK)
-$env.GDK_SCALE = 1
+		# Import SSH auth socket.
+		SSH_AUTH_SOCK: '/tmp/ssh-agent.socket',
 
-# DPI Scale for Wayland (GTK)
-$env.GDK_DPI_SCALE = 1
+		# For Neovim MRU plugin (latest files).
+		MRU_File: ($env.HOME + '/.cache/vim_mru_files'),
 
-# Enable Wayland for Firefox.
-$env.MOZ_ENABLE_WAYLAND = 1
-$env.MOZ_DBUS_REMOTE = 1
+		# Python: MYPY cache directory.
+		MYPY_CACHE_DIR: ($xdg_cache_home + '/mypy/'),
 
-# Fix all Java issues.
-$env._JAVA_AWT_WM_NONREPARENTING = 1
+		# To put trash files in here instead of removing them out of existence.
+		TRASH: ($env.HOME + '/.local/trash'),
 
-# Import SSH auth socket.
-$env.SSH_AUTH_SOCK = '/tmp/ssh-agent.socket'
+		# Paru: AUR package manager configuration.
+		PARU_CONF: ($xdg_config_home + '/paru/paru.conf'),
 
-# For Neovim MRU plugin (latest files).
-$env.MRU_File = $env.HOME + '/.cache/vim_mru_files'
+		# Possible fix for Steam
+		QT_QPA_PLATFORM: 'wayland;xcb',
 
-# XDG desktop folder.
-$env.XDG_DESKTOP_DIR = $env.HOME + '/armazenamento/desktop'
+		# Render GDK for wayland! Useful for ags.
+		GDK_BACKEND: 'wayland',
 
-# XDG default folder for data files.
-$env.XDG_DATA_HOME = $env.HOME + '/.local/share'
+		# Language unix settings.
+		LC_TIME: 'ja_JP.UTF-8',
+		LANG: 'en_GB.UTF-8',
+		LC_COLLATE: 'C.UTF-8',
 
-# XDG cache folder.
-$env.XDG_CACHE_HOME = $env.HOME + '/.cache'
+		# Image folder.
+		IMAGES_FOLDER: $images_folder,
 
-# XDG state folder.
-$env.XDG_STATE_HOME = $env.HOME + '/.local/state'
+		# Default location for images.
+		IMAGE_LOCATIONS: ([
+			($images_folder + 'extensions/jpg')
+			($images_folder + 'extensions/png')
+			($images_folder + 'art/extensions/jpg')
+			($images_folder + 'art/extensions/png')
+			($images_folder + 'art/poetry')
+			($images_folder + 'art/gl')
+			($images_folder + 'art/flags')
+			($images_folder + 'art/design')
+			($images_folder + 'photos')
+			($images_folder + 'profile/square')
+			($images_folder + 'profile/thumbnail')
+			($images_folder + 'profile/tall')
+		] | str join (char esep)),
 
-# Python: MYPY cache directory.
-$env.MYPY_CACHE_DIR = $env.XDG_CACHE_HOME + '/mypy/'
+		# Glob to all wallpaper files.
+		WALLPAPER_FILES: ($images_folder + 'wallpaper/desktop/**/*'),
 
-# To put trash files in here instead of removing them out of existence.
-$env.TRASH = $env.HOME + '/.local/trash'
+		# Share local database between diferent personal systems.
+		# Useful for sioyek.
+		PDF_USER_DATABASE: 'hana',
 
-# Paru: AUR package manager configuration.
-$env.PARU_CONF = $env.XDG_CONFIG_HOME + '/paru/paru.conf'
+		# Python: path of './.python_history'.
+		PYTHON_HISTORY: ($xdg_data_home + '/python/history.txt'),
 
-# Possible fix for Steam
-$env.QT_QPA_PLATFORM = 'wayland;xcb'
+		# Python: startup file for Python.
+		PYTHONSTARTUP: ($xdg_config_home + '/python/startup.py'),
 
-# Render GDK for wayland! Useful for ags.
-$env.GDK_BACKEND = 'wayland'
+		# Runit: directory for serive manager (sv).
+		SVDIR: ($env.HOME + '/.local/services'),
 
-# Language unix settings.
-$env.LC_TIME = 'ja_JP.UTF-8'
-$env.LANG = 'en_GB.UTF-8'
-$env.LC_COLLATE = 'C.UTF-8'
+		# Go path for binaries, etc.
+		GOPATH: ($env.HOME + '/.config/go'),
 
-# Image folder.
-$env.IMAGES_FOLDER = '~/storage/images/'
+		# For gnupg configuration files.
+		GNUPGHOME: ($xdg_config_home + '/gnupg'),
 
-# Default location for images.
-$env.IMAGE_LOCATIONS = [
-	($env.IMAGES_FOLDER + 'extensions/jpg')
-	($env.IMAGES_FOLDER + 'extensions/png')
-	($env.IMAGES_FOLDER + 'art/extensions/jpg')
-	($env.IMAGES_FOLDER + 'art/extensions/png')
-	($env.IMAGES_FOLDER + 'art/poetry')
-	($env.IMAGES_FOLDER + 'art/gl')
-	($env.IMAGES_FOLDER + 'art/flags')
-	($env.IMAGES_FOLDER + 'art/design')
-	($env.IMAGES_FOLDER + 'photos')
-	($env.IMAGES_FOLDER + 'profile/square')
-	($env.IMAGES_FOLDER + 'profile/thumbnail')
-	($env.IMAGES_FOLDER + 'profile/tall')
-] | str join (char esep)
+		# Path for .NET SDK runtime packs.
+		DBTOOLS_HOME: ($xdg_cache_home + '/dbtools'),
 
-# Glob to all wallpaper files.
-$env.WALLPAPER_FILES = $env.IMAGES_FOLDER + 'wallpaper/desktop/**/*'
+		# Path for .NET SDK runtime packs.
+		DOTNET_ROOT: ($xdg_cache_home + '/dotnet'),
 
-# Share local database between diferent personal systems.
-# Useful for sioyek.
-$env.PDF_USER_DATABASE = 'hana'
+		# Path for Docker certificates and config files.
+		DOCKER_CERT_PATH: ($xdg_config_home + '/docker/'),
 
-# Python: path of './.python_history':
-$env.PYTHON_HISTORY = $env.XDG_DATA_HOME + '/python/history.txt'
+		# Java: user home for Java configuration files.
+		_JAVA_OPTIONS: ([
+			$'-Djava.util.prefs.userRoot="($xdg_config_home)/java"'
+			$'-Djavafx.cachedir="($xdg_cache_home)/openjfx"'
+		] | str join (char space)),
 
-# Python: startup file for Python.
-$env.PYTHONSTARTUP = $env.XDG_CONFIG_HOME + '/python/startup.py'
+		JAVA_HOME: '/usr/lib/jvm/java-17-openjdk/',
 
-# Runit: directory for serive manager (sv).
-$env.SVDIR =  $env.HOME + '/.local/services'
+		# NPM: Node.js package manager home and configuration.
+		NPM_CONFIG_USERCONFIG: ($xdg_config_home + '/npm/npmrc'),
 
-# SSH: dynamic get the agent PID.
-$env.SSH_AGENT_PID = ^pidof ssh-agent | complete | get stdout | str trim
+		# OPAM: OCaml package manager home and configuration.
+		OPAMROOT: ($xdg_config_home + '/opam'),
 
-# Go path for binaries, etc.
-$env.GOPATH = $env.HOME + '/.config/go'
+		# WINE: configuration files.
+		WINEPREFIX: ($xdg_config_home + '/wine/default'),
 
-# Link user binaries.
-# By putting these new binary folders, they end up having higher priority.
-$env.PATH = ($env.PATH | split row (char esep)) ++ [
-	# User's local binaries.
-	($env.HOME + '/.local/bin/')
-	# Rust: binaries of cargo, package manager.
-	($env.CARGO_HOME + '/bin/')
-	# Python: binaries of virtual environment.
-	# Bun: binaries.
-	($env.BUN_INSTALL + '/bin/')
-	# Go: binaries.
-	($env.GOPATH + '/bin/')
-] | str join (char esep)
+		# Elixir: package manager home and configuration.
+		MIX_XDG: 'true',
+
+		# Oracle SQL Developer: configuration files.
+		IDE_USER_DIR: ($xdg_cache_home + '/sqldeveloper/'),
+
+		# GTK 2.0: configuration files.
+		GTK2_RC_FILES: ([
+			($xdg_config_home + '/gtk-2.0/gtkrc-2.0')
+			($xdg_config_home + '/gtk-2.0/gtkrc.mine')
+		] | str join (char esep)),
+
+		# WDM: configuration files.
+		WDM_DIR: ($xdg_config_home + '/wdm/'),
+
+		# Lean: home and configuration.
+		ELAN_HOME: ($xdg_config_home + '/elan/'),
+
+		# OpenSSL: random seed file.
+		RANDFILE: ($xdg_cache_home + '/openssl/.rnd'),
+
+		# Claude: AI CLI tool configuration.
+		CLAUDE_CONFIG_DIR: ($xdg_config_home + '/claude'),
+
+		# Junie: AI CLI cache folder.
+		EJ_FOLDER_WORK: ($xdg_cache_home + '/junie/'),
+
+		# Gradle: configuration files.
+		GRADLE_USER_HOME: ($xdg_config_home + '/gradle/'),
+
+		# Kotlin: configuration files.
+		KOTLIN_HOME: ($xdg_config_home + '/kotlin/'),
+	}
+
+	runtime: {
+		# SSH: dynamic get the agent PID.
+		SSH_AGENT_PID: (^pidof ssh-agent | complete | get stdout | str trim),
+
+		# Link user binaries.
+		# By putting these new binary folders, they end up having higher priority.
+		PATH: ((($env.PATH | split row (char esep)) ++ [
+			# User's local binaries.
+			($env.HOME + '/.local/bin/')
+			# Rust: binaries of cargo, package manager.
+			($xdg_config_home + '/cargo/bin/')
+			# Python: binaries of virtual environment.
+			# Bun: binaries.
+			($xdg_config_home + '/bun/bin/')
+			# Go: binaries.
+			($env.HOME + '/.config/go/bin/')
+		]) | str join (char esep)),
+	}
+}
+
+load-env $environment.static
+load-env $environment.runtime
 
 # For QT applications, disable GPU usage if Intel CPU is detected.
 if (sys cpu | get brand | any { $in =~ 'Intel' }) {
 	$env.QTWEBENGINE_CHROMIUM_FLAGS = "--use-gl=disabled"
 }
-
-# For gnupg configuration files.
-$env.GNUPGHOME = $env.XDG_CONFIG_HOME + '/gnupg'
-
-# Path for .NET SDK runtime packs.
-$env.DBTOOLS_HOME = $env.XDG_CACHE_HOME + '/dbtools'
-
-# Path for .NET SDK runtime packs.
-$env.DOTNET_ROOT = $env.XDG_CACHE_HOME + '/dotnet'
-
-# Path for Docker certificates and config files.
-$env.DOCKER_CERT_PATH = $env.XDG_CONFIG_HOME + '/docker/'
-
-# Java: user home for Java configuration files.
-$env._JAVA_OPTIONS = [
-  $'-Djava.util.prefs.userRoot="($env.XDG_CONFIG_HOME)/java"'
-  $'-Djavafx.cachedir="($env.XDG_CACHE_HOME)/openjfx"'
-] | str join (char space)
-
-$env.JAVA_HOME = '/usr/lib/jvm/java-17-openjdk/'
-
-# NPM: Node.js package manager home and configuration.
-$env.NPM_CONFIG_USERCONFIG = $env.XDG_CONFIG_HOME + '/npm/npmrc'
-
-# OPAM: OCaml package manager home and configuration.
-$env.OPAMROOT = $env.XDG_CONFIG_HOME + '/opam'
-
-# WINE: configuration files.
-$env.WINEPREFIX = $env.XDG_CONFIG_HOME + '/wine/default'
-
-# Elixir: package manager home and configuration.
-$env.MIX_XDG = 'true'
-
-# Oracle SQL Developer: configuration files.
-$env.IDE_USER_DIR = $env.XDG_CACHE_HOME + '/sqldeveloper/'
-
-# GTK 2.0: configuration files.
-$env.GTK2_RC_FILES = [
-  $env.XDG_CONFIG_HOME + '/gtk-2.0/gtkrc-2.0'
-  $env.XDG_CONFIG_HOME + '/gtk-2.0/gtkrc.mine'
-] | str join (char esep)
-
-# WDM: configuration files.
-$env.WDM_DIR = $env.XDG_CONFIG_HOME + '/wdm/'
-
-# Lean: home and configuration.
-$env.ELAN_HOME = $env.XDG_CONFIG_HOME + '/elan/'
-
-# OpenSSL: random seed file.
-$env.RANDFILE = $env.XDG_CACHE_HOME + '/openssl/.rnd'
-
-# Claude: AI CLI tool configuration.
-$env.CLAUDE_CONFIG_DIR = $env.XDG_CONFIG_HOME + '/claude'
-
-# Junie: AI CLI cache folder.
-$env.EJ_FOLDER_WORK = $env.XDG_CACHE_HOME + '/junie/'
-
-# Gradle: configuration files.
-$env.GRADLE_USER_HOME = $env.XDG_CONFIG_HOME + '/gradle/'
-
-# Kotlin: configuration files.
-$env.KOTLIN_HOME = $env.XDG_CONFIG_HOME + '/kotlin/'
