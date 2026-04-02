@@ -280,6 +280,20 @@
 				"java"
 			],
 			"replace": "java-icon"
+		},
+		{
+			"find": [
+				"org.gnome.Nautilus",
+				"org.freedesktop.FileManager1",
+				"org.freedesktop.FileManager"
+			],
+			"replace": "file-manager"
+		},
+		{
+			"find": [
+				"libreoffice-calc"
+			],
+			"replace": "spreadsheet"
 		}
 	]
 }
