@@ -43,7 +43,7 @@ export def main [
 		# Use chosen shell to execute the given command.
 		nu --commands
 		# Escape the command using double quotes.
-		('"' + $source_code + '"')
+		$source_code
 		# Send standard output and error streams to chosen files.
 		# Uses POSIX syntax.
 		'1>' $stdout '2>' $stderr
