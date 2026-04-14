@@ -1,6 +1,6 @@
 #!/usr/bin/env nu
 #
-# João Farias © BeyondMagic <beyondmagic@mail.ru> 2024-2025
+# João Farias © BeyondMagic <beyondmagic@mail.ru> 2024-2026
 
 # Spawn closure command(s) in the background and return PID.
 #
