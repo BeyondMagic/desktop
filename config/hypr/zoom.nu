@@ -5,8 +5,6 @@ export def main [
 	--difference: float = 0.15 # Difference percentage for zooming in or out.
 ]: nothing -> any {
 
-	use fork.nu
-
 	let current = run-external hyprctl getoption cursor:zoom_factor '-j'
 		| from json
 		| get float
@@ -22,10 +20,7 @@ export def main [
 		),
 		'reset' => (1.0),
 		'screenshot' => {
-			fork {
-				flameshot gui --raw
-				| wl-copy
-			}
+			^fork.nu `flameshot gui --raw | wl-copy`
 			sleep 0.25sec
 			1.0
 		},
