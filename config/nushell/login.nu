@@ -259,7 +259,14 @@ $dinit_environment
 	let value = ($item.value | into string | str trim)
 	if ($value | str length) > 0 {
 		try {
-			run-external 'dinitctl' '--user' 'setenv' $"($item.key)=($value)"
+			let commands = [
+				'dinitctl'
+				'--user'
+				'setenv'
+				$"($item.key)=($value)"
+			]
+			# print $commands
+			run-external ...$commands
 		} catch {
 			# Keep login shell resilient if dinit user manager is not ready yet.
 			null
