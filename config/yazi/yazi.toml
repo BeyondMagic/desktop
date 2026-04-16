@@ -1,0 +1,5 @@
+# configuration: https://yazi-rs.github.io/docs/configuration/yazi/
+
+[mgr]
+# ratio = [1, 4, 3] or 0 for default
+sort_by = "mtime"
