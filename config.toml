@@ -869,6 +869,15 @@ target = "~/.google-service-cli"
 root = false
 exclude = []
 
+[[configuration]]
+label = "yazi"
+
+[[configuration.item]]
+source = "./config/yazi/yazi.toml"
+target = "~/.config/yazi/yazi.toml"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
