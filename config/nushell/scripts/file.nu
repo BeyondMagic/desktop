@@ -45,12 +45,29 @@ const default_flags = [
 ]
 
 # Open default file manager.
-export def --env manager [
+export def --env _manager [
 	...args : string # Argument for file manager.
 	--flags : list<string> = $default_flags # Flags of file manager.
 ]: nothing -> nothing {
 	use quitcd.nu n
 	n ...$flags ...$args
+}
+
+# Open default editor.
+export def --env manager [
+	...args : string # Argument for file manager.
+]: nothing -> nothing {
+    let tmp = (mktemp -t "yazi-cwd.XXXXXX")
+    run-external ...[
+		yazi
+		...$args
+		--cwd-file $tmp
+	]
+    let cwd = (open $tmp)
+    if $cwd != "" and $cwd != $env.PWD {
+        cd $cwd
+    }
+    rm -f $tmp
 }
 
 # Display tree-like structure for folders.
