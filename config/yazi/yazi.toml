@@ -1,5 +1,7 @@
 # configuration: https://yazi-rs.github.io/docs/configuration/yazi/
 
 [mgr]
-# ratio = [1, 4, 3] or 0 for default
+show_symlink = false
 sort_by = "mtime"
+sort_reverse = true
+sort_dir_first = true
