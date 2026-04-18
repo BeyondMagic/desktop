@@ -878,6 +878,12 @@ target = "~/.config/yazi"
 root = false
 exclude = []
 
+[[configuration.item]]
+source = "./config/yazi/yazi.desktop"
+target = "/usr/share/applications/yazi.desktop"
+root = true
+exclude = []
+
 [[configuration]]
 label = "wl-clip-persist"
 
@@ -1446,6 +1452,14 @@ label = "upscayl"
 codename = "upscayl-bin"
 description = "Image upscaling tool powered by AI"
 depends_on = []
+
+[[packages]]
+method = "aur"
+label = "yazi-nightly-bin"
+codename = "yazi-nightly-bin"
+description = "The fastest file manager for the modern age"
+depends_on = []
+config = "yazi"
 
 # [[packages]]
 # method = "aur"

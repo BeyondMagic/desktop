@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Yazi
+Comment=A simple file manager just for you!
+Exec=terminal-nu fm %U
+Icon=~/.local/share/icons/png/yazi.png
+Terminal=false
+Type=Application
+Categories=Utility
+MimeType=inode/directory
