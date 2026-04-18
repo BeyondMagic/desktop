@@ -1,0 +1,19 @@
+[[mgr.prepend_keymap]]
+on = "<Enter>"
+run = "plugin --sync smart-enter"
+desc = "Enter the child directory, or open the file"
+
+[[mgr.prepend_keymap]]
+on = ["<C-w>"]
+run = "plugin close-and-restore-tab close_to_left"
+desc = "Close the current tab and turn to left tab, or quit if it is last tab"
+
+# [[mgr.prepend_keymap]]
+# on = ["<C-w>"]
+# run = "plugin close-and-restore-tab close_to_right"
+# desc = "Close the current tab and turn to right tab, or quit if it is last tab"
+
+[[mgr.prepend_keymap]]
+on = ["<C-S-T>"]
+run = "plugin close-and-restore-tab restore"
+desc = "Restore the closed tab"
