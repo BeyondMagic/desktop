@@ -57,3 +57,8 @@ desc = "Merge current tab to other projects"
 on = ["P", "M"]
 run = "plugin projects 'merge all'"
 desc = "Merge current project to other projects"
+
+[[mgr.prepend_keymap]]
+on = ["<Space>"]
+run = "toggle"
+desc = "Toggle selection"
