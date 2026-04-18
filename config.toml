@@ -878,6 +878,21 @@ target = "~/.config/yazi/yazi.toml"
 root = false
 exclude = []
 
+[[configuration]]
+label = "wl-clip-persist"
+
+[[configuration.item]]
+source = "./config/wl-clip-persist/dinit/wl-clip-persist"
+target = "~/.config/dinit.d/wl-clip-persist"
+root = false
+exclude = []
+
+[[configuration.item]]
+source = "./config/wl-clip-persist/dinit/wl-clip-persist"
+target = "~/.config/dinit.d/boot.d/wl-clip-persist"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 

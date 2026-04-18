@@ -1,0 +1,4 @@
+type = process
+depends-on = dbus
+command = wl-clip-persist --clipboard regular
+smooth-recovery = true
