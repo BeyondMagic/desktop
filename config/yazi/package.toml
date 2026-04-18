@@ -8,6 +8,11 @@ use = "MasouShizuka/close-and-restore-tab"
 rev = "5047217"
 hash = "bb24648b1f96f1cef8c1543742189aad"
 
+[[plugin.deps]]
+use = "MasouShizuka/projects"
+rev = "198c2ba"
+hash = "5eeb4f0919ce6be5d941a9290c131d7d"
+
 [[flavor.deps]]
 use = "gosxrgxx/flexoki-dark"
 rev = "25d28ce"

@@ -22,3 +22,38 @@ desc = "Restore the closed tab"
 run = ["shell 'organize-fav.nu %h' --orphan", "ya emit reveal %h"]
 on = ["<C-k>"]
 desc = "Organize favorites with nu shell"
+
+[[mgr.prepend_keymap]]
+on = ["P", "s"]
+run = "plugin projects save"
+desc = "Save current project"
+
+[[mgr.prepend_keymap]]
+on = ["P", "l"]
+run = "plugin projects load"
+desc = "Load project"
+
+[[mgr.prepend_keymap]]
+on = ["P", "P"]
+run = "plugin projects load_last"
+desc = "Load last project"
+
+[[mgr.prepend_keymap]]
+on = ["P", "d"]
+run = "plugin projects delete"
+desc = "Delete project"
+
+[[mgr.prepend_keymap]]
+on = ["P", "D"]
+run = "plugin projects delete_all"
+desc = "Delete all projects"
+
+[[mgr.prepend_keymap]]
+on = ["P", "m"]
+run = "plugin projects 'merge current'"
+desc = "Merge current tab to other projects"
+
+[[mgr.prepend_keymap]]
+on = ["P", "M"]
+run = "plugin projects 'merge all'"
+desc = "Merge current project to other projects"
