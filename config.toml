@@ -873,8 +873,8 @@ exclude = []
 label = "yazi"
 
 [[configuration.item]]
-source = "./config/yazi/yazi.toml"
-target = "~/.config/yazi/yazi.toml"
+source = "./config/yazi"
+target = "~/.config/yazi"
 root = false
 exclude = []
 
