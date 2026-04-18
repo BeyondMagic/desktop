@@ -13,7 +13,7 @@ def main [
 	} else {
 		# Yazi pre-formats the path with quotes, so we need to remove them.
 		$path
-		| str replace --all  --regex `^"|"$` ``
+		| str replace --all --regex `^"|"$` ``
 	}
 
 	let base = if ('IMAGES_FOLDER' in $env) {
