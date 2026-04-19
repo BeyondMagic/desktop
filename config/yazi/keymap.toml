@@ -24,6 +24,11 @@ on = ["<C-k>"]
 desc = "Organize favorites with nu shell"
 
 [[mgr.prepend_keymap]]
+on = ["e"]
+run = "shell '$EDITOR %h' --block"
+desc = "Open with default editor"
+
+[[mgr.prepend_keymap]]
 on = ["P", "s"]
 run = "plugin projects save"
 desc = "Save current project"
