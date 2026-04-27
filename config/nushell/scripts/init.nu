@@ -44,7 +44,7 @@ export use ./themes/tokyo-night.nu
 export alias fm = file manager
 export alias _ = echo $env.LAST
 export alias find = find --no-highlight
-export alias prolog = ^swipl
+export alias prolog = ^swipl -q
 export alias mv = mv --progress --verbose
 export alias cp = cp --progress --verbose
 export alias rm = rm --interactive --trash --verbose
