@@ -231,7 +231,8 @@ key("n", "<Leader>cpd", '',
     silent   = true,
     desc     = "Disable Copilot",
     callback = function()
-      vim.g.blink_cmp = false
+      vim.g.copilot = false
+      require("sidekick.nes").enable(false)
       vim.cmd(":Copilot disable")
     end
   }
@@ -244,31 +245,8 @@ key("n", "<Leader>cpe", '',
     desc     = "Enable Copilot",
     callback = function()
       vim.cmd(":Copilot enable")
-      vim.g.blink_cmp = true
-    end
-  }
-)
-
-key("n", "<Leader>cpd", '',
-  {
-    noremap  = true,
-    silent   = true,
-    desc     = "Open the NeoTree without any warning messages...",
-    callback = function()
-      vim.g.blink_cmp = false
-      vim.cmd(":Copilot disable")
-    end
-  }
-)
-
-key("n", "<Leader>cpe", '',
-  {
-    noremap  = true,
-    silent   = true,
-    desc     = "Open the NeoTree without any warning messages...",
-    callback = function()
-      vim.cmd(":Copilot enable")
-      vim.g.blink_cmp = true
+      require("sidekick.nes").enable(true)
+      vim.g.copilot = true
     end
   }
 )

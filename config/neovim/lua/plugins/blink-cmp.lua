@@ -105,6 +105,10 @@ return {
 					module = "blink-copilot",
 					score_offset = 100,
 					async = true,
+					-- Set function here that checks if vim.g.copilot is true, so that the source can be toggled on/off without reloading the config
+					enabled = function()
+						return vim.g.copilot == true
+					end
 				},
 			},
 		},
