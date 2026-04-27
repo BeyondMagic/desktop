@@ -13,26 +13,26 @@ return {
 
     -- auto change color according to neovims mode
     local mode_color = {
-      n      = { 'Normal'           ,COLOUR.fg_1 },
-      i      = { 'Insert'           ,COLOUR.green_3 },
-      v      = { 'Visual'           ,COLOUR.green_1 },
-      [''] = { 'Visual Block'     ,COLOUR.green_0 },
-      V      = { 'Visual Line'      ,COLOUR.violet_2 },
-      c      = { 'Command-Line'     ,COLOUR.violet_0 },
-      no     = { 'Operator-Pending' ,COLOUR.blue_1 },
-      s      = { 'Select'           ,COLOUR.orange_1 },
-      S      = { 'Select'           ,COLOUR.yellow_0 },
-      [''] = { 'Select'           ,COLOUR.orange_0 },
-      ic     = { 'Ins-Complete'     ,COLOUR.yellow_1 },
-      R      = { 'Replace'          ,COLOUR.red_1 },
-      Rv     = { 'Virtual'          ,COLOUR.red_2 },
-      cv     = { 'Ex'               ,COLOUR.green_5 },
-      ce     = { 'Normal Ex'        ,COLOUR.blue_2 },
-      r      = { 'Hit-Enter'        ,COLOUR.violet_1 },
-      rm     = { '--More'           ,COLOUR.blue_0 },
-      ['r?'] = { ':Confirm'         ,COLOUR.green_4 },
-      ['!']  = { 'Shell'            ,COLOUR.blue_3 },
-      t      = { 'Terminal'         ,COLOUR.blue_4 }
+      n      = { 'Normal', COLOUR.fg_1 },
+      i      = { 'Insert', COLOUR.green_3 },
+      v      = { 'Visual', COLOUR.green_1 },
+      ['']  = { 'Visual Block', COLOUR.green_0 },
+      V      = { 'Visual Line', COLOUR.violet_2 },
+      c      = { 'Command-Line', COLOUR.violet_0 },
+      no     = { 'Operator-Pending', COLOUR.blue_1 },
+      s      = { 'Select', COLOUR.orange_1 },
+      S      = { 'Select', COLOUR.yellow_0 },
+      ['']  = { 'Select', COLOUR.orange_0 },
+      ic     = { 'Ins-Complete', COLOUR.yellow_1 },
+      R      = { 'Replace', COLOUR.red_1 },
+      Rv     = { 'Virtual', COLOUR.red_2 },
+      cv     = { 'Ex', COLOUR.green_5 },
+      ce     = { 'Normal Ex', COLOUR.blue_2 },
+      r      = { 'Hit-Enter', COLOUR.violet_1 },
+      rm     = { '--More', COLOUR.blue_0 },
+      ['r?'] = { ':Confirm', COLOUR.green_4 },
+      ['!']  = { 'Shell', COLOUR.blue_3 },
+      t      = { 'Terminal', COLOUR.blue_4 }
     }
 
     -- Conditional for a certain part of the bar to be rendered.
@@ -66,7 +66,7 @@ return {
       end,
 
       -- To check if spell is activated.
-      spell_activated = function ()
+      spell_activated = function()
         if (vim.api.nvim_win_get_option(0, 'spell')) then return true end
       end
 
@@ -131,30 +131,30 @@ return {
         lualine_d = {},
         lualine_x = {
           {
-              'copilot',
-              -- Default values
-              symbols = {
-                  status = {
-                      icons = {
-                          enabled = " ",
-                          sleep = " ",   -- auto-trigger disabled
-                          disabled = " ",
-                          warning = " ",
-                          unknown = " "
-                      },
-                      hl = {
-                          enabled = "#50FA7B",
-                          sleep = "#AEB7D0",
-                          disabled = "#6272A4",
-                          warning = "#FFB86C",
-                          unknown = "#FF5555"
-                      }
-                  },
-                  spinners = "dots", -- has some premade spinners
-                  spinner_color = "#6272A4"
+            'copilot',
+            -- Default values
+            symbols = {
+              status = {
+                icons = {
+                  enabled = " ",
+                  sleep = " ", -- auto-trigger disabled
+                  disabled = " ",
+                  warning = " ",
+                  unknown = " "
+                },
+                hl = {
+                  enabled = "#50FA7B",
+                  sleep = "#AEB7D0",
+                  disabled = "#6272A4",
+                  warning = "#FFB86C",
+                  unknown = "#FF5555"
+                }
               },
-              show_colors = false,
-              show_loading = true
+              spinners = "dots",     -- has some premade spinners
+              spinner_color = "#6272A4"
+            },
+            show_colors = false,
+            show_loading = true
           },
           'encoding',
           'fileformat',
@@ -204,12 +204,12 @@ return {
 
       status = {
 
-        left = function (component)
+        left = function(component)
           table.insert(config.sections.lualine_c, component)
         end,
 
         -- Inserts a component in lualine_x ot right section
-        right = function (component)
+        right = function(component)
           table.insert(config.sections.lualine_x, component)
         end,
 
@@ -264,16 +264,16 @@ return {
 
     insert.status.left({
       'diff',
-      colored = true, -- Displays a colored diff status if set to true
+      colored    = true, -- Displays a colored diff status if set to true
       diff_color = {
         -- Same color values as the general color option can be used here.
-        added    = { fg = COLOUR.green_0 },  -- Changes the diff's added color
-        modified = { fg = COLOUR.blue_1 },  -- Changes the diff's modified color
-        removed  = { fg = COLOUR.red_1 }  -- Changes the diff's removed color you
+        added    = { fg = COLOUR.green_0 }, -- Changes the diff's added color
+        modified = { fg = COLOUR.blue_1 }, -- Changes the diff's modified color
+        removed  = { fg = COLOUR.red_1 } -- Changes the diff's removed color you
       },
-      symbols = { added = ' ', modified = ' ', removed = ' ' }, -- Changes the symbols used by the diff.
-      cond = conditions.hide_in_width,
-      source   = nil, -- A function that works as a data source for diff.
+      symbols    = { added = ' ', modified = ' ', removed = ' ' }, -- Changes the symbols used by the diff.
+      cond       = conditions.hide_in_width,
+      source     = nil, -- A function that works as a data source for diff.
       -- It must return a table as such:
       --   { added = add_count, modified = modified_count, removed = removed_count }
       -- or nil on failure. count <= 0 won't be displayed.
@@ -300,7 +300,7 @@ return {
       -- Lsp server name .
       function()
         --local msg = 'No Active Lsp'
-        local buf_ft = vim.api.nvim_get_option_value('filetype', {buf = 0})
+        local buf_ft = vim.api.nvim_get_option_value('filetype', { buf = 0 })
         local clients = vim.lsp.get_clients()
         if next(clients) == nil then
           return ''
@@ -324,14 +324,14 @@ return {
       symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
       diagnostics_color = {
         -- Same values as the general color option can be used here.
-        error = { fg = COLOUR.red_1 }, -- Changes diagnostics' error color.
+        error = { fg = COLOUR.red_1 },    -- Changes diagnostics' error color.
         warn  = { fg = COLOUR.yellow_0 }, -- Changes diagnostics' warn color.
-        info  = { fg = COLOUR.blue_3 }, -- Changes diagnostics' info color.
+        info  = { fg = COLOUR.blue_3 },   -- Changes diagnostics' info color.
         hint  = { fg = COLOUR.violet_1 }  -- Changes diagnostics' hint color.,
       },
-      colored = true,           -- Displays diagnostics status in color if set to true.
-      update_in_insert = false, -- Update diagnostics in insert mode.
-      always_visible = false,   -- Show diagnostics even if there are none.
+      colored = true,                     -- Displays diagnostics status in color if set to true.
+      update_in_insert = false,           -- Update diagnostics in insert mode.
+      always_visible = false,             -- Show diagnostics even if there are none.
     })
 
     insert.status.right({
@@ -352,7 +352,7 @@ return {
 
     -- Add components to right sections
     insert.status.right({
-      'o:encoding', -- option component same as &encoding in viml
+      'o:encoding',       -- option component same as &encoding in viml
       fmt = string.upper, -- I'm not sure why it's upper case either ;)
       cond = conditions.hide_in_width,
       color = { fg = COLOUR.fg_0, gui = 'bold' },
