@@ -251,3 +251,10 @@ vim.filetype.add({
 		end,
 	},
 })
+
+vim.filetype.add({
+	extension = {
+		regex = "regex",
+		grepe = "regex" -- To use with `grep -E` command.
+	},
+})
