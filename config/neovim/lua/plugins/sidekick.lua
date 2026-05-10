@@ -12,6 +12,10 @@ return {
 	},
 	config = function(_, opts)
 		require("sidekick").setup(opts)
+
+		require("sidekick.nes").enable(false)
+		vim.g.copilot = false
+		vim.cmd(":Copilot disable")
 	end,
 	keys = {
 		{
