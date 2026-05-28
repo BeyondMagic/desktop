@@ -123,9 +123,10 @@ return {
 					select   = true,
 				},
 				["<Tab>"]   = vim.schedule_wrap(function(fallback)
-					if require("sidekick").nes_jump_or_apply() then
-						return -- jumped or applied
-					elseif cmp.visible() and has_words_before() then
+					--if require("sidekick").nes_jump_or_apply() then
+					--return -- jumped or applied
+					--else
+					if cmp.visible() and has_words_before() then
 						cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
 					else
 						fallback()
