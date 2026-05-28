@@ -232,7 +232,7 @@ key("n", "<Leader>cpd", '',
     desc     = "Disable Copilot",
     callback = function()
       vim.g.copilot = false
-      require("sidekick.nes").enable(false)
+      -- require("sidekick.nes").disable()
       vim.cmd(":Copilot disable")
     end
   }
@@ -245,7 +245,7 @@ key("n", "<Leader>cpe", '',
     desc     = "Enable Copilot",
     callback = function()
       vim.cmd(":Copilot enable")
-      require("sidekick.nes").enable(true)
+      -- require("sidekick.nes").enable(true)
       vim.g.copilot = true
     end
   }
