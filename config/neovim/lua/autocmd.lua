@@ -3,6 +3,7 @@
 local modules = {
 	'autocmd.session',
 	'autocmd.save_path',
+	'autocmd.copilot',
 	-- 'autocmd.optimise',
 }
 
