@@ -1,7 +1,6 @@
 local M = {}
 
 function M.setup()
-	print("Setting up Copilot autocmds...")
 	vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufNewFile' }, {
 		desc = 'Disable Copilot for all filetypes',
 		pattern = { '*' },
