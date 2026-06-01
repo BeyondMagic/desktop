@@ -67,3 +67,4 @@ x-scheme-handler/beeper=beeper.desktop
 x-scheme-handler/http=firefox-nightly.desktop
 x-scheme-handler/https=firefox-nightly.desktop
 inode/directory=yazi.desktop
+x-scheme-handler/superproductivity=superproductivity.desktop
