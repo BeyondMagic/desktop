@@ -1659,6 +1659,7 @@ packages = [
 	"advcpmv",
 	"pwvucontrol",
 	"syncthing",
+	"nwg-look",    # GTK theme switcher
 ]
 
 [[profiles]]
