@@ -376,11 +376,13 @@ export def unstage [
 	...paths: string # Paths to restore.
 	--patch (-p) # Interactively select hunks in the difference between the restore source and the restore location.
 ]: nothing -> any {
+	mut args = [ 'restore' '--staged' ]
+
 	let patch = if $patch {
-		'--patch'
+		$args = $args ++ ['--patch']
 	}
 	
-	main [ 'restore' '--staged' $patch ...$paths ]
+	main ($args ++ $paths)
 }
 
 export def push [
