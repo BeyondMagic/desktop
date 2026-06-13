@@ -1657,7 +1657,7 @@ packages = [
 	"dashbinsh",
 	"turnstile",
 	"advcpmv",
-	"pavucontrol",
+	"pwvucontrol",
 	"syncthing",
 ]
 
