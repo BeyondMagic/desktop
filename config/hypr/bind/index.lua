@@ -43,8 +43,8 @@ hl.bind("Print", hl.dsp.exec_cmd("zoom.nu --type 'screenshot'"))
 hl.bind("SUPER + Print", hl.dsp.exec_cmd("flameshot screen"))
 hl.bind("SUPER + SHIFT + Print", hl.dsp.exec_cmd("hyprpicker --autocopy"))
 
-hl.bind("SUPER + F", hl.dsp.exec_cmd("hyprctl dispatch fullscreen 0"))
-hl.bind("SUPER + M", hl.dsp.exec_cmd("hyprctl dispatch fullscreen 1"))
+hl.bind("SUPER + F", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))
+hl.bind("SUPER + M", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
 
 hl.bind("SUPER + Minus", hl.dsp.exec_cmd("hyprctl dispatch layoutmsg splitratio -0.1"), { repeating = true })
 hl.bind("SUPER + Equal", hl.dsp.exec_cmd("hyprctl dispatch layoutmsg splitratio 0.1"), { repeating = true })
