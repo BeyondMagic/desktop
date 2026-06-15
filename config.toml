@@ -47,7 +47,7 @@ root = false
 exclude = ["zoom.nu"]
 
 [[configuration.item]]
-source = "./config/hypr/**/*{device}*.conf"
+source = "./config/hypr/**/*{device}*.lua"
 target = "~/.config/hypr/current/"
 root = false
 exclude = []
