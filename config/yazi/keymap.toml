@@ -4,6 +4,16 @@ run = "plugin --sync smart-enter"
 desc = "Enter the child directory, or open the file"
 
 [[mgr.prepend_keymap]]
+on = ["y", "f"]
+run = "shell --confirm 'echo -n \"$@\" | wl-copy'"
+desc = "Copy full path of hovered file to clipboard"
+
+[[mgr.prepend_keymap]]
+on = ["y", "p"]
+run = "shell 'pwd | wl-copy' --confirm"
+desc = "Copy current directory path to clipboard"
+
+[[mgr.prepend_keymap]]
 on = "o"
 run = "shell 'xdg-open %h' --orphan"
 desc = "Open with system default application"
