@@ -35,7 +35,7 @@ desc = "Restore the closed tab"
 
 [[mgr.prepend_keymap]]
 run = ["shell 'organize-fav.nu %h' --orphan", "ya emit reveal %h"]
-on = ["<C-k>"]
+on = ["m", "k"]
 desc = "Organize favorites with nu shell"
 
 [[mgr.prepend_keymap]]
