@@ -4,12 +4,12 @@ run = "plugin --sync smart-enter"
 desc = "Enter the child directory, or open the file"
 
 [[mgr.prepend_keymap]]
-on = ["y", "f"]
+on = ["Y", "f"]
 run = "shell --confirm 'echo -n \"$@\" | wl-copy'"
 desc = "Copy full path of hovered file to clipboard"
 
 [[mgr.prepend_keymap]]
-on = ["y", "p"]
+on = ["Y", "p"]
 run = "shell 'pwd | wl-copy' --confirm"
 desc = "Copy current directory path to clipboard"
 
@@ -18,7 +18,7 @@ on = "o"
 run = "shell 'xdg-open %h' --orphan"
 desc = "Open with system default application"
 
-[[mgr.prepend_keymap]]
+[[mgr.append_keymap]]
 on = ["<C-w>"]
 run = "plugin close-and-restore-tab close_to_left"
 desc = "Close the current tab and turn to left tab, or quit if it is last tab"
@@ -35,7 +35,7 @@ desc = "Restore the closed tab"
 
 [[mgr.prepend_keymap]]
 run = ["shell 'organize-fav.nu %h' --orphan", "ya emit reveal %h"]
-on = ["m", "k"]
+on = ["<C-k>"]
 desc = "Organize favorites with nu shell"
 
 [[mgr.prepend_keymap]]
