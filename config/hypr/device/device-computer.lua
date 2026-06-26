@@ -11,4 +11,7 @@ hl.device({
 	kb_options = "",
 	kb_rules = "",
 })
-hl.device({ name = "pixart-opticalmouse" })
+hl.device({
+	name = "pixart-opticalmouse",
+	sensitivity = 0.1,
+})
