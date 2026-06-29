@@ -29,6 +29,7 @@ let environment = {
 		XDG_DATA_HOME: $xdg_data_home,
 		XDG_CACHE_HOME: $xdg_cache_home,
 		XDG_STATE_HOME: $xdg_state_home,
+		XDG_MENU_PREFIX: 'arch-',
 
 		# Rust: package manager home and configuration.
 		CARGO_HOME: ($xdg_config_home + '/cargo'),
