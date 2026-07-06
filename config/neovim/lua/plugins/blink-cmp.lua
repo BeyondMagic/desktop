@@ -1,3 +1,5 @@
+local trigger_chars_add = { ' ', '\n', '\t' }
+
 return {
 	'saghen/blink.cmp',
 	-- optional: provides snippets for the snippet source
@@ -109,6 +111,23 @@ return {
 					enabled = function()
 						return vim.g.copilot == true
 					end
+				},
+				snippets = {
+					override = {
+						get_trigger_characters = function(self)
+							if self.get_trigger_characters then
+								local stat, trigger_chars = pcall(self.get_trigger_characters, self)
+								if stat then
+									vim.list_extend(trigger_chars, trigger_chars_add)
+									return trigger_chars
+								else
+									return trigger_chars_add
+								end
+							else
+								return trigger_chars_add
+							end
+						end,
+					},
 				},
 			},
 		},
