@@ -27,7 +27,7 @@ export def editor [
 	--temporary : string = '/tmp/' # Temporary folder.
 ]: nothing -> nothing {
 
-	use std log
+	use std/log
 
 	# Exit if environment variable EDITOR is not set.
 	if not ('EDITOR' in $env) or $env.EDITOR == '' {

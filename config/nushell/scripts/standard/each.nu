@@ -40,7 +40,7 @@ export def interactive [
 			if $confirmation == "y" or $confirmation == "n" {
 				break
 			} else {
-				$confirmation = (null | input "Please enter 'y' or 'n': " | str downcase)
+				$confirmation = (null | input "Please enter 'y' or 'n': " | str lowercase)
 			}
 		}
 

@@ -8,7 +8,7 @@ export use ./standard/random.nu
 export use ./standard/str.nu
 export use ./standard/transform.nu
 export use ./standard/each.nu
-export use ./standard/sys.nu
+# export use ./standard/sys.nu
 
 # Modules for external commands.
 export use ./external/dinitctl.nu
@@ -20,7 +20,7 @@ export use ./external/oracle.nu
 export use ./external/steam.nu
 export use ./external/pacman.nu
 export use ./external/biome.nu
-export use ./external/calendar.nu
+# export use ./external/calendar.nu
 
 export use miscelanous.nu *
 export use package.nu
