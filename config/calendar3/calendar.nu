@@ -10,7 +10,7 @@ def format-time []: datetime -> string {
 }
 
 # Format the event time based on the available fields (dateTime and timeZone or date).
-def format-item-time []: any -> string {
+def format-item-time []: any -> datetime {
 
 	let input = $in
 
