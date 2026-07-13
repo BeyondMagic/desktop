@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Thunderbird (Nightly)
+Comment=Mail & News Reader (Nightly)
+GenericName=Mail Client & News Reader (Nightly)
+Exec=hypr-minimize --type open --class thunderbird-nightly
+Icon=thunderbird-nightly
+Terminal=false
+Type=Application
+Categories=Network;Email;
+MimeType=message/rfc822;x-scheme-handler/mailto;
+StartupNotify=true
