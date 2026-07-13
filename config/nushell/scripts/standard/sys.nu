@@ -248,7 +248,7 @@ export def host []: nothing -> record {
 }
 
 # Validate the current machine against the configured devices.
-export def setup []: record<devices: list<record<label: string, machine_id: string>>> -> any {
+export def setup []: any -> any {
 
 	let machine_id = host | get machine_id
 
@@ -267,3 +267,5 @@ export def setup []: record<devices: list<record<label: string, machine_id: stri
 export def main []: nothing -> any {
 	sys --help
 }
+
+export use config

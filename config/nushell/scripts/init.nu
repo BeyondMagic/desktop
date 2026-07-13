@@ -8,7 +8,7 @@ export use ./standard/random.nu
 export use ./standard/str.nu
 export use ./standard/transform.nu
 export use ./standard/each.nu
-# export use ./standard/sys.nu
+export use ./standard/sys.nu
 
 # Modules for external commands.
 export use ./external/dinitctl.nu
@@ -48,3 +48,4 @@ export alias prolog = ^swipl -q
 export alias mv = mv --progress --verbose
 export alias cp = cp --progress --verbose
 export alias rm = rm --interactive --trash --verbose
+export alias di = dinitctl
