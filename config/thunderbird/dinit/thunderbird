@@ -1,5 +1,5 @@
 type = process
-command = /usr/bin/thunderbird
+command = /usr/bin/thunderbird-nightly
 depends-on = dbus
 waits-for = dbus
 smooth-recovery = true
