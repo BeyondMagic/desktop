@@ -5,7 +5,7 @@ import { Astal, Gtk, Gdk } from "ags/gtk4"
 import AstalApps from "gi://AstalApps"
 import Graphene from "gi://Graphene"
 
-import { dbus_address } from "../../app"
+// import { dbus_address } from "../../app"
 import GLib from "gi://GLib"
 
 const { TOP, BOTTOM, LEFT, RIGHT } = Astal.WindowAnchor
