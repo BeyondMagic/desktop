@@ -29,8 +29,8 @@ export function Bar({ monitor }: { monitor: number }) {
 			<box
 				$type="start"
 			>
-				<Icon />
-				<Title />
+				<Icon monitor={monitor} />
+				<Title monitor={monitor} />
 			</box>
 
 			{/* Date and time. */}

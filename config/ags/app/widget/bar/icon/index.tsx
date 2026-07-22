@@ -1,45 +1,45 @@
-import { createBinding, createComputed, With } from "ags"
-import { focused_client } from "../../../services/hyprland"
+import { createBinding, createState, createEffect } from "ags"
+import { focused_client, hyprland } from "../../../services/hyprland"
 import { config } from "../../../app"
 import { resolveCategory } from "./map"
 
 const FALLBACK_ICON = "unknown-status-symbolic";
 
-export function Icon() {
+export function Icon({ monitor }: { monitor: number }) {
+	const [lastIcon, setLastIcon] = createState("");
+	const focused = focused_client();
+	const focusedMonitor = createBinding(hyprland(), "focused_monitor");
+
+	createEffect(() => {
+		const client = focused();
+		const fm = focusedMonitor();
+
+		if (client && client.monitor?.id === monitor) {
+			const clientClass = createBinding(client, "class");
+			const clientTitle = createBinding(client, "initial_title");
+			const category = resolveCategory({
+				className: clientClass(),
+				title: clientTitle(),
+			});
+			if (!category) {
+				if (clientClass.peek())
+					printerr("No category found for class:", clientClass.peek());
+				if (clientTitle.peek())
+					printerr("No category found for title:", clientTitle.peek());
+			}
+			setLastIcon(category ?? FALLBACK_ICON);
+		} else if (!client && fm?.id === monitor) {
+			setLastIcon("");
+		}
+		// Otherwise: focus is elsewhere — keep frozen lastIcon
+	});
+
 	return <box>
-		<With
-			value={focused_client()}
-		>
-			{client => {
-				if (!client)
-					return <image
-						width_request={config.corner}
-						height_request={config.corner}
-						css_classes={["icon"]}
-					/>
-
-				const client_class = createBinding(client, "class");
-				const client_title = createBinding(client, "initial_title");
-				const icon_name = createComputed([client_class, client_title], (class_name, title) => {
-					const category = resolveCategory({ className: class_name, title });
-					if (!category) {
-						if (class_name)
-							printerr("No category found for class:", class_name);
-						if (title)
-							printerr("No category found for title:", title);
-					}
-					return category ?? FALLBACK_ICON;
-				});
-
-				return <image
-					width_request={config.corner}
-					height_request={config.corner}
-					css_classes={[
-						"icon"
-					]}
-					icon_name={icon_name}
-				/>
-			}}
-		</With>
+		<image
+			width_request={config.corner}
+			height_request={config.corner}
+			css_classes={["icon"]}
+			icon_name={lastIcon}
+		/>
 	</box>
 }
