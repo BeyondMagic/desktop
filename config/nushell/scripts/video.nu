@@ -39,6 +39,48 @@ export def to-mp3 [
 	^ffmpeg -i $input -q:a 0 -map a ($out + '.webp')
 }
 
+# Compress video by scaling it down to a lower resolution.
+export def compress [
+	--lowest: int = 720  # Maximum height in pixels; videos taller than this get scaled down.
+	--audio-bitrate: string = '128k' # Audio bitrate for the output video.
+]: list<string> -> nothing {
+	let files = $in
+
+	for file in $files {
+		# Get video height using ffprobe.
+		let probe = (
+			^ffprobe
+				-v error
+				-select_streams v:0
+				-show_entries stream=height
+				-of default=noprint_wrappers=1:nokey=1
+				$file
+			| complete
+		)
+
+		if $probe.exit_code != 0 {
+			print $"Error probing ($file): ($probe.stderr | str trim)"
+			continue
+		}
+
+		let height = ($probe.stdout | str trim | into int)
+
+		if $height > $lowest {
+			let parsed = $file | path parse
+			let out = if ($parsed.parent | is-empty) {
+				$"compressed_($parsed.stem).($parsed.extension)"
+			} else {
+				$"($parsed.parent)/compressed_($parsed.stem).($parsed.extension)"
+			}
+
+			print $"Compressing ($file): ($height)p → ($lowest)p …"
+			^ffmpeg -i $file -vf $"scale=-2:($lowest)" -c:v libx265 -crf 26 -preset slow -c:a aac -b:a 128k $out
+		} else {
+			print $"Skipping ($file): already ≤ ($lowest)p (($height)p)"
+		}
+	}
+}
+
 # Get the duration of a video.
 export def get-duration [
 	input: string # Video to get duration from.
