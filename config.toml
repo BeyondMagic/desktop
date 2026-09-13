@@ -307,6 +307,12 @@ target = "~/.config/code-flags.conf"
 root = false
 exclude = []
 
+# [[configuration.item]]
+# source = "./config/vscode/space-magic"
+# target = "~/.config/vscode/extensions/space-magic"
+# root = false
+# exclude = []
+
 [[configuration]]
 label = "gtk2"
 
