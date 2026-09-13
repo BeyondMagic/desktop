@@ -36,7 +36,7 @@ export function Launcher() {
 			try {
 				await execAsync([
 					"fork.nu",
-					`exec gtk-launch ${entry}`
+					`exec gtk-launch '${entry}'`
 				]);
 				return;
 			} catch (e) {
