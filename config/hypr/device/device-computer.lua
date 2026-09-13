@@ -13,5 +13,5 @@ hl.device({
 })
 hl.device({
 	name = "pixart-opticalmouse",
-	sensitivity = 0.1,
+	sensitivity = 1,
 })
