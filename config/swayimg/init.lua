@@ -109,3 +109,14 @@ end)
 swayimg.viewer.on_key("Shift+less", function()
 	swayimg.viewer.flip_horizontal()
 end)
+
+swayimg.viewer.on_key("x", function()
+	with_current_image(function(path)
+		swayimg.imagelist.remove(path)
+	end)
+end)
+
+-- swayimg.gallery.dnd_button = "MouseRight"
+-- swayimg.viewer.dnd_button = "MouseRight"
+
+swayimg.dnd_button = 'MouseLeft'
