@@ -5,17 +5,17 @@ swayimg = swayimg or {}
 ----------------------------------
 
 -- app_id has no Lua API equivalent in swayimg.
-swayimg.enable_overlay(false)
-swayimg.imagelist.set_order("mtime")
+swayimg.overlay = false
+swayimg.imagelist.order = "mtime"
 
 ----------------------------------
 -- UI
 ----------------------------------
 
-swayimg.text.set_font("Noto Sans CJK JP")
-swayimg.text.set_size(12)
-swayimg.gallery.set_window_color(0x00000000)
-swayimg.gallery.set_border_color(0x00000000)
+swayimg.text.font = "Noto Sans CJK JP"
+swayimg.text.size = 12
+swayimg.gallery.window_color = 0x00000000
+swayimg.gallery.border_color = 0x00000000
 swayimg.viewer.set_window_background(0x00000000)
 swayimg.viewer.set_image_background(0x00000000)
 
