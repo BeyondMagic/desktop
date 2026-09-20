@@ -210,6 +210,10 @@ let environment = {
 			($xdg_config_home + '/bun/bin/')
 			# Go: binaries.
 			($env.HOME + '/.config/go/bin/')
+			# Perl: binaries.
+			('/usr/bin/vendor_perl/')
+			('/usr/bin/core_perl/')
+			('/usr/bin/site_perl/')
 		]) | str join (char esep)),
 	}
 }
