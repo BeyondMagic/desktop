@@ -203,11 +203,17 @@ label = "mpv"
 source = "./config/mpv/*"
 target = "~/.config/mpv/"
 root = false
-exclude = ["computer.conf", "laptop.conf"]
+exclude = ["computer.conf", "laptop.conf", "sort-video.nu"]
 
 [[configuration.item]]
 source = "./config/mpv/{device}.conf"
 target = "~/.config/mpv/device.conf"
+root = false
+exclude = []
+
+[[configuration.item]]
+source = "./config/mpv/sort-video.nu"
+target = "~/.local/bin/sort-video.nu"
 root = false
 exclude = []
 
