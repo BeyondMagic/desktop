@@ -5,3 +5,4 @@ show_symlink = false
 sort_by = "mtime"
 sort_reverse = true
 sort_dir_first = true
+mouse_events = [ "click", "scroll", "touch", "move", "drag" ]
