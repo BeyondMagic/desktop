@@ -1,5 +1,5 @@
 ---@diagnostic disable: undefined-global
-local terminal = "foot"
+local terminal = "kitty"
 
 -- --------------------------------------------------------------------------
 -- Keybindings
@@ -33,10 +33,10 @@ hl.bind("SUPER + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind("SUPER + C",
 	hl.dsp.exec_cmd("pkill fuzzel || cliphist list | fuzzel --match-mode=fzf --dmenu | cliphist decode | wl-copy"))
 
-hl.bind("SUPER + Return", hl.dsp.exec_cmd(terminal .. " --window-size-pixels=100x100"))
-hl.bind("SUPER + Backspace", hl.dsp.exec_cmd(terminal .. " --title=\"foot floating\""))
-hl.bind("SUPER + SHIFT + Backspace", hl.dsp.exec_cmd(terminal .. " --title=\"foot floating\""))
-hl.bind("ALT + Backspace", hl.dsp.exec_cmd(terminal .. " --title=\"foot floating\""))
+hl.bind("SUPER + Return", hl.dsp.exec_cmd(terminal .. ""))
+hl.bind("SUPER + Backspace", hl.dsp.exec_cmd(terminal .. " --title=\"kitty floating\""))
+hl.bind("SUPER + SHIFT + Backspace", hl.dsp.exec_cmd(terminal .. " --title=\"kitty floating\""))
+hl.bind("ALT + Backspace", hl.dsp.exec_cmd(terminal .. " --title=\"kitty floating\""))
 
 hl.bind("SUPER + D", hl.dsp.exec_cmd("ags toggle launcher"))
 hl.bind("Print", hl.dsp.exec_cmd("zoom.nu --type 'screenshot'"))
