@@ -1,3 +1,6 @@
 [flavor]
 #dark = "modus-vivendi"
 dark = "flexoki-dark"
+
+[app]
+overall = { bg = "#010101" }
