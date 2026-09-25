@@ -46,10 +46,13 @@ hl.bind("SUPER + SHIFT + Print", hl.dsp.exec_cmd("hyprpicker --autocopy"))
 hl.bind("SUPER + F", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))
 hl.bind("SUPER + M", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
 
-hl.bind("SUPER + Minus", hl.dsp.exec_cmd("hyprctl dispatch layoutmsg splitratio -0.1"), { repeating = true })
-hl.bind("SUPER + Equal", hl.dsp.exec_cmd("hyprctl dispatch layoutmsg splitratio 0.1"), { repeating = true })
-hl.bind("SUPER + Semicolon", hl.dsp.exec_cmd("hyprctl dispatch layoutmsg splitratio -0.1"), { repeating = true })
-hl.bind("SUPER + Apostrophe", hl.dsp.exec_cmd("hyprctl dispatch layoutmsg splitratio 0.1"), { repeating = true })
+hl.bind("SUPER + minus", hl.dsp.layout("splitratio -0.05"), { repeating = true, description = "Decrease split ratio" })
+hl.bind("SUPER + equal", hl.dsp.layout("splitratio 0.05"), { repeating = true, description = "Increase split ratio" })
+hl.bind("SUPER + semicolon", hl.dsp.layout("splitratio -0.05"),
+	{ repeating = true, description = "Decrease split ratio" })
+hl.bind("SUPER + apostrophe", hl.dsp.layout("splitratio 0.05"),
+	{ repeating = true, description = "Increase split ratio" })
+
 
 hl.bind("CONTROL + SUPER + right", hl.dsp.focus({ workspace = "+1" }))
 hl.bind("CONTROL + SUPER + left", hl.dsp.focus({ workspace = "-1" }))
