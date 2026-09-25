@@ -11,7 +11,7 @@ local function no_blur_rule(name, klass)
 	})
 end
 
-no_blur_rule("foot", "^(foot)(.*)$")
+no_blur_rule("kitty", "^(kitty)(.*)$")
 no_blur_rule("firefox", "^(firefox)(.*)$")
 no_blur_rule("rnote", "^(rnote)(.*)$")
 no_blur_rule("telegram", "^(telegram)(.*)$")
@@ -107,8 +107,8 @@ hl.window_rule({
 })
 
 hl.window_rule({
-	name = "foot-floating-overlay",
-	match = { title = "foot floating" },
+	name = "kitty-floating-overlay",
+	match = { title = "kitty floating" },
 	float = true,
 	size = "550 425",
 	center = true,
