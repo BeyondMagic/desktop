@@ -20,12 +20,17 @@ export def downgrade [
 # Install packages in system.
 export def add [
 	--ignore: list<string> # Names of packages to ignore.
+	--skip-pgp-check # Skip PGP check of packages.
 	...packages: string # Names of the packages.
 ]: nothing -> any {
 	mut args = [
 		-S
 		...$packages
 	]
+
+	if $skip_pgp_check {
+		$args = $args ++ [ --mflags "--skippgpcheck" ]
+	}
 
 
 	if not ($ignore | is-empty) {
