@@ -66,7 +66,7 @@ swayimg.viewer.on_key("Ctrl+c", function()
 end)
 
 -- Ctrl+k: Adds the current image file to the favorites list in organize-fav.nu.
-swayimg.viewer.on_key("Ctrl+k", function()
+swayimg.viewer.on_key("F1", function()
 	with_current_image(function(path)
 		os.execute("printf %s " .. shell_quote(path) .. " | organize-fav.nu")
 	end)
