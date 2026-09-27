@@ -67,3 +67,6 @@ require 'lsp.copilot'
 
 -- haskell
 require 'lsp.haskell'
+
+-- qml
+require 'lsp.qml'
