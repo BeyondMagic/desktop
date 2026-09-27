@@ -13,10 +13,15 @@ on = ["Y", "p"]
 run = "shell 'pwd | wl-copy' --confirm"
 desc = "Copy current directory path to clipboard"
 
-[[mgr.prepend_keymap]]
-on = "o"
-run = "shell 'xdg-open %h' --orphan"
-desc = "Open with system default application"
+# [[mgr.prepend_keymap]]
+# on = "o"
+# run = "shell 'xdg-open %h' --orphan"
+# desc = "Open with system default application"
+
+#[[manager.prepend_keymap]]
+#on   = [ "o" ]
+#run  = 'shell "xdg-open $@" --block --selected'
+#desc = "Open selected files in an mpv playlist"
 
 [[mgr.append_keymap]]
 on = ["<C-w>"]
