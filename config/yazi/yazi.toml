@@ -6,3 +6,34 @@ sort_by = "mtime"
 sort_reverse = true
 sort_dir_first = true
 mouse_events = [ "click", "scroll", "touch", "move", "drag" ]
+
+[open]
+prepend_rules = [
+	{
+		url = "*.{mp3,flac,wav,mp4,mkv,avi}",
+		use = "playlist"
+	},
+	{
+		url = "*.{jpg,jpeg,png,gif,webp}",
+		use = "gallery"
+	}
+]
+
+[opener]
+playlist = [
+	{
+		run = 'mpv --force-window %s',
+		desc = "Open as playlist",
+		orphan = true,
+		for = "unix"
+	}
+]
+
+gallery = [
+	{
+		run = 'swayimg %s',
+		desc = "Open gallery",
+		orphan = true,
+		for = "unix"
+	}
+]
