@@ -2,8 +2,8 @@
 Name=Thunderbird (Nightly)
 Comment=Mail & News Reader (Nightly)
 GenericName=Mail Client & News Reader (Nightly)
-Exec=hypr-minimize --type open --class thunderbird-nightly
-Icon=thunderbird-nightly
+Exec=hypr-minimize --type open --class thunderbird
+Icon=thunderbird
 Terminal=false
 Type=Application
 Categories=Network;Email;
