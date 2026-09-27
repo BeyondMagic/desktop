@@ -67,3 +67,6 @@ hl.bind("SUPER + SHIFT + Left", hl.dsp.exec_cmd("hyprctl dispatch movewindow mon
 -- 	hl.bind("SUPER + " .. key, hl.dsp.focus({ workspace = i }))
 -- 	hl.bind("SUPER + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
 -- end
+
+-- Toggle sticky status of the active window
+hl.bind("SUPER + S", hl.dsp.window.pin({ action = "toggle" }))
