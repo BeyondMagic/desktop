@@ -38,5 +38,7 @@ export def main [
 		}
 	}
 
-	run-external hyprctl keyword cursor:zoom_factor $zoom
+	let zoom = $zoom | math round --precision 3
+
+	run-external hyprctl eval $"hl.config\({ [\"cursor.zoom_factor\"] = ($zoom) }\)"
 }
