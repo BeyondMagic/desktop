@@ -149,7 +149,7 @@ export def diff [
 	base?: string # Root folder to find changes within.
 	--untracked = true # List files not tracked by git.
 	--cached = true # List also staged files.
-]: nothing -> list<string> {
+]: nothing -> table {
 
 	let content_git = if ($base | is-empty) {
 		main [ '-c' 'core.quotepath=false' 'diff' '--name-only' ]
