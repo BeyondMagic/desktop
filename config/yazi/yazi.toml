@@ -9,6 +9,14 @@ mouse_events = [ "click", "scroll", "touch", "move", "drag" ]
 
 [open]
 prepend_rules = [
+    # Explicitly block directories from being caught by editor open rules
+    # { url = "*/", use = [] },
+
+    # Your existing media rules
+    { mime = "image/*", use = "gallery" },
+    { mime = "video/*", use = "playlist" },
+    { mime = "audio/*", use = "playlist" },
+
 	{
 		url = "*.{mp3,flac,wav,mp4,mkv,avi}",
 		use = "playlist"
@@ -16,6 +24,10 @@ prepend_rules = [
 	{
 		url = "*.{jpg,jpeg,png,gif,webp}",
 		use = "gallery"
+	},
+	{
+		url = "*.{rnote}",
+		use = "rnote"
 	}
 ]
 
@@ -33,6 +45,15 @@ gallery = [
 	{
 		run = 'swayimg %s',
 		desc = "Open gallery",
+		orphan = true,
+		for = "unix"
+	}
+]
+
+rnote = [
+	{
+		run = 'rnote %s',
+		desc = "Open rnote",
 		orphan = true,
 		for = "unix"
 	}
