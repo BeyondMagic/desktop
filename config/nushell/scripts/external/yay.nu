@@ -65,8 +65,9 @@ export def list-paths [
 	main [
 		-Ql $package
 	] | lines | par-each {|item|
+		# Split name of package and path
 		let data = $item
-			| split row ' '
+			| split row ' ' --number 2
 		
 		ls --long=$long --directory $data.1
 		| first
