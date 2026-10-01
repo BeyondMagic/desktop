@@ -929,6 +929,15 @@ target = "~/.config/dinit.d/boot.d/wl-clip-persist"
 root = false
 exclude = []
 
+[[configuration]]
+label = "kitty"
+
+[[configuration.item]]
+source = "./config/kitty"
+target = "~/.config/kitty"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
