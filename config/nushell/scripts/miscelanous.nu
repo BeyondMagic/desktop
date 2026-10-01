@@ -6,6 +6,8 @@ export def cpdir [
 ]: nothing -> nothing {
 	$file
 	| path expand
+	| ^tr -d '\r\n'
+	| ^sed 's/\/$//'
 	| ^wl-copy
 }
 
