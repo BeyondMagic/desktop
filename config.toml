@@ -302,8 +302,14 @@ root = false
 exclude = []
 
 [[configuration.item]]
-source = "./config/vscode/code.desktop"
-target = "/usr/share/applications/code.desktop"
+source = "./config/vscode/com.microsoft.VSCode.desktop"
+target = "/usr/share/applications/com.microsoft.VSCode.desktop"
+root = true
+exclude = []
+
+[[configuration.item]]
+source = "./config/vscode/com.microsoft.VSCode.UrlHandler.desktop"
+target = "/usr/share/applications/com.microsoft.VSCode.UrlHandler.desktop"
 root = true
 exclude = []
 
