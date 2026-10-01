@@ -21,6 +21,7 @@ export use ./external/steam.nu
 export use ./external/pacman.nu
 export use ./external/biome.nu
 export use ./external/calendar.nu
+export use ./external/trash.nu
 
 export use miscelanous.nu *
 export use package.nu
