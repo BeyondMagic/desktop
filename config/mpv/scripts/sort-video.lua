@@ -22,8 +22,9 @@ local function get_folders(base, current, list)
 
     for _, name in ipairs(files) do
         if name ~= "." and name ~= ".." then
-            local full_path = current .. "/" .. name
-            local rel_path = string.sub(full_path, #base + 1)
+			local full_path = current .. "/" .. name
+			local rel_path = string.sub(full_path, #base + 1)
+			rel_path = rel_path:gsub("^/", "") -- drop leading slash
 
             if not is_excluded(rel_path) then
                 local info = utils.file_info(full_path)
