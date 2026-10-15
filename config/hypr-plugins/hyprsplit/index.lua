@@ -11,4 +11,4 @@ for i = 1, 10 do
 end
 
 hl.bind("SUPER + g", hs.dsp.grab_rogue_windows())
-hl.bind("SUPER + tab", hs.dsp.workspace.swap_monitors({ monitor1 = "current", monitor2 = "+1" }))
+hl.bind("alt + tab", hs.dsp.workspace.swap_monitors({ monitor1 = "current", monitor2 = "+1" }))
