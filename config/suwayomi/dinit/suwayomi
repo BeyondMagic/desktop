@@ -1,0 +1,7 @@
+type = process
+command = /usr/bin/suwayomi-server
+run-as = suwayomi-server
+smooth-recovery = true
+logfile = /var/tmp/suwayomi-server.log
+depends-on = tailscaled
+smooth-recovery = true
