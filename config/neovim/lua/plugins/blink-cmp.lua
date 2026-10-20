@@ -84,6 +84,7 @@ return {
 				"fallback",
 			},
 			["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
+			-- ['<Esc>'] = { 'cancel', 'fallback' }, -- 'cancel' closes the menu, 'fallback' exits insert mode
 		},
 
 		appearance = {
