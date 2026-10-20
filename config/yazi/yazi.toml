@@ -16,6 +16,7 @@ prepend_rules = [
     { mime = "image/*", use = "gallery" },
     { mime = "video/*", use = "playlist" },
     { mime = "audio/*", use = "playlist" },
+    { mime = "text/html", use = "xdg-open" },
 
 	{
 		url = "*.{mp3,flac,wav,mp4,mkv,avi}",
@@ -54,6 +55,15 @@ rnote = [
 	{
 		run = 'rnote %s',
 		desc = "Open rnote",
+		orphan = true,
+		for = "unix"
+	}
+]
+
+xdg-open = [
+	{
+		run = 'xdg-open %s',
+		desc = "Use xdg-open",
 		orphan = true,
 		for = "unix"
 	}
