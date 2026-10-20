@@ -225,6 +225,8 @@ export def commit [
 	title?: string # Title of the commit.
 	message?: string # Message of the commit.
 	--datetime: datetime # Date and time of the commit.
+	--author-name: string # Name to commit as (defaults to configured user).
+	--author-email: string # Email to commit as (defaults to configured user).
 	--feat: string # New feature for the user, not a new feature for build script.
 	--fix: string # Bug fix for the user, not a fix to a build script.
 	--docs: string # Changes to the documentation.
