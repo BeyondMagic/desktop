@@ -227,6 +227,7 @@ export def commit [
 	--datetime: datetime # Date and time of the commit.
 	--author-name: string # Name to commit as (defaults to configured user).
 	--author-email: string # Email to commit as (defaults to configured user).
+	--allow-empty # Allow creating a commit with no staged changes.
 	--feat: string # New feature for the user, not a new feature for build script.
 	--fix: string # Bug fix for the user, not a fix to a build script.
 	--docs: string # Changes to the documentation.
@@ -361,6 +362,10 @@ export def commit [
 	}
 
 	mut args = [ commit -S ]
+
+	if $allow_empty {
+    	$args = $args ++ [ '--allow-empty' ]
+	}
 
 	# Commit as someone else: override both author and committer identities.
 	if ($author_name | is-not-empty) {
