@@ -12,8 +12,12 @@ prepend_rules = [
     # Explicitly block directories from being caught by editor open rules
     # { url = "*/", use = [] },
 
-    # Your existing media rules
-    { mime = "image/*", use = "gallery" },
+	# SVG first – more specific than image/*
+    { url = "*.svg", use = [ "gallery", "inkscape", "vectorcraft", "photocraft" ] },
+
+    # All other images
+    { mime = "image/*", use = [ "gallery", "photocraft", "inkscape" ] },
+
     { mime = "video/*", use = "playlist" },
     { mime = "audio/*", use = "playlist" },
     { mime = "text/html", use = "xdg-open" },
@@ -42,10 +46,37 @@ playlist = [
 	}
 ]
 
+inkscape = [
+	{
+		run = 'inkscape %s',
+		desc = "Open with inkscape",
+		orphan = true,
+		for = "unix"
+	}
+]
+
+vectorcraft = [
+	{
+		run = 'vectorcraft %s',
+		desc = "Open with vectorcraft",
+		orphan = true,
+		for = "unix"
+	}
+]
+
+photocraft = [
+	{
+		run = 'photocraft %s',
+		desc = "Open with photocraft",
+		orphan = true,
+		for = "unix"
+	}
+]
+
 gallery = [
 	{
 		run = 'swayimg %s',
-		desc = "Open gallery",
+		desc = "Open on image viewer (swayimg)",
 		orphan = true,
 		for = "unix"
 	}
