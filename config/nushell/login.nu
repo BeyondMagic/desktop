@@ -31,6 +31,9 @@ let environment = {
 		XDG_STATE_HOME: $xdg_state_home,
 		XDG_MENU_PREFIX: 'arch-',
 
+		# MPV to avoid NVIDIA CUDA drivers
+		RADV_EXPERIMENTAL: 'video_decode',
+
 		# Rust: package manager home and configuration.
 		CARGO_HOME: ($xdg_config_home + '/cargo'),
 
