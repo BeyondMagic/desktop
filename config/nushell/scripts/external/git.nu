@@ -200,6 +200,7 @@ export def `commit amend` [
 	}
 
 	let datetime = if ($datetime | is-not-empty) {
+		let datetime = ($datetime | format date '%+')
 		$env.LC_ALL = 'C'
 		$env.GIT_COMMITTER_DATE = $datetime
 		$env.GIT_AUTHOR_DATE = $datetime
