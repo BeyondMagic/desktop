@@ -241,6 +241,17 @@ export def commit [
 	--refs: list<string> # Link commits (useful for reverting).
 ]: nothing -> any {
 
+	# Author must be specified as a (name, email) pair, or not at all.
+	if (($author_name | is-empty) != ($author_email | is-empty)) {
+		error make {
+			msg: "Invalid author."
+			label: {
+				text: "You must specify both `--author-name` and `--author-email`, or neither."
+				span: (metadata $author_name).span
+			}
+		}
+	}
+
 	let semantics = [
 		['type', 'value'];
 		[ 'feat' $feat ]
@@ -347,6 +358,14 @@ export def commit [
 	}
 
 	mut args = [ commit -S ]
+
+	# Commit as someone else: override both author and committer identities.
+	if ($author_name | is-not-empty) {
+		$env.GIT_AUTHOR_NAME = $author_name
+		$env.GIT_AUTHOR_EMAIL = $author_email
+		$env.GIT_COMMITTER_NAME = $author_name
+		$env.GIT_COMMITTER_EMAIL = $author_email
+	}
 
 	if ($datetime | is-not-empty) {
 		let datetime = ($datetime | format date '%+')
