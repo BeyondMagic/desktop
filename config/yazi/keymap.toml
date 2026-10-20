@@ -5,11 +5,16 @@ desc = "Enter the child directory, or open the file"
 
 [[mgr.prepend_keymap]]
 on = ["Y", "f"]
-run = "shell --confirm 'echo -n \"$@\" | wl-copy'"
-desc = "Copy full path of hovered file to clipboard"
+run = 'plugin copy-paths'
+desc = "Copy selected files to system clipboard (Wayland)"
 
 [[mgr.prepend_keymap]]
-on = ["Y", "p"]
+on = ["F5"]
+run = 'plugin copy-paths'
+desc = "Copy selected files to system clipboard (Wayland)"
+
+[[mgr.prepend_keymap]]
+on = ["Y", "d"]
 run = "shell 'pwd | wl-copy' --confirm"
 desc = "Copy current directory path to clipboard"
 
