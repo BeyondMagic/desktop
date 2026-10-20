@@ -944,6 +944,21 @@ target = "~/.config/kitty"
 root = false
 exclude = []
 
+[[configuration]]
+label = "suwayomi"
+
+[[configuration.item]]
+source = "./config/suwayomi/dinit/suwayomi"
+target = "/etc/dinit.d/suwayomi"
+root = true
+exclude = []
+
+[[configuration.item]]
+source = "./config/suwayomi/dinit/suwayomi"
+target = "/etc/dinit.d/boot.d/suwayomi"
+root = true
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
