@@ -6,7 +6,7 @@ import {
 	getPersistedNotifications,
 	subscribeToPersistedNotifications,
 	type PersistedNotification,
-} from "../notification/storage"
+} from "../../services/notifications"
 import { config } from "../../app"
 
 let menuWindow: Astal.Window | null = null

@@ -191,6 +191,10 @@
 							}
 						}
 
+						&.weekend {
+							color: tokens.gtkalpha(tokens.color-var("fg-color"), 0.666);
+						}
+
 						&.inactive {
 							color: tokens.gtkalpha(tokens.color-var("fg-color"), 0.3);
 
@@ -330,7 +334,6 @@
 
 				>.events-scroll {
 					min-height: 8rem;
-					max-height: 14rem;
 				}
 
 				>.events-list {

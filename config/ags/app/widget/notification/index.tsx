@@ -3,7 +3,7 @@ import { Astal, Gtk } from "ags/gtk4"
 import AstalNotifd from "gi://AstalNotifd"
 import Notification from "./util"
 import { createBinding, For, createState, onCleanup } from "ags"
-import { persistNotification } from "./storage"
+import { persistNotification } from "../../services/notifications"
 
 export function NotificationPopups({ monitor }: { monitor: number }) {
 

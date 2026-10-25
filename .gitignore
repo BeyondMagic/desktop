@@ -13,6 +13,5 @@
 /config/rclone/rclone.conf
 /config/qbittorrent
 /config/calendar3/share
-/config/ags
 /config/gemini
 /config/mirrorlist

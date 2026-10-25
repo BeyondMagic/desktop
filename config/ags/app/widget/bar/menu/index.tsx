@@ -1,13 +1,10 @@
 import { Gtk } from "ags/gtk4"
 import { config } from "../../../app"
-import { createBinding } from "ags"
-import { get_color_at_percentage } from "./color"
-
-import Service from "gi://AstalBattery"
+import { get_color_at_percentage } from "../../../lib/color"
+import { batteryPercentage, isBattery } from "../../../services/battery"
 
 export function Menu() {
-	const service = Service.get_default()
-	const percentage = createBinding(service, "percentage")
+	const percentage = batteryPercentage()
 
 	const batteryColors = [
 		"#101657ff",
@@ -16,7 +13,7 @@ export function Menu() {
 	]
 
 	const icon = (
-		service.is_battery ? (
+		isBattery() ? (
 			<label
 				css_classes={["battery"]}
 				use_markup

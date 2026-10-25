@@ -2,351 +2,15 @@ import GLib from "gi://GLib";
 import { Gtk } from "ags/gtk4"
 import { With, For, createState, onCleanup } from "ags"
 import { interval, timeout } from "ags/time"
-import { google } from "./google";
-import { Gdk } from "ags/gtk4";
 
-type DayCell = {
-	label: string;
-	css_classes: string[];
-	tooltip_text?: string;
-}
-
-type CalendarView = {
-	base: GLib.DateTime;
-	month_label: string;
-	year_label: string;
-	weeks: DayCell[][];
-	is_current_month: boolean;
-}
-
-type CalendarEvent = {
-	title: string;
-	description?: string;
-	start: Date;
-	end: Date;
-	id: string;
-	type: string;
-}
-
-// Time range is in years, so 3 means we fetch events from 3 years ago to 3 years in the future.
-const time_range = 3;
-
-// const events = await google.events({
-// 	time_min: ensure_date(GLib.DateTime.new_now_local().get_year() - time_range, 1, 1).format("%FT%T") ?? "",
-// 	time_max: ensure_date(GLib.DateTime.new_now_local().get_year() + time_range, 12, 31).format("%FT%T") ?? "",
-// });
-
-const WEEKDAY_LABELS = [
-	{
-		label: "日",
-		weekday: false,
-	},
-	{
-		label: "月",
-		weekday: true,
-	},
-	{
-		label: "火",
-		weekday: true,
-	},
-	{
-		label: "水",
-		weekday: true,
-	},
-	{
-		label: "木",
-		weekday: true,
-	},
-	{
-		label: "金",
-		weekday: true,
-	},
-	{
-		label: "土",
-		weekday: false,
-	}
-] as const;
-
-const DEFAULT_SPACING = 6;
-const REFRESH_RATE = 60_000; // 1 minute in milliseconds
-const REFRESH_RATE_FIRST = 1_000; // 3 seconds in milliseconds
-const DEBUG_EVENTS = true;
-
-const [events_state, set_events_state] = createState(new Array<CalendarEvent>());
-let events_loaded = false;
-let events_loading: Promise<CalendarEvent[]> | null = null;
-let refresh_calendar_view: (() => void) | null = null;
-
-function debug_log(message: string) {
-	if (!DEBUG_EVENTS)
-		return;
-	// eslint-disable-next-line no-console
-	print(`[calendar] ${message}`);
-}
-
-async function refresh_events() {
-	const now = GLib.DateTime.new_now_local();
-	const time_min = ensure_date(now.get_year() - time_range, 1, 1).format("%FT%T") ?? "";
-	const time_max = ensure_date(now.get_year() + time_range, 12, 31).format("%FT%T") ?? "";
-	debug_log(`Refreshing events time_min=${time_min} time_max=${time_max}`);
-	const events = await google.events({ time_min, time_max }) as CalendarEvent[];
-	debug_log(`Loaded ${events.length} events`);
-	if (events.length > 0) {
-		const samples = events.slice(0, 3).map((event) => {
-			return `${event.title || "Untitled"} | ${event.start.toISOString()} -> ${event.end.toISOString()} | ${event.type}`;
-		});
-		debug_log(`Sample events: ${samples.join(" || ")}`);
-	}
-	set_events_state(events);
-	refresh_calendar_view?.();
-	return events;
-}
-
-function ensure_events_loaded(onLoad?: (events: CalendarEvent[]) => void) {
-	if (events_loaded) {
-		onLoad?.(events_state.peek());
-		return;
-	}
-
-	if (events_loading) {
-		events_loading.then((events) => onLoad?.(events));
-		return;
-	}
-
-	events_loading = refresh_events().then((events) => {
-		events_loaded = true;
-		events_loading = null;
-		onLoad?.(events);
-		return events;
-	});
-}
-
-function ensure_date(year: number, month: number, day = 1) {
-	const dt = GLib.DateTime.new_local(year, month, day, 0, 0, 0);
-	return dt ?? GLib.DateTime.new_now_local();
-}
-
-function is_same_date(a: GLib.DateTime, b: GLib.DateTime) {
-	return a.get_year() === b.get_year() &&
-		a.get_month() === b.get_month() &&
-		a.get_day_of_month() === b.get_day_of_month();
-}
-
-function to_glib_datetime(date: Date) {
-	const seconds = Math.floor(date.getTime() / 1000);
-	return GLib.DateTime.new_from_unix_local(seconds);
-}
-
-function day_bounds(day: GLib.DateTime) {
-	const day_start = ensure_date(day.get_year(), day.get_month(), day.get_day_of_month());
-	const day_end = day_start.add_days(1) ?? day_start;
-	return { day_start, day_end };
-}
-
-function event_overlaps_day(event: CalendarEvent, day: GLib.DateTime) {
-	if (event.type === "birthday") {
-		const event_start = to_glib_datetime(event.start);
-		return event_start.get_month() === day.get_month()
-			&& event_start.get_day_of_month() === day.get_day_of_month();
-	}
-	const { day_start, day_end } = day_bounds(day);
-	const event_start = to_glib_datetime(event.start);
-	const event_end = to_glib_datetime(event.end);
-	return event_start.compare(day_end) < 0 && event_end.compare(day_start) > 0;
-}
-
-function event_tooltip_line(event: CalendarEvent) {
-	const title = event.title?.trim() || "Untitled";
-	const description = event.description?.trim();
-	return description ? `${title}: ${description}` : title;
-}
-
-function hash_u32_fnv1a(input: string) {
-	let hash = 0x811c9dc5;
-	for (let i = 0; i < input.length; i++) {
-		hash ^= input.charCodeAt(i);
-		hash = Math.imul(hash, 0x01000193);
-	}
-	return hash >>> 0;
-}
-
-function color_class_for_event_title(title?: string) {
-	const normalized = (title ?? "").trim() || "Untitled";
-	const color_index = (hash_u32_fnv1a(normalized) % 16) + 1;
-	return `color-${color_index}`;
-}
-
-function add_span_edge_classes(week_days: DayCell[]) {
-	const span_types = ["event", "birthday"] as const;
-
-	for (const span_type of span_types) {
-		for (let index = 0; index < week_days.length; index++) {
-			const day_cell = week_days[index];
-			if (!day_cell)
-				continue;
-			if (!day_cell.css_classes.includes(span_type))
-				continue;
-
-			const prev_same = index > 0 && week_days[index - 1]?.css_classes.includes(span_type);
-			const next_same = index < week_days.length - 1 && week_days[index + 1]?.css_classes.includes(span_type);
-
-			if (!prev_same && !day_cell.css_classes.includes("edge-left"))
-				day_cell.css_classes.push("edge-left");
-			if (!next_same && !day_cell.css_classes.includes("edge-right"))
-				day_cell.css_classes.push("edge-right");
-		}
-	}
-
-	return week_days;
-}
-
-function build_weeks(first_day: GLib.DateTime, events: CalendarEvent[]): DayCell[][] {
-	const today_date = GLib.DateTime.new_now_local();
-	const month = first_day.get_month();
-	const start_weekday = first_day.get_day_of_week() % 7;
-	let cursor = first_day.add_days(-start_weekday) ?? first_day;
-	const weeks: DayCell[][] = [];
-	const marked_days: string[] = [];
-
-	for (let week_index = 0; week_index < 6; week_index++) {
-		let week_days: DayCell[] = [];
-
-		for (let day_index = 0; day_index < 7; day_index++) {
-			const is_current_month = cursor.get_month() === month;
-			const classes = ["day"];
-			const day_events = events.filter((event) => event_overlaps_day(event, cursor));
-			const has_birthday = day_events.some((event) => event.type === "birthday");
-			const has_default = day_events.some((event) => event.type === "default");
-			let default_color_title: string | undefined;
-			if (has_default) {
-				for (const event of day_events) {
-					if (event.type !== "default")
-						continue;
-					const candidate = event.title?.trim() || "Untitled";
-					if (default_color_title === undefined || candidate.localeCompare(default_color_title) < 0)
-						default_color_title = candidate;
-				}
-			}
-			const tooltip_text = day_events.length > 0
-				? day_events.map(event_tooltip_line).join("\n")
-				: undefined;
-
-			if (!is_current_month)
-				classes.push("inactive");
-
-			if (is_same_date(cursor, today_date))
-				classes.push("today");
-
-			if (has_birthday)
-				classes.push("birthday");
-
-			if (has_default)
-				classes.push("event");
-
-			if (has_default)
-				classes.push(color_class_for_event_title(default_color_title));
-
-			if (day_events.length > 0) {
-				marked_days.push(
-					`${cursor.get_year()}-${cursor.get_month()}-${cursor.get_day_of_month()}:${day_events.length}`,
-				);
-			}
-
-			week_days.push({
-				label: cursor.get_day_of_month().toString(),
-				css_classes: classes,
-				tooltip_text,
-			});
-
-			cursor = cursor.add_days(1) ?? cursor;
-		}
-
-		week_days = add_span_edge_classes(week_days);
-
-		weeks.push(week_days);
-	}
-
-	if (DEBUG_EVENTS) {
-		debug_log(`Month ${first_day.get_year()}-${first_day.get_month()} has ${marked_days.length} marked days`);
-		if (marked_days.length > 0)
-			debug_log(`Marked days: ${marked_days.slice(0, 20).join(", ")}`);
-	}
-
-	return weeks;
-}
-
-function is_same_month(a: GLib.DateTime, b: GLib.DateTime) {
-	return a.get_year() === b.get_year() && a.get_month() === b.get_month();
-}
-
-function build_calendar_view(date: GLib.DateTime, events: CalendarEvent[]): CalendarView {
-	const first_day = ensure_date(date.get_year(), date.get_month(), 1);
-	const month_label = first_day.format("%B") ?? "Month";
-	const year_label = first_day.format("%Y") ?? first_day.get_year().toString();
-	const now = GLib.DateTime.new_now_local();
-
-	return {
-		base: first_day,
-		month_label,
-		year_label,
-		weeks: build_weeks(first_day, events),
-		is_current_month: is_same_month(first_day, now),
-	};
-}
-
-type EventSpan = "today" | "week" | "month" | "year";
-
-function range_for_span(span: EventSpan) {
-	const now = GLib.DateTime.new_now_local();
-	if (span === "today") {
-		const day_start = ensure_date(now.get_year(), now.get_month(), now.get_day_of_month());
-		const day_end = day_start.add_days(1) ?? day_start;
-		return { range_start: day_start, range_end: day_end };
-	}
-
-	if (span === "week") {
-		const start_weekday = now.get_day_of_week() % 7;
-		const week_start = now.add_days(-start_weekday) ?? now;
-		const week_end = week_start.add_days(7) ?? week_start;
-		const range_start = ensure_date(week_start.get_year(), week_start.get_month(), week_start.get_day_of_month());
-		return { range_start, range_end: week_end };
-	}
-
-	if (span === "month") {
-		const month_start = ensure_date(now.get_year(), now.get_month(), 1);
-		const month_end = month_start.add_months(1) ?? month_start;
-		return { range_start: month_start, range_end: month_end };
-	}
-
-	const year_start = ensure_date(now.get_year(), 1, 1);
-	const year_end = year_start.add_years(1) ?? year_start;
-	return { range_start: year_start, range_end: year_end };
-}
-
-function event_overlaps_range(event: CalendarEvent, range_start: GLib.DateTime, range_end: GLib.DateTime) {
-	if (event.type === "birthday") {
-		const event_start = to_glib_datetime(event.start);
-		const month = event_start.get_month();
-		const day = event_start.get_day_of_month();
-		for (let year = range_start.get_year(); year <= range_end.get_year(); year++) {
-			const candidate = ensure_date(year, month, day);
-			if (candidate.compare(range_start) >= 0 && candidate.compare(range_end) < 0)
-				return true;
-		}
-		return false;
-	}
-	const event_start = to_glib_datetime(event.start);
-	const event_end = to_glib_datetime(event.end);
-	return event_start.compare(range_end) < 0 && event_end.compare(range_start) > 0;
-}
-
-function format_event_time(event: CalendarEvent) {
-	const start = to_glib_datetime(event.start);
-	const end = to_glib_datetime(event.end);
-	const start_text = start.format("%b %d %H:%M") ?? "";
-	const end_text = end.format("%b %d %H:%M") ?? "";
-	return `${start_text} – ${end_text}`.trim();
-}
+import {
+	type CalendarView, type CalendarEvent, type DayCell, type EventSpan,
+	events_state, refresh_events, ensure_events_loaded,
+	build_calendar_view, range_for_span, event_overlaps_range,
+	format_event_time, WEEKDAY_LABELS, DEFAULT_SPACING,
+	REFRESH_RATE, REFRESH_RATE_FIRST,
+	set_refresh_calendar_view,
+} from "../../../services/calendar"
 
 export function Calendar() {
 	const nav_arrows = {
@@ -358,19 +22,13 @@ export function Calendar() {
 		build_calendar_view(GLib.DateTime.new_now_local(), events_state.peek()),
 	);
 
-	refresh_calendar_view = () => {
-		debug_log("Refreshing calendar view with loaded events");
+	set_refresh_calendar_view(() => {
 		set_calendar_view((current_view: CalendarView) =>
 			build_calendar_view(current_view.base, events_state.peek()),
 		);
-	};
-
-	// ensure_events_loaded(() => {
-	// 	refresh_calendar_view?.();
-	// });
+	});
 
 	const refresh_today_highlight = () => {
-		// print("Refreshing today's highlight");
 		set_calendar_view((current_view: CalendarView) => {
 			const now = GLib.DateTime.new_now_local();
 			if (!current_view.is_current_month)
@@ -384,7 +42,7 @@ export function Calendar() {
 
 	onCleanup(() => {
 		refresh_tick?.cancel();
-		refresh_calendar_view = null;
+		set_refresh_calendar_view(null);
 	});
 
 	function shift_month(delta: number) {
@@ -452,13 +110,11 @@ export function Calendar() {
 			<Gtk.Separator />
 			<box
 				orientation={Gtk.Orientation.VERTICAL}
-				// spacing={DEFAULT_SPACING * 2}
 				class="days"
 			>
 				<box
 					css_classes={["row", "header"]}
 					homogeneous
-				// spacing={DEFAULT_SPACING * 2}
 				>
 					{WEEKDAY_LABELS.map((weekday_label) => (
 						<label css_classes={[
@@ -471,7 +127,6 @@ export function Calendar() {
 						<box
 							css_classes={["row"]}
 							homogeneous
-						// spacing={DEFAULT_SPACING * 2}
 						>
 							{week_cells.map((day_cell: DayCell) => (
 								<label
@@ -520,27 +175,15 @@ export function Events() {
 			class="events"
 			orientation={Gtk.Orientation.VERTICAL}
 			spacing={DEFAULT_SPACING}
-		// css_classes={["events"]}
-		// margin={DEFAULT_SPACING * 2}
-		// padding={DEFAULT_SPACING * 2}
 		>
-			{/* <label
-				class="events-title"
-				halign={Gtk.Align.START}
-				xalign={0}
-				label="Events"
-			/> */}
 			<box>
-							<With
-					value={active_span}
-				>
+				<With value={active_span}>
 					{(span) => (
-			<box
-				class="events-tabs"
-				halign={Gtk.Align.START}
-				spacing={DEFAULT_SPACING}
-			>
-					
+						<box
+							class="events-tabs"
+							halign={Gtk.Align.START}
+							spacing={DEFAULT_SPACING}
+						>
 							<button
 								onClicked={() => on_select_span("today")}
 								class={span === "today" ? "active" : ""}
@@ -573,12 +216,10 @@ export function Events() {
 									self.set_cursor_from_name("pointer");
 								}}
 							/>
-					
-				
-			</box>
-			)}
-						</With>
 						</box>
+					)}
+				</With>
+			</box>
 			<Gtk.ScrolledWindow
 				css_classes={["events-scroll"]}
 				vexpand={false}
@@ -656,5 +297,4 @@ export function Events() {
 			</box>
 		</box>
 	)
-
 }

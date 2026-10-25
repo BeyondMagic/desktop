@@ -1,7 +1,7 @@
 import app from "ags/gtk4/app"
 import { Astal, Gtk, Gdk } from "ags/gtk4";
 import Cairo from "cairo";
-import config from "../../config.json";
+import { config } from "../../app";
 
 const radius = config.corner;
 	
