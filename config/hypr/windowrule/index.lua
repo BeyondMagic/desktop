@@ -25,6 +25,16 @@ no_blur_rule("lxappearance", "^(Lxappearance)(.*)$")
 no_blur_rule("qalculate", "^(Qalculate)(.*)$")
 
 hl.window_rule({
+	name = "Quickshell windows",
+	match = { class = "^(org.quickshell)(.*)$" },
+	float = true,
+	-- size = "681 314",
+	-- center = true,
+	-- content = "video",
+	-- sync_fullscreen = true,
+})
+
+hl.window_rule({
 	name = "perf-no-blur-mpv",
 	match = { class = "^(mpv)(.*)$" },
 	no_blur = true,
