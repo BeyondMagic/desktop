@@ -36,7 +36,7 @@ $ sys --help
 $ cp config.example.toml config.toml
 ```
 
-5. Open the configuration file and run the setup function, which will install and configure everything interactively:
+5. Open the configuration file and run the setup function, which validates this machine against your devices and builds the system (linking every configuration and installing services):
 ```sh
 $ open config.toml | sys setup
 ```
@@ -45,9 +45,21 @@ $ open config.toml | sys setup
 
 After the setup is complete, you can use the `sys` command to manage your desktop environment.
 
-- To update your configuration, run:
+- To (re)build the system from the configuration file — linking every configuration and installing services — run:
 ```sh
-$ sys update
+$ sys build [--config path/to/config.toml] [--only [label ...]] [--dry-run]
+```
+
+- To upgrade all packages and rebuild the system afterwards, run:
+```sh
+$ package upgrade --build
+```
+
+- To apply a single configuration or manage services:
+```sh
+$ sys config apply --label <label>
+$ sys service install [<label>]
+$ sys service autostart [<label>]
 ```
 
 <!-- - To backup your current configuration, run:
