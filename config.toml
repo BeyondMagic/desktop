@@ -959,6 +959,48 @@ target = "/etc/dinit.d/boot.d/suwayomi"
 root = true
 exclude = []
 
+[[configuration]]
+label = "open-fprintd"
+
+[[configuration.item]]
+source = "./config/open-fprintd/dinit/open-fprintd"
+target = "/etc/dinit.d/open-fprintd"
+root = true
+exclude = []
+
+[[configuration.item]]
+source = "./config/open-fprintd/dinit/open-fprintd"
+target = "/etc/dinit.d/boot.d/open-fprintd"
+root = true
+exclude = []
+
+[[configuration.item]]
+source = "./config/open-fprintd/fprintd-elogind.sh"
+target = "/etc/elogind/system-sleep/fprintd-elogind.sh"
+root = true
+exclude = []
+
+[[configuration]]
+label = "python-validity"
+
+[[configuration.item]]
+source = "./config/python-validity/dinit/python-validity"
+target = "/etc/dinit.d/python-validity"
+root = true
+exclude = []
+
+[[configuration.item]]
+source = "./config/python-validity/dinit/python-validity"
+target = "/etc/dinit.d/boot.d/python-validity"
+root = true
+exclude = []
+
+[[configuration.item]]
+source = "./config/python-validity/python-validity-elogind.sh"
+target = "/etc/elogind/system-sleep/python-validity-elogind.sh"
+root = true
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
@@ -1364,7 +1406,7 @@ method = "aur"
 label = "python-validity"
 codename = "python-validity"
 description = "Validity fingerprint driver userspace helper"
-depends_on = []
+depends_on = ["open-fprintd"]
 config = "python-validity"
 
 [[packages]]
@@ -1923,25 +1965,10 @@ packages = [
 	"tesseract-data-best-eng",      # English
 ]
 
-[[services]]
-label = "fprintd"
-command = "/usr/bin/fprintd"
-description = "Fingerprint reader D-Bus service"
-depends_on = []
-root = true
-autostart = []
+[[profiles]]
+description = "Fingerprint reader support."
 devices = ["laptop"]
-packages = ["fprintd"]
-
-[[services]]
-label = "python3-validity"
-command = "/usr/local/bin/python3-validity"
-description = "Validity fingerprint driver userspace helper"
-depends_on = ["fprintd"]
-root = true
-autostart = []
-devices = ["laptop"]
-packages = ["python-validity"]
+packages = ["open-fprintd", "python-validity"]
 
 [[services]]
 label = "waydroid"

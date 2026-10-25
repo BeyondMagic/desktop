@@ -1,0 +1,5 @@
+type = process
+command = python /usr/lib/open-fprintd/open-fprintd --debug
+depends-on = dbus
+waits-for = dbus
+smooth-recovery = true

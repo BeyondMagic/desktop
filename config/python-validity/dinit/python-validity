@@ -1,0 +1,5 @@
+type = process
+command = python /usr/lib/python-validity/dbus-service --debug
+depends-on = open-fprintd
+waits-for = open-fprintd
+smooth-recovery = true
