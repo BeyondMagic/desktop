@@ -10,19 +10,19 @@ DefaultIM=mozc
 # Name
 Name=keyboard-br
 # Layout
-Layout=
+# Layout=
 
 [Groups/0/Items/1]
 # Name
 Name=mozc
 # Layout
-Layout=
+# Layout=
 
 [Groups/0/Items/2]
 # Name
 Name=keyboard-apl-dyalog
 # Layout
-Layout=
+# Layout=
 
 [GroupOrder]
 0=デフォルト
