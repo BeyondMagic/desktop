@@ -282,4 +282,8 @@ $dinit_environment
 	}
 }
 
+if ($env.WAYLAND_DISPLAY? | is-empty) and ($env.DISPLAY? | is-empty) and ((^tty | complete | get stdout | str trim) == '/dev/tty1') {
+	exec start-hyprland
+}
+
 null
