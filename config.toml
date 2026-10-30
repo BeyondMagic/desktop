@@ -1001,6 +1001,15 @@ target = "/etc/elogind/system-sleep/python-validity-elogind.sh"
 root = true
 exclude = []
 
+[[configuration]]
+label = "agetty"
+
+[[configuration.item]]
+source = "./config/agetty/agetty-tty1-{device}.conf"
+target = "/etc/dinit.d/config/agetty-tty1.conf"
+root = true
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 
