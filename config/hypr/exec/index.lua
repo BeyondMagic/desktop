@@ -5,6 +5,7 @@
 -- --------------------------------------------------------------------------
 
 hl.on("hyprland.start", function()
+	hl.exec_cmd("sh -c 'until quickshell -p ~/.config/quickshell/login.qml; do sleep 0.2; done'")
 	hl.exec_cmd("nu --login -c \"source ~/.config/nushell/login.nu\"")
 	hl.exec_cmd("dbus-update-activation-environment --all")
 	hl.exec_cmd("pkill --full --exact /usr/lib/xdg-desktop-portal")
