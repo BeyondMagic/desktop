@@ -47,7 +47,7 @@ export def root []: nothing -> string {
 }
 
 # Parse text of strings of files as paths.
-def parse-files [base?: string]: string -> list<string> {
+def parse-files [base?: string]: string -> table<name: string, type: string, size: filesize, modified: datetime> {
 	let before = if ($base | is-empty) {
 		root
 	} else {
@@ -80,7 +80,7 @@ def realpath []: string -> string {
 # List untracked files.
 export def 'list untracked' [
 	base?: string # Root folder to find changes within.
-]: nothing -> list<string> {
+]: nothing -> table<name: string, type: string, size: filesize, modified: datetime> {
 	let before = if ($base | is-empty) {
 		root
 	} else {
@@ -90,6 +90,7 @@ export def 'list untracked' [
 	cd $before
 
 	let result = main [ -c core.quotepath=false ls-files --others --exclude-standard ]
+		| collect
 		| parse-files $base
 
 	cd -
