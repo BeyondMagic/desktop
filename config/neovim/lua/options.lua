@@ -22,6 +22,9 @@ vim.o.foldenable               = false
 vim.wo.number                  = true
 vim.wo.relativenumber          = true
 
+-- History limit of files.
+vim.opt.shada = "!,'1000,<50,s10,h"
+
 -- To have a extra line :)
 vim.o.cmdheight                = 0
 
