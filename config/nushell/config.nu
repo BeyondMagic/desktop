@@ -242,6 +242,16 @@ $env.config = {
 
 	keybindings: [
 		{
+			name: unfreeze_last_job
+			modifier: control
+			keycode: char_z
+			mode: [emacs, vi_insert, vi_normal]
+			event: {
+				send: executehostcommand
+				cmd: "job unfreeze"
+			}
+		},
+		{
 			name: completion_menu
 			modifier: none
 			keycode: tab
