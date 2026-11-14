@@ -174,6 +174,11 @@ export def download [
 		--embed-chapters
 		--sub-langs 'all'
 		--embed-subs
+
+		# No live-chat
+		--compat-options no-live-chat
+
+		# Input
 		-i
 		$link
 		...$file_name
