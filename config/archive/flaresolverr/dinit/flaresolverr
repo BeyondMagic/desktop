@@ -1,0 +1,6 @@
+type = process
+command = /opt/flaresolverr/flaresolverr
+run-as = flaresolverr
+smooth-recovery = true
+logfile = /var/log/dinit/flaresolverr.log
+depends-on = tailscaled
