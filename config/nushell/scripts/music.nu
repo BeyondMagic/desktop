@@ -1,6 +1,6 @@
 #!/usr/bin/env nu
 #
-# BeyondMagic © João Farias 2024 <beyondmagic@mail.ru>
+# BeyondMagic © João Farias 2024-2026 <beyondmagic@mail.ru>
 
 const default_playlist = 'https://www.youtube.com/playlist?list=PLZx2EchsfnlgoXkZtHaNrAta_hIl4wkXA'
 const default_archive = '~/storage/music/youtube.log'
@@ -58,11 +58,10 @@ export def download [
 		-o ($folder | path join $format)
 		--download-archive $archive
 		--add-metadata
-		--embed-thumbnail
 		--embed-metadata
 		--embed-chapters
 		--cookies-from-browser firefox
-		--js-runtimes bun
+		--js-runtimes deno
 		# --extractor-args youtubetab:skip=authcheck
 		# --extractor-args youtube:player_js_version=actual
 		# --no-embed-info-json
@@ -70,8 +69,37 @@ export def download [
 		--embed-subs
 		--playlist-end $max
 		--metadata-from-title "(?P<artist>.+?) - (?P<title>.+)"
+
+		# Thumbnail
+		--embed-thumbnail
+		# Maybe if some servers and players don't support PNG and WebP well
+		# --convert-thumbnails jpg
+
+		# Useful for artists' playlists
+		--parse-metadata "playlist_index:%(track_number)s"
+
+		# Audio Quality & Format
+		-f "ba"
 		-x
-		-i $playlist
+		--audio-format opus
+
+		# Reliability & Resumption
+		# don't re-download files that already exist on disk
+		--no-overwrites
+		# Resumes partial downloads
+		--continue
+		# Process the playlist lazily
+		--lazy-playlist
+		# No live-chat
+		--compat-options no-live-chat
+
+		# Ignore errors
+		--ignore-errors
+
+		# Rate Limiting & Politeness
+		--sleep-requests 1
+
+		$playlist
 	]
 
 	# Download the new songs to the folder.
