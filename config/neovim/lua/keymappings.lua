@@ -118,8 +118,6 @@ key('v', '<C-x>', 'mad`ai<Right>', { silent = true })
 
 -- Set 'CTRL + c' as 'copier'
 key('v', '<C-c>', 'may`ai', remap)
-key('i', '<C-v>', '<Esc>:Registers<CR>', remap)
-
 
 -- Create mark.
 key('n', "'", '`', remap)
