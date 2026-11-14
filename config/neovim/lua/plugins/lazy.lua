@@ -63,9 +63,6 @@ return {
   -- Movement
   --
 
-  -- List registers to open.
-  'tversteeg/registers.nvim',
-
   -- Restore folds and cursor position
   'senderle/restoreview',
 
