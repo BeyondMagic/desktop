@@ -6,7 +6,7 @@ const default_playlist = 'https://www.youtube.com/playlist?list=PLZx2EchsfnlgoXk
 const default_archive = '~/storage/music/youtube.log'
 const default_archive_failed = '~/storage/music/youtube_failed.log'
 const default_folder = '~/storage/music/songs/'
-const default_format = '%(title)s.%(ext)s'
+const default_format = '%(album,playlist_title)s/%(track_number,playlist_index)02d - %(track,title)s.%(ext)s'
 const default_max = 50
 
 # Add cover to image.
