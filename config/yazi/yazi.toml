@@ -7,6 +7,9 @@ sort_reverse = true
 sort_dir_first = true
 mouse_events = [ "click", "scroll", "touch", "move", "drag" ]
 
+[preview]
+cache_dir = "~/.cache/yazi/previews"
+
 [open]
 prepend_rules = [
     # Explicitly block directories from being caught by editor open rules
