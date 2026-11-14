@@ -128,10 +128,10 @@ $env.config = {
 	use_kitty_protocol: false # enables keyboard enhancement protocol implemented by kitty console, only if your terminal support this
 
 	hooks: {
-		pre_prompt: [{ null }] # run before the prompt is shown
-		env_change: {
-			PWD: [{|before, after| null }] # run if the PWD environment is different since the last repl input
-		}
+		# pre_prompt: [{ null }] # run before the prompt is shown
+		#env_change: {
+			#PWD: [{|before, after| null }] # run if the PWD environment is different since the last repl input
+		#}
 		# run before the repl input is run
 		#pre_execution: [{
 		#	print "\b\b\b\b\b\b\b\bHH:MM:SS" --raw
