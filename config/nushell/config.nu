@@ -1,4 +1,7 @@
-# João Farias © BeyondMagic 2024 <beyondmagic@mail.ru>
+# João Farias © BeyondMagic 2024-2026  <beyondmagic@mail.ru>
+
+source module/env_change.nu
+#source module/pre_prompt.nu
 
 # Initialization modules.
 use ./scripts/init.nu *
@@ -241,6 +244,16 @@ $env.config = {
 	]
 
 	keybindings: [
+		{
+			name: dir_history_picker
+			modifier: control
+			keycode: char_k
+			mode: [emacs, vi_insert, vi_normal]
+			event: {
+				send: executehostcommand
+				cmd: "dir-history"
+			}
+		},
 		{
 			name: unfreeze_last_job
 			modifier: control
