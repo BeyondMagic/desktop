@@ -217,6 +217,8 @@ let environment = {
 			('/usr/bin/vendor_perl/')
 			('/usr/bin/core_perl/')
 			('/usr/bin/site_perl/')
+			# dotnet: binaries.
+			($env.HOME + '/.dotnet/tools')
 		]) | str join (char esep)),
 	}
 }
