@@ -2,7 +2,7 @@
 #
 # BeyondMagic © João Farias 2024-2026 <beyondmagic@mail.ru>
 
-const default_playlist = 'https://www.youtube.com/playlist?list=PLZx2EchsfnlgoXkZtHaNrAta_hIl4wkXA'
+const default_playlist = 'https://www.youtube.com/playlist?list=PLb8ca249lfy8'
 const default_archive = '~/storage/music/youtube.log'
 const default_archive_failed = '~/storage/music/youtube_failed.log'
 const default_folder = '~/storage/music/songs/'
