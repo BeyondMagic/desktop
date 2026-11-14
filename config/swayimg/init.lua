@@ -8,6 +8,10 @@ swayimg = swayimg or {}
 swayimg.overlay = false
 swayimg.imagelist.order = "mtime"
 
+swayimg.gallery.limit_cache = 1000000
+swayimg.gallery.preload = true
+swayimg.gallery.pstore = true
+
 ----------------------------------
 -- UI
 ----------------------------------
