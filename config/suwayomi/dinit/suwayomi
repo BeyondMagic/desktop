@@ -4,4 +4,3 @@ run-as = suwayomi-server
 smooth-recovery = true
 logfile = /var/tmp/suwayomi-server.log
 depends-on = tailscaled
-smooth-recovery = true
