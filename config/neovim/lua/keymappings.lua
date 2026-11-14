@@ -270,3 +270,17 @@ key('n', '=F', '', {
     vim.lsp.buf.format { async = true }
   end
 })
+
+key(
+  "n",
+  "'",
+  '',
+  {
+    noremap  = true,
+    silent   = true,
+    desc     = "Open the registers.",
+    callback = function()
+      require('telescope.builtin').registers()
+    end
+  }
+)
