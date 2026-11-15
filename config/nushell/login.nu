@@ -244,7 +244,7 @@ let session_environment = {
 	USER: ($env.USER?)
 	HYPRLAND_INSTANCE_SIGNATURE: ($env.HYPRLAND_INSTANCE_SIGNATURE?)
 	SSH_AUTH_SOCK: ($env.SSH_AUTH_SOCK?)
-	PATH: ($env.PATH?)
+	PATH: ($env.PATH? | uniq | str join ":")
 	GDK_BACKEND: ($env.GDK_BACKEND?)
 	QT_QPA_PLATFORM: ($env.QT_QPA_PLATFORM?)
 	XDG_SESSION_TYPE: ($env.XDG_SESSION_TYPE?)
