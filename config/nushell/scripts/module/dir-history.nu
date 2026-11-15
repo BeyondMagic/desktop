@@ -99,8 +99,6 @@ export def "pick" [
 		return ""
 	}
 
-	print $selected
-
 	# Field 2 (index 1 after split) is the plain path.
 	$selected
 	| ansi strip  # remove ANSI from field 1 (field 2 has none anyway)
