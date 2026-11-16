@@ -159,5 +159,3 @@ end
 
 -- Keybindings
 mp.add_key_binding("f1", "sort_video", sort_and_move_video)
-mp.add_key_binding("f2", "debug_test_menu", debug_test_menu)
-mp.add_key_binding("f3", "debug_test_playlist", debug_test_playlist_swap)
