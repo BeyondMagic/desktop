@@ -26,8 +26,28 @@ def "count-color" [
 	}
 }
 
+# Sort directory history entries by frecency: count / (age_in_days + 1.0).
+export def "sort-by-frecency" []: any -> any {
+	let items = $in
+	if ($items | is-empty) {
+		return []
+	}
+
+	let now = (date now)
+
+	$items
+	| insert frecency {|row|
+		let raw_age = (($now - ($row.last_visit | into datetime)) / 1day)
+		let age_days = if $raw_age < 0 { 0.0 } else { $raw_age }
+		$row.count / ($age_days + 1.0)
+	}
+	| sort-by frecency --reverse
+	| reject frecency
+}
+
 export def "pick" [
 	--by-frequency  # Sort by visit count instead of recency.
+	--by-frecency   # Sort by frecency score (frequency + recency).
 	--max: int # Override the history limit for this invocation.
 ]: nothing -> string {
 
@@ -36,8 +56,21 @@ export def "pick" [
 
 	mut hist = (open $hist_path | default [])
 
-	# Sort: by default newest first; with --by-frequency, most-visited first.
-	$hist = if $by_frequency {
+	# Lazy cleanup: drop entries whose directories no longer exist on disk.
+	let initial_count = ($hist | length)
+	$hist = ($hist | where { $in.path | path exists })
+	if ($hist | length) != $initial_count {
+		$hist | save --force $hist_path
+	}
+
+	if ($hist | is-empty) {
+		return ""
+	}
+
+	# Sort: by default newest first; with --by-frecency, frecency score; with --by-frequency, most-visited first.
+	$hist = if $by_frecency {
+		$hist | sort-by-frecency
+	} else if $by_frequency {
 		$hist | sort-by count --reverse
 	} else {
 		$hist | sort-by last_visit --reverse
@@ -108,9 +141,10 @@ export def "pick" [
 
 export def --env main [
 	--by-frequency
+	--by-frecency
 	--max: int
 ] {
-	let target = (pick --by-frequency=$by_frequency --max=$max)
+	let target = (pick --by-frequency=$by_frequency --by-frecency=$by_frecency --max=$max)
 	if ($target | is-not-empty) {
 		cd $target
 	}

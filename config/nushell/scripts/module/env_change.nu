@@ -4,7 +4,10 @@
 const DIR_HISTORY_PATH = ($nu.cache-dir | path join "nu-dir-history.json")
 
 # configurable maximum number of entries
-const DIR_HISTORY_MAX = 10000
+const DIR_HISTORY_MAX = 5000
+
+# Age threshold after which single-visit entries are evicted under capacity pressure.
+const DIR_HISTORY_STALE_AGE = 30day
 
 # Ensure the file exists as an empty list.
 if not ($DIR_HISTORY_PATH | path exists) {
@@ -48,9 +51,24 @@ $env.config.hooks.env_change.PWD ++= [{|before, after|
 		})
 	}
 
-	# Enforce the maximum size: keep the most-recently-visited entries.
+	# Enforce the maximum size via a tiered eviction pipeline:
+	#   1. Drop non-existent paths.
+	#   2. Drop stale single-visit entries (count == 1 and older than 30 days).
+	#   3. Trim remaining entries by frecency score, keeping the top DIR_HISTORY_MAX.
 	if ($hist | length) > $DIR_HISTORY_MAX {
-		$hist = ($hist | sort-by last_visit | last $DIR_HISTORY_MAX)
+		$hist = ($hist | where { $in.path | path exists })
+
+		if ($hist | length) > $DIR_HISTORY_MAX {
+			let cutoff = ((date now) - $DIR_HISTORY_STALE_AGE)
+			$hist = ($hist | where {|row|
+				not ($row.count == 1 and ($row.last_visit | into datetime) < $cutoff)
+			})
+		}
+
+		if ($hist | length) > $DIR_HISTORY_MAX {
+			use ./dir-history.nu sort-by-frecency
+			$hist = ($hist | sort-by-frecency | first $DIR_HISTORY_MAX)
+		}
 	}
 
 	$hist | save --force $DIR_HISTORY_PATH
