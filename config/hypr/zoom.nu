@@ -22,7 +22,7 @@ export def main [
 		),
 		'reset' => (1.0),
 		'screenshot' => {
-			^fork.nu `flameshot gui --raw | wl-copy`
+			^fork.nu `grim -g (slurp) - | tensaku -f - --disable-notifications --copy-command wl-copy`
 			sleep 0.25sec
 			1.0
 		},
