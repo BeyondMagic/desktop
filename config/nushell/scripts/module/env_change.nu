@@ -4,7 +4,7 @@
 const DIR_HISTORY_PATH = ($nu.cache-dir | path join "nu-dir-history.json")
 
 # configurable maximum number of entries
-const DIR_HISTORY_MAX = 100000
+const DIR_HISTORY_MAX = 10000
 
 # Ensure the file exists as an empty list.
 if not ($DIR_HISTORY_PATH | path exists) {
