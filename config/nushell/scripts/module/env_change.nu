@@ -1,4 +1,6 @@
 # ~/.config/nushell/config.nu (or a sourced module)
+#
+# João Farias © BeyondMagic <beyondmagic@mail.ru> 2026
 
 # Path to the directory-history file (JSON for structured counts).
 const DIR_HISTORY_PATH = ($nu.cache-dir | path join "nu-dir-history.json")
