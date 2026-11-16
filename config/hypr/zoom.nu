@@ -1,4 +1,6 @@
 #!/usr/bin/env -S nu --stdin
+#
+# João Farias © BeyondMagic <beyondmagic@mail.ru> 2026
 
 export def main [
 	--type: string # Type of action to perform: 'in', 'out', 'reset', 'screenshot'.
