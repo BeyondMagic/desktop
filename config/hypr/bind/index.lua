@@ -1,3 +1,5 @@
+-- João Farias © BeyondMagic <beyondmagic@mail.ru> 2026
+
 ---@diagnostic disable: undefined-global
 local terminal = "kitty"
 
