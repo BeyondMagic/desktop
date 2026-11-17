@@ -5,6 +5,7 @@
 def "main start" [
 	--drive: string # Required rclone remote drive name
 	--mount: string  # Required mount root path
+	--vfs-cache-mode: string = "off" # Optional VFS cache mode (default: full)
 ]: nothing -> any {
 	if ($drive | is-empty) {
 		error make {
@@ -43,12 +44,18 @@ def "main start" [
 	    sleep 1sec
 	}
 
-	run-external ...[
+	mut arguments = [
 		rclone
 		mount
 		$"($drive):"
 		$mount
-	]	
+	]
+
+	if ($vfs_cache_mode | is-not-empty) {
+		$arguments ++= [--vfs-cache-mode $vfs_cache_mode]
+	}
+
+	run-external ...$arguments
 }
 
 def "main quit" [
