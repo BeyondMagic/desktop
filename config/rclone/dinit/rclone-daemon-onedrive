@@ -1,0 +1,4 @@
+type = process
+command = /usr/local/bin/rclone-daemon start --drive onedrive --mount ~/storage/onedrive
+stop-command = /usr/local/bin/rclone-daemon quit --mount ~/storage/onedrive
+smooth-recovery = true

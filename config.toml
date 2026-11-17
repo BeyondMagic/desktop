@@ -789,14 +789,26 @@ root = false
 exclude = []
 
 [[configuration.item]]
-source = "./config/rclone/dinit/rclone-daemon"
-target = "~/.config/dinit.d/rclone-daemon"
+source = "./config/rclone/dinit/rclone-daemon-gdrive"
+target = "~/.config/dinit.d/rclone-daemon-gdrive"
 root = false
 exclude = []
 
 [[configuration.item]]
-source = "./config/rclone/dinit/rclone-daemon"
-target = "~/.config/dinit.d/boot.d/rclone-daemon"
+source = "./config/rclone/dinit/rclone-daemon-gdrive"
+target = "~/.config/dinit.d/boot.d/rclone-daemon-gdrive"
+root = false
+exclude = []
+
+[[configuration.item]]
+source = "./config/rclone/dinit/rclone-daemon-onedrive"
+target = "~/.config/dinit.d/rclone-daemon-onedrive"
+root = false
+exclude = []
+
+[[configuration.item]]
+source = "./config/rclone/dinit/rclone-daemon-onedrive"
+target = "~/.config/dinit.d/boot.d/rclone-daemon-onedrive"
 root = false
 exclude = []
 
