@@ -24,8 +24,8 @@ let environment = {
 
 		# XDG folders.
 		XDG_CONFIG_HOME: $xdg_config_home,
-		XDG_DOWNLOAD_DIR: ($env.HOME + '/armazenamento/baixados'),
-		XDG_DESKTOP_DIR: ($env.HOME + '/armazenamento/desktop'),
+		XDG_DOWNLOAD_DIR: ($env.HOME + '/storage/downloads'),
+		XDG_DESKTOP_DIR: ($env.HOME + '/storage/desktop'),
 		XDG_DATA_HOME: $xdg_data_home,
 		XDG_CACHE_HOME: $xdg_cache_home,
 		XDG_STATE_HOME: $xdg_state_home,
