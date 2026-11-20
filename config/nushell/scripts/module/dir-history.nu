@@ -1,3 +1,9 @@
+export const DIR_HISTORY_MAX = 5000
+const DIR_HISTORY_STALE_AGE = 30day
+const DIR_HISTORY_DEDUP_WINDOW = 5sec
+const LOCK_TIMEOUT = 1sec
+const LOCK_STALE_AGE = 10sec
+
 # ANSI colour shortcuts
 const A = {
 	reset:   "\e[0m"
@@ -6,6 +12,72 @@ const A = {
 	 yellow:  "\e[33m"
 	 cyan:	"\e[36m"
 	 grey:	"\e[90m"
+}
+
+def history-path []: nothing -> path {
+	$nu.cache-dir | path join "nu-dir-history.json"
+}
+
+def lock-path []: nothing -> path {
+	$nu.cache-dir | path join "nu-dir-history.lock"
+}
+
+def load-history [hist_path: path]: nothing -> list<record> {
+	if not ($hist_path | path exists) {
+		return []
+	}
+	try {
+		open $hist_path | default []
+	} catch {
+		[]
+	}
+}
+
+def save-history [hist: list<record>, hist_path: path]: nothing -> nothing {
+	let tmp_file = $"($hist_path).($nu.pid).tmp"
+	$hist | to json | save --force --raw $tmp_file
+	^mv -f $tmp_file $hist_path
+}
+
+# Acquire an atomic mkdir lock so concurrent Nushell and Yazi writes never race.
+def with-history-lock [action: closure]: nothing -> any {
+	let lock_dir = (lock-path)
+	mkdir ($lock_dir | path dirname)
+
+	let deadline = ((date now) + $LOCK_TIMEOUT)
+	mut acquired = false
+
+	while (date now) < $deadline {
+		if (^mkdir $lock_dir | complete | get exit_code) == 0 {
+			$acquired = true
+			break
+		}
+
+		let modified = try {
+			ls --directory $lock_dir | get 0.modified
+		} catch {
+			null
+		}
+		if ($modified | is-not-empty) and ((date now) - $modified) > $LOCK_STALE_AGE {
+			try { ^rm -rf $lock_dir }
+			continue
+		}
+
+		sleep 10ms
+	}
+
+	if not $acquired {
+		return null
+	}
+
+	try {
+		let result = (do $action)
+		try { ^rm -rf $lock_dir }
+		$result
+	} catch {|err|
+		try { ^rm -rf $lock_dir }
+		error make { msg: $err.msg }
+	}
 }
 
 # Returns the ANSI escape prefix for a given visit count.
@@ -45,23 +117,90 @@ export def "sort-by-frecency" []: any -> any {
 	| reject frecency
 }
 
+# Record a directory visit with locking, 5s deduplication, and tiered eviction.
+export def "record" [
+	dir: string # Directory path to record.
+]: nothing -> nothing {
+	if ($dir | is-empty) {
+		return
+	}
+
+	let expanded = ($dir | path expand)
+	if not ($expanded | path exists) or ($expanded | path type) != 'dir' {
+		return
+	}
+
+	let hist_path = (history-path)
+
+	with-history-lock {
+		mut hist = (load-history $hist_path)
+		let now = (date now)
+
+		let existing = ($hist | where path == $expanded | get --optional 0)
+		if ($existing | is-not-empty) {
+			let elapsed = ($now - ($existing.last_visit | into datetime))
+			if $elapsed >= 0sec and $elapsed < $DIR_HISTORY_DEDUP_WINDOW {
+				return
+			}
+
+			$hist = ($hist | each {|row|
+				if $row.path == $expanded {
+					$row
+					| update count ($row.count + 1)
+					| update last_visit $now
+				} else {
+					$row
+				}
+			})
+		} else {
+			$hist = ($hist | append {
+				path: $expanded
+				count: 1
+				last_visit: $now
+			})
+		}
+
+		# Enforce the maximum size via a tiered eviction pipeline:
+		#   1. Drop non-existent paths.
+		#   2. Drop stale single-visit entries (count == 1 and older than 30 days).
+		#   3. Trim remaining entries by frecency score, keeping the top DIR_HISTORY_MAX.
+		if ($hist | length) > $DIR_HISTORY_MAX {
+			$hist = ($hist | where { $in.path | path exists })
+
+			if ($hist | length) > $DIR_HISTORY_MAX {
+				let cutoff = ($now - $DIR_HISTORY_STALE_AGE)
+				$hist = ($hist | where {|row|
+					not ($row.count == 1 and ($row.last_visit | into datetime) < $cutoff)
+				})
+			}
+
+			if ($hist | length) > $DIR_HISTORY_MAX {
+				$hist = ($hist | sort-by-frecency | first $DIR_HISTORY_MAX)
+			}
+		}
+
+		save-history $hist $hist_path
+	} | ignore
+}
+
 export def "pick" [
 	--by-frequency  # Sort by visit count instead of recency.
 	--by-frecency   # Sort by frecency score (frequency + recency).
 	--max: int # Override the history limit for this invocation.
 ]: nothing -> string {
 
-	let hist_path = ($nu.cache-dir | path join "nu-dir-history.json")
-	let max = ($max | default 1000)
-
-	mut hist = (open $hist_path | default [])
+	let hist_path = (history-path)
+	let max = ($max | default $DIR_HISTORY_MAX)
 
 	# Lazy cleanup: drop entries whose directories no longer exist on disk.
-	let initial_count = ($hist | length)
-	$hist = ($hist | where { $in.path | path exists })
-	if ($hist | length) != $initial_count {
-		$hist | save --force $hist_path
-	}
+	mut hist = (with-history-lock {
+		let current = (load-history $hist_path)
+		let filtered = ($current | where { $in.path | path exists })
+		if ($filtered | length) != ($current | length) {
+			save-history $filtered $hist_path
+		}
+		$filtered
+	} | default [])
 
 	if ($hist | is-empty) {
 		return ""
@@ -109,6 +248,7 @@ export def "pick" [
 	let selected = (
 		$lines
 		| fzf --ansi
+			  --scheme=path
 			  --delimiter "\t"
 			  --with-nth 1
 			  --prompt "  CD  ➜  "
@@ -131,6 +271,8 @@ export def "pick" [
 	if ($selected | is-empty) {
 		return ""
 	}
+
+	echo $selected
 
 	# Field 2 (index 1 after split) is the plain path.
 	$selected
