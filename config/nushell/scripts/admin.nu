@@ -79,7 +79,7 @@ export def editor [
 			} --args [ $fullpath $tmp ] | complete)
 
 			if $copy_res.exit_code != 0 {
-				rm --recursive --force $tmp_dir
+				^rm -rf $tmp_dir
 				if $copy_res.exit_code == 2 {
 					error make {
 						msg: "Failed parsing file."
@@ -105,7 +105,7 @@ export def editor [
 
 		if $before_hash == $after_hash {
 			log warning " File unchanged, exiting..."
-			rm --recursive --force $tmp_dir
+			^rm -rf $tmp_dir
 		} else {
 			let write_res = (main {|from, to|
 				^dd $"if=($from)" $"of=($to)" status=none
@@ -113,7 +113,7 @@ export def editor [
 
 			if $write_res.exit_code == 0 {
 				log debug " Done, changes written."
-				rm --recursive --force $tmp_dir
+				^rm -rf $tmp_dir
 			} else {
 				log warning $" Failed to write changes; edited copy preserved at ($tmp)"
 			}
