@@ -1,53 +1,29 @@
--- Scrollbar with LSP
-
--- vim.cmd([[
---     augroup scrollbar_search_hide
---         autocmd!
---         autocmd CmdlineLeave : lua require('scrollbar').search_handler.hide()
---     augroup END
--- ]])
+-- Scrollbar and minimap
 
 return {
-  'petertriho/nvim-scrollbar',
-  -- dependencies = 'kevinhwang91/nvim-hlslens',
+  "petertriho/nvim-scrollbar",
   opts = {
-    build_position_cb = function(plist)
-      require("scrollbar").search_handler.show(plist.start_pos)
-    end,
-    show = true,
-    handle = {
-      text                = " ",
-      color               = COLOUR.bar,
-      hide_if_all_visible = true, -- Hides handle if all lines are visible
+    exclude = {
+      filetypes = { ["neo-tree"] = true },
     },
-    marks = {
-      Search = { text = { "-", "=" }, priority = 0, color = "orange" },
-      Error  = { text = { "-", "=" }, priority = 1, color = "red" },
-      Warn   = { text = { "-", "=" }, priority = 2, color = "yellow" },
-      Info   = { text = { "-", "=" }, priority = 3, color = "blue" },
-      Hint   = { text = { "-", "=" }, priority = 4, color = "green" },
-      Misc   = { text = { "-", "=" }, priority = 5, color = "purple" },
+    providers = {
+      cursor = true,
+      diagnostic = true,
+      search = true,
+      marks = true,
+      gitsigns = true,
     },
-    excluded_filetypes = {
-      "neo-tree",
-      "prompt",
-      "TelescopePrompt",
-    },
-    autocmd = {
-      render = {
-        "BufWinEnter",
-        "TabEnter",
-        "TermEnter",
-        "WinEnter",
-        "CmdwinLeave",
-        "TextChanged",
-        "VimResized",
-        "WinScrolled",
+    scrollbar = {
+      visibility = "active",
+      unit = "screenline",
+      thumb = {
+        text = " ",
+        hide_if_all_visible = true,
       },
     },
-    handlers = {
-      diagnostic = true,
-      search     = false, -- Requires hlslens to be loaded
+    minimap = {
+      enabled = false,
+      visibility = "active",
     },
   },
 }
