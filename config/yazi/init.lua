@@ -8,6 +8,10 @@ require("mouse"):setup({
 	},
 })
 
+require("dir-history"):setup({
+	dwell = 2.5,
+})
+
 require("projects"):setup({
 	event = {
 		save = {

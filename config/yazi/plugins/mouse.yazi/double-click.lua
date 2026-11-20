@@ -40,6 +40,7 @@ function M.handle(file)
 		if is_dir then
 			ya.emit("enter", {})
 		else
+			ya.emit("plugin", { "dir-history" })
 			if is_selected(url_str) then
 				ya.emit("open", { hovered = false })
 			else

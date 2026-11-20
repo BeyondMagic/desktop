@@ -11,7 +11,8 @@ local function entry(self)
 		-- Safely navigate into the directory
 		ya.emit("enter", {})
 	else
-		-- Open files while preserving multi-selection (hovered = false)
+		-- Record current directory immediately and open files while preserving multi-selection.
+		ya.emit("plugin", { "dir-history" })
 		ya.emit("open", { hovered = false })
 	end
 end
