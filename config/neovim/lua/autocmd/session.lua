@@ -87,6 +87,45 @@ local function is_managed_session(path)
 end
 
 --- Return true when a buffer represents a real workspace file or terminal.
+local EPHEMERAL_FILETYPES = {
+	alpha = true,
+	['neo-tree'] = true,
+	['neo-tree-popup'] = true,
+	trouble = true,
+	TelescopePrompt = true,
+	TelescopeResults = true,
+	qf = true,
+	notify = true,
+	lazy = true,
+	mason = true,
+}
+
+local EPHEMERAL_BUFTYPES = {
+	nofile = true,
+	prompt = true,
+	quickfix = true,
+}
+
+--- Return true when a buffer is a Neo-tree buffer or a restored Neo-tree phantom buffer.
+--- @param buf number
+--- @return boolean
+local function is_neotree_buffer(buf)
+	if not vim.api.nvim_buf_is_valid(buf) then
+		return false
+	end
+	local ft = vim.bo[buf].filetype
+	if ft == 'neo-tree' or ft == 'neo-tree-popup' then
+		return true
+	end
+	local name = vim.api.nvim_buf_get_name(buf)
+	if name == '' then
+		return false
+	end
+	local tail = vim.fn.fnamemodify(name, ':t')
+	return tail:match('^neo%-tree [%w_%-]+ %[[%w_%-]+%]$') ~= nil
+end
+
+--- Return true when a buffer represents a real workspace file or terminal.
 --- Empty `[No Name]` buffers, directories, and UI/picker buffers return false.
 --- @param buf number
 --- @return boolean
@@ -97,7 +136,8 @@ local function is_real_buffer(buf)
 	if not vim.bo[buf].buflisted then
 		return false
 	end
-	if vim.bo[buf].filetype == 'alpha' then
+	local ft = vim.bo[buf].filetype
+	if EPHEMERAL_FILETYPES[ft] or is_neotree_buffer(buf) then
 		return false
 	end
 	local bt = vim.bo[buf].buftype
@@ -152,11 +192,69 @@ local function collect_real_buffers()
 	return files, active_file
 end
 
---- Wipe any lingering Alpha dashboard buffers so `:mks!` does not save phantom tabs.
-local function wipe_alpha_buffers()
+--- Count non-floating windows inside the given tabpage.
+--- @param tabpage number
+--- @return number
+local function count_normal_tab_windows(tabpage)
+	local count = 0
+	for _, w in ipairs(vim.api.nvim_tabpage_list_wins(tabpage)) do
+		if vim.api.nvim_win_is_valid(w) then
+			local cfg = vim.api.nvim_win_get_config(w)
+			if not cfg or cfg.relative == '' then
+				count = count + 1
+			end
+		end
+	end
+	return count
+end
+
+--- Close any extra split windows displaying `buf` and force-delete the buffer.
+--- @param buf number
+local function delete_sidebar_buffer(buf)
+	if not vim.api.nvim_buf_is_valid(buf) then
+		return
+	end
+	for _, win in ipairs(vim.fn.win_findbuf(buf)) do
+		if vim.api.nvim_win_is_valid(win) then
+			local tab = vim.api.nvim_win_get_tabpage(win)
+			if count_normal_tab_windows(tab) > 1 then
+				pcall(vim.api.nvim_win_close, win, true)
+			end
+		end
+	end
+	if vim.api.nvim_buf_is_valid(buf) then
+		pcall(vim.api.nvim_buf_delete, buf, { force = true })
+	end
+end
+
+--- Close Neo-tree cleanly and wipe ephemeral UI buffers so `:mks!` never persists them.
+local function wipe_ephemeral_buffers()
+	local nt_mgr = package.loaded['neo-tree.sources.manager']
+	if nt_mgr and type(nt_mgr.close_all) == 'function' then
+		pcall(nt_mgr.close_all)
+	end
+	local nt_cmd = package.loaded['neo-tree.command']
+	if nt_cmd and type(nt_cmd.execute) == 'function' then
+		pcall(nt_cmd.execute, { action = 'close' })
+	end
+
 	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-		if vim.api.nvim_buf_is_valid(buf) and vim.bo[buf].filetype == 'alpha' then
-			pcall(vim.api.nvim_buf_delete, buf, { force = true })
+		if vim.api.nvim_buf_is_valid(buf) and not is_real_buffer(buf) then
+			local ft = vim.bo[buf].filetype
+			local bt = vim.bo[buf].buftype
+			if is_neotree_buffer(buf) or EPHEMERAL_FILETYPES[ft] or EPHEMERAL_BUFTYPES[bt] then
+				delete_sidebar_buffer(buf)
+			end
+		end
+	end
+end
+
+--- Scrub stale phantom Neo-tree buffers restored from older `.vim` session files
+--- before Neo-tree triggers `bufnr(...)` regex mismatches / E95 on reload.
+local function scrub_restored_neotree_buffers()
+	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+		if is_neotree_buffer(buf) then
+			delete_sidebar_buffer(buf)
 		end
 	end
 end
@@ -214,6 +312,9 @@ local function parse_vim_fallback(vim_path)
 	local function resolve_entry(raw)
 		local p = unescape_vim_path(vim.trim(raw))
 		if p == '' then
+			return ''
+		end
+		if vim.fn.fnamemodify(p, ':t'):match('^neo%-tree [%w_%-]+ %[[%w_%-]+%]$') then
 			return ''
 		end
 		if p:sub(1, 1) ~= '/' and not p:match('^%w+://') then
@@ -423,7 +524,7 @@ function M.save()
 		target_vim = dir .. '/' .. cwd_to_stem(cwd) .. '.vim'
 	end
 
-	wipe_alpha_buffers()
+	wipe_ephemeral_buffers()
 
 	local ok = pcall(vim.cmd, 'silent! mksession! ' .. vim.fn.fnameescape(target_vim))
 	if not ok then
@@ -487,6 +588,8 @@ function M.restore(session_path)
 			pcall(vim.api.nvim_buf_delete, buf, { force = true })
 		end
 	end
+
+	scrub_restored_neotree_buffers()
 
 	state.started_on_alpha = false
 	if #collect_real_buffers() > 0 then
@@ -701,8 +804,9 @@ function M.setup()
 	vim.api.nvim_create_autocmd('SessionLoadPost', {
 		group = group,
 		pattern = '*',
-		desc = 'Clear Alpha dashboard guard once a session finishes loading',
+		desc = 'Scrub stale Neo-tree phantom buffers and clear Alpha guard after session load',
 		callback = function()
+			scrub_restored_neotree_buffers()
 			state.started_on_alpha = false
 			if #collect_real_buffers() > 0 then
 				state.left_alpha = true
