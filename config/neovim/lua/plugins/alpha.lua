@@ -1,4 +1,6 @@
 -- Alpha (dashboard) for neovim
+--
+-- João Farias © BeyondMagic <beyondmagic@mail.ru> 2024-2026
 
 local options
 
@@ -235,7 +237,7 @@ then
   local buttons = {
     type = "group",
     val = {
-      button("g", "  Open Last Session", 'RainbowGreen', ':source ~/.config/nvim/session.vim<CR>'),
+      button("g", "  Open Session", 'RainbowGreen', '<cmd>lua require("autocmd.session").pick()<CR>'),
       button("e", "  New Buffer",            'RainbowRed', ':tabnew<CR>'),
       button("f", "  Find file",             'RainbowYellow', ':Telescope find_files<CR>'),
       button("h", "  Recently opened files", 'RainbowBlue', ':Telescope oldfiles<CR>'),
