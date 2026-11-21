@@ -51,20 +51,21 @@ def trash-dirs []: nothing -> table<dir: path, mount: string> {
 	| where { ($in.dir | path type) == "dir" }
 }
 
-# Parse a single .trashinfo file into { datetime, original, path }, or null if missing.
+# Parse a single .trashinfo file into { datetime, original, path, size, _type }, or null if missing.
 def parse-trashinfo [
 	info_file: path
 	trash_dir: path
 	mount: string
+	file_map: record
 ]: nothing -> any {
 	let name = ($info_file | path basename | str replace --regex '\.trashinfo$' '')
-	let trashed = ($trash_dir | path join "files" $name)
+	let meta = ($file_map | get --optional $name)
 
-	# Use `path type` instead of `path exists` so trashed broken symlinks are included.
-	if ($trashed | path type | is-empty) {
+	if ($meta | is-empty) {
 		return null
 	}
 
+	let trashed = ($trash_dir | path join "files" $name)
 	let content = (try { open --raw $info_file | lines } catch { [] })
 
 	let raw_path = (
@@ -96,20 +97,34 @@ def parse-trashinfo [
 		datetime: $deleted_at
 		original: $original
 		path: $trashed
+		size: $meta.size
+		_type: $meta.type
 	}
 }
 
-# List trashed files with deletion time, original path, and current path in trash.
+# List trashed files with deletion time, original path, trashed path, and size.
 export def list [
-	--sizes # Show the disk usage sizes of all items.
+	--sizes # Compute recursive physical disk usage for directories via `du`.
 ]: nothing -> any {
 	let data = (
 		trash-dirs
 		| each {|entry|
 			let info_dir = ($entry.dir | path join "info")
-			if ($info_dir | path type) != "dir" {
+			let files_dir = ($entry.dir | path join "files")
+			if ($info_dir | path type) != "dir" or ($files_dir | path type) != "dir" {
 				return []
 			}
+
+			let file_rows = (try { ls --all $files_dir | select name type size } catch { [] })
+			if ($file_rows | is-empty) {
+				return []
+			}
+
+			let file_map = (
+				$file_rows
+				| each {|f| { k: ($f.name | path basename), v: { type: $f.type, size: $f.size } } }
+				| transpose --header-row --as-record
+			)
 
 			let info_files = (
 				try {
@@ -122,7 +137,7 @@ export def list [
 			)
 
 			$info_files | par-each {|info_file|
-				parse-trashinfo $info_file $entry.dir $entry.mount
+				parse-trashinfo $info_file $entry.dir $entry.mount $file_map
 			}
 		}
 		| flatten
@@ -134,15 +149,19 @@ export def list [
 	}
 
 	if not $sizes {
-		return ($data | sort-by datetime --reverse)
+		return ($data | reject _type | sort-by datetime --reverse)
 	}
 
 	$data
 	| par-each {|row|
-		let sz = (try { du $row.path | select apparent physical | first } catch { { apparent: 0B, physical: 0B } })
-		$row | merge $sz
+		let size = if $row._type == "dir" {
+			try { du $row.path | get 0.physical } catch { $row.size }
+		} else {
+			$row.size
+		}
+		$row | update size $size | reject _type
 	}
-	| sort-by physical apparent
+	| sort-by size --reverse
 }
 
 # Permanently delete trashed files (all, older than a duration, or piped from `list`).
@@ -194,10 +213,16 @@ export def clear [
 
 	if not $force {
 		let count = ($targets | length)
+		let sizes = ($targets | get --optional size | compact)
+		let size_suffix = if ($sizes | is-not-empty) {
+			$" \(($sizes | math sum)\)"
+		} else {
+			""
+		}
 		let prompt = if $has_orphans {
 			"Permanently clear orphaned trash entries? [y/N]: "
 		} else {
-			$"Permanently delete ($count) trashed item\(s\)? [y/N]: "
+			$"Permanently delete ($count) trashed item\(s\)($size_suffix)? [y/N]: "
 		}
 		let answer = (input $prompt | str trim | str lowercase)
 		if $answer not-in [ "y" "yes" ] {
