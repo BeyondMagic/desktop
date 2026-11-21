@@ -235,12 +235,12 @@ then
   local buttons = {
     type = "group",
     val = {
+      button("g", "  Open Last Session", 'RainbowGreen', ':source ~/.config/nvim/session.vim<CR>'),
       button("e", "  New Buffer",            'RainbowRed', ':tabnew<CR>'),
       button("f", "  Find file",             'RainbowYellow', ':Telescope find_files<CR>'),
       button("h", "  Recently opened files", 'RainbowBlue', ':Telescope oldfiles<CR>'),
       button("l", "  Projects",              'RainbowOrange', ':Telescope marks<CR>'),
-      --button("r", "  Frecency/MRU",          'RainbowCyan', ':Telescope oldfiles<CR>'),
-      button("g", "  Open Last Session",     'RainbowGreen', ':source ~/.config/nvim/session.vim<CR>'),
+      button("r", "  Frecency",          'RainbowCyan', ':Telescope oldfiles<CR>'),
       --button("m", "  Word Finder",           'RainbowViolet', ':Telescope live_grep<CR>'),
     },
     opts = {
