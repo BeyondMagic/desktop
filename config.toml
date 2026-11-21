@@ -1022,6 +1022,21 @@ target = "/etc/dinit.d/config/agetty-tty1.conf"
 root = true
 exclude = []
 
+[[configuration]]
+label = "beeper-irc"
+
+[[configuration.item]]
+source = "./config/beeper-irc/dinit/beeper-irc"
+target = "~/.config/dinit.d/beeper-irc"
+root = false
+exclude = []
+
+[[configuration.item]]
+source = "./config/beeper-irc/dinit/beeper-irc"
+target = "~/.config/dinit.d/boot.d/beeper-irc"
+root = false
+exclude = []
+
 # [[configuration]]
 # label = ""
 # 

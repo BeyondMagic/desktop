@@ -1,0 +1,7 @@
+type = process
+command = /usr/local/bin/bbctl run --type irc sh-irc
+depends-on = beeper
+waits-for = beeper
+smooth-recovery = true
+restart = true
+logfile = $XDG_CACHE_HOME/beeper-irc.log
