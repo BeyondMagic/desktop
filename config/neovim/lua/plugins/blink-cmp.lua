@@ -1,5 +1,3 @@
-local trigger_chars_add = { ' ', '\n', '\t' }
-
 return {
 	'saghen/blink.cmp',
 	-- optional: provides snippets for the snippet source
@@ -29,19 +27,20 @@ return {
 			-- show_on_trigger_character = true, -- Set to true to show on trigger chars
 			-- Or enable prefetching when entering insert mode to show suggestions immediately
 			trigger = {
-				show_on_backspace = true,
-				prefetch_on_insert = true, -- Shows completions on InsertEnter event
+				show_on_backspace = false,
+				show_on_backspace_in_keyword = true,
+				prefetch_on_insert = false, -- Avoid triggering/prefetching on InsertEnter
 				-- show_on_keyword = true,
 				-- Show suggestions after typing specific trigger characters (e.g., '.', '(', ':', etc.)
 
 				-- When true, will show the completion window after entering insert mode
 				show_on_insert = false,
 
-				--
+				-- Block whitespace from triggering completions (e.g. typing/deleting spaces or pressing I on indentation)
 				show_on_blocked_trigger_characters = {
-					-- ' ',
-					-- '\n',
-					-- '\t'
+					' ',
+					'\n',
+					'\t',
 				},
 			},
 			-- Other settings for documentation, menu, etc.
@@ -112,23 +111,6 @@ return {
 					enabled = function()
 						return vim.g.copilot == true
 					end
-				},
-				snippets = {
-					override = {
-						get_trigger_characters = function(self)
-							if self.get_trigger_characters then
-								local stat, trigger_chars = pcall(self.get_trigger_characters, self)
-								if stat then
-									vim.list_extend(trigger_chars, trigger_chars_add)
-									return trigger_chars
-								else
-									return trigger_chars_add
-								end
-							else
-								return trigger_chars_add
-							end
-						end,
-					},
 				},
 			},
 		},
