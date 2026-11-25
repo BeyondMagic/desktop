@@ -56,14 +56,14 @@ swayimg.viewer.on_key("Delete", function()
 end)
 
 -- Ctrl+p: Copies the file path of the current image to the clipboard.
-swayimg.viewer.on_key("Ctrl+p", function()
+swayimg.viewer.on_key("Ctrl+c", function()
 	with_current_image(function(path)
 		os.execute("printf %s " .. shell_quote(path) .. " | wl-copy")
 	end)
 end)
 
 -- Ctrl+c: Copies the current image file to the clipboard.
-swayimg.viewer.on_key("Ctrl+c", function()
+swayimg.viewer.on_key("Ctrl+p", function()
 	with_current_image(function(path)
 		os.execute("cat " .. shell_quote(path) .. " | wl-copy")
 	end)
