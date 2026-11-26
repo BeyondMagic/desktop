@@ -70,14 +70,19 @@ $env.PROMPT_COMMAND = {
 }
 
 $env.PROMPT_COMMAND_RIGHT = {
-	if $env.LAST_EXIT_CODE != 0 {
-		[
-			(ansi rb)
-			($env.LAST_EXIT_CODE)
-		] | str join
+	let jobs = (job list | length)
+	let job_segment = if $jobs > 0 {
+		$"(ansi yb)󰏤 ($jobs)(ansi reset)"
 	} else {
-		''
+		""
 	}
+	let exit_segment = if $env.LAST_EXIT_CODE != 0 {
+		$"(ansi rb)($env.LAST_EXIT_CODE)(ansi reset)"
+	} else {
+		""
+	}
+
+	[$job_segment $exit_segment] | where { is-not-empty } | str join "  "
 }
 
 $env.LAST = null
