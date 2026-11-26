@@ -59,6 +59,11 @@ run = "plugin dir-history pick"
 desc = "Jump to a directory from history (fzf)"
 
 [[mgr.prepend_keymap]]
+on = ["<C-d>"]
+run = "plugin video-download"
+desc = "Download video from URL into current directory"
+
+[[mgr.prepend_keymap]]
 on = ["e"]
 run = "shell '$EDITOR %h' --block"
 desc = "Open with default editor"
