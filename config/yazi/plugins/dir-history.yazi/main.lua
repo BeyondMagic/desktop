@@ -1,6 +1,5 @@
 --- @since 25.5.31
 local M = {
-	seq = 0,
 	dwell = 2.5,
 }
 
@@ -15,12 +14,17 @@ local function record_path(path)
 		:status()
 end
 
-local get_seq = ya.sync(function(st)
+local bump_seq = ya.sync(function(st)
+	st.seq = (st.seq or 0) + 1
 	return st.seq
 end)
 
+local get_seq = ya.sync(function(st)
+	return st.seq or 0
+end)
+
 local prepare_current = ya.sync(function(st)
-	local tab = cx.tab or cx.active
+	local tab = cx.active
 	if not tab then
 		return nil
 	end
@@ -30,7 +34,7 @@ local prepare_current = ya.sync(function(st)
 		return nil
 	end
 
-	st.seq = st.seq + 1
+	st.seq = (st.seq or 0) + 1
 	return url
 end)
 
@@ -42,7 +46,7 @@ function M:setup(opts)
 
 	local dwell = self.dwell
 	ps.sub("cd", function(body)
-		if not body.url then
+		if type(body) ~= "table" or not body.url then
 			return
 		end
 
@@ -51,8 +55,7 @@ function M:setup(opts)
 			return
 		end
 
-		self.seq = self.seq + 1
-		local my_seq = self.seq
+		local my_seq = bump_seq()
 
 		ya.async(function()
 			ya.sleep(dwell)
