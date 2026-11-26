@@ -11,94 +11,85 @@ mouse_events = [ "click", "scroll", "touch", "move", "drag" ]
 cache_dir = "~/.cache/yazi/previews"
 
 [open]
-prepend_rules = [
-    # Explicitly block directories from being caught by editor open rules
-    # { url = "*/", use = [] },
+# Explicitly block directories from being caught by editor open rules
+# [[open.prepend_rules]]
+# url = "*/"
+# use = []
 
-	# SVG first – more specific than image/*
-    { url = "*.svg", use = [ "gallery", "inkscape", "vectorcraft", "photocraft" ] },
+# SVG first – more specific than image/*
+[[open.prepend_rules]]
+url = "*.svg"
+use = [ "gallery", "inkscape", "vectorcraft", "photocraft" ]
 
-    # All other images
-    { mime = "image/*", use = [ "gallery", "photocraft", "inkscape" ] },
+# All other images
+[[open.prepend_rules]]
+mime = "image/*"
+use = [ "gallery", "photocraft", "inkscape" ]
 
-    { mime = "video/*", use = "playlist" },
-    { mime = "audio/*", use = "playlist" },
-    { mime = "text/html", use = "xdg-open" },
+[[open.prepend_rules]]
+mime = "video/*"
+use = "playlist"
 
-	{
-		url = "*.{mp3,flac,wav,mp4,mkv,avi}",
-		use = "playlist"
-	},
-	{
-		url = "*.{jpg,jpeg,png,gif,webp}",
-		use = "gallery"
-	},
-	{
-		url = "*.{rnote}",
-		use = "rnote"
-	}
-]
+[[open.prepend_rules]]
+mime = "audio/*"
+use = "playlist"
+
+[[open.prepend_rules]]
+mime = "text/html"
+use = "xdg-open"
+
+[[open.prepend_rules]]
+url = "*.{mp3,flac,wav,mp4,mkv,avi}"
+use = "playlist"
+
+[[open.prepend_rules]]
+url = "*.{jpg,jpeg,png,gif,webp}"
+use = "gallery"
+
+[[open.prepend_rules]]
+url = "*.{rnote}"
+use = "rnote"
 
 [opener]
-playlist = [
-	{
-		run = 'mpv --force-window %s',
-		desc = "Open as playlist",
-		orphan = true,
-		for = "unix"
-	}
-]
 
-inkscape = [
-	{
-		run = 'inkscape %s',
-		desc = "Open with inkscape",
-		orphan = true,
-		for = "unix"
-	}
-]
+[[opener.playlist]]
+run = 'mpv --force-window %s'
+desc = "Open as playlist"
+orphan = true
+for = "unix"
 
-vectorcraft = [
-	{
-		run = 'vectorcraft %s',
-		desc = "Open with vectorcraft",
-		orphan = true,
-		for = "unix"
-	}
-]
+[[opener.inkscape]]
+run = 'inkscape %s'
+desc = "Open with inkscape"
+orphan = true
+for = "unix"
 
-photocraft = [
-	{
-		run = 'photocraft %s',
-		desc = "Open with photocraft",
-		orphan = true,
-		for = "unix"
-	}
-]
+[[opener.vectorcraft]]
+run = 'vectorcraft %s'
+desc = "Open with vectorcraft"
+orphan = true
+for = "unix"
 
-gallery = [
-	{
-		run = 'swayimg %s',
-		desc = "Open on image viewer (swayimg)",
-		orphan = true,
-		for = "unix"
-	}
-]
+[[opener.photocraft]]
+run = 'photocraft %s'
+desc = "Open with photocraft"
+orphan = true
+for = "unix"
 
-rnote = [
-	{
-		run = 'rnote %s',
-		desc = "Open rnote",
-		orphan = true,
-		for = "unix"
-	}
-]
+[[opener.gallery]]
+run = 'swayimg %s'
+desc = "Open on image viewer (swayimg)"
+orphan = true
+for = "unix"
 
-xdg-open = [
-	{
-		run = 'xdg-open %s',
-		desc = "Use xdg-open",
-		orphan = true,
-		for = "unix"
-	}
-]
+[[opener.rnote]]
+run = 'rnote %s'
+desc = "Open rnote"
+orphan = true
+for = "unix"
+
+[[opener.xdg-open]]
+run = 'xdg-open %s'
+desc = "Use xdg-open"
+orphan = true
+for = "unix"
