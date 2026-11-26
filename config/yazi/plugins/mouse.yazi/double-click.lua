@@ -1,4 +1,6 @@
+--- @since 25.5.31
 --- Double Click opening for Yazi
+
 local M = {
 	last_url = nil,
 	last_time = 0,
@@ -27,8 +29,10 @@ end
 
 -- Checks if the click qualifies as double click and handles it if so.
 -- Returns true if handled, false otherwise.
+--- @param file fs__File
 function M.handle(file)
-	local now = ya.time().unix
+	local t = ya.time()
+	local now = type(t) == "number" and t or (t --[[@as { unix: number }]]).unix
 	local url_str = tostring(file.url)
 	local elapsed_ms = (now - M.last_time) * 1000
 
@@ -36,7 +40,7 @@ function M.handle(file)
 		-- Double click triggered: reset state
 		M.reset()
 
-		local is_dir = (file.stat and file.stat.is_dir) or (file.cha and file.cha.is_dir)
+		local is_dir = file.cha and file.cha.is_dir
 		if is_dir then
 			ya.emit("enter", {})
 		else

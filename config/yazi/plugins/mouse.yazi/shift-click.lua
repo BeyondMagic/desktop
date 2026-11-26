@@ -1,4 +1,6 @@
+--- @since 25.5.31
 --- Shift+Click range selection for Yazi
+
 local M = {
 	anchor_url = nil,
 }
@@ -17,6 +19,7 @@ function M.set_anchor(url)
 	M.anchor_url = tostring(url)
 end
 
+--- @param file fs__File
 function M.handle(file)
 	local clicked = file
 	local count, sel_url = selection_info()
@@ -38,23 +41,29 @@ function M.handle(file)
 	local files = cx.active.current.files
 	local anchor_idx, clicked_idx
 
-	for i, f in ipairs(files) do
-		local u = tostring(f.url)
-		if u == M.anchor_url then anchor_idx = i end
-		if u == tostring(clicked.url) then clicked_idx = i end
+	for i = 1, #files do
+		local f = files[i]
+		if f then
+			local u = tostring(f.url)
+			if u == M.anchor_url then anchor_idx = i end
+			if u == tostring(clicked.url) then clicked_idx = i end
+		end
 	end
 
 	if anchor_idx and clicked_idx then
 		-- Put cursor on anchor, enter visual mode there,
 		-- then move once to the clicked file to extend the range.
 		ya.emit("escape", { select = true })
-		ya.emit("reveal", { files[anchor_idx].url })
+		local anchor_file = files[anchor_idx]
+		if anchor_file then
+			ya.emit("reveal", { anchor_file.url })
+		end
 		ya.emit("visual_mode", {})
 		local delta = clicked_idx - anchor_idx
 		if delta ~= 0 then
 			ya.emit("arrow", { delta })
 		end
-		ya.emit("escape", { visual = true })  -- commit, keep selection
+		ya.emit("escape", { visual = true }) -- commit, keep selection
 	end
 end
 

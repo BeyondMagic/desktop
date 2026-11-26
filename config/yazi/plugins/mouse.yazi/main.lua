@@ -1,4 +1,21 @@
+--- @since 25.5.31
 --- Mouse interactions plugin for Yazi
+
+--- @class YaziMouseModifiers
+--- @field shift? boolean
+--- @field ctrl? boolean
+--- @field alt? boolean
+
+--- @class YaziMouseEvent
+--- @field is_left boolean
+--- @field modifiers? YaziMouseModifiers
+
+--- @class YaziEntity
+--- @field _file? fs__File
+--- @field click fun(self: YaziEntity, event: YaziMouseEvent, up: boolean)
+--- @global Entity
+Entity = Entity
+
 local M = {
 	options = {
 		double_click = {
@@ -41,11 +58,13 @@ function M:setup(opts)
 
 	double_click.setup(self.options.double_click)
 
+	--- @param event YaziMouseEvent
+	--- @param up boolean
 	function Entity:click(event, up)
 		if up or not event.is_left then return end
-		if not self._file then return end
-
 		local clicked = self._file
+		if not clicked then return end
+
 		local mods = event.modifiers or {}
 
 		if mods.shift and M.options.shift_click.enable then
