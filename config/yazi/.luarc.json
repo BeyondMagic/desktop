@@ -1,0 +1,12 @@
+{
+  "$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
+  "runtime.version": "Lua 5.5",
+  "workspace.library": [
+    "./plugins/types.yazi"
+  ],
+  "workspace.ignoreDir": [
+    "plugins/types.yazi",
+    "plugins/close-and-restore-tab.yazi",
+    "flavors"
+  ]
+}

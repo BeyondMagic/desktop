@@ -3,6 +3,11 @@ use = "MasouShizuka/close-and-restore-tab"
 rev = "5047217"
 hash = "bb24648b1f96f1cef8c1543742189aad"
 
+[[plugin.deps]]
+use = "yazi-rs/plugins:types"
+rev = "1ef5fe0"
+hash = "d368d5a6a72657e1c0e7ee7340dcea8c"
+
 [[flavor.deps]]
 use = "gosxrgxx/flexoki-dark"
 rev = "25d28ce"
