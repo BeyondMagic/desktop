@@ -54,6 +54,11 @@ desc = "Restore the closed tab"
 # desc = "Organize favorites with nu shell"
 
 [[mgr.prepend_keymap]]
+on = ["<C-k>"]
+run = "plugin dir-history pick"
+desc = "Jump to a directory from history (fzf)"
+
+[[mgr.prepend_keymap]]
 on = ["e"]
 run = "shell '$EDITOR %h' --block"
 desc = "Open with default editor"
