@@ -5,7 +5,7 @@ desc = "Go back to the previous directory"
 
 [[mgr.prepend_keymap]]
 on = "<Enter>"
-run = "plugin --sync my-smart-enter"
+run = "plugin my-smart-enter"
 desc = "Enter the child directory, or open the file"
 
 [[mgr.prepend_keymap]]
@@ -57,41 +57,6 @@ desc = "Restore the closed tab"
 on = ["e"]
 run = "shell '$EDITOR %h' --block"
 desc = "Open with default editor"
-
-[[mgr.prepend_keymap]]
-on = ["P", "s"]
-run = "plugin projects save"
-desc = "Save current project"
-
-[[mgr.prepend_keymap]]
-on = ["P", "l"]
-run = "plugin projects load"
-desc = "Load project"
-
-[[mgr.prepend_keymap]]
-on = ["P", "P"]
-run = "plugin projects load_last"
-desc = "Load last project"
-
-[[mgr.prepend_keymap]]
-on = ["P", "d"]
-run = "plugin projects delete"
-desc = "Delete project"
-
-[[mgr.prepend_keymap]]
-on = ["P", "D"]
-run = "plugin projects delete_all"
-desc = "Delete all projects"
-
-[[mgr.prepend_keymap]]
-on = ["P", "m"]
-run = "plugin projects 'merge current'"
-desc = "Merge current tab to other projects"
-
-[[mgr.prepend_keymap]]
-on = ["P", "M"]
-run = "plugin projects 'merge all'"
-desc = "Merge current project to other projects"
 
 [[mgr.prepend_keymap]]
 on = ["<Space>"]
